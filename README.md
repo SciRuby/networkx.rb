@@ -13,6 +13,8 @@
 
 ### Installing
 
+[(Back to top)](#list-of-contents)
+
 - Clone the repository with `git clone git@github.com:athityakumar/networkx.rb.git`
 - Navigate to networkx with `cd networkx.rb`
 - Install dependencies with `gem install bundler && bundle install`
@@ -30,6 +32,8 @@ g.add_edge('start', 'stop')
 
 ### Roadmap
 
+[(Back to top)](#list-of-contents)
+
 Quite easily, any networkx user would be able to understand the number of details that have been implemented in the Python library. As a humble start towards the release of v0.1.0, the following could be the goals to achieve :
 
 - `Node` : This class should be capable of handling different types of nodes (not just `String` / `Integer`). A possible complex use-case could be XML nodes.
@@ -39,10 +43,6 @@ Quite easily, any networkx user would be able to understand the number of detail
 - `Graph` : The simplest of graphs. This class handles just connections between different `Node`s via `Edge`s.
 
 - `DirectedGraph` : Inherits from `Graph` class. Uses directions between `Edge`s.
-
-[(Back to top)](#list-of-contents)
-
-After months of extensive searching, we realised there was not a single repository that could guide a newbie to machine learning and natural language processing in Ruby. Thus, after a series of naming discussions, `sciruby-examples` was born.
 
 ### Contributing
 
