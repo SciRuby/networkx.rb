@@ -14,8 +14,8 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
 1. Clone this repository and install all the required gem dependencies.
 
     ```sh
-    git clone https://github.com/athityakumar/daru-io.git
-    cd daru-io
+    git clone https://github.com/athityakumar/networkx.rb.git
+    cd networkx.rb
     gem install bundler
     bundle install
     ```
