@@ -31,5 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'saharspec'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
+
   spec.add_development_dependency 'guard-rspec' if RUBY_VERSION >= '2.2.5'
 end
