@@ -1,0 +1,109 @@
+require: rubocop-rspec
+
+AllCops:
+  Include:
+    - 'lib/**/*'
+  Exclude:
+    - 'vendor/**/*'
+    - 'benchmarks/*'
+    - 'profile/*'
+  DisplayCopNames: true
+  TargetRubyVersion: 2.1
+
+# Preferred codebase style ---------------------------------------------
+
+### Layouts ------------------------------------------------------------
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+
+Layout/SpaceAfterComma:
+  Enabled: false
+
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+### Styles -------------------------------------------------------------
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Style/EmptyElse:
+  EnforcedStyle: empty
+
+Style/EmptyMethod:
+  EnforcedStyle: compact
+
+Style/FileName:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false # TODO
+
+### Metrics ------------------------------------------------------------
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/ModuleLength:
+  Max: 200
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+
+### RSpec --------------------------------------------------------------
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+RSpec/NestedGroups:
+  Max: 5
