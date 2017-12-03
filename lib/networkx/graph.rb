@@ -25,5 +25,27 @@ module NetworkX
       edges.each {|edge| add_edge(*edge)}
     end
 
+    def remove_node(node)
+      @adj.delete(node)
+      @adj.each_key {|key| @adj[key].delete(node)}
+    end
+
+    def remove_nodes_from(nodes)
+      nodes.each do |node|
+        @adj.delete(node)
+      end
+        nodes.each do |node|
+        @adj.each_key {|key| @adj[key].delete(node)}
+      end
+    end
+
+    def remove_edge(node1, node2)
+      @adj[node1].delete(node2) if @adj.has_key?node1
+    end
+
+    def remove_edges_from(edges)
+      edges.each {|edge| remove_edge(*edge)}
+    end
+
   end
 end
