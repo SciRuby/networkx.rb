@@ -1,5 +1,8 @@
 module NetworkX
     class Graph
+
+        attr_reader :node, :adj
+
         def initialize(incoming_graph_data=nil, **graph_attr) 
             @graph = Hash.new 
             @node = Hash.new
@@ -24,7 +27,7 @@ module NetworkX
             @graph["name"]
         end
 
-        def add_node(node_for_adding, **node_attr={})
+        def add_node(node_for_adding, **node_attr)
             if !@node.key?(node_for_adding)
                 @node[node_for_adding] = node_attr.clone
                 @adj[node_for_adding] = Hash.new
@@ -33,7 +36,7 @@ module NetworkX
             end
         end
 
-        def add_nodes_from(*nodes, **nodes_attrs={})
+        def add_nodes_from(*nodes, **nodes_attrs)
             nodes.each do |n|
                 if !@node.key?(n)
                     @node[n] = nodes_attr.clone
@@ -55,6 +58,7 @@ module NetworkX
             end
 
             edge_attr_hash = Hash.new
+
             if @adj[u].key?(v)
             edge_attr_hash = @adj[u][v] 
             end
@@ -66,11 +70,13 @@ module NetworkX
         end
 
         def remove_edge(u, v)
-            if @adj[u].key?(v)
+            begin
                 @adj[u].delete(v)
                 if u != v
                     @adj[v].delete(u)
                 end
+            rescue NoMethodError, KeyError
+                raise NetworkXError, "There exists no edge between #{u} and #{v}"
             end
         end
     end
