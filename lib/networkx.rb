@@ -1,1 +1,2 @@
 require 'networkx/version'
+require 'networkx/graph'
