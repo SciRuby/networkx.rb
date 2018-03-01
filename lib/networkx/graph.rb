@@ -15,7 +15,7 @@ module NetworkX
       add_node(node_2)
 
       attrs_hash = @_adj[node_1][node_2]
-      attrs_hash = {} if attrs_hash == nil
+      attrs_hash = {} if attrs_hash.nil?
       attrs_hash.merge!(edge_attrs)
       @_adj[node_1][node_2] = attrs_hash
       @_adj[node_2][node_1] = attrs_hash
@@ -51,13 +51,11 @@ module NetworkX
     end
 
     def remove_node(node)
-      begin
-        @_adj[node].each { |k, v| @_adj[k].delete(node) }
-        @_adj.delete(node)
-        @_nodes.delete(node)
-      rescue
-        raise KeyError, "Error in deleting node #{node.to_s} from Graph."
-      end
+      @_adj[node].each_key { |k| @_adj[k].delete(node) }
+      @_adj.delete(node)
+      @_nodes.delete(node)
+    rescue KeyError, NoMethodError
+      raise KeyError, "Error in deleting node #{node} from Graph."
     end
 
     def remove_nodes(nodes)
@@ -69,6 +67,5 @@ module NetworkX
                              "received #{nodes.class.name} instead."
       end
     end
-
   end
 end
