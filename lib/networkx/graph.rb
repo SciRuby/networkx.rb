@@ -1,24 +1,22 @@
 module NetworkX
   class Graph
-    attr_reader :_adj, :_nodes
+    attr_reader :adj, :nodes, :graph
 
     def initialize(**graph_attrs)
-      @_nodes = {}
-      @_adj = {}
+      @nodes = {}
+      @adj = {}
       @graph = {}
 
-      @graph.merge!(graph_attrs)
+      @graph = graph_attrs
     end
 
     def add_edge(node_1, node_2, **edge_attrs)
       add_node(node_1)
       add_node(node_2)
 
-      attrs_hash = @_adj[node_1][node_2]
-      attrs_hash = {} if attrs_hash.nil?
-      attrs_hash.merge!(edge_attrs)
-      @_adj[node_1][node_2] = attrs_hash
-      @_adj[node_2][node_1] = attrs_hash
+      edge_attrs = (@adj[node_1][node_2] || {}).merge(edge_attrs)
+      @adj[node_1][node_2] = edge_attrs
+      @adj[node_2][node_1] = edge_attrs
     end
 
     def add_edges(edges)
@@ -32,11 +30,11 @@ module NetworkX
     end
 
     def add_node(node, **node_attrs)
-      if !@_nodes.key?(node)
-        @_adj[node] = {}
-        @_nodes[node] = node_attrs
+      if @nodes.key?(node)
+        @nodes[node].merge!(node_attrs)
       else
-        @_nodes[node].merge!(node_attrs)
+        @adj[node] = {}
+        @nodes[node] = node_attrs
       end
     end
 
@@ -51,11 +49,13 @@ module NetworkX
     end
 
     def remove_node(node)
-      @_adj[node].each_key { |k| @_adj[k].delete(node) }
-      @_adj.delete(node)
-      @_nodes.delete(node)
-    rescue KeyError, NoMethodError
-      raise KeyError, "Error in deleting node #{node} from Graph."
+      if @nodes.key?(node)
+        @adj[node].each_key { |k| @adj[k].delete(node) }
+        @adj.delete(node)
+        @nodes.delete(node)
+      else
+        raise KeyError, "Error in deleting node #{node} from Graph."
+      end
     end
 
     def remove_nodes(nodes)
