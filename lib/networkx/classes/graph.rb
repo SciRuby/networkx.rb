@@ -1,5 +1,6 @@
 module NetworkX
   # Describes the class for making Undirected Graphs
+  #
   # @attr_reader adj [Hash{ Object => Hash{ Object => Hash{ Object => Object } } }]
   #                  Stores the edges and their attributes in an adjencency list form
   # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
@@ -8,8 +9,10 @@ module NetworkX
     attr_reader :adj, :nodes, :graph
 
     # Constructor for initializing graph
+    #
     # @example Initialize a graph with attributes 'type' and 'name'
     #   graph = NetworkX::Graph.new(name: "Social Network", type: "undirected")
+    #
     # @param graph_attrs [Hash{ Object => Object }] the graph attributes in a hash format
     def initialize(**graph_attrs)
       @nodes = {}
@@ -20,9 +23,13 @@ module NetworkX
     end
 
     # Adds the respective edges
-    # @example Add an edge
+    #
+    # @example Add an edge with attribute name
     #   graph.add_edge(node1, node2, name: "Edge1")
+    #
+    # @example Add an edge with no attribute
     #   graph.add_edge("Bangalore", "Chennai")
+    #
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     # @param edge_attrs [Hash{ Object => Object }] the hash of the edge attributes
@@ -36,6 +43,7 @@ module NetworkX
     end
 
     # Adds multiple edges from an array
+    #
     # @example Add multiple edges without any attributes
     #   graph.add_edges([['Nagpur', 'Kgp'], ['Noida', 'Kgp']])
     # @param edges [Array<Object, Object>]
@@ -50,8 +58,10 @@ module NetworkX
     end
 
     # Adds a node and its attributes to the graph
+    #
     # @example Add a node with attribute 'type'
     #   graph.add_node("Noida", type: "city")
+    #
     # @param node [Object] the node object
     # @param node_attrs [Hash{ Object => Object }] the hash of the attributes of the node
     def add_node(node, **node_attrs)
@@ -64,8 +74,10 @@ module NetworkX
     end
 
     # Adds multiple nodes to the graph
+    #
     # @example Adds multiple nodes with attribute 'type'
     #   graph.add_nodes([["Noida", type: "city"], ["Kgp", type: "town"]])
+    #
     # @param nodes [Array<Object, Hash{ Object => Object }>] the Array of pair containing nodes and its attributes
     def add_nodes(nodes)
       case nodes
@@ -78,8 +90,10 @@ module NetworkX
     end
 
     # Removes node from the graph
+    #
     # @example
     #   graph.remove_node("Noida")
+    #
     # @param node [Object] the node to be removed
     def remove_node(node)
       raise KeyError, "Error in deleting node #{node} from Graph." unless @nodes.key?(node)
@@ -89,8 +103,10 @@ module NetworkX
     end
 
     # Removes multiple nodes from the graph
+    #
     # @example
     #   graph.remove_nodes(["Noida", "Bangalore"])
+    #
     # @param nodes [Array<Object>] the array of nodes to be removed
     def remove_nodes(nodes)
       case nodes
