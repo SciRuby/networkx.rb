@@ -20,13 +20,14 @@ module NetworkX
     def add_node(node, **node_attrs)
       super(node, node_attrs)
 
-      if !@pred.key?(node) do
+      if !@pred.key?(node)
         @pred[node] = {}
       end
     end
 
     def remove_node(node)
       raise KeyError, "Error in deleting node #{node} from Graph." unless @nodes.key?(node)
+      
       neighbours = @adj[node]
       neighbours.each_key { |k| @pred[k].delete(node) }
       @pred[node].each_key do |k|  
@@ -49,6 +50,7 @@ module NetworkX
 
     def clear
       super
+      
       @pred.clear
     end
 
@@ -93,6 +95,43 @@ module NetworkX
         @adj[k].each_key { |v| new_graph.add_edge(v, k, @adj[k][v]) }
       end
       new_graph 
+    end
+  
+    def subgraph(nodes)
+      case nodes
+      when Array, Set
+        sub_graph = NetworkX::DiGraph.new(@graph)
+        nodes.each do |u, _|
+          raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.key?(u)
+          sub_graph.add_node(u, @nodes[u])
+          @adj[u].each do |v, edge_val|
+            sub_graph.add_edge(u, v, edge_val) if @adj[u].key?(v) && nodes.include?(v)
+          end
+          return sub_graph
+        end
+      else
+        raise ArgumentError, 'Expected Argument to be Array or Set of nodes, '\
+                            "received #{nodes.class.name} instead."
+      end
+    end
+
+    def edge_subgraph(edges)
+      case edges
+      when Array, Set
+        sub_graph = NetworkX::DiGraph.new(@graph)
+        edges.each do |u, v|
+          raise KeyError, "#{u} does not exist in the graph!" unless @nodes.key?(u)
+          raise KeyError, "#{v} does not exist in the graph!" unless @nodes.key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @adj[u].key?(v)
+          sub_graph.add_node(u, @nodes[u])
+          sub_graph.add_node(v, @nodes[v])
+          sub_graph.add_edge(u, v, @adj[u][v])
+        end
+        return sub_graph
+      else
+        raise ArgumentError, 'Expected Argument to be Array or Set of edges, '\
+        "received #{edges.class.name} instead."
+      end
     end
   end
 end
