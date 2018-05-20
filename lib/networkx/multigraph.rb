@@ -1,5 +1,9 @@
 module NetworkX
-  class MultiGraph < Graph
+  class MultiGraph < Graph    
+    # Returns a new key
+    # 
+    # @param node_1 [Object] the first node of a given edge
+    # @param node_2 [Object] the second node of a given edge
     def new_edge_key(node_1, node_2)
       return 0 if @adj[node_1][node_2] == nil
       key = @adj[node_1][node_2].length
@@ -9,6 +13,17 @@ module NetworkX
       key
     end
 
+    # Adds the respective edge
+    #
+    # @example Add an edge with attribute name
+    #   graph.add_edge(node1, node2, name: "Edge1")
+    #
+    # @example Add an edge with no attribute
+    #   graph.add_edge("Bangalore", "Chennai")
+    #
+    # @param node_1 [Object] the first node of the edge
+    # @param node_2 [Object] the second node of the edge
+    # @param edge_attrs [Hash{ Object => Object }] the hash of the edge attributes
     def add_edge(node_1, node_2, **edge_attrs)
       add_node(node_1)
       add_node(node_2)
@@ -19,6 +34,13 @@ module NetworkX
       @adj[node_2][node_1] = all_edge_attrs
     end
 
+    # Removes edge from the graph
+    #
+    # @example
+    #   graph.remove_edge('Noida', 'Bangalore')
+    #   
+    # @param node_1 [Object] the first node of the edge
+    # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2, key=nil)
       raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
       raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
@@ -32,6 +54,13 @@ module NetworkX
       @adj[node_2][node_1].delete(key)
     end
 
+    # Returns number of edges if is_weighted is false
+    # or returns total weight of all edges
+    #
+    # @example
+    #   graph.size(true)
+    #
+    # @praram is_weighted [Bool] if we want weighted size of unweighted size
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0
@@ -43,18 +72,34 @@ module NetworkX
       number_of_edges
     end
     
+    # Returns number of edges
+    #
+    # @example
+    #   graph.number_of_edges
     def number_of_edges
       num = 0
       @adj.each { |_, v| v.each { |key, keyval| num += keyval.length }}
       num / 2
     end
 
-    def has_edge(node_1, node_2, key=nil)
+    # Checks if the the edge consisting of two nodes is present in the graph
+    #
+    # @example
+    #   graph.edge?(node_1, node_2)
+    #
+    # @param node_1 [Object] the first node of the edge to be checked
+    # @param node_2 [Object] the second node of the edge to be checked
+    # @param key [Integer] the key of the given edge
+    def edge?(node_1, node_2, key=nil)
       super(node_1, node_2) if key == nil
       return true if @nodes.key?(node_1) and @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
       false
     end
 
+    # Returns the undirected version of the graph
+    #
+    # @example
+    #   graph.to_undirected
     def to_undirected
       graph = NetworkX::Graph.new(@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, node_attr) }
@@ -68,6 +113,12 @@ module NetworkX
       graph
     end
 
+    # Returns subgraph consisting of given array of nodes
+    #
+    # @example
+    #   graph.subgraph(%w[Mumbai Nagpur])
+    #
+    # @param nodes [Array<Object>] the nodes to be included in the subgraph
     def subgraph(nodes)
       case nodes
       when Array, Set
@@ -86,6 +137,12 @@ module NetworkX
       end
     end
 
+    # Returns subgraph conisting of given edges
+    #
+    # @example
+    #   graph.edge_subgraph([%w[Nagpur Wardha], %w[Nagpur Mumbai]])
+    #
+    # @param edges [Array<Object, Object>] the edges to be included in the subraph
     def edge_subgraph(edges)
       case edges
       when Array, Set

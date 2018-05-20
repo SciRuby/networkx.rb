@@ -118,6 +118,13 @@ module NetworkX
       end
     end
 
+    # Removes edge from the graph
+    #
+    # @example
+    #   graph.remove_edge('Noida', 'Bangalore')
+    #   
+    # @param node_1 [Object] the first node of the edge
+    # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2)
       raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
       raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
@@ -126,6 +133,12 @@ module NetworkX
       @adj[node_2].delete(node_1) if node_1 != node_2
     end
 
+    # Removes multiple edges from the graph
+    #
+    # @example
+    #   graph.remove_edges([%w[Noida Bangalore], %w[Bangalore Chennai]])
+    #
+    # @param edges [Array<Object>] the array of edges to be removed
     def remove_edges(edges)
       case edges
       when Array, Set
@@ -136,10 +149,26 @@ module NetworkX
       end
     end
 
+    # Adds weighted edge
+    #
+    # @example
+    #   graph.add_weighted_edge('Noida', 'Bangalore', 1000)
+    #
+    # @param node_1 [Object] the first node of the edge
+    # @param node_2 [Object] the second node of the edge
+    # @param weight [Integer] the weight value
     def add_weighted_edge(node_1, node_2, weight)
       add_edge(node_1, node_2, weight: weight)
     end
 
+    # Adds multiple weighted edges
+    #
+    # @example
+    #   graph.add_weighted_edges([['Noida', 'Bangalore', 1000], 
+    #                             ['Noida', 'Nagpur', 1000]])
+    #
+    # @param edges [Array<Object, Object>] the array of edges
+    # @param weight [Array<Integer>] the array of weights
     def add_weighted_edges(edges, weights)
       raise ArgumentError, 'edges and weights array must have equal number of elements.'\
                            unless edges.size == weights.size
@@ -150,46 +179,97 @@ module NetworkX
       end
     end
 
+    # Clears the graph
+    #
+    # @example
+    #   graph.clear
     def clear
       @adj.clear
       @nodes.clear
       @graph.clear
     end
 
+    # Checks if a node is present in the graph
+    #
+    # @example
+    #   graph.node?(node_1)
+    #
+    # @param node [Object] the node to be checked
     def node?(node)
       @node.key?(node)
     end
 
+    # Checks if the the edge consisting of two nodes is present in the graph
+    #
+    # @example
+    #   graph.edge?(node_1, node_2)
+    #
+    # @param node_1 [Object] the first node of the edge to be checked
+    # @param node_2 [Object] the second node of the edge to be checked
     def edge?(node_1, node_2)
       return true if @nodes.key?(node_1) && @adj[node_1].key?(node_2)
       false
     end
 
+    # Gets the node data
+    #
+    # @example
+    #   graph.get_node_data(node)
+    #
+    # @param node [Object] the node whose data is to be fetched
     def get_node_data(node)
       return @nodes[node] if @nodes.key?(node)
       raise ArgumentError, 'No such node exists!'
     end
 
+    # Gets the edge data
+    #
+    # @example
+    #   graph.get_edge_data(node_1, node_2)
+    #
+    # @param node_1 [Object] the first node of the edge
+    # @param node_2 [Object] the second node of the edge
     def get_edge_data(node_1, node_2)
       return @adj[node_1][node_2] if @nodes.key?(node_1) && @adj[node_1].key?(node_2)
       raise KeyError, 'No such edge exists!'
     end
 
+    # Retus a hash of neighbours of a node
+    #
+    # @example
+    #   graph.neighbours(node)
+    #
+    # @param node [Object] the node whose neighbours are to be fetched
     def neighbours(node)
       return @adj[node] if @nodes.key?(node)
       raise KeyError, 'No such node exists!'
     end
 
+    # Returns number of nodes
+    #
+    # @example
+    #   graph.number_of_nodes
     def number_of_nodes
       @nodes.length
     end
 
+    # Returns number of edges
+    #
+    # @example
+    #   graph.number_of_edges
     def number_of_edges
       num = 0
       @adj.each { |_, v| num += v.length }
       num / 2
     end
 
+    # Returns number of edges if is_weighted is false
+    # or returns total weight of all edges
+    #
+    # @example
+    #   graph.size(true)
+    #
+    # @praram is_weighted [Bool] if we want weighted size of unweighted size
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0
@@ -201,6 +281,12 @@ module NetworkX
       number_of_edges
     end
 
+    # Returns subgraph consisting of given array of nodes
+    #
+    # @example
+    #   graph.subgraph(%w[Mumbai Nagpur])
+    #
+    # @param nodes [Array<Object>] the nodes to be included in the subgraph
     def subgraph(nodes)
       case nodes
       when Array, Set
@@ -219,6 +305,12 @@ module NetworkX
       end
     end
 
+    # Returns subgraph conisting of given edges
+    #
+    # @example
+    #   graph.edge_subgraph([%w[Nagpur Wardha], %w[Nagpur Mumbai]])
+    #
+    # @param edges [Array<Object, Object>] the edges to be included in the subraph
     def edge_subgraph(edges)
       case edges
       when Array, Set
