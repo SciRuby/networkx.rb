@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe NetworkX::MultiDiGraph do
+RSpec.describe NetworkX::MultiGraph do
   subject { graph }
 
-  let(:graph) { described_class.new(name: 'Cities', type: 'directed') }
+  let(:graph) { described_class.new(name: 'Cities', type: 'undirected') }
 
   before do
     graph.add_nodes(%w[Nagpur Mumbai])
@@ -13,7 +13,7 @@ RSpec.describe NetworkX::MultiDiGraph do
   end
 
   context 'when graph has been assigned attributes' do
-    its('graph') { is_expected.to eq(name: 'Cities', type: 'directed') }
+    its('graph') { is_expected.to eq(name: 'Cities', type: 'undirected') }
   end
 
   context 'when a new node/s has/have been created' do
@@ -29,15 +29,8 @@ RSpec.describe NetworkX::MultiDiGraph do
   context 'when a new edge/s has/have been added' do
     its('adj') do
       is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}, 'Chennai' => {0 => {}}},
-                        'Bangalore' => {},
-                        'Chennai' => {'Bangalore' => {0 => {}}},
-                        'Mumbai' => {}, 'Kolkata' => {})
-    end
-
-    its('pred') do
-      is_expected.to eq('Nagpur' => {},
                         'Bangalore' => {'Chennai' => {0 => {}}},
-                        'Chennai' => {'Nagpur' => {0 => {}}},
+                        'Chennai' => {'Nagpur' => {0 => {}}, 'Bangalore' => {0 => {}}},
                         'Mumbai' => {'Nagpur' => {0 => {}}}, 'Kolkata' => {})
     end
   end
@@ -66,22 +59,26 @@ RSpec.describe NetworkX::MultiDiGraph do
 
   context 'when weighted edge/s is/are added' do
     before do
+      graph.remove_nodes(%w[Chennai Bangalore])
       graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
       graph.add_weighted_edges([%w[Nagpur Kolkata]], [10])
     end
 
     its('adj') do
-      is_expected.to eq('Bangalore' => {},
-                        'Chennai' => {'Bangalore' => {0 => {}}},
-                        'Kolkata' => {},
-                        'Mumbai' => {},
-                        'Nagpur' => {'Mumbai' => {0 => {}, 1 => {weight: 15}}, 'Chennai' => {0 => {}}, 'Kolkata' => {0 => {weight: 10}}})
+      is_expected.to eq('Kolkata' => {'Nagpur' => {0 => {weight: 10}}},
+                        'Mumbai' => {'Nagpur' => {1 => {weight: 15}, 0 => {}}},
+                        'Nagpur' => {'Mumbai' => {1 => {weight: 15}, 0 => {}},
+                                     'Kolkata' => {0 => {weight: 10}}})
     end
   end
 
   context 'when number of edges are calculated' do
+    before do
+      graph.add_edge('Nagpur', 'Mumbai')
+    end
+
     its('number_of_edges') do
-      is_expected.to eq 3
+      is_expected.to eq 4
     end
   end
 
@@ -105,7 +102,7 @@ RSpec.describe NetworkX::MultiDiGraph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}}, 'Mumbai' => {})
+      is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}}, 'Mumbai' => {'Nagpur' => {0 => {}}})
     end
   end
 
@@ -117,18 +114,20 @@ RSpec.describe NetworkX::MultiDiGraph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Chennai' => {0 => {}}, 'Mumbai' => {0 => {}}}, 'Mumbai' => {}, 'Chennai' => {})
+      is_expected.to eq('Nagpur' => {'Chennai' => {0 => {}}, 'Mumbai' => {0 => {}}},
+                        'Mumbai' => {'Nagpur' => {0 => {}}},
+                        'Chennai' => {'Nagpur' => {0 => {}}})
     end
   end
 
-  context 'when reverse is called' do
-    subject { graph.reverse }
+  context 'when to_undirected is called' do
+    subject { graph.to_undirected }
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {},
-                        'Bangalore' => {'Chennai' => {0 => {}}},
-                        'Chennai' => {'Nagpur' => {0 => {}}},
-                        'Mumbai' => {'Nagpur' => {0 => {}}}, 'Kolkata' => {})
+      is_expected.to eq('Nagpur' => {'Mumbai' => {}, 'Chennai' => {}},
+                        'Bangalore' => {'Chennai' => {}},
+                        'Chennai' => {'Nagpur' => {}, 'Bangalore' => {}},
+                        'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
     end
   end
 end

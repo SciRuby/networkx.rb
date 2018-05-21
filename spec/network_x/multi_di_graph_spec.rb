@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe NetworkX::MultiGraph do
+RSpec.describe NetworkX::MultiDiGraph do
   subject { graph }
 
-  let(:graph) { described_class.new(name: 'Cities', type: 'undirected') }
+  let(:graph) { described_class.new(name: 'Cities', type: 'directed') }
 
   before do
     graph.add_nodes(%w[Nagpur Mumbai])
@@ -13,7 +13,7 @@ RSpec.describe NetworkX::MultiGraph do
   end
 
   context 'when graph has been assigned attributes' do
-    its('graph') { is_expected.to eq(name: 'Cities', type: 'undirected') }
+    its('graph') { is_expected.to eq(name: 'Cities', type: 'directed') }
   end
 
   context 'when a new node/s has/have been created' do
@@ -29,8 +29,15 @@ RSpec.describe NetworkX::MultiGraph do
   context 'when a new edge/s has/have been added' do
     its('adj') do
       is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}, 'Chennai' => {0 => {}}},
+                        'Bangalore' => {},
+                        'Chennai' => {'Bangalore' => {0 => {}}},
+                        'Mumbai' => {}, 'Kolkata' => {})
+    end
+
+    its('pred') do
+      is_expected.to eq('Nagpur' => {},
                         'Bangalore' => {'Chennai' => {0 => {}}},
-                        'Chennai' => {'Nagpur' => {0 => {}}, 'Bangalore' => {0 => {}}},
+                        'Chennai' => {'Nagpur' => {0 => {}}},
                         'Mumbai' => {'Nagpur' => {0 => {}}}, 'Kolkata' => {})
     end
   end
@@ -59,26 +66,22 @@ RSpec.describe NetworkX::MultiGraph do
 
   context 'when weighted edge/s is/are added' do
     before do
+      graph.remove_nodes(%w[Chennai Bangalore])
       graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
       graph.add_weighted_edges([%w[Nagpur Kolkata]], [10])
     end
 
     its('adj') do
-      is_expected.to eq('Bangalore' => {'Chennai' => {0 => {}}},
-                        'Chennai' => {'Nagpur' => {0 => {}}, 'Bangalore' => {0 => {}}},
-                        'Kolkata' => {'Nagpur' => {0 => {weight: 10}}},
-                        'Mumbai' => {'Nagpur' => {1 => {weight: 15}, 0 => {}}},
-                        'Nagpur' => {'Mumbai' => {1 => {weight: 15}, 0 => {}}, 'Chennai' => {0 => {}}, 'Kolkata' => {0 => {weight: 10}}})
+      is_expected.to eq('Kolkata' => {},
+                        'Mumbai' => {},
+                        'Nagpur' => {'Mumbai' => {0 => {}, 1 => {weight: 15}},
+                                     'Kolkata' => {0 => {weight: 10}}})
     end
   end
 
   context 'when number of edges are calculated' do
-    before do
-      graph.add_edge('Nagpur', 'Mumbai')
-    end
-    
     its('number_of_edges') do
-      is_expected.to eq 4
+      is_expected.to eq 3
     end
   end
 
@@ -102,7 +105,7 @@ RSpec.describe NetworkX::MultiGraph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}}, 'Mumbai' => {'Nagpur' => {0 => {}}})
+      is_expected.to eq('Nagpur' => {'Mumbai' => {0 => {}}}, 'Mumbai' => {})
     end
   end
 
@@ -114,18 +117,18 @@ RSpec.describe NetworkX::MultiGraph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Chennai' => {0 => {}}, 'Mumbai' => {0 => {}}}, 'Mumbai' => {'Nagpur' => {0 => {}}}, 'Chennai' => {'Nagpur' => {0 => {}}})
+      is_expected.to eq('Nagpur' => {'Chennai' => {0 => {}}, 'Mumbai' => {0 => {}}}, 'Mumbai' => {}, 'Chennai' => {})
     end
   end
 
-  context 'when to_undirected is called' do
-    subject { graph.to_undirected }
+  context 'when reverse is called' do
+    subject { graph.reverse }
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Mumbai' => {}, 'Chennai' => {}},
-      'Bangalore' => {'Chennai' => {}},
-      'Chennai' => {'Nagpur' => {}, 'Bangalore' => {}},
-      'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
+      is_expected.to eq('Nagpur' => {},
+                        'Bangalore' => {'Chennai' => {0 => {}}},
+                        'Chennai' => {'Nagpur' => {0 => {}}},
+                        'Mumbai' => {'Nagpur' => {0 => {}}}, 'Kolkata' => {})
     end
   end
 end

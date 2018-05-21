@@ -1,7 +1,7 @@
 module NetworkX
   class DiGraph < Graph
     attr_reader :adj, :nodes, :graph, :pred
-    
+
     # Constructor for initializing graph
     #
     # @example Initialize a graph with attributes 'type' and 'name'
@@ -44,9 +44,7 @@ module NetworkX
     def add_node(node, **node_attrs)
       super(node, node_attrs)
 
-      if !@pred.key?(node)
-        @pred[node] = {}
-      end
+      @pred[node] = {} unless @pred.key?(node)
     end
 
     # Removes node from the graph
@@ -57,10 +55,10 @@ module NetworkX
     # @param node [Object] the node to be removed
     def remove_node(node)
       raise KeyError, "Error in deleting node #{node} from Graph." unless @nodes.key?(node)
-      
+
       neighbours = @adj[node]
       neighbours.each_key { |k| @pred[k].delete(node) }
-      @pred[node].each_key do |k|  
+      @pred[node].each_key do |k|
         @adj[k].delete(node)
       end
 
@@ -73,7 +71,7 @@ module NetworkX
     #
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
-    #   
+    #
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2)
@@ -91,7 +89,7 @@ module NetworkX
     #   graph.clear
     def clear
       super
-      
+
       @pred.clear
     end
 
@@ -166,7 +164,7 @@ module NetworkX
       @adj.each_key do |k|
         @adj[k].each_key { |v| new_graph.add_edge(v, k, @adj[k][v]) }
       end
-      new_graph 
+      new_graph
     end
 
     # Returns subgraph consisting of given array of nodes
@@ -204,9 +202,8 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::DiGraph.new(@graph)
         edges.each do |u, v|
-          raise KeyError, "#{u} does not exist in the graph!" unless @nodes.key?(u)
-          raise KeyError, "#{v} does not exist in the graph!" unless @nodes.key?(v)
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @adj[u].key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
+                                                                                    && @adj[u].key?(v)
           sub_graph.add_node(u, @nodes[u])
           sub_graph.add_node(v, @nodes[v])
           sub_graph.add_edge(u, v, @adj[u][v])

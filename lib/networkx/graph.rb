@@ -122,7 +122,7 @@ module NetworkX
     #
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
-    #   
+    #
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2)
@@ -164,7 +164,7 @@ module NetworkX
     # Adds multiple weighted edges
     #
     # @example
-    #   graph.add_weighted_edges([['Noida', 'Bangalore', 1000], 
+    #   graph.add_weighted_edges([['Noida', 'Bangalore', 1000],
     #                             ['Noida', 'Nagpur', 1000]])
     #
     # @param edges [Array<Object, Object>] the array of edges
@@ -316,9 +316,8 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::Graph.new(@graph)
         edges.each do |u, v|
-          raise KeyError, "#{u} does not exist in the graph!" unless @nodes.key?(u)
-          raise KeyError, "#{v} does not exist in the graph!" unless @nodes.key?(v)
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @adj[u].key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
+                                                                                    && @adj[u].key?(v)
           sub_graph.add_node(u, @nodes[u])
           sub_graph.add_node(v, @nodes[v])
           sub_graph.add_edge(u, v, @adj[u][v])

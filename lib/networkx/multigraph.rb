@@ -1,15 +1,13 @@
 module NetworkX
-  class MultiGraph < Graph    
+  class MultiGraph < Graph
     # Returns a new key
-    # 
+    #
     # @param node_1 [Object] the first node of a given edge
     # @param node_2 [Object] the second node of a given edge
     def new_edge_key(node_1, node_2)
-      return 0 if @adj[node_1][node_2] == nil
+      return 0 if @adj[node_1][node_2].nil?
       key = @adj[node_1][node_2].length
-      while @adj[node_1][node_2].key?(key) do
-        key += 1
-      end
+      key += 1 while @adj[node_1][node_2].key?(key)
       key
     end
 
@@ -38,18 +36,18 @@ module NetworkX
     #
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
-    #   
+    #
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2, key=nil)
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' if key != nil && !@adj[node_1][node_2].key?(key)
-      if key == nil
+      if key.nil?
         super(node_1, node_2)
         return
       end
+      raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
+      raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].key?(node_2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1][node_2].key?(key)
       @adj[node_1][node_2].delete(key)
       @adj[node_2][node_1].delete(key)
     end
@@ -71,14 +69,14 @@ module NetworkX
       end
       number_of_edges
     end
-    
+
     # Returns number of edges
     #
     # @example
     #   graph.number_of_edges
     def number_of_edges
       num = 0
-      @adj.each { |_, v| v.each { |key, keyval| num += keyval.length }}
+      @adj.each { |_, v| v.each { |_, keyval| num += keyval.length } }
       num / 2
     end
 
@@ -91,8 +89,8 @@ module NetworkX
     # @param node_2 [Object] the second node of the edge to be checked
     # @param key [Integer] the key of the given edge
     def edge?(node_1, node_2, key=nil)
-      super(node_1, node_2) if key == nil
-      return true if @nodes.key?(node_1) and @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
+      super(node_1, node_2) if key.nil?
+      return true if @nodes.key?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
       false
     end
 
@@ -148,12 +146,11 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::MultiGraph.new(@graph)
         edges.each do |u, v|
-          raise KeyError, "#{u} does not exist in the graph!" unless @nodes.key?(u)
-          raise KeyError, "#{v} does not exist in the graph!" unless @nodes.key?(v)
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @adj[u].key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
+                                                                                    && @adj[u].key?(v)
           sub_graph.add_node(u, @nodes[u])
           sub_graph.add_node(v, @nodes[v])
-          @adj[u][v].each { |key, keyval| sub_graph.add_edge(u, v, keyval) }
+          @adj[u][v].each { |_, keyval| sub_graph.add_edge(u, v, keyval) }
         end
         return sub_graph
       else
