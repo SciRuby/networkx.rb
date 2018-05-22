@@ -50,7 +50,7 @@ module NetworkX
     def add_edges(edges)
       case edges
       when Array
-        edges.each { |node_1, node_2, **attrs| add_edge(node_1, node_2, **attrs) }
+        edges.each { |node_1, node_2, **attrs| add_edge(node_1, node_2, attrs) }
       else
         raise ArgumentError, 'Expected argument to be an Array of edges, '\
                              "received #{edges.class.name} instead."
