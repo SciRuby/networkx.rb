@@ -75,7 +75,7 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      @adj.values.values.map(:length).inject(:+) / 2
+      @adj.values.flat_map(&:values).map(&:length).inject(:+) / 2
     end
 
     # Checks if the the edge consisting of two nodes is present in the graph
