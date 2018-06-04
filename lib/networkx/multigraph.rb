@@ -52,13 +52,13 @@ module NetworkX
       @adj[node_2][node_1].delete(key)
     end
 
-    # Returns number of edges if is_weighted is false
-    # or returns total weight of all edges
+    # Returns the size of the graph
     #
     # @example
     #   graph.size(true)
     #
-    # @praram is_weighted [Bool] if we want weighted size of unweighted size
+    # @param is_weighted [Bool] if true, method returns sum of weights of all edges
+    #                           else returns number of edges
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0
@@ -75,9 +75,7 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      num = 0
-      @adj.each { |_, v| v.each { |_, keyval| num += keyval.length } }
-      num / 2
+      @adj.values.values.map(:length).inject(:+) / 2
     end
 
     # Checks if the the edge consisting of two nodes is present in the graph
@@ -90,8 +88,7 @@ module NetworkX
     # @param key [Integer] the key of the given edge
     def edge?(node_1, node_2, key=nil)
       super(node_1, node_2) if key.nil?
-      return true if @nodes.key?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
-      false
+      node?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
     end
 
     # Returns the undirected version of the graph
@@ -101,10 +98,10 @@ module NetworkX
     def to_undirected
       graph = NetworkX::Graph.new(@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, node_attr) }
-      @adj.each_key do |node_1|
-        @adj[node_1].each_key do |node_2|
+      @adj.each do |node_1, node_1_edges|
+        node_1_edges.each do |node_2, node_1_node_2|
           edge_attrs = {}
-          @adj[node_1][node_2].each_key { |key| edge_attrs.merge!(@adj[node_1][node_2][key]) }
+          node_1_node_2.each { |_key, attrs| edge_attrs.merge!(attrs) }
           graph.add_edge(node_1, node_2, edge_attrs)
         end
       end

@@ -62,8 +62,7 @@ module NetworkX
     # @param key [Integer] the key of the given edge
     def edge?(node_1, node_2, key=nil)
       super(node_1, node_2) if key.nil?
-      return true if @nodes.key?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
-      false
+      node?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
     end
 
     # Returns the undirected version of the graph
@@ -73,10 +72,10 @@ module NetworkX
     def to_undirected
       graph = NetworkX::Graph.new(@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, node_attr) }
-      @adj.each_key do |node_1|
-        @adj[node_1].each_key do |node_2|
+      @adj.each do |node_1, node_1_edges|
+        node_1_edges.each do |node_2, node_1_node_2|
           edge_attrs = {}
-          @adj[node_1][node_2].each_key { |key| edge_attrs.merge!(@adj[node_1][node_2][key]) }
+          node_1_node_2.each { |_key, attrs| edge_attrs.merge!(attrs) }
           graph.add_edge(node_1, node_2, edge_attrs)
         end
       end
@@ -90,10 +89,10 @@ module NetworkX
     def to_directed
       graph = NetworkX::DiGraph.new(@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, node_attr) }
-      @adj.each_key do |node_1|
-        @adj[node_1].each_key do |node_2|
+      @adj.each do |node_1, node_1_edges|
+        node_1_edges.each do |node_2, node_1_node_2|
           edge_attrs = {}
-          @adj[node_1][node_2].each_key { |key| edge_attrs.merge!(@adj[node_1][node_2][key]) }
+          node_1_node_2.each { |_key, attrs| edge_attrs.merge!(attrs) }
           graph.add_edge(node_1, node_2, edge_attrs)
         end
       end
@@ -107,25 +106,25 @@ module NetworkX
     def to_multigraph
       graph = NetworkX::MultiGraph.new(@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, node_attr) }
-      @adj.each_key do |node_1|
-        @adj[node_1].each_key do |node_2|
+      @adj.each do |node_1, node_1_edges|
+        node_1_edges.each_key do |node_2, node_1_node_2|
           edge_attrs = {}
-          @adj[node_1][node_2].each_key { |key| graph.add_edge(node_1, node_2, @adj[node_1][node_2][key]) }
+          node_1_node_2.each { |_key, attrs| graph.add_edge(node_1, node_2, attrs) }
           graph.add_edge(node_1, node_2, edge_attrs)
         end
       end
       graph
     end
 
-    # Returns the reversed version of a the graph
+    # Returns the reversed version of the graph
     #
     # @example
     #   graph.reverse
     def reverse
       new_graph = NetworkX::MultiDiGraph.new(@graph)
-      @nodes.each_key { |k| new_graph.add_node(k, @nodes[k]) }
-      @adj.each_key do |u|
-        @adj[u].each_key { |v| @adj[u][v].each_key { |k| new_graph.add_edge(v, u, @adj[u][v][k]) } }
+      @nodes.each { |node, attrs| new_graph.add_node(node, attrs) }
+      @adj.each do |u, u_edges|
+        u_edges.each { |v, uv_attrs| uv_attrs.each { |_k, edge_attrs| new_graph.add_edge(v, u, edge_attrs) } }
       end
       new_graph
     end
@@ -137,9 +136,7 @@ module NetworkX
     #
     # @param node [Object] the node whose in degree is to be calculated
     def in_degree(node)
-      in_degree_no = 0
-      @pred[node].each_key { |u| in_degree_no += @pred[node][u].length }
-      in_degree_no
+      @pred[node].values.map(:length).inject(:+)
     end
 
     # Returns out-degree of a given node
@@ -149,9 +146,7 @@ module NetworkX
     #
     # @param node [Object] the node whose out degree is to be calculated
     def out_degree(node)
-      out_degree_no = 0
-      @adj[node].each_key { |u| out_degree_no += @adj[node][u].length }
-      out_degree_no
+      @adj[node].values.map(:length).inject(:+)
     end
 
     # Returns number of edges
@@ -159,18 +154,16 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      no_of_edges = 0
-      @adj.each_key { |node_1| @adj[node_1].each_key { |node_2| no_of_edges += @adj[node_1][node_2].length } }
-      no_of_edges
+      @adj.values.values.map(:length).inject(:+)
     end
 
-    # Returns number of edges if is_weighted is false
-    # or returns total weight of all edges
+    # Returns the size of the graph
     #
     # @example
     #   graph.size(true)
     #
-    # @praram is_weighted [Bool] if we want weighted size of unweighted size
+    # @param is_weighted [Bool] if true, method returns sum of weights of all edges
+    #                           else returns number of edges
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0

@@ -98,18 +98,16 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      num = 0
-      @adj.each { |_, v| num += v.length }
-      num
+      @adj.values.map(&:length).inject(:+)
     end
 
-    # Returns number of edges if is_weighted is false
-    # or returns total weight of all edges
+    # Returns the size of graph
     #
     # @example
     #   graph.size(true)
     #
-    # @praram is_weighted [Bool] if we want weighted size of unweighted size
+    # @param is_weighted [Bool] if true, method returns sum of weights of all edges
+    #                            else returns number of edges
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0
@@ -141,15 +139,15 @@ module NetworkX
       @adj[node].length
     end
 
-    # Returns the reversed version of a the graph
+    # Returns the reversed version of the graph
     #
     # @example
     #   graph.reverse
     def reverse
       new_graph = NetworkX::DiGraph.new(@graph)
-      @nodes.each_key { |k| new_graph.add_node(k, @nodes[k]) }
-      @adj.each_key do |k|
-        @adj[k].each_key { |v| new_graph.add_edge(v, k, @adj[k][v]) }
+      @nodes.each { |u, attrs| new_graph.add_node(u, attrs) }
+      @adj.each do |u, edges|
+        edges.each { |v, attrs| new_graph.add_edge(u, v, attrs) }
       end
       new_graph
     end
@@ -160,9 +158,9 @@ module NetworkX
     #   graph.to_undirected
     def to_undirected
       new_graph = NetworkX::Graph.new(@graph)
-      @nodes.each_key { |k| new_graph.add_node(k, @nodes[k]) }
-      @adj.each_key do |k|
-        @adj[k].each_key { |v| new_graph.add_edge(v, k, @adj[k][v]) }
+      @nodes.each { |u, attrs| new_graph.add_node(u, attrs) }
+      @adj.each do |u, edges|
+        edges.each { |v, attrs| new_graph.add_edge(u, v, attrs) }
       end
       new_graph
     end
@@ -177,11 +175,11 @@ module NetworkX
       case nodes
       when Array, Set
         sub_graph = NetworkX::DiGraph.new(@graph)
-        nodes.each do |u, _|
+        nodes.each do |u, u_attrs|
           raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.key?(u)
-          sub_graph.add_node(u, @nodes[u])
-          @adj[u].each do |v, edge_val|
-            sub_graph.add_edge(u, v, edge_val) if @adj[u].key?(v) && nodes.include?(v)
+          sub_graph.add_node(u, u_attrs)
+          @adj[u].each do |v, uv_attrs|
+            sub_graph.add_edge(u, v, uv_attrs) if @adj[u].key?(v) && nodes.include?(v)
           end
           return sub_graph
         end
@@ -191,7 +189,7 @@ module NetworkX
       end
     end
 
-    # Returns subgraph conisting of given edges
+    # Returns subgraph consisting of given edges
     #
     # @example
     #   graph.edge_subgraph([%w[Nagpur Wardha], %w[Nagpur Mumbai]])

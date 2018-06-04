@@ -164,11 +164,11 @@ module NetworkX
     # Adds multiple weighted edges
     #
     # @example
-    #   graph.add_weighted_edges([['Noida', 'Bangalore', 1000],
-    #                             ['Noida', 'Nagpur', 1000]])
+    #   graph.add_weighted_edges([['Noida', 'Bangalore'],
+    #                             ['Noida', 'Nagpur']], [1000, 2000])
     #
     # @param edges [Array<Object, Object>] the array of edges
-    # @param weight [Array<Integer>] the array of weights
+    # @param weights [Array<Integer>] the array of weights
     def add_weighted_edges(edges, weights)
       raise ArgumentError, 'edges and weights array must have equal number of elements.'\
                            unless edges.size == weights.size
@@ -196,7 +196,7 @@ module NetworkX
     #
     # @param node [Object] the node to be checked
     def node?(node)
-      @node.key?(node)
+      @nodes.key?(node)
     end
 
     # Checks if the the edge consisting of two nodes is present in the graph
@@ -207,8 +207,7 @@ module NetworkX
     # @param node_1 [Object] the first node of the edge to be checked
     # @param node_2 [Object] the second node of the edge to be checked
     def edge?(node_1, node_2)
-      return true if @nodes.key?(node_1) && @adj[node_1].key?(node_2)
-      false
+      node(node_1) && @adj[node_1].key?(node_2)
     end
 
     # Gets the node data
@@ -218,8 +217,8 @@ module NetworkX
     #
     # @param node [Object] the node whose data is to be fetched
     def get_node_data(node)
-      return @nodes[node] if @nodes.key?(node)
-      raise ArgumentError, 'No such node exists!'
+      raise ArgumentError, 'No such node exists!' unless node?(node)
+      @nodes[node]
     end
 
     # Gets the edge data
@@ -230,8 +229,8 @@ module NetworkX
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     def get_edge_data(node_1, node_2)
-      return @adj[node_1][node_2] if @nodes.key?(node_1) && @adj[node_1].key?(node_2)
-      raise KeyError, 'No such edge exists!'
+      raise KeyError, 'No such edge exists!' unless node?(node_1) && edge?(node_2)
+      @adj[node_1][node_2]
     end
 
     # Retus a hash of neighbours of a node
@@ -241,8 +240,8 @@ module NetworkX
     #
     # @param node [Object] the node whose neighbours are to be fetched
     def neighbours(node)
-      return @adj[node] if @nodes.key?(node)
-      raise KeyError, 'No such node exists!'
+      raise KeyError, 'No such node exists!' unless node?(node)
+      @adj[node]
     end
 
     # Returns number of nodes
@@ -258,18 +257,16 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      num = 0
-      @adj.each { |_, v| num += v.length }
-      num / 2
+      @adj.values.map(&:length).inject(:+) / 2
     end
 
-    # Returns number of edges if is_weighted is false
-    # or returns total weight of all edges
+    # Returns the size of the graph
     #
     # @example
     #   graph.size(true)
     #
-    # @praram is_weighted [Bool] if we want weighted size of unweighted size
+    # @param is_weighted [Bool] if true, method returns sum of weights of all edges
+    #                           else returns number of edges
     def size(is_weighted=false)
       if is_weighted
         graph_size = 0
