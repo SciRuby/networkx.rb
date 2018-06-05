@@ -1,4 +1,12 @@
 module NetworkX
+  # Describes the class for making Directed Graphs
+  #
+  # @attr_reader adj [Hash{ Object => Hash{ Object => Hash{ Object => Object } } }]
+  #                  Stores the edges and their attributes in an adjencency list form
+  # @attr_reader pred [Hash{ Object => Hash{ Object => Hash{ Object => Object } } }]
+  #                  Stores the reverse edges and their attributes in an adjencency list form
+  # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
+  # @attr_reader graph [Hash{ Object => Object }] Stores the attributes of the graph
   class DiGraph < Graph
     attr_reader :adj, :nodes, :graph, :pred
 

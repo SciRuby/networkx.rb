@@ -1,4 +1,10 @@
 module NetworkX
+  # Describes the class for making MultiGraphs
+  #
+  # @attr_reader adj [Hash{ Object => Hash{ Object => Hash{ Integer => Hash{ Object => Object } } } }]
+  #                  Stores the edges and their attributes in an adjencency list form
+  # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
+  # @attr_reader graph [Hash{ Object => Object }] Stores the attributes of the gra
   class MultiGraph < Graph
     # Returns a new key
     #
