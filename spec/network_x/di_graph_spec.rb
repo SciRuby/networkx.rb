@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe NetworkX::Graph do
+RSpec.describe NetworkX::DiGraph do
   subject { graph }
 
-  let(:graph) { described_class.new(name: 'Cities', type: 'undirected') }
+  let(:graph) { described_class.new(name: 'Cities', type: 'directed') }
 
   before do
     graph.add_nodes(%w[Nagpur Mumbai])
@@ -13,7 +13,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when graph has been assigned attributes' do
-    its('graph') { is_expected.to eq(name: 'Cities', type: 'undirected') }
+    its('graph') { is_expected.to eq(name: 'Cities', type: 'directed') }
   end
 
   context 'when a new node/s has/have been created' do
@@ -29,8 +29,15 @@ RSpec.describe NetworkX::Graph do
   context 'when a new edge/s has/have been added' do
     its('adj') do
       is_expected.to eq('Nagpur' => {'Mumbai' => {}, 'Chennai' => {}},
+                        'Bangalore' => {},
+                        'Chennai' => {'Bangalore' => {}},
+                        'Mumbai' => {}, 'Kolkata' => {})
+    end
+
+    its('pred') do
+      is_expected.to eq('Nagpur' => {},
                         'Bangalore' => {'Chennai' => {}},
-                        'Chennai' => {'Nagpur' => {}, 'Bangalore' => {}},
+                        'Chennai' => {'Nagpur' => {}},
                         'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
     end
   end
@@ -64,10 +71,10 @@ RSpec.describe NetworkX::Graph do
     end
 
     its('adj') do
-      is_expected.to eq('Bangalore' => {'Chennai' => {}},
-                        'Chennai' => {'Nagpur' => {}, 'Bangalore' => {}},
-                        'Kolkata' => {'Nagpur' => {weight: 10}},
-                        'Mumbai' => {'Nagpur' => {weight: 15}},
+      is_expected.to eq('Bangalore' => {},
+                        'Chennai' => {'Bangalore' => {}},
+                        'Kolkata' => {},
+                        'Mumbai' => {},
                         'Nagpur' => {'Mumbai' => {weight: 15}, 'Chennai' => {}, 'Kolkata' => {weight: 10}})
     end
   end
@@ -98,7 +105,7 @@ RSpec.describe NetworkX::Graph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Mumbai' => {}}, 'Mumbai' => {'Nagpur' => {}})
+      is_expected.to eq('Nagpur' => {'Mumbai' => {}}, 'Mumbai' => {})
     end
   end
 
@@ -110,8 +117,18 @@ RSpec.describe NetworkX::Graph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Chennai' => {}, 'Mumbai' => {}},\
-                        'Mumbai' => {'Nagpur' => {}}, 'Chennai' => {'Nagpur' => {}})
+      is_expected.to eq('Nagpur' => {'Chennai' => {}, 'Mumbai' => {}}, 'Mumbai' => {}, 'Chennai' => {})
+    end
+  end
+
+  context 'when reverse is called' do
+    subject { graph.reverse }
+
+    its('adj') do
+      is_expected.to eq('Nagpur' => {},
+                        'Bangalore' => {'Chennai' => {}},
+                        'Chennai' => {'Nagpur' => {}},
+                        'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
     end
   end
 end
