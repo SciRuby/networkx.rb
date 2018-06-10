@@ -1,28 +1,45 @@
-def out_edges(g, u)
-  edges = []
-  visited = {}
-  case g.class.name
-  when 'NetworkX::Graph', 'NetworkX::DiGraph'
-    g.adj[u].each do |v, _|
-      if g.class.name == 'NetworkX::DiGraph' || !visited[[v, u]].nil?
-        visited[[u, v]] = true
-        edges << [u, v]
+module NetworkX
+  # Helper function for edge_dfs
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param u [Object] a node in the graph
+  def self.out_edges(g, u)
+    edges = []
+    visited = {}
+    case g.class.name
+    when 'NetworkX::Graph', 'NetworkX::DiGraph'
+      g.adj[u].each do |v, _|
+        if g.class.name == 'NetworkX::DiGraph' || !visited[[v, u]].nil?
+          visited[[u, v]] = true
+          edges << [u, v]
+        end
       end
-    end
-  else
-    g.adj[u].each do |v, uv_keys|
-      uv_keys.each_key do |k|
-        if g.class.name == 'NetworkX::MultiDiGraph' || !visited[[v, u, k]].nil?
-          visited[[u, v, k]] = true
-          edges << [u, v, k]
+    else
+      g.adj[u].each do |v, uv_keys|
+        uv_keys.each_key do |k|
+          if g.class.name == 'NetworkX::MultiDiGraph' || !visited[[v, u, k]].nil?
+            visited[[u, v, k]] = true
+            edges << [u, v, k]
+          end
         end
       end
     end
+    edges
   end
-  edges
-end
 
-module NetworkX
+  # Performs edge dfs on the graph
+  # Orientation :ignore, directed edges can be
+  #                     travelled in both fashions
+  # Orientation reverse, directed edges can be travelled
+  #                      in reverse fashion
+  # Orientation :nil, the graph is not meddled with
+  #
+  # @example
+  #   NetworkX.edge_dfs(g, source, 'ignore')
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start dfs from
+  # @param orientation [:ignore, :reverse', nil] the orientation of edges of graph
   def self.edge_dfs(g, start, orientation=nil)
     case orientation
     when :reverse

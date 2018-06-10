@@ -1,4 +1,12 @@
 module NetworkX
+  # Returns edges of the graph travelled in depth first fashion
+  #
+  # @example
+  #   NetworkX.dfs_edges(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start dfs from
+  # @param depth_limit [Integer, nil] the depth limit of dfs
   def self.dfs_edges(g, source, depth_limit=nil)
     raise KeyError, "There exists no node names #{source} in the given graph." unless g.node?(source)
     depth_limit = g.nodes.length if depth_limit.nil?
@@ -20,6 +28,14 @@ module NetworkX
     dfs_edges
   end
 
+  # Returns dfs tree of the graph
+  #
+  # @example
+  #   NetworkX.dfs_tree(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start dfs from
+  # @param depth_limit [Integer, nil] the depth limit of dfs
   def self.dfs_tree(g, source, depth_limit=nil)
     t = NetworkX::DiGraph.new
     t.add_node(source)
@@ -27,6 +43,14 @@ module NetworkX
     t
   end
 
+  # Returns parent successor pair of the graph travelled in depth first fashion
+  #
+  # @example
+  #   NetworkX.dfs_successors(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start dfs from
+  # @param depth_limit [Integer, nil] the depth limit of dfs
   def self.dfs_successors(g, source, depth_limit=nil)
     dfs_edges = dfs_edges(g, source, depth_limit)
     parent = source
@@ -38,6 +62,14 @@ module NetworkX
     successors
   end
 
+  # Returns predecessor child pair of the graph travelled in depth first fashion
+  #
+  # @example
+  #   NetworkX.dfs_predecessors(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start dfs from
+  # @param depth_limit [Integer, nil] the depth limit of dfs
   def self.dfs_predecessors(g, source, depth_limit=nil)
     dfs_edges = dfs_edges(g, source, depth_limit)
     predecessors = {}

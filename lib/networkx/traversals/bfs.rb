@@ -1,4 +1,11 @@
 module NetworkX
+  # Returns edges of the graph travelled in breadth first fashion
+  #
+  # @example
+  #   NetworkX.bfs_edges(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start bfs from
   def self.bfs_edges(g, source)
     raise KeyError, "There exists no node names #{source} in the given graph." unless g.node?(source)
     bfs_edges = []
@@ -16,6 +23,13 @@ module NetworkX
     bfs_edges
   end
 
+  # Returns parent successor pair of the graph travelled in breadth first fashion
+  #
+  # @example
+  #   NetworkX.bfs_successors(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start bfs from
   def self.bfs_successors(g, source)
     bfs_edges = bfs_edges(g, source)
     parent = source
@@ -27,6 +41,13 @@ module NetworkX
     successors
   end
 
+  # Returns predecessor child pair of the graph travelled in breadth first fashion
+  #
+  # @example
+  #   NetworkX.bfs_predecessors(g, source)
+  #
+  # @param g [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param source [Object] node to start bfs from
   def self.bfs_predecessors(g, source)
     bfs_edges = bfs_edges(g, source)
     predecessors = {}
