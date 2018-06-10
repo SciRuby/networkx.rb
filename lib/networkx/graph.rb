@@ -325,5 +325,13 @@ module NetworkX
         "received #{edges.class.name} instead."
       end
     end
+
+    def is_multigraph
+      self.class.name.include?('Multi')
+    end
+
+    def is_directed
+      self.class.name.include?('Di')
+    end
   end
 end
