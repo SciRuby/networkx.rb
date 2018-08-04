@@ -327,11 +327,11 @@ module NetworkX
     end
 
     def multigraph?
-      [NetworkX::MultiGraph, NetworkX::MultiDiGraph].include?(self.class.name)
+      ['NetworkX::MultiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
     end
 
     def directed?
-      [NetworkX::DiGraph, NetworkX::MultiDiGraph].include?(self.class.name)
+      ['NetworkX::DiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
     end
   end
 end
