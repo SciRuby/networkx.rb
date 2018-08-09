@@ -10,8 +10,8 @@ module NetworkX
     r_pred = residual.pred
     r_adj = residual.adj
 
-    r_adj.each do |u, u_edges|
-      u_edges.each do |v, attrs|
+    r_adj.each do |_u, u_edges|
+      u_edges.each do |_v, attrs|
         attrs[:flow] = 0
       end
     end
@@ -19,7 +19,7 @@ module NetworkX
     heights = {target => 0}
     q = [[target, 0]]
 
-    while !q.empty?
+    until q.empty?
       u, height = q.shift
       height += 1
       r_pred[u].each do |v, attrs|
@@ -45,7 +45,7 @@ module NetworkX
 
     counts = Array.new(2 * n - 1, 0)
     counts.fill(0)
-    r_nodes.each { |u, attrs| counts[attrs[:height]] += 1 }
+    r_nodes.each { |_u, attrs| counts[attrs[:height]] += 1 }
     inf = graph.graph[:inf]
 
     cutoff = Float::INFINITY if cutoff.nil?
@@ -55,11 +55,11 @@ module NetworkX
     d = two_phase ? n : [m ** 0.5, 2 * n ** (2. / 3)].min.floor
     done = r_nodes[source][:height] >= d
 
-    while !done
+    until done
       height = r_nodes[u][:height]
       curr_edge = r_nodes[u][:curr_edge]
 
-      while true
+      loop do
         v, attr = curr_edge.get
         if height == r_nodes[v][:height] + 1 && attr[:flow] < attr[:capacity]
           path << v
@@ -92,12 +92,11 @@ module NetworkX
           end
         end
       end
-      if u == target
-        flow_value += augment(path, inf, r_adj)
-        if flow_value >= cutoff
-          residual.graph[:flow_value] = flow_value
-          return residual
-        end
+      next unless u == target
+      flow_value += augment(path, inf, r_adj)
+      if flow_value >= cutoff
+        residual.graph[:flow_value] = flow_value
+        return residual
       end
     end
     flow_value += edmondskarp_core(residual, source, target, cutoff - flow_value)
@@ -146,7 +145,7 @@ module NetworkX
   # @param cutoff [Numeric] cutoff value for the algorithm
   #
   # @return [DiGraph] a residual graph containing the flow values
-  def self.shortest_augmenting_path(graph, source, target, residual=nil, value_only=false, two_phase=false, cutoff=nil)
+  def self.shortest_augmenting_path(graph, source, target, residual=nil, _value_only=false, two_phase=false, cutoff=nil)
     shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
   end
 end

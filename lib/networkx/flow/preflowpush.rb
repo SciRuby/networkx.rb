@@ -120,7 +120,7 @@ module NetworkX
   end
 
   # Helper function to relable a node to create a permissible edge
-  def self.relabel(u, grt, residual_adj, residual_nodes, source, target, levels)
+  def self.relabel(u, grt, residual_adj, residual_nodes, _source, _target, _levels)
     grt.add_work(residual_adj[u].length)
     residual_adj[u].map { |v, attr| attr[:flow] < (attr[:capacity] + 1) ? residual_nodes[v][:height] : Float::INFINITY }.min
   end

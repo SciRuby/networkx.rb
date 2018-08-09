@@ -8,7 +8,7 @@ module NetworkX
   #
   # @return [Array<Numeric, Numeric>] hits and authority scores
   def self.hits(graph, max_iter=100, tol=1e-8, nstart)
-    return [{}, {}] if graph.nodes.length == 0
+    return [{}, {}] if graph.nodes.empty?
     h = nstart
     sum = h.values.inject(:+)
     h.each_key { |k| h[k] /= (sum * 1.0) }
@@ -18,7 +18,7 @@ module NetworkX
     loop do
       hlast = Marshal.load(Marshal.dump(h))
       h, a = {}, {}
-      hlast.each do |k, v|
+      hlast.each do |k, _v|
         h[k] = 0
         a[k] = 0
       end
@@ -41,7 +41,7 @@ module NetworkX
   #
   # @return [NMatrix] authority matrix for the graph
   def self.authority_matrix(graph)
-    matrix, _ = to_matrix(graph, 0)
+    matrix, = to_matrix(graph, 0)
     matrix.transpose.dot matrix
   end
 
@@ -51,7 +51,7 @@ module NetworkX
   #
   # @return [NMatrix] hub matrix for the graph
   def self.hub_matrix(graph)
-    matrix, _ = to_matrix(graph, 0)
+    matrix, = to_matrix(graph, 0)
     matrix.dot matrix.transpose
   end
 end

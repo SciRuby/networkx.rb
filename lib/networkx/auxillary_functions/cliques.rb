@@ -5,11 +5,11 @@ module NetworkX
   #
   # @return [Array<Array<Object>>] Arrays of nodes in the cliques
   def self.find_cliques(graph)
-    return nil if graph.nodes.length == 0
+    return nil if graph.nodes.empty?
     q = [nil]
     adj = {}
     graph.nodes.each { |u, _| adj[u] = [] }
-    graph.adj.each { |u, u_edges| u_edges.each { |v, _| adj[u] << v  if u != v } }
+    graph.adj.each { |u, u_edges| u_edges.each { |v, _| adj[u] << v if u != v } }
 
     subg = graph.nodes.keys
     cand = graph.nodes.keys
@@ -18,7 +18,7 @@ module NetworkX
     stack = []
     cliques = []
     begin
-      while true
+      loop do
         if !ext_u.empty?
           q_elem = ext_u.pop
           cand.delete(q_elem)

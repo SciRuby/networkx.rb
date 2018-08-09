@@ -1,5 +1,5 @@
-module NetworkX 
-  def self.to_matrix(graph, val , multigraph_weight='sum')
+module NetworkX
+  def self.to_matrix(graph, val, multigraph_weight='sum')
     is_undirected = !graph.directed?
     is_multigraph = graph.multigraph?
     nodelen = graph.nodes.length

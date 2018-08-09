@@ -19,7 +19,7 @@ module NetworkX
     ensure
       graph.remove_node(newnode)
     end
-    return false
+    false
   end
 
   # Detects the unboundedness in the residual graph
@@ -29,10 +29,10 @@ module NetworkX
     g.add_nodes(residual.nodes.keys.zip(residual.nodes.values))
     inf = residual.graph[:inf]
 
-    residual.nodes.each do |u, attr|
+    residual.nodes.each do |u, _attr|
       residual.adj[u].each do |v, uv_attrs|
         w = inf
-        uv_attrs.each { |key, edge_attrs| w = [w, edge_attrs[:weight]].min if edge_attrs[:capacity] == inf }
+        uv_attrs.each { |_key, edge_attrs| w = [w, edge_attrs[:weight]].min if edge_attrs[:capacity] == inf }
         g.add_edge(u, v, weight: w) unless w == inf
       end
     end
@@ -65,7 +65,7 @@ module NetworkX
       end
     end
 
-    temp_inf = [residual.nodes.map { |u, attrs| attrs[:excess].abs }.inject(0, :+), edge_list.map { |_, _, _, e| (e.key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0) }.inject(0, :+) * 2].max
+    temp_inf = [residual.nodes.map { |_u, attrs| attrs[:excess].abs }.inject(0, :+), edge_list.map { |_, _, _, e| (e.key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0) }.inject(0, :+) * 2].max
     inf = temp_inf == 0 ? 1 : temp_inf
 
     edge_list.each do |u, v, k, e|
@@ -91,7 +91,7 @@ module NetworkX
           flow_dict[u][v] = Hash[uv_edges.map { |k, e| [k, u != v || (e[:capacity] || inf) <= 0 || (e[:weight] || 0) >= 0 ? 0 : e[:capacity]] }]
         end
         residual.adj[u].each do |v, uv_edges|
-          flow_dict[u][v].merge!(Hash[uv_edges.map { |k, attrs| [attrs[:temp_key][0], attrs[:flow]] if attrs[:flow] > 0 }])
+          flow_dict[u][v].merge!(Hash[uv_edges.map { |_k, attrs| [attrs[:temp_key][0], attrs[:flow]] if attrs[:flow] > 0 }])
         end
       end
     else
@@ -125,10 +125,9 @@ module NetworkX
 
     # TODO: Account cost of self-loof edges
 
-    wmax = ([-inf] + residual.adj.inject([]) do |arr, u|
-        u[1].each { |_, key_attrs| key_attrs.each { |_, attrs| arr << attrs[:capacity] } }
-        arr
-      end).max
+    wmax = ([-inf] + residual.adj.each_with_object([]) do |u, arr|
+                       u[1].each { |_, key_attrs| key_attrs.each { |_, attrs| arr << attrs[:capacity] } }
+                     end).max
 
     return flow_cost, _build_flow_dict(graph, residual) if wmax == -inf
     r_nodes = residual.nodes
@@ -139,17 +138,15 @@ module NetworkX
       r_nodes.each do |u, u_attrs|
         p_u = u_attrs[:potential]
         r_adj[u].each do |v, uv_edges|
-          uv_edges.each do |k, e|
+          uv_edges.each do |_k, e|
             flow = e[:capacity]
-            if e[:weight] - p_u + r_nodes[v][:potential] < 0
-              flow = e[:capacity] - e[:flow]
-              if flow >= delta
-                e[:flow] += flow
-                r_adj[v][u].each_key { |attrs| attrs[:flow] += attrs[:temp_key][0] == e[:temp_key][0] && attrs[:temp_key][1] != e[:temp_key][1] ? -flow : 0 }
-                r_nodes[u][:excess] -= flow
-                r_nodes[v][:excess] += flow
-              end
-            end
+            next unless e[:weight] - p_u + r_nodes[v][:potential] < 0
+            flow = e[:capacity] - e[:flow]
+            next unless flow >= delta
+            e[:flow] += flow
+            r_adj[v][u].each_key { |attrs| attrs[:flow] += attrs[:temp_key][0] == e[:temp_key][0] && attrs[:temp_key][1] != e[:temp_key][1] ? -flow : 0 }
+            r_nodes[u][:excess] -= flow
+            r_nodes[v][:excess] += flow
           end
         end
       end
@@ -157,7 +154,7 @@ module NetworkX
       s_set = Set.new
       t_set = Set.new
 
-      residual.nodes.each do |u, attrs|
+      residual.nodes.each do |u, _attrs|
         excess = r_nodes[u][:excess]
         if excess >= delta
           s_set.add(u)
@@ -167,14 +164,14 @@ module NetworkX
       end
 
       while !s_set.empty? && !t_set.empty?
-        s = arbitrary_element()
+        s = arbitrary_element
         t = nil
         d = {}
         pred = {s => nil}
         h = Heap.new { |x, y| x[0] < y[0] || (x[0] == y[0] && x[1] < y[1]) }
         h_dict = {s => 0}
         h << [0, count, s]
-        while !h.empty?
+        until h.empty?
           d_u, _, u = h.pop
           h_dict.delete(u)
           d[u] = d_u
@@ -186,23 +183,20 @@ module NetworkX
           r_adj[u].each do |v, uv_edges|
             next if d.key?(v)
             wmin = inf
-            uv_edges.each do |k, e|
-              if e[:capacity] - e[:flow] >= delta
-                w = e[:weight]
-                if w < wmin
-                  wmin = w
-                  kmin = e[:temp_key]
-                  emin = e
-                end
-              end
+            uv_edges.each do |_k, e|
+              next unless e[:capacity] - e[:flow] >= delta
+              w = e[:weight]
+              next unless w < wmin
+              wmin = w
+              kmin = e[:temp_key]
+              emin = e
             end
             next if wmin == inf
             d_v = d_u + wmin - p_u + r_nodes[v][:potential]
-            if h_dict[v] > d_v
-              h << [d_v, count, v]
-              h_dict[v] = d_v
-              pred[v] = [u, kmin, emin]
-            end
+            next unless h_dict[v] > d_v
+            h << [d_v, count, v]
+            h_dict[v] = d_v
+            pred[v] = [u, kmin, emin]
           end
         end
 
@@ -211,7 +205,7 @@ module NetworkX
             v = u
             u, k, e = pred[v]
             e[:flow] += delta
-            r_adj[v][u].each_key { |attrs| attrs[:flow] += (attrs[:temp_key][0] == k[0] && attrs[:temp_key][1] != k[1]) ? -delta : 0 }
+            r_adj[v][u].each_key { |attrs| attrs[:flow] += attrs[:temp_key][0] == k[0] && attrs[:temp_key][1] != k[1] ? -delta : 0 }
           end
           r_nodes[s][:excess] -= delta
           r_nodes[t][:excess] += delta
@@ -223,14 +217,14 @@ module NetworkX
           s_set.delete(s)
         end
       end
-      delta  = (delta / 2).floor
+      delta = (delta / 2).floor
     end
 
-    r_nodes.each { |u, attrs| raise ArgumentError, 'No flow satisfying all demands!' if attrs[:excess] != 0 }
+    r_nodes.each { |_u, attrs| raise ArgumentError, 'No flow satisfying all demands!' if attrs[:excess] != 0 }
 
-    residual.nodes.each do |u, attrs|
-      residual.adj[u].each do |v, uv_edges|
-        uv_edges.each do |k, k_attrs|
+    residual.nodes.each do |u, _attrs|
+      residual.adj[u].each do |_v, uv_edges|
+        uv_edges.each do |_k, k_attrs|
           flow = k_attrs[:flow]
           flow_cost += (flow * k_attrs[:weight])
         end

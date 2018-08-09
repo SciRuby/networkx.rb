@@ -34,7 +34,7 @@ module NetworkX
     indegree_map = Hash[graph.nodes.each_key.map { |u| [u, graph.in_degree(u)] if graph.in_degree(u) > 0 }.compact]
     zero_indegree = graph.nodes.each_key.map { |u| u if graph.in_degree(u) == 0 }.compact
 
-    while !zero_indegree.empty?
+    until zero_indegree.empty?
       node = zero_indegree.shift
       raise ArgumentError, 'Graph changed during iteration!' unless graph.nodes.key?(node)
       graph.adj[node].each do |child, _|

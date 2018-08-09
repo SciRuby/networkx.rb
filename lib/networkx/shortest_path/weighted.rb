@@ -273,7 +273,6 @@ module NetworkX
     [pred, dist]
   end
 
-
   def self.singlesource_bellmanford(graph, source, target=nil, cutoff=nil)
     return [0, [source]] if source == target
     weight = get_weight(graph)
@@ -365,7 +364,7 @@ module NetworkX
   end
 
   # Helper function to get distances
-  def self.dist_path_lambda(graph, new_weight)
+  def self.dist_path_lambda(_graph, _new_weight)
     lambda do |graph, v, new_weight|
       paths = {v => [v]}
       _ = help_dijkstra(graph, v, new_weight, nil, paths)

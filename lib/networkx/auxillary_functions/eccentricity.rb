@@ -11,7 +11,7 @@ module NetworkX
       length = single_source_shortest_path_length(graph, u)
       l = length.length
       raise ArgumentError, 'Found infinite path length!' unless l == graph.nodes.length
-      e[u] = length.max { |x1, x2| x1[1] <=> x2[1] }[1]
+      e[u] = length.max_by { |a| a[1] }[1]
     end
     node.nil? ? e : e[node]
   end

@@ -1,6 +1,6 @@
 module NetworkX
   # Helper function for the minimum spanning tree
-  #   
+  #
   def self.get_edges_weights(graph)
     edges = []
     graph.adj.each do |u, u_edges|
@@ -19,7 +19,7 @@ module NetworkX
   def self.minimum_spanning_tree(graph)
     mst = Marshal.load(Marshal.dump(graph))
     mst.clear
-    edges = get_edges_weights(graph).sort { |x, y| x[1] <=> y[1] }
+    edges = get_edges_weights(graph).sort_by { |a| a[1] }
     union_find = UnionFind.new(graph.nodes.keys)
     while edges.any? && mst.nodes.length <= graph.nodes.length
       edge = edges.shift

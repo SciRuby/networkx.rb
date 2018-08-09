@@ -66,8 +66,8 @@ module NetworkX
     inf = Float::INFINITY
     edge_list = []
 
-    g.adj.each do |u, u_edges|require 'spec_helper'
-
+    g.adj.each do |u, u_edges|
+      require 'spec_helper'
       RSpec.describe NetworkX::DiGraph do
         subject { graph }
 
@@ -127,7 +127,6 @@ module NetworkX
       u = q.shift
       r_network.adj[u].each do |v, uv_attrs|
         next unless uv_attrs[:capacity] == inf && !seen.include?(v)
-        binding.pry
         raise ArgumentError, 'Infinite capacity flow!' if v == t
         seen << v
         q << v

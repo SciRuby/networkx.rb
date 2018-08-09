@@ -127,11 +127,12 @@ RSpec.describe NetworkX::Graph do
   context 'when johnson is called' do
     subject { NetworkX.johnson(graph) }
 
-    it do is_expected.to eq([['A', {'A'=>['A'], 'B'=>['A', 'B'], 'C'=>['A', 'C'], 'D'=>['A', 'C', 'D']}],
-                            ['B', {'B'=>['B'], 'A'=>['B', 'A'], 'C'=>['B', 'A', 'C'], 'D'=>['B', 'A', 'C', 'D']}],
-                            ['C', {'C'=>['C'], 'A'=>['C', 'A'], 'D'=>['C', 'D'], 'B'=>['C', 'A', 'B']}],
-                            ['D', {'D'=>['D'], 'C'=>['D', 'C'], 'A'=>['D', 'C', 'A'], 'B'=>['D', 'C', 'A', 'B']}],
-                            ['E', {'E'=>['E']}]])
+    it do
+      is_expected.to eq([['A', {'A'=>['A'], 'B'=>%w[A B], 'C'=>%w[A C], 'D'=>%w[A C D]}],
+                         ['B', {'B'=>['B'], 'A'=>%w[B A], 'C'=>%w[B A C], 'D'=>%w[B A C D]}],
+                         ['C', {'C'=>['C'], 'A'=>%w[C A], 'D'=>%w[C D], 'B'=>%w[C A B]}],
+                         ['D', {'D'=>['D'], 'C'=>%w[D C], 'A'=>%w[D C A], 'B'=>%w[D C A B]}],
+                         ['E', {'E'=>['E']}]])
     end
   end
 end

@@ -20,18 +20,18 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] a decoded graph
   def self.json_to_graph(json_str)
     graph_hash = JSON.parse(json_str)
-    case json_str["class"]
-    when "NetworkX::Graph"
+    case json_str['class']
+    when 'NetworkX::Graph'
       graph = NetworkX::Graph.new(graph_hash.graph)
-    when "NetworkX::MultiGraph"
+    when 'NetworkX::MultiGraph'
       graph = NetworkX::MultiGraph.new(graph_hash.graph)
-    when "NetworkX::DiGraph"
+    when 'NetworkX::DiGraph'
       graph = NetworkX::DiGraph.new(graph_hash.graph)
-    when "NetworkX::MultiDiGraph"
+    when 'NetworkX::MultiDiGraph'
       graph = NetworkX::MultiDiGraph.new(graph_hash.graph)
     end
-    graph.adj = graph_hash["adj"]
-    graph.nodes = graph_hash["nodes"]
+    graph.adj = graph_hash['adj']
+    graph.nodes = graph_hash['nodes']
     graph
   end
 end

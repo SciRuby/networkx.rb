@@ -17,7 +17,7 @@ module NetworkX
     p = []
     curr = init.values
     init.keys.each_with_index { |n, i| elem_ind[n] = i }
-    graph.adj.each do |u, u_edges|
+    graph.adj.each do |_u, u_edges|
       adj_arr = Array.new(dim, 0)
       u_edges.each do |v, _|
         adj_arr[elem_ind[v]] = 1

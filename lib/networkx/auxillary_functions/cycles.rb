@@ -8,12 +8,12 @@ module NetworkX
   def self.cycle_basis(graph, root=nil)
     gnodes = graph.nodes.keys
     cycles = []
-    while !gnodes.empty?
+    until gnodes.empty?
       root = gnodes.shift if root.nil?
       stack = [root]
-      pred = { root => root }
-      used = { root => [] }
-      while !stack.empty?
+      pred = {root => root}
+      used = {root => []}
+      until stack.empty?
         z = stack.shift
         zused = used[z]
         graph.adj[z].each_key do |u|
@@ -27,7 +27,7 @@ module NetworkX
             pn = used[u]
             cycle = [u, z]
             p = pred[z]
-            while !pn.include?(p)
+            until pn.include?(p)
               cycle << p
               p = pred[p]
             end
@@ -64,7 +64,7 @@ module NetworkX
         tail, head = edge
         next if explored.include?(head)
         if !previous_head.nil? && tail != previous_head
-          while true
+          loop do
             popped_edge = edges.pop
             if popped_edge.nil?
               edges = []
