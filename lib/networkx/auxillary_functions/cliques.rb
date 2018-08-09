@@ -1,5 +1,9 @@
-require 'pry'
 module NetworkX
+  # Returns all cliques in the graph
+  #
+  # @param graph [Graph, MultiGraph] a graph
+  #
+  # @return [Array<Array<Object>>] Arrays of nodes in the cliques
   def self.find_cliques(graph)
     return nil if graph.nodes.length == 0
     q = [nil]
@@ -15,7 +19,6 @@ module NetworkX
     cliques = []
     begin
       while true
-        # binding.pry
         if !ext_u.empty?
           q_elem = ext_u.pop
           cand.delete(q_elem)
@@ -45,6 +48,12 @@ module NetworkX
     end
   end
 
+  # Returns the number of cliques in a graph containing a node
+  #
+  # @param graph [Graph, MultiGraph] a graph
+  # @param node [Object] a node
+  #
+  # @return [Numeric] Number of cliques containing the given node
   def self.number_of_cliques(graph, node)
     cliques = find_cliques(graph)
     num_cliq_arr = []

@@ -6,7 +6,7 @@ module NetworkX
   # @return [Hash{ Object => { Object => { Numeric }}}] a hash containing distances
   #                                                     b/w all pairs of nodes
   def self.floyd_warshall(graph)
-    a, index = to_matrix(graph, 'min')
+    a, index = to_matrix(graph, Float::INFINITY, 'min')
     nodelen = graph.nodes.length
     (0..(nodelen - 1)).each { |i| a[i, i] = 0 }
     (0..(nodelen - 1)).each do |k|

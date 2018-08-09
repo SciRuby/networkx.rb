@@ -1,4 +1,5 @@
 module NetworkX
+  # Helper function for running the shortest augmenting path algorithm
   def self.shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
     raise ArgumentError, 'Source is not in the graph!' unless graph.nodes.key?(source)
     raise ArgumentError, 'Target is not in the graph!' unless graph.nodes.key?(target)
@@ -104,6 +105,7 @@ module NetworkX
     residual
   end
 
+  # Helper function for augmenting flow
   def augment(path, inf, r_adj)
     flow = inf
     temp_path = path.clone
@@ -124,6 +126,7 @@ module NetworkX
     flow
   end
 
+  # Helper function to relable a node to create a permissible edge
   def self.relabel(u, n, r_adj, r_nodes)
     height = n - 1
     r_adj[u].each do |v, attrs|
@@ -132,6 +135,17 @@ module NetworkX
     height + 1
   end
 
+  # Computes max flow using shortest augmenting path algorithm
+  #
+  # @param graph [DiGraph] a graph
+  # @param source [Object] source node
+  # @param target [Object] target node
+  # @param residual [DiGraph, nil] residual graph
+  # @param value_only [Boolean] if true, compute only the maximum flow value
+  # @param two_phase [Boolean] if true, two phase variant is used
+  # @param cutoff [Numeric] cutoff value for the algorithm
+  #
+  # @return [DiGraph] a residual graph containing the flow values
   def self.shortest_augmenting_path(graph, source, target, residual=nil, value_only=false, two_phase=false, cutoff=nil)
     shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
   end

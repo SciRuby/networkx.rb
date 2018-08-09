@@ -1,4 +1,8 @@
 module NetworkX
+  # Saves the graph in a csv file
+  #
+  # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param filename [String] filename of the graph
   def self.graph_to_csv(graph, filename='graph.csv')
     CSV.open(filename, 'wb') do |csv|
       csv << [graph.class.name]
@@ -38,21 +42,4 @@ module NetworkX
       end
     end
   end
-
-  '''def self.csv_to_graph(filename)
-    graph_csv = CSV.read(filename)
-    graph_class = graph_csv.shift
-    case graph_class[0]
-    when "NetworkX::Graph"
-      graph = NetworkX::Graph.new
-    when "NetworkX::MultiGraph"
-      graph = NetworkX::MultiGraph.new
-    when "NetworkX::DiGraph"
-      graph = NetworkX::DiGraph.new
-    when "NetworkX::MultiDiGraph"
-      graph = NetworkX::MultiDiGraph.new
-    end
-
-  end
-  '''
 end

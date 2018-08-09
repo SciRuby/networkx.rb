@@ -1,5 +1,10 @@
-require 'pry'
 module NetworkX
+  # Returns the maximal independent set of a graph
+  #
+  # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  # @param nodes [Object] nodes to be considered in the MIS
+  #
+  # @return [Numeric] radius of the graph
   def self.maximal_independent_set(graph, nodes)
     raise 'The array containing the nodes should be a subset of the graph!' if (graph.nodes.keys - nodes).empty?
     neighbours = []

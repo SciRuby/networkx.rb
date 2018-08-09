@@ -1,4 +1,5 @@
 module NetworkX
+  # Helper function to augment the flow in a residual graph
   def self.augment(residual, inf, path)
     flow = inf
     path_first_elem = path.shift
@@ -17,6 +18,7 @@ module NetworkX
     flow
   end
 
+  # Helper function for the bidirectional bfs
   def self.bidirectional_bfs(residual, source, target)
     pred, succ = {source => nil}, {target => nil}
     q_s, q_t = [source], [target]
@@ -47,6 +49,7 @@ module NetworkX
     end
   end
 
+  # Core helper function for the EdmondsKarp algorithm
   def self.edmondskarp_core(residual, source, target, cutoff)
     inf = residual.graph[:inf]
     flow_val = 0
@@ -70,6 +73,7 @@ module NetworkX
     flow_val
   end
 
+  # Helper function for the edmondskarp function
   def self.edmondskarp_impl(graph, source, target, residual, cutoff)
     raise ArgumentError, 'Source not in graph!' unless graph.nodes.key?(source)
     raise ArgumentError, 'Target not in graph!' unless graph.nodes.key?(target)
@@ -86,6 +90,15 @@ module NetworkX
     res_graph
   end
 
+  # Computes max flow using edmonds karp algorithm
+  #
+  # @param graph [Graph, DiGraph] a graph
+  # @param source [Object] source node
+  # @param target [Object] target node
+  # @param residual [DiGraph, nil] residual graph
+  # @param cutoff [Numeric] cutoff for the algorithm
+  #
+  # @return [DiGraph] a residual graph containing the flow values
   def self.edmondskarp(graph, source, target, residual=nil, cutoff=nil)
     edmondskarp_impl(graph, source, target, residual, cutoff)
   end

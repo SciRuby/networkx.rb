@@ -1,8 +1,28 @@
 module NetworkX
+  # Returns a label for unique node
   def self.generate_unique_node
     SecureRandom.uuid
   end
 
+  # Finds if there is a negative edge cycle in the graph
+  #
+  # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
+  #
+  # @return [Boolean] whether there exists a negative cycle in graph
+  def self.negative_edge_cycle(graph)
+    newnode = generate_unique_node
+    graph.add_edges(graph.nodes.keys.map { |n| [newnode, n] })
+    begin
+      bellmanford_predecesor_distance(graph, newnode)
+    rescue ArgumentError
+      return true
+    ensure
+      graph.remove_node(newnode)
+    end
+    return false
+  end
+
+  # Detects the unboundedness in the residual graph
   def self._detect_unboundedness(residual)
     s = generate_unique_node
     g = NetworkX::DiGraph.new
@@ -13,13 +33,13 @@ module NetworkX
       residual.adj[u].each do |v, uv_attrs|
         w = inf
         uv_attrs.each { |key, edge_attrs| w = [w, edge_attrs[:weight]].min if edge_attrs[:capacity] == inf }
-        g.add_edge(u, v, weight: w) unless w != inf
+        g.add_edge(u, v, weight: w) unless w == inf
       end
     end
-
-    # TODO: Detect negative edges
+    raise ArgumentError, 'Negative cost cycle of infinite capacity found!' if negative_edge_cycle(g)
   end
 
+  # Returns the residual graph of the given graph
   def self._build_residual_network(graph)
     raise ArgumentError, 'Sum of demands should be 0!' unless graph.nodes.values.map { |attr| attr[:demand] || 0 }.inject(0, :+) == 0
     residual = NetworkX::MultiDiGraph.new(inf: 0)
@@ -59,6 +79,7 @@ module NetworkX
     residual
   end
 
+  # Returns the flowdict of the graph
   def self._build_flow_dict(graph, residual)
     flow_dict = {}
     inf = Float::INFINITY
@@ -84,21 +105,28 @@ module NetworkX
     flow_dict
   end
 
+  # Counter for the algorithm
   cnt = 0
   def self.count
     cnt += 1
     cnt
   end
 
+  # Computes max flow using capacity scaling algorithm
+  #
+  # @param graph [DiGraph, MultiDiGraph] a graph
+  #
+  # @return [Array<Numeric, Hash{ Object => Hash{ Object => Numeric } }>]
+  #          flow cost and flowdict containing all the flow values in the edges
   def self.capacity_scaling(graph)
-    residual = build_residual_network(graph)
+    residual = _build_residual_network(graph)
     inf = Float::INFINITY
     flow_cost = 0
 
     # TODO: Account cost of self-loof edges
 
     wmax = ([-inf] + residual.adj.inject([]) do |arr, u|
-        arr += u[1][:capacity]
+        u[1].each { |_, key_attrs| key_attrs.each { |_, attrs| arr << attrs[:capacity] } }
         arr
       end).max
 
@@ -109,7 +137,7 @@ module NetworkX
     delta = 2 ** Math.log2(wmax).floor
     while delta >= 1
       r_nodes.each do |u, u_attrs|
-        p_u = attrs[:potential]
+        p_u = u_attrs[:potential]
         r_adj[u].each do |v, uv_edges|
           uv_edges.each do |k, e|
             flow = e[:capacity]
@@ -138,7 +166,7 @@ module NetworkX
         end
       end
 
-      while !s.empty? && !t.empty?
+      while !s_set.empty? && !t_set.empty?
         s = arbitrary_element()
         t = nil
         d = {}

@@ -1,5 +1,5 @@
-require 'pry'
 module NetworkX
+  # Helper class for preflow push algorithm
   class CurrentEdge
     attr_reader :curr, :edges
 
@@ -22,6 +22,7 @@ module NetworkX
     end
   end
 
+  # Helper class for preflow push algorithm
   class Level
     attr_reader :inactive, :active
 
@@ -31,6 +32,7 @@ module NetworkX
     end
   end
 
+  # Helper class for preflow push algorithm
   class GlobalRelabelThreshold
     def initialize(n, m, freq)
       freq = freq.nil? ? Float::INFINITY : freq
@@ -51,6 +53,11 @@ module NetworkX
     end
   end
 
+  # Builds a residual graph from a constituent graph
+  #
+  # @param graph [DiGraph] a graph
+  #
+  # @return [DiGraph] residual graph
   def self.build_residual_network(g)
     raise NotImplementedError, 'MultiGraph and MultiDiGraph not supported!' if g.multigraph?
 
@@ -59,7 +66,25 @@ module NetworkX
     inf = Float::INFINITY
     edge_list = []
 
-    g.adj.each do |u, u_edges|
+    g.adj.each do |u, u_edges|require 'spec_helper'
+
+      RSpec.describe NetworkX::DiGraph do
+        subject { graph }
+
+        let(:graph) { described_class.new }
+
+        before do
+          graph.add_edge(1, 2)
+          graph.add_edge(2, 4)
+        end
+
+        context 'when capacity_scaling is called' do
+          subject { NetworkX.capacity_scaling(graph) }
+
+          it { is_expected.to eq([0, {1=>{2=>0}, 2=>{4=>0}, 4=>{}}]) }
+        end
+      end
+
       u_edges.each do |v, uv_attrs|
         edge_list << [u, v, uv_attrs] if (uv_attrs[:capacity] || inf) > 0 && u != v
       end
@@ -89,6 +114,11 @@ module NetworkX
     r_network
   end
 
+  # Detects unboundedness in a graph, raises exception when
+  #   infinite capacity flow is found
+  #
+  # @param graph [DiGraph] a graph
+  # @param residual [DiGraph] residual graph
   def self.detect_unboundedness(r_network, s, t)
     q = [s]
     seen = Set.new([s])
@@ -96,7 +126,8 @@ module NetworkX
     until q.empty?
       u = q.shift
       r_network.adj[u].each do |v, uv_attrs|
-        next unless uv_attrs[:capacity] == inf && !seen.key?(v)
+        next unless uv_attrs[:capacity] == inf && !seen.include?(v)
+        binding.pry
         raise ArgumentError, 'Infinite capacity flow!' if v == t
         seen << v
         q << v
@@ -104,6 +135,13 @@ module NetworkX
     end
   end
 
+  # Build flow dictionary of a graph from its residual graph
+  #
+  # @param graph [DiGraph] a graph
+  # @param residual [DiGraph] residual graph
+  #
+  # @return [Hash{ Object => Hash{ Object => Numeric }] flowdict containing all
+  #                                                   the flow values in the edges
   def self.build_flow_dict(g, _r_network)
     flow_dict = {}
     g.edges.each do |u, u_edges|

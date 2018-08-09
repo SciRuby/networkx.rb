@@ -1,10 +1,10 @@
-module NetworkX
-  def self.to_matrix(graph, multigraph_weight='sum')
+module NetworkX 
+  def self.to_matrix(graph, val , multigraph_weight='sum')
     is_undirected = !graph.directed?
     is_multigraph = graph.multigraph?
     nodelen = graph.nodes.length
 
-    m = NMatrix.new(nodelen, Float::INFINITY)
+    m = NMatrix.new(nodelen, val)
     index = {}
     inv_index = {}
     ind = 0
@@ -41,7 +41,6 @@ module NetworkX
     else
       graph.adj.each do |u, edge_hash|
         edge_hash.each do |v, attrs|
-          # binding.pry
           m[index[u], index[v]] = (attrs[:weight] || 1)
           m[index[v], index[u]] = (attrs[:weight] || 1) if is_undirected
         end

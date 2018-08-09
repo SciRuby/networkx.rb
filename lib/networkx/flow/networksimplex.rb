@@ -20,6 +20,7 @@ module NetworkX
           uv_attrs.each { |k, attrs| edges << [u, v, attrs, k] }
         else
           edges << [u, v, uv_attrs]
+        end
       end
     end
     edges.each_with_index do |i, (u, v, attrs, k)|
@@ -88,7 +89,7 @@ module NetworkX
 
     edges.each do |e|
       if e[0] != e[1]
-        add_entry
+        add_entry 
     end
 
   end

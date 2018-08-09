@@ -1,4 +1,10 @@
 module NetworkX
+  # Returns all basis cycles in graph
+  #
+  # @param graph [Graph] a graph
+  # @param root [Object, Nil] root for the graph cycles
+  #
+  # @return [Array<Array<Object>>] Arrays of nodes in the cycles
   def self.cycle_basis(graph, root=nil)
     gnodes = graph.nodes.keys
     cycles = []
@@ -38,6 +44,12 @@ module NetworkX
     cycles
   end
 
+  # Returns the cycle containing the given node
+  #
+  # @param graph [Graph, DiGraph] a graph
+  # @param node [Object] node to be included in the cycle
+  #
+  # @return [Array<Array<Object>>] Arrays of nodes in the cycle
   def self.find_cycle(graph, node)
     explored = Set.new
     cycle = []
