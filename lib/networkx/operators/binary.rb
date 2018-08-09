@@ -1,4 +1,3 @@
-require 'pry'
 module NetworkX
   # Returns the edges of the graph in an array
   def self.get_edges(graph)
