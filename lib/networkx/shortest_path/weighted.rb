@@ -1,4 +1,3 @@
-require 'pry'
 module NetworkX
   # Helper function to extract weight from a adjecency hash
   def self.get_weight(graph)
