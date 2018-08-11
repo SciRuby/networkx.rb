@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe NetworkX::Graph do
   subject { graph }
 

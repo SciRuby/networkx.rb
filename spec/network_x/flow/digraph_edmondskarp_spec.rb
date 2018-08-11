@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe NetworkX::DiGraph do
   subject { graph }
 

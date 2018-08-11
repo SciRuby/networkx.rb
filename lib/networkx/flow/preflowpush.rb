@@ -147,7 +147,7 @@ module NetworkX
         curr_edge.move_to_next
       rescue StopIteration
         height = relabel(u, grt, residual_adj, residual_nodes, source, target, levels)
-        if is_phase1 && height >= n = 1
+        if is_phase1 && height >= n - 1
           levels[height].active.add(u)
           break
         end

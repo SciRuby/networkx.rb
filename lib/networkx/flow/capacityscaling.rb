@@ -24,7 +24,6 @@ module NetworkX
 
   # Detects the unboundedness in the residual graph
   def self._detect_unboundedness(residual)
-    s = generate_unique_node
     g = NetworkX::DiGraph.new
     g.add_nodes(residual.nodes.keys.zip(residual.nodes.values))
     inf = residual.graph[:inf]
