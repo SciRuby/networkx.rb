@@ -7,14 +7,14 @@ module NetworkX
       end
     end
 
-    def connected?(node1, node2)
-      @unions[node1] == @unions[node2]
+    def connected?(node_1, node_2)
+      @unions[node_1] == @unions[node_2]
     end
 
-    def union(node1, node2)
-      return if connected?(node1, node2)
-      node1_id = @unions[node1]
-      node2_id = @unions[node2]
+    def union(node_1, node_2)
+      return if connected?(node_1, node_2)
+      node1_id = @unions[node_1]
+      node2_id = @unions[node_2]
 
       @unions.each do |node, id|
         @unions[node] = node1_id if id == node2_id

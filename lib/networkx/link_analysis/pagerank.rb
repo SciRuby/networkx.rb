@@ -1,7 +1,7 @@
 module NetworkX
   # Computes pagerank values for the graph
   #
-  # @param graph [Graph, DiGraph] a graph
+  # @param graph [Graph] a graph
   # @param init [Array<Numeric>] initial pagerank values for the nodes
   # @param alpha [Numeric] the alpha value to compute the pagerank
   # @param eps [Numeric] tolerence to check for convergence

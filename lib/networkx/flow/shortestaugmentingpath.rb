@@ -10,8 +10,8 @@ module NetworkX
     r_pred = residual.pred
     r_adj = residual.adj
 
-    r_adj.each do |_u, u_edges|
-      u_edges.each do |_v, attrs|
+    r_adj.each_value do |u_edges|
+      u_edges.each_value do |attrs|
         attrs[:flow] = 0
       end
     end
@@ -38,14 +38,14 @@ module NetworkX
     n = graph.nodes.length
     m = residual.size / 2
 
-    r_nodes.each do |u, attrs|
-      attrs[:height] = heights.key?(u) ? heights[u] : n
-      attrs[:curr_edge] = CurrentEdge.new(r_adj[u])
+    r_nodes.each do |node, attrs|
+      attrs[:height] = heights.key?(node) ? heights[node] : n
+      attrs[:curr_edge] = CurrentEdge.new(r_adj[node])
     end
 
     counts = Array.new(2 * n - 1, 0)
     counts.fill(0)
-    r_nodes.each { |_u, attrs| counts[attrs[:height]] += 1 }
+    r_nodes.each_value { |attrs| counts[attrs[:height]] += 1 }
     inf = graph.graph[:inf]
 
     cutoff = Float::INFINITY if cutoff.nil?
@@ -69,7 +69,7 @@ module NetworkX
         begin
           curr_edge.move_to_next
         rescue StopIteration
-          if counts[height] == 0
+          if counts[height].zero?
             residual.graph[:flow_value] = flow_value
             return residual
           end
@@ -126,9 +126,9 @@ module NetworkX
   end
 
   # Helper function to relable a node to create a permissible edge
-  def self.relabel(u, n, r_adj, r_nodes)
-    height = n - 1
-    r_adj[u].each do |v, attrs|
+  def self.relabel(node, num, r_adj, r_nodes)
+    height = num - 1
+    r_adj[node].each do |v, attrs|
       height = [height, r_nodes[v][:height]].min if attrs[:flow] < attrs[:capacity]
     end
     height + 1

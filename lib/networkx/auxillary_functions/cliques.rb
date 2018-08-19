@@ -8,12 +8,12 @@ module NetworkX
     return nil if graph.nodes.empty?
     q = [nil]
     adj = {}
-    graph.nodes.each { |u, _| adj[u] = [] }
-    graph.adj.each { |u, u_edges| u_edges.each { |v, _| adj[u] << v if u != v } }
+    graph.nodes.each_key { |u| adj[u] = [] }
+    graph.adj.each { |u, u_edges| u_edges.each_key { |v| adj[u] << v if u != v } }
 
     subg = graph.nodes.keys
     cand = graph.nodes.keys
-    u = subg.max { |n1, n2| (cand & adj[n1]).length <=> (cand & adj[n2]).length }
+    u = subg.max { |n_1, n_2| (cand & adj[n_1]).length <=> (cand & adj[n_2]).length }
     ext_u = cand - adj[u]
     stack = []
     cliques = []
@@ -34,7 +34,7 @@ module NetworkX
               q << nil
               subg = subg_q
               cand = cand_q
-              u = subg.max { |n1, n2| (cand & adj[n1]).length <=> (cand & adj[n2]).length }
+              u = subg.max { |n_1, n_2| (cand & adj[n_1]).length <=> (cand & adj[n_2]).length }
               ext_u = cand - adj[u]
             end
           end

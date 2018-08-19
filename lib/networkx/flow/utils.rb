@@ -34,9 +34,9 @@ module NetworkX
 
   # Helper class for preflow push algorithm
   class GlobalRelabelThreshold
-    def initialize(n, m, freq)
+    def initialize(num_1, num_2, freq)
       freq = freq.nil? ? Float::INFINITY : freq
-      @threshold = (n + m) / freq
+      @threshold = (num_1 + num_2) / freq
       @work = 0
     end
 
@@ -44,7 +44,7 @@ module NetworkX
       @work += work
     end
 
-    def is_reached
+    def reached?
       @work >= @threshold
     end
 
@@ -58,15 +58,15 @@ module NetworkX
   # @param graph [DiGraph] a graph
   #
   # @return [DiGraph] residual graph
-  def self.build_residual_network(g)
-    raise NotImplementedError, 'MultiGraph and MultiDiGraph not supported!' if g.multigraph?
+  def self.build_residual_network(graph)
+    raise NotImplementedError, 'MultiGraph and MultiDiGraph not supported!' if graph.multigraph?
 
     r_network = NetworkX::DiGraph.new(inf: 0, flow_value: 0)
-    r_network.add_nodes(g.nodes.keys)
+    r_network.add_nodes(graph.nodes.keys)
     inf = Float::INFINITY
     edge_list = []
 
-    g.adj.each do |u, u_edges|
+    graph.adj.each do |u, u_edges|
       require 'spec_helper'
       RSpec.describe NetworkX::DiGraph do
         subject { graph }
@@ -90,10 +90,12 @@ module NetworkX
       end
     end
 
-    inf_chk = 3 * edge_list.inject(0) { |result, arr| arr[2].key?(:capacity) && arr[2][:capacity] != inf ? (result + arr[2][:capacity]) : result }
-    inf = inf_chk == 0 ? 1 : inf_chk
+    inf_chk = 3 * edge_list.inject(0) do |result, arr|
+      arr[2].key?(:capacity) && arr[2][:capacity] != inf ? (result + arr[2][:capacity]) : result
+    end
+    inf = inf_chk.zero? ? 1 : inf_chk
 
-    if g.directed?
+    if graph.directed?
       edge_list.each do |u, v, attrs|
         r = [attrs[:capacity] || inf, inf].min
         if r_network.adj[u][v].nil?
@@ -117,17 +119,18 @@ module NetworkX
   # Detects unboundedness in a graph, raises exception when
   #   infinite capacity flow is found
   #
-  # @param graph [DiGraph] a graph
-  # @param residual [DiGraph] residual graph
-  def self.detect_unboundedness(r_network, s, t)
-    q = [s]
-    seen = Set.new([s])
+  # @param r_network [DiGraph] a residual graph
+  # @param source [Object] source node
+  # @param target [Object] target node
+  def self.detect_unboundedness(r_network, source, target)
+    q = [source]
+    seen = Set.new([source])
     inf = r_network.graph[:inf]
     until q.empty?
       u = q.shift
       r_network.adj[u].each do |v, uv_attrs|
         next unless uv_attrs[:capacity] == inf && !seen.include?(v)
-        raise ArgumentError, 'Infinite capacity flow!' if v == t
+        raise ArgumentError, 'Infinite capacity flow!' if v == target
         seen << v
         q << v
       end
@@ -141,12 +144,12 @@ module NetworkX
   #
   # @return [Hash{ Object => Hash{ Object => Numeric }] flowdict containing all
   #                                                   the flow values in the edges
-  def self.build_flow_dict(g, _r_network)
+  def self.build_flow_dict(graph, residual)
     flow_dict = {}
-    g.edges.each do |u, u_edges|
+    graph.edges.each do |u, u_edges|
       flow_dict[u] = {}
       u_edges.each_key { |v| flow_dict[u][v] = 0 }
-      u_edges.each { |v, uv_attrs| flow_dict[u][v] = uv_attrs[:flow] if uv_attrs[:flow] > 0 }
+      u_edges.each_key { |v| flow_dict[u][v] = residual[u][v][:flow] if residual[u][v][:flow] > 0 }
     end
     flow_dict
   end

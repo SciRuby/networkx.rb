@@ -32,9 +32,9 @@ module NetworkX
             end
           else
             node_attrs = [u, v]
-            uv_attrs.each do |k, v|
+            uv_attrs.each do |k, vals|
               node_attrs << k
-              node_attrs << v
+              node_attrs << vals
             end
             csv << node_attrs
           end

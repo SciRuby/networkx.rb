@@ -68,7 +68,7 @@ module NetworkX
         u = succ[u]
         path << u
       end
-      flow_val += augment(path)
+      flow_val += augment(residual, inf, path)
     end
     flow_val
   end

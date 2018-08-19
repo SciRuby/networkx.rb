@@ -8,7 +8,7 @@ module NetworkX
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
     result = graphs.shift
 
-    for graph in graphs
+    graphs.each do |graph|
       result = NetworkX.union(result, graph)
     end
     result
@@ -23,7 +23,7 @@ module NetworkX
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
     result = graphs.shift
 
-    for graph in graphs
+    graphs.each do |graph|
       result = NetworkX.disjoint_union(result, graph)
     end
     result
@@ -38,7 +38,7 @@ module NetworkX
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
     result = graphs.shift
 
-    for graph in graphs
+    graphs.each do |graph|
       result = NetworkX.intersection(result, graph)
     end
     result
@@ -53,7 +53,7 @@ module NetworkX
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
     result = graphs.shift
 
-    for graph in graphs
+    graphs.each do |graph|
       result = NetworkX.compose(result, graph)
     end
     result

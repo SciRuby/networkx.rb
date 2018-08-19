@@ -67,7 +67,7 @@ module NetworkX
         old_level = level
         u = arbitrary_element(level.active)
         height = discharge(u, true, residual_nodes, residual_adj, height, levels, grt, source, target)
-        if grt.is_reached
+        if grt.reached?
           height = global_relabel(true, source, target, residual_nodes, n, levels, residual_pred)
           max_height = height
           grt.clear_work
@@ -98,7 +98,7 @@ module NetworkX
         end
         u = arbitrary_element(level.active)
         height = discharge(u, false, residual_nodes, residual_adj, height, levels, grt, source, target)
-        if grt.is_reached
+        if grt.reached?
           height = global_relabel(false, source, target, residual_nodes, n, levels, residual_pred)
           grt.clear_work
         end
@@ -109,52 +109,50 @@ module NetworkX
   end
 
   # Helper function to move a node from inactive set to active set
-  def self.activate(v, source, target, levels, residual_nodes)
-    if v != source && v != target
-      level = levels[residual_nodes[v][:height]]
-      if level.inactive.include?(v)
-        level.inactive.delete(v)
-        level.active.add(v)
-      end
-    end
+  def self.activate(node, source, target, levels, residual_nodes)
+    return if node == source || node == target
+    return unless level.inactive.include?(node)
+    level = levels[residual_nodes[node][:height]]
+    level.inactive.delete(node)
+    level.active.add(node)
   end
 
   # Helper function to relable a node to create a permissible edge
-  def self.relabel(u, grt, residual_adj, residual_nodes, _source, _target, _levels)
-    grt.add_work(residual_adj[u].length)
-    residual_adj[u].map { |v, attr| attr[:flow] < (attr[:capacity] + 1) ? residual_nodes[v][:height] : Float::INFINITY }.min
+  def self.relabel(u_node, grt, r_adj, _r_nodes, _source, _target, _levels)
+    grt.add_work(r_adj[u_node].length)
+    r_adj[u_node].map { |v, attr| attr[:flow] < (attr[:capacity] + 1) ? _nodes[v][:height] : Float::INFINITY }.min
   end
 
   # Helper function for discharging a node
-  def self.discharge(u, is_phase1, residual_nodes, residual_adj, height, levels, grt, source, target)
-    height = residual_nodes[u][:height]
-    curr_edge = residual_nodes[u][:curr_edge]
-    next_height = height
-    levels[height].active.delete(u)
+  def self.discharge(u_node, is_phase_1, residual_nodes, residual_adj, height, levels, grt, source, target)
+    height_val = residual_nodes[u_node][:height]
+    curr_edge = residual_nodes[u_node][:curr_edge]
+    next_height = height_val
+    levels[height_val].active.delete(u_node)
 
     loop do
       v, attr = curr_edge.get
-      if height == residual_nodes[v][:height] + 1 && attr[:flow] < attr[:capacity]
-        flow = [residual_nodes[u][:excess], attr[:capacity] - attr[:flow]].min
-        push(u, v, flow, residual_nodes, residual_adj)
+      if height_val == residual_nodes[v][:height] + 1 && attr[:flow] < attr[:capacity]
+        flow = [residual_nodes[u_node][:excess], attr[:capacity] - attr[:flow]].min
+        push(u_node, v, flow, residual_nodes, residual_adj)
         activate(v, source, target, levels, residual_nodes)
-        if residual_nodes[u][:excess] == 0
-          levels[height].inactive.add(u)
+        if residual_nodes[u_node][:excess].zero?
+          levels[height_val].inactive.add(u_node)
           break
         end
       end
       begin
         curr_edge.move_to_next
       rescue StopIteration
-        height = relabel(u, grt, residual_adj, residual_nodes, source, target, levels)
-        if is_phase1 && height >= n - 1
-          levels[height].active.add(u)
+        height_val = relabel(u_node, grt, residual_adj, residual_nodes, source, target, levels)
+        if is_phase_1 && height_val >= n - 1
+          levels[height].active.add(u_node)
           break
         end
-        next_height = height
+        next_height = height_val
       end
     end
-    residual_nodes[u][:height] = height
+    residual_nodes[u_node][:height] = height_val
     next_height
   end
 
@@ -172,16 +170,16 @@ module NetworkX
   end
 
   # Helper function for global relabel heuristic
-  def self.global_relabel(from_sink, source, target, residual_nodes, n, levels, residual_pred)
+  def self.global_relabel(from_sink, source, target, residual_nodes, num, levels, residual_pred)
     src = from_sink ? target : source
     heights = reverse_bfs(src, residual_pred)
     heights.delete(target) unless from_sink
     max_height = heights.values.max
     if from_sink
-      residual_nodes.each { |u, attr| heights[u] = n + 1 if !heights.key?(u) && attr[:height] < n }
+      residual_nodes.each { |u, attr| heights[u] = num + 1 if !heights.key?(u) && attr[:height] < num }
     else
-      heights.each_key { |u| heights[u] += n }
-      max_height += n
+      heights.each_key { |u| heights[u] += num }
+      max_height += num
     end
     heights.delete(src)
     heights.each do |u, new_height|
@@ -200,11 +198,11 @@ module NetworkX
   end
 
   # Helper function for augmenting flow
-  def self.push(u, v, flow, residual_nodes, residual_adj)
-    residual_adj[u][v][:flow] += flow
-    residual_adj[v][u][:flow] -= flow
-    residual_nodes[u][:excess] -= flow
-    residual_nodes[v][:excess] += flow
+  def self.push(node_1, node_2, flow, residual_nodes, residual_adj)
+    residual_adj[node_1][node_2][:flow] += flow
+    residual_adj[node_2][node_1][:flow] -= flow
+    residual_nodes[node_1][:excess] -= flow
+    residual_nodes[node_2][:excess] += flow
   end
 
   # Helper function for reverse bfs

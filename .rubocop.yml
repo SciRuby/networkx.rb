@@ -52,9 +52,6 @@ Style/EmptyElse:
 Style/EmptyMethod:
   EnforcedStyle: compact
 
-Style/FileName:
-  Enabled: false
-
 Style/FormatString:
   EnforcedStyle: percent
 
@@ -73,26 +70,31 @@ Style/Documentation:
 ### Metrics ------------------------------------------------------------
 
 Metrics/AbcSize:
-  Max: 20
+  Enabled: false
 
 Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
+  Enabled: false
 
 Metrics/ClassLength:
   Max: 200
 
 Metrics/CyclomaticComplexity:
-  Max: 7
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
 
 Metrics/LineLength:
   Max: 120
 
 Metrics/MethodLength:
-  Max: 15
+  Enabled: false
 
 Metrics/ModuleLength:
-  Max: 200
+  Enabled: false
 
 Style/MultilineBlockChain:
   Enabled: false
