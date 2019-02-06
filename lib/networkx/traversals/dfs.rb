@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method complexity and method length
+
   # Returns edges of the graph travelled in depth first fashion
   #
   # @example

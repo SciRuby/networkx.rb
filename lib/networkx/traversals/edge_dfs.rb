@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method complexity and method length
+
   # Helper function for edge_dfs
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
@@ -33,6 +35,8 @@ module NetworkX
     return Set.new([edge, (edge[0..1].reverse + edge[2])]) if graph.multigraph?
     Set.new([edge, edge.reverse])
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Performs edge dfs on the graph
   # Orientation :ignore, directed edges can be

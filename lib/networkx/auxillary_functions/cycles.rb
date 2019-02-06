@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method complexity and method length
+
   # Returns all basis cycles in graph
   #
   # @param graph [Graph] a graph
@@ -43,6 +45,8 @@ module NetworkX
     end
     cycles
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Returns the cycle containing the given node
   #

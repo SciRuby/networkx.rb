@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method complexity and method length
+
   # Returns the maximal independent set of a graph
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph

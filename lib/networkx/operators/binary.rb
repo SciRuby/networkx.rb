@@ -1,3 +1,5 @@
+# TODO: Reduce module length
+
 module NetworkX
   # Returns the edges of the graph in an array
   def self.get_edges(graph)
@@ -9,6 +11,8 @@ module NetworkX
     end
     edges
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Transforms the labels of the nodes of the graphs
   # so that they are disjoint.
@@ -38,6 +42,8 @@ module NetworkX
     end
     new_graph
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Performs the intersection of two graphs
   #
@@ -82,6 +88,8 @@ module NetworkX
     result
   end
 
+  # TODO: Reduce method complexity and method length
+
   # Performs the difference of two graphs
   #
   # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
@@ -110,6 +118,8 @@ module NetworkX
     end
     result
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Performs the symmetric difference of two graphs
   #
@@ -152,6 +162,8 @@ module NetworkX
     result
   end
 
+  # TODO: Reduce method complexity and method length
+
   # Performs the composition of two graphs
   #
   # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
@@ -176,6 +188,8 @@ module NetworkX
     end
     result
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Performs the union of two graphs
   #

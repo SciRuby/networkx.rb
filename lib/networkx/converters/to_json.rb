@@ -13,6 +13,8 @@ module NetworkX
     json_hash.to_json
   end
 
+  # TODO: Reduce method length
+
   # Returns a graph from the json encoded graph
   #
   # @param json_str [JSON] json encoded string

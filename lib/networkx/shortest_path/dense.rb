@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method length and method complexity
+
   # Returns the all pair distance between all the nodes
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph

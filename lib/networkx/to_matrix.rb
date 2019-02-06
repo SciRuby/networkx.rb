@@ -1,4 +1,5 @@
 module NetworkX
+  # TODO: Reduce condition branches and method length
   def self.to_matrix(graph, val, multigraph_weight='sum')
     is_undirected = !graph.directed?
     is_multigraph = graph.multigraph?

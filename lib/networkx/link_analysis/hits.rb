@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method length and method complexity
+
   # Computes hits and authority scores for all the graphs
   #
   # @param graph [Graph, DiGraph] a graph

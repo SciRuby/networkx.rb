@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method length
+
   # Helper function for single source shortest path length
   def self.help_single_shortest_path_length(adj, firstlevel, cutoff)
     iterator = Enumerator.new do |e|
@@ -48,6 +50,8 @@ module NetworkX
     shortest_paths
   end
 
+  # TODO: Reduce method length
+
   # Helper function for finding single source shortest path
   def self.help_single_shortest_path(adj, firstlevel, paths, cutoff)
     level = 0
@@ -94,6 +98,8 @@ module NetworkX
     graph.nodes.each_key { |n| shortest_paths << [n, single_source_shortest_path(graph, n, cutoff)] }
     shortest_paths
   end
+
+  # TODO: Reduce method length and method complexity
 
   # Computes shortest paths to all nodes from all nodes
   #

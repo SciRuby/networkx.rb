@@ -1,4 +1,8 @@
+# TODO: Reduce module length
+
 module NetworkX
+  # TODO: Reduce method complexity and method length
+
   # Helper function for running the shortest augmenting path algorithm
   def self.shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
     raise ArgumentError, 'Source is not in the graph!' unless graph.nodes.key?(source)
@@ -103,6 +107,8 @@ module NetworkX
     residual.graph[:flow_value] = flow_value
     residual
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Helper function for augmenting flow
   def augment(path, inf, r_adj)

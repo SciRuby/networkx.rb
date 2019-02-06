@@ -1,3 +1,5 @@
+# TODO: Reduce module length
+
 module NetworkX
   # Helper function to extract weight from a adjecency hash
   def self.get_weight(graph)
@@ -7,6 +9,8 @@ module NetworkX
     end
     weight_get
   end
+
+  # TODO: Reduce method length and method complexity
 
   # Helper function for multisource dijkstra
   def self.help_multisource_dijkstra(graph, sources, weight, pred=nil, paths=nil, cutoff=nil, target=nil)
@@ -207,6 +211,8 @@ module NetworkX
     paths
   end
 
+  # TODO: Reduce method length and method complexity
+
   # Helper function for bellman ford
   def self.help_bellman_ford(graph, sources, weight, pred=nil, paths=nil, dist=nil, cutoff=nil, target=nil)
     pred = sources.product([[]]).to_h if pred.nil?
@@ -378,6 +384,8 @@ module NetworkX
     graph.nodes.each_key { |n| path_lengths << [n, dist_path.call(graph, n, new_weight)] }
     path_lengths
   end
+
+  # TODO: Reduce method length and method complexity
 
   # Returns shortest path between all pairs of nodes
   #

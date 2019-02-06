@@ -1,4 +1,6 @@
 module NetworkX
+  # TODO: Reduce method length
+
   # Returns edges of the graph travelled in breadth first fashion
   #
   # @example

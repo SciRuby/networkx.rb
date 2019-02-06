@@ -53,6 +53,8 @@ module NetworkX
     end
   end
 
+  # TODO: Reduce method complexity and method length
+
   # Builds a residual graph from a constituent graph
   #
   # @param graph [DiGraph] a graph
@@ -115,6 +117,8 @@ module NetworkX
     r_network.graph[:inf] = inf
     r_network
   end
+
+  # TODO: Reduce method complexity and method length
 
   # Detects unboundedness in a graph, raises exception when
   #   infinite capacity flow is found

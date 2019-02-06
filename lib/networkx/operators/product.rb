@@ -1,4 +1,8 @@
+# TODO: Reduce module length
+
 module NetworkX
+  # TODO: Reduce method length
+
   # Returns the edges of the graph in an array
   def self.edges_in_array(graph)
     edge_array = []
@@ -164,7 +168,9 @@ module NetworkX
     g
   end
 
-  # Returns the specified power of the
+  # TODO: Reduce method complexity and method length
+
+  # Returns the specified power of the graph
   #
   # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
   # @param [Numeric] the power to which to raise the graph to

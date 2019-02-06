@@ -70,34 +70,34 @@ Style/Documentation:
 ### Metrics ------------------------------------------------------------
 
 Metrics/AbcSize:
-  Enabled: false
+  Enabled: true
 
 Metrics/BlockLength:
-  Enabled: false
+  Enabled: true
 
 Metrics/ClassLength:
   Max: 200
 
 Metrics/CyclomaticComplexity:
-  Enabled: false
+  Enabled: true
 
 Metrics/PerceivedComplexity:
-  Enabled: false
+  Enabled: true
 
 Metrics/BlockNesting:
-  Enabled: false
+  Enabled: true
 
 Metrics/LineLength:
   Max: 120
 
 Metrics/MethodLength:
-  Enabled: false
+  Enabled: true
 
 Metrics/ModuleLength:
-  Enabled: false
+  Enabled: true
 
 Style/MultilineBlockChain:
-  Enabled: false
+  Enabled: true
 
 Metrics/ParameterLists:
   Max: 10
