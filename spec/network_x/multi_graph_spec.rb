@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe NetworkX::MultiGraph do
   subject { graph }
 

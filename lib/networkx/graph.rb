@@ -207,7 +207,7 @@ module NetworkX
     # @param node_1 [Object] the first node of the edge to be checked
     # @param node_2 [Object] the second node of the edge to be checked
     def edge?(node_1, node_2)
-      node(node_1) && @adj[node_1].key?(node_2)
+      node?(node_1) && @adj[node_1].key?(node_2)
     end
 
     # Gets the node data
@@ -278,6 +278,8 @@ module NetworkX
       number_of_edges
     end
 
+    # TODO: Reduce method length and method complexity
+
     # Returns subgraph consisting of given array of nodes
     #
     # @example
@@ -302,6 +304,8 @@ module NetworkX
       end
     end
 
+    # TODO: Reduce method length and method complexity
+
     # Returns subgraph conisting of given edges
     #
     # @example
@@ -324,6 +328,14 @@ module NetworkX
         raise ArgumentError, 'Expected Argument to be Array or Set of edges, '\
         "received #{edges.class.name} instead."
       end
+    end
+
+    def multigraph?
+      ['NetworkX::MultiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
+    end
+
+    def directed?
+      ['NetworkX::DiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
     end
   end
 end
