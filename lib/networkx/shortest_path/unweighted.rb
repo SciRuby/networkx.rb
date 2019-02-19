@@ -13,6 +13,7 @@ module NetworkX
         nextlevel = {}
         thislevel.each do |u, _attrs|
           next if seen.key?(u)
+
           seen[u] = level
           nextlevel.merge!(adj[u])
           e.yield [u, level]
@@ -33,6 +34,7 @@ module NetworkX
   # @return [Array<Object, Numeric>] path lengths for all nodes
   def self.single_source_shortest_path_length(graph, source, cutoff=nil)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
+
     cutoff = Float::INFINITY if cutoff.nil?
     nextlevel = {source => 1}
     help_single_shortest_path_length(graph.adj, nextlevel, cutoff).take(graph.nodes.length)
@@ -81,6 +83,7 @@ module NetworkX
   # @return [Array<Object, Array<Object, Array<Object>>>] path lengths for all nodes from all nodes
   def self.single_source_shortest_path(graph, source, cutoff=nil)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
+
     cutoff = Float::INFINITY if cutoff.nil?
     nextlevel = {source => 1}
     paths = {source => [source]}
@@ -113,6 +116,7 @@ module NetworkX
   #         predecessors of a given node and/or seen dict
   def self.predecessor(graph, source, cutoff=nil, return_seen=false)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
+
     level = 0
     nextlevel = [source]
     seen = {source => level}

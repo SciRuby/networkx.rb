@@ -178,6 +178,7 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the power of the graph
   def self.power(graph, pow)
     raise ArgumentError, 'Power must be a positive quantity!' if pow <= 0
+
     result = NetworkX::Graph.new
     result.add_nodes(graph.nodes.map { |n, attrs| [n, attrs] })
     graph.nodes.each do |n, _attrs|
@@ -189,12 +190,14 @@ module NetworkX
         next_level = {}
         this_level.each do |v, _attrs|
           next if v == n
+
           unless seen.key?(v)
             seen[v] = level
             next_level.merge!(graph.adj[v])
           end
         end
         break if pow <= level
+
         level += 1
       end
       result.add_edges(seen.map { |v, _| [n, v] })

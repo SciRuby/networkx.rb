@@ -97,6 +97,7 @@ module NetworkX
         end
       end
       next unless u == target
+
       flow_value += augment(path, inf, r_adj)
       if flow_value >= cutoff
         residual.graph[:flow_value] = flow_value
@@ -121,6 +122,7 @@ module NetworkX
       u = v
     end
     raise ArgumentError, 'Infinite capacity path!' if flow * 2 > inf
+
     temp_path = path.clone
     u = temp_path.shift
     temp_path.each do |v|

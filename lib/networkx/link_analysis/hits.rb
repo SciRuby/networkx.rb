@@ -11,6 +11,7 @@ module NetworkX
   # @return [Array<Numeric, Numeric>] hits and authority scores
   def self.hits(graph, max_iter=100, tol=1e-8, nstart)
     return [{}, {}] if graph.nodes.empty?
+
     h = nstart
     sum = h.values.inject(:+)
     h.each_key { |k| h[k] /= (sum * 1.0) }
@@ -32,6 +33,7 @@ module NetworkX
       a.each_key { |k| a[k] /= smax }
       break if h.keys.map { |k| (h[k] - hlast[k]).abs }.inject(:+) < tol
       raise ArgumentError, 'Power Iteration failed to converge!' if i > max_iter
+
       i += 1
     end
     [h, a]

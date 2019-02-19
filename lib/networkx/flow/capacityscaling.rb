@@ -48,6 +48,7 @@ module NetworkX
   def self._build_residual_network(graph)
     raise ArgumentError, 'Sum of demands should be 0!' unless\
                          graph.nodes.values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
+
     residual = NetworkX::MultiDiGraph.new(inf: 0)
     residual.add_nodes(graph.nodes.map { |u, attr| [u, excess: (attr[:demand] || 0) * -1, potential: 0] })
     inf = Float::INFINITY
@@ -148,6 +149,7 @@ module NetworkX
                      end).max
 
     return flow_cost, _build_flow_dict(graph, residual) if wmax == -inf
+
     r_nodes = residual.nodes
     r_adj = residual.adj
 
@@ -159,8 +161,10 @@ module NetworkX
           uv_edges.each do |_k, e|
             flow = e[:capacity]
             next unless e[:weight] - p_u + r_nodes[v][:potential] < 0
+
             flow = e[:capacity] - e[:flow]
             next unless flow >= delta
+
             e[:flow] += flow
             r_adj[v][u].each_key do |val|
               val[:flow] += val[:temp_key][0] == e[:temp_key][0] && val[:temp_key][1] != e[:temp_key][1] ? -flow : 0
@@ -202,16 +206,21 @@ module NetworkX
           p_u = r_nodes[u][:potential]
           r_adj[u].each do |v, uv_edges|
             next if d.key?(v)
+
             wmin = inf
             uv_edges.each_value do |e|
               next unless e[:capacity] - e[:flow] >= delta
+
               w = e[:weight]
               next unless w < wmin
+
               wmin = w
             end
             next if wmin == inf
+
             d_v = d_u + wmin - p_u + r_nodes[v][:potential]
             next unless h_dict[v] > d_v
+
             h << [d_v, count, v]
             h_dict[v] = d_v
             pred[v] = [u, kmin, emin]

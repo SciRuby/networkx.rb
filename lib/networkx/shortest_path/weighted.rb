@@ -5,6 +5,7 @@ module NetworkX
   def self.get_weight(graph)
     weight_get = lambda do |_, _, attrs|
       return attrs[:weight] || 1 unless graph.multigraph?
+
       attrs.group_by { |_k, vals| vals[:weight] || 1 }.keys.max
     end
     weight_get
@@ -27,13 +28,17 @@ module NetworkX
     until fringe.empty?
       d, _, v = fringe.pop
       next if dist.key?(v)
+
       dist[v] = d
       break if v == target
+
       graph.adj[v].each do |u, attrs|
         cost = weight.call(v, u, attrs)
         next if cost.nil?
+
         vu_dist = dist[v] + cost
         next if !cutoff.nil? && vu_dist > cutoff
+
         if dist.key?(u)
           raise ValueError, 'Contradictory weights found!' if vu_dist < dist[u]
         elsif !seen.key?(u) || vu_dist < seen[u]
@@ -65,12 +70,14 @@ module NetworkX
   def self.multisource_dijkstra(graph, sources, target=nil, cutoff=nil)
     raise ValueError, 'Sources cannot be empty' if sources.empty?
     return [0, [target]] if sources.include?(target)
+
     paths = {}
     weight = get_weight(graph)
     sources.each { |source| paths[source] = [source] }
     dist = help_multisource_dijkstra(graph, sources, weight, nil, paths, cutoff, target)
     return [dist, paths] if target.nil?
     raise KeyError, "No path to #{target}!" unless dist.key?(target)
+
     [dist[target], paths[target]]
   end
 
@@ -83,6 +90,7 @@ module NetworkX
   # @return [Hash{ Object => Numeric }] path lengths for any nodes from given nodes
   def self.multisource_dijkstra_path_length(graph, sources, cutoff=nil)
     raise ValueError, 'Sources cannot be empty' if sources.empty?
+
     weight = get_weight(graph)
     help_multisource_dijkstra(graph, sources, weight, nil, nil, cutoff)
   end
@@ -142,9 +150,11 @@ module NetworkX
   # @return [Numeric] path length for target node from given node
   def self.dijkstra_path_length(graph, source, target)
     return 0 if source == target
+
     weight = get_weight(graph)
     length = help_dijkstra(graph, source, weight, nil, nil, nil, target)
     raise KeyError, 'Node not reachable!' unless length.key?(target)
+
     length[target]
   end
 
@@ -225,17 +235,20 @@ module NetworkX
       skip = false
       pred[u].each { |k| skip = true if in_q.include?(k) }
       next if skip
+
       dist_u = dist[u]
       graph.adj[u].each do |v, e|
         dist_v = dist_u + weight.call(u, v, e)
         next if !cutoff.nil? && dist_v > cutoff
         next if !target.nil? && dist_v > (dist[target] || inf)
+
         if dist_v < (dist[v] || inf)
           unless in_q.include?(v)
             q << v
             in_q.add(v)
             count_v = (count[v] || 0) + 1
             raise ArgumentError, 'Negative edge cycle detected!' if count_v == n
+
             count[v] = count_v
           end
           dist[v] = dist_v
@@ -270,22 +283,26 @@ module NetworkX
   # @return [Array<Hash{ Object => Array<Object> }, Hash{ Object => Numeric }>] predecessors and distances
   def self.bellmanford_predecesor_distance(graph, source, target=nil, cutoff=nil)
     raise ArgumentError, 'Node not found!' unless graph.node?(source)
+
     weight = get_weight(graph)
     # TODO: Detection of selfloop edges
     dist = {source => 0}
     pred = {source => []}
     return [pred, dist] if graph.nodes.length == 1
+
     dist = help_bellman_ford(graph, [source], weight, pred, nil, dist, cutoff, target)
     [pred, dist]
   end
 
   def self.singlesource_bellmanford(graph, source, target=nil, cutoff=nil)
     return [0, [source]] if source == target
+
     weight = get_weight(graph)
     paths = {source => [source]}
     dist = help_bellman_ford(graph, [source], weight, nil, paths, nil, cutoff, target)
     return [dist, paths] if target.nil?
     raise ArgumentError, 'Node not reachable!' unless dist.key?(target)
+
     [dist[target], paths[target]]
   end
 
@@ -298,9 +315,11 @@ module NetworkX
   # @return [Numeric] distance between source and target
   def self.bellmanford_path_length(graph, source, target)
     return 0 if source == target
+
     weight = get_weight(graph)
     length = help_bellman_ford(graph, [source], weight, nil, nil, nil, nil, target=target)
     raise ArgumentError, 'Node not reachable!' unless length.key?(target)
+
     length[target]
   end
 

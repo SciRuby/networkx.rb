@@ -12,6 +12,7 @@ module NetworkX
     # @param node_2 [Object] the second node of a given edge
     def new_edge_key(node_1, node_2)
       return 0 if @adj[node_1][node_2].nil?
+
       key = @adj[node_1][node_2].length
       key += 1 while @adj[node_1][node_2].key?(key)
       key
@@ -56,6 +57,7 @@ module NetworkX
       raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
       raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].key?(node_2)
       raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1][node_2].key?(key)
+
       @adj[node_1][node_2].delete(key)
       @adj[node_2][node_1].delete(key)
     end
@@ -130,6 +132,7 @@ module NetworkX
         sub_graph = NetworkX::MultiGraph.new(@graph)
         nodes.each do |u, _|
           raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.key?(u)
+
           sub_graph.add_node(u, @nodes[u])
           @adj[u].each do |v, edge_val|
             edge_val.each { |_, keyval| sub_graph.add_edge(u, v, keyval) if @adj[u].key?(v) && nodes.include?(v) }
@@ -157,6 +160,7 @@ module NetworkX
         edges.each do |u, v|
           raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
                                                                                     && @adj[u].key?(v)
+
           sub_graph.add_node(u, @nodes[u])
           sub_graph.add_node(v, @nodes[v])
           @adj[u][v].each { |_, keyval| sub_graph.add_edge(u, v, keyval) }
