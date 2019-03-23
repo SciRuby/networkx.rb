@@ -135,6 +135,7 @@ module NetworkX
       r_network.adj[u].each do |v, uv_attrs|
         next unless uv_attrs[:capacity] == inf && !seen.include?(v)
         raise ArgumentError, 'Infinite capacity flow!' if v == target
+
         seen << v
         q << v
       end

@@ -33,6 +33,7 @@ module NetworkX
   def self.edge_id(graph, edge)
     return edge if graph.directed?
     return Set.new([edge, (edge[0..1].reverse + edge[2])]) if graph.multigraph?
+
     Set.new([edge, edge.reverse])
   end
 

@@ -187,6 +187,7 @@ module NetworkX
         sub_graph = NetworkX::DiGraph.new(@graph)
         nodes.each do |u|
           raise KeyError, "#{u} does not exist in the current graph!" unless node?(u)
+
           sub_graph.add_node(u, @nodes[u])
           @adj[u].each do |v, uv_attrs|
             sub_graph.add_edge(u, v, uv_attrs) if @adj[u].key?(v) && nodes.include?(v)
@@ -214,6 +215,7 @@ module NetworkX
         edges.each do |u, v|
           raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
                                                                                     && @adj[u].key?(v)
+
           sub_graph.add_node(u, @nodes[u])
           sub_graph.add_node(v, @nodes[v])
           sub_graph.add_edge(u, v, @adj[u][v])

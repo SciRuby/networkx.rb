@@ -14,6 +14,7 @@ module NetworkX
     dim = graph.nodes.length
     raise ArgumentError, 'Init array needs to have same length as number of graph nodes!'\
                           unless dim == init.length
+
     matrix = []
     elem_ind = {}
     p = []

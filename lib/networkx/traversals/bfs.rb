@@ -10,6 +10,7 @@ module NetworkX
   # @param source [Object] node to start bfs from
   def self.bfs_edges(graph, source)
     raise KeyError, "There exists no node names #{source} in the given graph." unless graph.node?(source)
+
     bfs_edges = []
     visited = [source]
     queue = Queue.new.push([source, graph.neighbours(source)])
@@ -17,6 +18,7 @@ module NetworkX
       parent, children = queue.pop
       children.each_key do |child|
         next if visited.include?(child)
+
         bfs_edges << [parent, child]
         visited << child
         queue.push([child, graph.neighbours(child)])

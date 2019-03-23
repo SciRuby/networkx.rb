@@ -67,6 +67,7 @@ module NetworkX
       edge_dfs(graph, node).each do |edge|
         tail, head = edge
         next if explored.include?(head)
+
         if !previous_head.nil? && tail != previous_head
           loop do
             popped_edge = edges.pop

@@ -6,6 +6,7 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] union of all the graphs
   def self.union_all(graphs)
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
+
     result = graphs.shift
 
     graphs.each do |graph|
@@ -21,6 +22,7 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] disjoint union of all the graphs
   def self.disjoint_union_all(graphs)
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
+
     result = graphs.shift
 
     graphs.each do |graph|
@@ -36,6 +38,7 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] intersection of all the graphs
   def self.intersection_all(graphs)
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
+
     result = graphs.shift
 
     graphs.each do |graph|
@@ -51,6 +54,7 @@ module NetworkX
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] composition of all the graphs
   def self.compose_all(graphs)
     raise ArgumentError, 'Argument array is empty' if graphs.empty?
+
     result = graphs.shift
 
     graphs.each do |graph|

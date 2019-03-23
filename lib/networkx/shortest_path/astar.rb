@@ -13,6 +13,7 @@ module NetworkX
   def self.astar_path(graph, source, target, heuristic=nil)
     warn 'A* is not implemented for MultiGraph and MultiDiGraph'
     raise ArgumentError, 'Either source or target is not in graph' unless graph.node?(source) && graph.node?(target)
+
     count = ->(i) { i + 1 }
     i = -1
     heuristic ||= (->(_u, _v) { 0 })
@@ -39,6 +40,7 @@ module NetworkX
 
       graph.adj[curnode].each do |u, attrs|
         next if explored.key?(u)
+
         ncost = dist + (attrs[:weight] || 1)
         if enqueued.key?(u)
           qcost, = enqueued[u]
@@ -63,6 +65,7 @@ module NetworkX
   # @return [Numeric] the length of the path
   def self.astar_path_length(graph, source, target, heuristic=nil)
     raise ArgumentError, 'Either source or target is not in graph' unless graph.node?(source) && graph.node?(target)
+
     path = astar_path(graph, source, target, heuristic)
     path_length = 0
     (1..(path.length - 1)).each { |i| path_length += (graph.adj[path[i - 1]][path[i]][:weight] || 1) }

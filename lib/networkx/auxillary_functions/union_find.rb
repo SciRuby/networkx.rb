@@ -13,6 +13,7 @@ module NetworkX
 
     def union(node_1, node_2)
       return if connected?(node_1, node_2)
+
       node1_id = @unions[node_1]
       node2_id = @unions[node_2]
 

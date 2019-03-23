@@ -8,6 +8,7 @@ module NetworkX
   # @return [Array<Array<Object>>] Arrays of nodes in the cliques
   def self.find_cliques(graph)
     return nil if graph.nodes.empty?
+
     q = [nil]
     adj = {}
     graph.nodes.each_key { |u| adj[u] = [] }

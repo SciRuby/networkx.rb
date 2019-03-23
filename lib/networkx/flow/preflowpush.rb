@@ -16,6 +16,7 @@ module NetworkX
 
     globalrelabel_freq = 0 if globalrelabel_freq.nil?
     raise ArgumentError, 'Global Relabel Freq must be nonnegative!' if globalrelabel_freq < 0
+
     r_network = residual.nil? ? build_residual_network(graph) : residual
     detect_unboundedness(r_network, source, target)
 
@@ -116,6 +117,7 @@ module NetworkX
   def self.activate(node, source, target, levels, residual_nodes)
     return if node == source || node == target
     return unless level.inactive.include?(node)
+
     level = levels[residual_nodes[node][:height]]
     level.inactive.delete(node)
     level.active.add(node)
@@ -195,6 +197,7 @@ module NetworkX
     heights.each do |u, new_height|
       old_height = residual_nodes[u][:height]
       next unless new_height != old_height
+
       if levels[old_height].active.include?(u)
         levels[old_height].active.delete(u)
         levels[new_height].active.add(u)

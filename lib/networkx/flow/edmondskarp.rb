@@ -11,6 +11,7 @@ module NetworkX
       u = v
     end
     raise ArgumentError, 'Infinite capacity path!' if flow * 2 > inf
+
     u = path_first_elem
     path.each do |v|
       residual.adj[u][v][:flow] += flow
@@ -32,8 +33,10 @@ module NetworkX
         q_s.each do |u|
           residual.adj[u].each do |v, uv_attrs|
             next unless !pred.include?(v) && (uv_attrs[:flow] < uv_attrs[:capacity])
+
             pred[v] = u
             return [v, pred, succ] if succ.key?(v)
+
             q << v
           end
         end
@@ -42,12 +45,15 @@ module NetworkX
         q_t.each do |u|
           residual.pred[u].each do |v, uv_attrs|
             next unless !succ.key?(v) && uv_attrs[:flow] < uv_attrs[:capacity]
+
             succ[v] = u
             return [v, pred, succ] if pred.key?(v)
+
             q << v
           end
         end
         return [nil, nil, nil] if q.empty?
+
         q_t = q
       end
     end
@@ -62,6 +68,7 @@ module NetworkX
     while flow_val < cutoff
       v, pred, succ = bidirectional_bfs(residual, source, target)
       break if pred.nil?
+
       path = [v]
       u = v
       while u != source
@@ -86,6 +93,7 @@ module NetworkX
     raise ArgumentError, 'Source not in graph!' unless graph.nodes.key?(source)
     raise ArgumentError, 'Target not in graph!' unless graph.nodes.key?(target)
     raise ArgumentError, 'Source and target are same node!' if source == target
+
     res_graph = residual.nil? ? build_residual_network(graph) : residual.clone
     res_graph.adj.each do |u, u_edges|
       u_edges.each do |v, _attrs|
