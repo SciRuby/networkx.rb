@@ -10,8 +10,14 @@ module NetworkX
   # @param max_iter [Integer] max iterations for the pagerank algorithm to run
   #
   # @return [Array<Numeric>] pagerank values of the graph
-  def self.pagerank(graph, init, alpha=0.85, eps=1e-4, max_iter=100)
+  def self.pagerank(graph, init=nil, alpha=0.85, eps=1e-4, max_iter=100)
     dim = graph.nodes.length
+    if init.nil?
+      init = dim.times.map { |i| [i, 1.0 / dim] }.to_h
+    else
+      s = init.values.sum.to_f
+      init = init.map { |k, v| [k, v / s] }.to_h
+    end
     raise ArgumentError, 'Init array needs to have same length as number of graph nodes!'\
                           unless dim == init.length
 
