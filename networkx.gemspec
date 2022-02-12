@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-its'
   spec.add_development_dependency 'rubocop', '>= 0.40.0'
   spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'rubygems-tasks'
+  # spec.add_development_dependency 'rubygems-tasks'
   spec.add_development_dependency 'saharspec'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
