@@ -1,5 +1,5 @@
 require 'set'
-# require 'nmatrix'
+require 'matrix'
 require 'rb_heap'
 require 'securerandom'
 require_relative 'networkx/version'
