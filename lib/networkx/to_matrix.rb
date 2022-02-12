@@ -5,7 +5,7 @@ module NetworkX
     is_multigraph = graph.multigraph?
     nodelen = graph.nodes.length
 
-    m = NMatrix.new(nodelen, val)
+    m = Matrix.build(nodelen) { val }
     index = {}
     inv_index = {}
     ind = 0
