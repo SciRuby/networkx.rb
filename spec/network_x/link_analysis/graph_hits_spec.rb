@@ -17,12 +17,12 @@ RSpec.describe NetworkX::Graph do
   context 'when authority_matrix is called' do
     subject { NetworkX.authority_matrix(graph) }
 
-    it { is_expected.to eq(NMatrix[[1, 0, 1], [0, 2, 0], [1, 0, 1]]) }
+    it { is_expected.to eq(Matrix[[1, 0, 1], [0, 2, 0], [1, 0, 1]]) }
   end
 
   context 'when hub_matrix is called' do
     subject { NetworkX.hub_matrix(graph) }
 
-    it { is_expected.to eq(NMatrix[[1, 0, 1], [0, 2, 0], [1, 0, 1]]) }
+    it { is_expected.to eq(Matrix[[1, 0, 1], [0, 2, 0], [1, 0, 1]]) }
   end
 end
