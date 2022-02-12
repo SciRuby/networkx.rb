@@ -43,19 +43,19 @@ module NetworkX
   #
   # @param graph [Graph, DiGraph] a graph
   #
-  # @return [NMatrix] authority matrix for the graph
+  # @return [Matrix] authority matrix for the graph
   def self.authority_matrix(graph)
     matrix, = to_matrix(graph, 0)
-    matrix.transpose.dot matrix
+    matrix.transpose * matrix
   end
 
   # Computes hub matrix for the graph
   #
   # @param graph [Graph, DiGraph] a graph
   #
-  # @return [NMatrix] hub matrix for the graph
+  # @return [Matrix] hub matrix for the graph
   def self.hub_matrix(graph)
     matrix, = to_matrix(graph, 0)
-    matrix.dot matrix.transpose
+    matrix * matrix.transpose
   end
 end
