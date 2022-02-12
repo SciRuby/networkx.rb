@@ -11,6 +11,6 @@ RSpec.describe NetworkX::Graph do
   context 'when pagerank is called' do
     subject { NetworkX.pagerank(graph, 1 => 0.333, 2 => 0.333, 4 => 0.333) }
 
-    it { is_expected.to eq([0.2567466855604044, 0.4865064976468385, 0.2567466855604044]) }
+    it { is_expected.to eq([0.2567467074324632, 0.4865065851350735, 0.2567467074324632]) }
   end
 end
