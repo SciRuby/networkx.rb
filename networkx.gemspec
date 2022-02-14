@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
   # spec.add_runtime_dependency 'nmatrix'
+  spec.add_runtime_dependency 'matrix'
   spec.add_runtime_dependency 'rb_heap'
 
   # spec.add_development_dependency 'guard-rspec' if RUBY_VERSION >= '2.2.5'
