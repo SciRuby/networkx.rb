@@ -50,7 +50,7 @@ RSpec.describe NetworkX::MultiGraph do
     end
 
     its('adj') do
-      is_expected.to eq('Kolkata' => {}, 'Bangalore' => {},\
+      is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}, \
                         'Nagpur' => {}, 'Chennai' => {}, 'Mumbai' => {})
     end
   end

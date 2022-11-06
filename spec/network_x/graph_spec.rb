@@ -50,7 +50,7 @@ RSpec.describe NetworkX::Graph do
     end
 
     its('adj') do
-      is_expected.to eq('Kolkata' => {}, 'Bangalore' => {},\
+      is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}, \
                         'Nagpur' => {}, 'Chennai' => {}, 'Mumbai' => {})
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe NetworkX::Graph do
     end
 
     its('adj') do
-      is_expected.to eq('Nagpur' => {'Chennai' => {}, 'Mumbai' => {}},\
+      is_expected.to eq('Nagpur' => {'Chennai' => {}, 'Mumbai' => {}}, \
                         'Mumbai' => {'Nagpur' => {}}, 'Chennai' => {'Nagpur' => {}})
     end
   end
