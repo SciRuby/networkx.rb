@@ -107,6 +107,9 @@ Naming/VariableNumber:
 
 ### RSpec --------------------------------------------------------------
 
+require:
+  - rubocop-rspec
+
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
