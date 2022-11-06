@@ -1,4 +1,6 @@
 AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
   Include:
     - 'lib/**/*'
   Exclude:
@@ -6,19 +8,18 @@ AllCops:
     - 'benchmarks/*'
     - 'profile/*'
   DisplayCopNames: true
-  TargetRubyVersion: 2.7
-  NewCops: enable
   SuggestExtensions: false
-
-# Preferred codebase style ---------------------------------------------
 
 ### Layouts ------------------------------------------------------------
 
-Layout/ParameterAlignment:
-  EnforcedStyle: with_fixed_indentation
-
 Layout/ExtraSpacing:
   AllowForAlignment: true
+
+Layout/LineLength:
+  Max: 120
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
 
 Layout/SpaceAfterComma:
   Enabled: false
@@ -35,13 +36,48 @@ Layout/SpaceInsideBlockBraces:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-Layout/LineLength:
-  Max: 120
+### Metrics ------------------------------------------------------------
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+### Naming -------------------------------------------------------------
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
 
 ### Styles -------------------------------------------------------------
 
 Style/AndOr:
   EnforcedStyle: conditionals
+
+Style/Documentation:
+  Enabled: false
 
 Style/DoubleNegation:
   Enabled: false
@@ -58,58 +94,20 @@ Style/EmptyMethod:
 Style/FormatString:
   EnforcedStyle: percent
 
+Style/MultilineBlockChain:
+  Enabled: false
+
 Style/OptionalBooleanParameter:
   Enabled: false
 
 Style/ParallelAssignment:
   Enabled: false
 
-Style/SingleLineBlockParams:
-  Enabled: true
-
 Style/PerlBackrefs:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false # TODO
-
-### Metrics ------------------------------------------------------------
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/BlockLength:
-  Enabled: false
-
-Metrics/ClassLength:
-  Max: 200
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
-Metrics/PerceivedComplexity:
-  Enabled: false
-
-Metrics/BlockNesting:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/ModuleLength:
-  Enabled: false
-
-Style/MultilineBlockChain:
-  Enabled: false
-
-Metrics/ParameterLists:
-  Enabled: false
-  Max: 10
-
-### Naming -------------------------------------------------------------
-
-Naming/VariableNumber:
-  EnforcedStyle: snake_case
+Style/SingleLineBlockParams:
+  Enabled: true
 
 ### RSpec --------------------------------------------------------------
 
