@@ -22,13 +22,13 @@ Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/SpaceAfterComma:
-  Enabled: false
+  Enabled: true
 
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 Layout/SpaceAroundOperators:
-  Enabled: false
+  Enabled: true
 
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
@@ -57,7 +57,7 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/ModuleLength:
-  Enabled: false
+  Max: 225
 
 Metrics/ParameterLists:
   Enabled: false

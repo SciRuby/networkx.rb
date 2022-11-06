@@ -56,7 +56,7 @@ module NetworkX
     flow_value = 0
     path = [source]
     u = source
-    d = two_phase ? n : [m ** 0.5, 2 * (n ** (2./ 3))].min.floor
+    d = two_phase ? n : [m**0.5, 2 * (n**(2./ 3))].min.floor
     done = r_nodes[source][:height] >= d
 
     until done

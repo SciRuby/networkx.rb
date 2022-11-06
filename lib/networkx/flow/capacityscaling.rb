@@ -155,7 +155,7 @@ module NetworkX
     r_nodes = residual.nodes
     r_adj = residual.adj
 
-    delta = 2 ** Math.log2(wmax).floor
+    delta = 2**Math.log2(wmax).floor
     while delta >= 1
       r_nodes.each do |u, u_attrs|
         p_u = u_attrs[:potential]
