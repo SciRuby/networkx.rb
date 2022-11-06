@@ -28,7 +28,7 @@ module NetworkX
 
   # Returns the hash product of two hashes
   def self.hash_product(hash_1, hash_2)
-    Hash[(hash_1.keys | hash_2.keys).map { |n| [n, [hash_1[n], hash_2[n]]] }]
+    (hash_1.keys | hash_2.keys).to_h { |n| [n, [hash_1[n], hash_2[n]]] }
   end
 
   # Returns the node product of nodes of two graphs

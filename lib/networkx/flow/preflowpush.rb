@@ -54,7 +54,7 @@ module NetworkX
       push(source, u, flow, residual_nodes, residual_adj) if flow.positive?
     end
 
-    levels = (0..(2 * n - 1)).map { |_| Level.new }
+    levels = (0..((2 * n) - 1)).map { |_| Level.new }
     residual_nodes.each do |u, attr|
       if u != source && u != target
         level = levels[attr[:height]]

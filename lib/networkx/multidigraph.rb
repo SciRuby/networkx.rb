@@ -211,7 +211,7 @@ module NetworkX
           return sub_graph
         end
       else
-        raise ArgumentError, 'Expected Argument to be Array or Set of nodes, '\
+        raise ArgumentError, 'Expected Argument to be Array or Set of nodes, ' \
                              "received #{nodes.class.name} instead."
       end
     end
@@ -229,7 +229,7 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::MultiDiGraph.new(**@graph)
         edges.each do |u, v|
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u) \
                                                                                     && @adj[u].key?(v)
 
           sub_graph.add_node(u, **@nodes[u])
@@ -238,8 +238,8 @@ module NetworkX
         end
         sub_graph
       else
-        raise ArgumentError, 'Expected Argument to be Array or Set of edges, '\
-        "received #{edges.class.name} instead."
+        raise ArgumentError, 'Expected Argument to be Array or Set of edges, ' \
+                             "received #{edges.class.name} instead."
       end
     end
   end

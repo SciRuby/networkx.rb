@@ -15,12 +15,12 @@ module NetworkX
   def self.pagerank(graph, init=nil, alpha=0.85, eps=1e-4, max_iter=100)
     dim = graph.nodes.length
     if init.nil?
-      init = dim.times.map { |i| [i, 1.0 / dim] }.to_h
+      init = dim.times.to_h { |i| [i, 1.0 / dim] }
     else
       s = init.values.sum.to_f
       init = init.transform_values { |v| v / s }
     end
-    raise ArgumentError, 'Init array needs to have same length as number of graph nodes!'\
+    raise ArgumentError, 'Init array needs to have same length as number of graph nodes!' \
                           unless dim == init.length
 
     matrix = []
@@ -45,7 +45,7 @@ module NetworkX
       dim.times do |i|
         ip = 0
         dim.times { |j| ip += p.transpose[i][j] * prev[j] }
-        curr[i] = (alpha * ip) + (1 - alpha) / (dim * 1.0)
+        curr[i] = (alpha * ip) + ((1 - alpha) / (dim * 1.0))
       end
       err = 0
       dim.times { |i| err += (prev[i] - curr[i]).abs }

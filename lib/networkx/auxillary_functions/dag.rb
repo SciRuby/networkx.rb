@@ -38,10 +38,10 @@ module NetworkX
     raise ArgumentError, 'Topological Sort not defined on undirected graphs!' unless graph.directed?
 
     nodes = []
-    indegree_map = Hash[graph.nodes.each_key.map do |u|
-                          [u, graph.in_degree(u)] if graph.in_degree(u).positive?
-                        end.compact]
-    zero_indegree = graph.nodes.each_key.map { |u| u if graph.in_degree(u).zero? }.compact
+    indegree_map = graph.nodes.each_key.map do |u|
+      [u, graph.in_degree(u)] if graph.in_degree(u).positive?
+    end.compact.to_h
+    zero_indegree = graph.nodes.each_key.select { |u| graph.in_degree(u).zero? }
 
     until zero_indegree.empty?
       node = zero_indegree.shift

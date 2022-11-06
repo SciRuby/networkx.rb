@@ -48,7 +48,7 @@ module NetworkX
 
   # Returns the residual graph of the given graph
   def self._build_residual_network(graph)
-    raise ArgumentError, 'Sum of demands should be 0!' unless\
+    raise ArgumentError, 'Sum of demands should be 0!' unless \
                          graph.nodes.values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
 
     residual = NetworkX::MultiDiGraph.new(inf: 0)
@@ -106,16 +106,16 @@ module NetworkX
           end
         end
         residual.adj[u].each do |v, uv_edges|
-          flow_dict[u][v].merge!(Hash[uv_edges.map do |_, val|
-                                        [val[:temp_key][0], val[:flow]] if (val[:flow]).positive?
-                                      end])
+          flow_dict[u][v].merge!(uv_edges.to_h do |_, val|
+                                   [val[:temp_key][0], val[:flow]] if (val[:flow]).positive?
+                                 end)
         end
       end
     else
       graph.nodes.each_key do |u|
-        flow_dict[u] = Hash[graph.adj[u].map do |v, e|
+        flow_dict[u] = graph.adj[u].to_h do |v, e|
           [v, u != v || (e[:capacity] || inf) <= 0 || (e[:weight] || 0) >= 0 ? 0 : e[:capacity]]
-        end]
+        end
         merge_dict = {}
         residual.adj[u].each do |v, uv_edges|
           uv_edges.each_value { |attrs| merge_dict[v] = attrs[:flow] if (attrs[:flow]).positive? }
@@ -231,7 +231,9 @@ module NetworkX
           end
         end
 
-        if !t.nil?
+        if t.nil?
+          s_set.delete(s)
+        else
           while u != s
             v = u
             u, k, e = pred[v]
@@ -246,8 +248,6 @@ module NetworkX
           t_set.delete(t) if r_nodes[t][:excess] > -delta
           d_t = d[t]
           d.each { |node, d_u_node| r_nodes[node][:potential] -= (d_u_node - d_t) }
-        else
-          s_set.delete(s)
         end
       end
       delta = (delta / 2).floor

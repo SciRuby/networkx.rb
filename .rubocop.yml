@@ -6,7 +6,9 @@ AllCops:
     - 'benchmarks/*'
     - 'profile/*'
   DisplayCopNames: true
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  SuggestExtensions: false
 
 # Preferred codebase style ---------------------------------------------
 
@@ -71,33 +73,34 @@ Style/Documentation:
 ### Metrics ------------------------------------------------------------
 
 Metrics/AbcSize:
-  Enabled: true
+  Enabled: false
 
 Metrics/BlockLength:
-  Enabled: true
+  Enabled: false
 
 Metrics/ClassLength:
   Max: 200
 
 Metrics/CyclomaticComplexity:
-  Enabled: true
+  Enabled: false
 
 Metrics/PerceivedComplexity:
-  Enabled: true
+  Enabled: false
 
 Metrics/BlockNesting:
-  Enabled: true
+  Enabled: false
 
 Metrics/MethodLength:
-  Enabled: true
+  Enabled: false
 
 Metrics/ModuleLength:
-  Enabled: true
+  Enabled: false
 
 Style/MultilineBlockChain:
-  Enabled: true
+  Enabled: false
 
 Metrics/ParameterLists:
+  Enabled: false
   Max: 10
 
 ### Naming -------------------------------------------------------------

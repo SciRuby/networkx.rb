@@ -54,7 +54,7 @@ module NetworkX
       when Array
         edges.each { |node_1, node_2, attrs| add_edge(node_1, node_2, **(attrs || {})) }
       else
-        raise ArgumentError, 'Expected argument to be an Array of edges, '\
+        raise ArgumentError, 'Expected argument to be an Array of edges, ' \
                              "received #{edges.class.name} instead."
       end
     end
@@ -86,7 +86,7 @@ module NetworkX
       when Set, Array
         nodes.each { |node, node_attrs| add_node(node, **(node_attrs || {})) }
       else
-        raise ArgumentError, 'Expected argument to be an Array or Set of nodes, '\
+        raise ArgumentError, 'Expected argument to be an Array or Set of nodes, ' \
                              "received #{nodes.class.name} instead."
       end
     end
@@ -116,7 +116,7 @@ module NetworkX
       when Set, Array
         nodes.each { |node| remove_node(node) }
       else
-        raise ArgumentError, 'Expected argument to be an Array or Set of nodes, '\
+        raise ArgumentError, 'Expected argument to be an Array or Set of nodes, ' \
                              "received #{nodes.class.name} instead."
       end
     end
@@ -148,7 +148,7 @@ module NetworkX
       when Array, Set
         edges.each { |node_1, node_2| remove_edge(node_1, node_2) }
       else
-        raise ArgumentError, 'Expected Arguement to be Array or Set of edges, '\
+        raise ArgumentError, 'Expected Arguement to be Array or Set of edges, ' \
                              "received #{edges.class.name} instead."
       end
     end
@@ -174,9 +174,9 @@ module NetworkX
     # @param edges [Array<Object, Object>] the array of edges
     # @param weights [Array<Integer>] the array of weights
     def add_weighted_edges(edges, weights)
-      raise ArgumentError, 'edges and weights array must have equal number of elements.'\
+      raise ArgumentError, 'edges and weights array must have equal number of elements.' \
                            unless edges.size == weights.size
-      raise ArgumentError, 'edges and weight must be given in an Array.'\
+      raise ArgumentError, 'edges and weight must be given in an Array.' \
                            unless edges.is_a?(Array) && weights.is_a?(Array)
 
       (edges.transpose << weights).transpose.each do |node_1, node_2, weight|
@@ -308,7 +308,7 @@ module NetworkX
           return sub_graph
         end
       else
-        raise ArgumentError, 'Expected Argument to be Array or Set of nodes, '\
+        raise ArgumentError, 'Expected Argument to be Array or Set of nodes, ' \
                              "received #{nodes.class.name} instead."
       end
     end
@@ -326,7 +326,7 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::Graph.new(**@graph)
         edges.each do |u, v|
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u)\
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u) \
                                                                                     && @adj[u].key?(v)
 
           sub_graph.add_node(u, **@nodes[u])
@@ -335,8 +335,8 @@ module NetworkX
         end
         sub_graph
       else
-        raise ArgumentError, 'Expected Argument to be Array or Set of edges, '\
-        "received #{edges.class.name} instead."
+        raise ArgumentError, 'Expected Argument to be Array or Set of edges, ' \
+                             "received #{edges.class.name} instead."
       end
     end
 

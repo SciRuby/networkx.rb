@@ -49,7 +49,7 @@ module NetworkX
       attrs[:curr_edge] = CurrentEdge.new(r_adj[node])
     end
 
-    counts = Array.new(2 * n - 1, 0)
+    counts = Array.new((2 * n) - 1, 0)
     counts.fill(0)
     r_nodes.each_value { |attrs| counts[attrs[:height]] += 1 }
     inf = graph.graph[:inf]
@@ -58,7 +58,7 @@ module NetworkX
     flow_value = 0
     path = [source]
     u = source
-    d = two_phase ? n : [m ** 0.5, 2 * n ** (2./ 3)].min.floor
+    d = two_phase ? n : [m ** 0.5, 2 * (n ** (2./ 3))].min.floor
     done = r_nodes[source][:height] >= d
 
     until done
@@ -81,12 +81,12 @@ module NetworkX
           end
           height = relabel(u, n, r_adj, r_nodes)
           if u == source && height >= d
-            if !two_phase
-              residual.graph[:flow_value] = flow_value
-              return residual
-            else
+            if two_phase
               done = true
               break
+            else
+              residual.graph[:flow_value] = flow_value
+              return residual
             end
           end
           counts[height] += 1

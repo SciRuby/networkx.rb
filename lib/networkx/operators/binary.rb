@@ -22,10 +22,10 @@ module NetworkX
     new_graph = Marshal.load(Marshal.dump(graph))
     new_graph.clear
 
-    idx_dict = Hash[graph.nodes.keys.map do |v|
+    idx_dict = graph.nodes.keys.to_h do |v|
       starting_int += 1
       [v, starting_int]
-    end]
+    end
 
     graph.nodes.each do |u, attrs|
       new_graph.add_node(u.to_s + idx_dict[u].to_s, **attrs)

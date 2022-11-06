@@ -24,7 +24,10 @@ module NetworkX
     cliques = []
     begin
       loop do
-        if !ext_u.empty?
+        if ext_u.empty?
+          q.pop
+          subg, cand, ext_u = stack.pop
+        else
           q_elem = ext_u.pop
           cand.delete(q_elem)
           q[-1] = q_elem
@@ -43,9 +46,6 @@ module NetworkX
               ext_u = cand - adj[u]
             end
           end
-        else
-          q.pop
-          subg, cand, ext_u = stack.pop
         end
       end
     rescue NoMethodError
