@@ -12,7 +12,7 @@ AllCops:
 
 ### Layouts ------------------------------------------------------------
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/ExtraSpacing:
@@ -32,6 +32,9 @@ Layout/SpaceInsideBlockBraces:
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+
+Layout/LineLength:
+  Max: 120
 
 ### Styles -------------------------------------------------------------
 
@@ -84,9 +87,6 @@ Metrics/PerceivedComplexity:
 
 Metrics/BlockNesting:
   Enabled: true
-
-Metrics/LineLength:
-  Max: 120
 
 Metrics/MethodLength:
   Enabled: true
