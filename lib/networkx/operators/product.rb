@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TODO: Reduce module length
 
 module NetworkX
@@ -66,7 +68,7 @@ module NetworkX
   def self.edges_cross_nodes(g_1, g_2)
     result = []
     edges_in_array(g_1).each do |u, v, d|
-      g_2.nodes.keys.each do |x|
+      g_2.nodes.each_key do |x|
         result << [[u, x], [v, x], d]
       end
     end
@@ -76,7 +78,7 @@ module NetworkX
   # Returns the product of directed nodes with edges
   def self.nodes_cross_edges(g_1, g_2)
     result = []
-    g_1.nodes.keys.each do |x|
+    g_1.nodes.each_key do |x|
       edges_in_array(g_2).each do |u, v, d|
         result << [[x, u], [x, v], d]
       end
@@ -88,8 +90,8 @@ module NetworkX
   def self.edges_cross_nodes_and_nodes(g_1, g_2)
     result = []
     edges_in_array(g_1).each do |u, v, d|
-      g_2.nodes.keys.each do |x|
-        g_2.nodes.keys.each do |y|
+      g_2.nodes.each_key do |x|
+        g_2.nodes.each_key do |y|
           result << [[u, x], [v, y], d]
         end
       end

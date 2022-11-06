@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # TODO: Reduce condition branches and method length
   def self.to_matrix(graph, val, multigraph_weight='sum')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # Describes the class for making MultiGraphs
   #
@@ -165,7 +167,7 @@ module NetworkX
           sub_graph.add_node(v, **@nodes[v])
           @adj[u][v].each { |_, keyval| sub_graph.add_edge(u, v, **keyval) }
         end
-        return sub_graph
+        sub_graph
       else
         raise ArgumentError, 'Expected Argument to be Array or Set of edges, '\
         "received #{edges.class.name} instead."

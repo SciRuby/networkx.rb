@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 # TODO: Reduce module length
 
 module NetworkX
   # Helper function to extract weight from a adjecency hash
   def self.get_weight(graph)
-    weight_get = lambda do |_, _, attrs|
+    lambda do |_, _, attrs|
       return attrs[:weight] || 1 unless graph.multigraph?
 
       attrs.group_by { |_k, vals| vals[:weight] || 1 }.keys.max
     end
-    weight_get
   end
 
   # TODO: Reduce method length and method complexity
@@ -421,7 +422,6 @@ module NetworkX
     dist_bellman = help_bellman_ford(graph, sources, weight, pred, nil, dist=dist)
     new_weight = ->(u, v, d) { weight.call(u, v, d) + dist_bellman[u] - dist_bellman[v] }
     dist_path = dist_path_lambda(graph, new_weight)
-    path_lengths = set_path_lengths_johnson(graph, dist_path, new_weight)
-    path_lengths
+    set_path_lengths_johnson(graph, dist_path, new_weight)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # Helper class for preflow push algorithm
   class CurrentEdge
@@ -88,7 +90,7 @@ module NetworkX
       end
 
       u_edges.each do |v, uv_attrs|
-        edge_list << [u, v, uv_attrs] if (uv_attrs[:capacity] || inf) > 0 && u != v
+        edge_list << [u, v, uv_attrs] if (uv_attrs[:capacity] || inf).positive? && u != v
       end
     end
 
@@ -154,7 +156,7 @@ module NetworkX
     graph.edges.each do |u, u_edges|
       flow_dict[u] = {}
       u_edges.each_key { |v| flow_dict[u][v] = 0 }
-      u_edges.each_key { |v| flow_dict[u][v] = residual[u][v][:flow] if residual[u][v][:flow] > 0 }
+      u_edges.each_key { |v| flow_dict[u][v] = residual[u][v][:flow] if (residual[u][v][:flow]).positive? }
     end
     flow_dict
   end

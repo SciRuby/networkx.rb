@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # Returns a JSON object of the given graph
   #

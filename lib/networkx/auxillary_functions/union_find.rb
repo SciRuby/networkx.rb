@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   class UnionFind
     def initialize(nodes)

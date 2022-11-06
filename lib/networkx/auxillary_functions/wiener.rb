@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # Returns the wiener index of the graph
   #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # Returns the descendants of a given node
   #
@@ -36,7 +38,9 @@ module NetworkX
     raise ArgumentError, 'Topological Sort not defined on undirected graphs!' unless graph.directed?
 
     nodes = []
-    indegree_map = Hash[graph.nodes.each_key.map { |u| [u, graph.in_degree(u)] if graph.in_degree(u) > 0 }.compact]
+    indegree_map = Hash[graph.nodes.each_key.map do |u|
+                          [u, graph.in_degree(u)] if graph.in_degree(u).positive?
+                        end.compact]
     zero_indegree = graph.nodes.each_key.map { |u| u if graph.in_degree(u).zero? }.compact
 
     until zero_indegree.empty?

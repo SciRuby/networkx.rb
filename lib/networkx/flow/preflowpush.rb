@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TODO: Reduce module length
 
 module NetworkX
@@ -15,7 +17,7 @@ module NetworkX
     raise ArgumentError, 'Source and Target are same!' if source == target
 
     globalrelabel_freq = 0 if globalrelabel_freq.nil?
-    raise ArgumentError, 'Global Relabel Freq must be nonnegative!' if globalrelabel_freq < 0
+    raise ArgumentError, 'Global Relabel Freq must be nonnegative!' if globalrelabel_freq.negative?
 
     r_network = residual.nil? ? build_residual_network(graph) : residual
     detect_unboundedness(r_network, source, target)
@@ -49,19 +51,19 @@ module NetworkX
 
     residual_adj[source].each do |u, attr|
       flow = attr[:capacity]
-      push(source, u, flow, residual_nodes, residual_adj) if flow > 0
+      push(source, u, flow, residual_nodes, residual_adj) if flow.positive?
     end
 
     levels = (0..(2 * n - 1)).map { |_| Level.new }
     residual_nodes.each do |u, attr|
       if u != source && u != target
         level = levels[attr[:height]]
-        residual_nodes[u][:excess] > 0 ? level.active.add(u) : level.inactive.add(u)
+        (residual_nodes[u][:excess]).positive? ? level.active.add(u) : level.inactive.add(u)
       end
     end
 
     height = max_height
-    while height > 0
+    while height.positive?
       loop do
         level = levels[height]
         if level.active.empty?

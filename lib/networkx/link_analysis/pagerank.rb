@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # TODO: Reduce method length and method complexity
 
@@ -16,7 +18,7 @@ module NetworkX
       init = dim.times.map { |i| [i, 1.0 / dim] }.to_h
     else
       s = init.values.sum.to_f
-      init = init.map { |k, v| [k, v / s] }.to_h
+      init = init.transform_values { |v| v / s }
     end
     raise ArgumentError, 'Init array needs to have same length as number of graph nodes!'\
                           unless dim == init.length

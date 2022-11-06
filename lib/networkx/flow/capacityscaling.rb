@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TODO: Reduce module length
 
 module NetworkX
@@ -50,7 +52,7 @@ module NetworkX
                          graph.nodes.values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
 
     residual = NetworkX::MultiDiGraph.new(inf: 0)
-    residual.add_nodes(graph.nodes.map { |u, attr| [u, excess: (attr[:demand] || 0) * -1, potential: 0] })
+    residual.add_nodes(graph.nodes.map { |u, attr| [u, {excess: (attr[:demand] || 0) * -1, potential: 0}] })
     inf = Float::INFINITY
     edge_list = []
 
@@ -60,14 +62,14 @@ module NetworkX
       graph.adj.each do |u, u_edges|
         u_edges.each do |v, uv_edges|
           uv_edges.each do |k, attrs|
-            edge_list << [u, v, k, e] if u != v && (attrs[:capacity] || inf) > 0
+            edge_list << [u, v, k, e] if u != v && (attrs[:capacity] || inf).positive?
           end
         end
       end
     else
       graph.adj.each do |u, u_edges|
         u_edges.each do |v, attrs|
-          edge_list << [u, v, 0, attrs] if u != v && (attrs[:capacity] || inf) > 0
+          edge_list << [u, v, 0, attrs] if u != v && (attrs[:capacity] || inf).positive?
         end
       end
     end
@@ -99,12 +101,14 @@ module NetworkX
       graph.nodes.each_key do |u|
         flow_dict[u] = {}
         graph.adj[u].each do |v, uv_edges|
-          flow_dict[u][v] = Hash[uv_edges.map do |k, e|
-            [k, u != v || (e[:capacity] || inf) <= 0 || (e[:weight] || 0) >= 0 ? 0 : e[:capacity]]
-          end]
+          flow_dict[u][v] = uv_edges.transform_values do |e|
+            u != v || (e[:capacity] || inf) <= 0 || (e[:weight] || 0) >= 0 ? 0 : e[:capacity]
+          end
         end
         residual.adj[u].each do |v, uv_edges|
-          flow_dict[u][v].merge!(Hash[uv_edges.map { |_, val| [val[:temp_key][0], val[:flow]] if val[:flow] > 0 }])
+          flow_dict[u][v].merge!(Hash[uv_edges.map do |_, val|
+                                        [val[:temp_key][0], val[:flow]] if (val[:flow]).positive?
+                                      end])
         end
       end
     else
@@ -114,7 +118,7 @@ module NetworkX
         end]
         merge_dict = {}
         residual.adj[u].each do |v, uv_edges|
-          uv_edges.each_value { |attrs| merge_dict[v] = attrs[:flow] if attrs[:flow] > 0 }
+          uv_edges.each_value { |attrs| merge_dict[v] = attrs[:flow] if (attrs[:flow]).positive? }
         end
         flow_dict[u].merge!(merge_dict)
       end
@@ -160,7 +164,7 @@ module NetworkX
         r_adj[u].each do |v, uv_edges|
           uv_edges.each do |_k, e|
             flow = e[:capacity]
-            next unless e[:weight] - p_u + r_nodes[v][:potential] < 0
+            next unless (e[:weight] - p_u + r_nodes[v][:potential]).negative?
 
             flow = e[:capacity] - e[:flow]
             next unless flow >= delta

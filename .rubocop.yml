@@ -6,7 +6,7 @@ AllCops:
     - 'benchmarks/*'
     - 'profile/*'
   DisplayCopNames: true
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.5
 
 # Preferred codebase style ---------------------------------------------
 

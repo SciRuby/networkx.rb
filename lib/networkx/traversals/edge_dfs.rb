@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # TODO: Reduce method complexity and method length
 
@@ -11,7 +13,7 @@ module NetworkX
     case graph.class.name
     when 'NetworkX::Graph', 'NetworkX::DiGraph'
       graph.adj[node].each do |v, _|
-        if graph.class.name == 'NetworkX::DiGraph' || visited[[v, node]].nil?
+        if graph.instance_of?(::NetworkX::DiGraph) || visited[[v, node]].nil?
           visited[[node, v]] = true
           edges << [node, v]
         end
@@ -19,7 +21,7 @@ module NetworkX
     else
       graph.adj[node].each do |v, uv_keys|
         uv_keys.each_key do |k|
-          if graph.class.name == 'NetworkX::MultiDiGraph' || visited[[v, node, k]].nil?
+          if graph.instance_of?(::NetworkX::MultiDiGraph) || visited[[v, node, k]].nil?
             visited[[node, v, k]] = true
             edges << [node, v, k]
           end
@@ -55,10 +57,10 @@ module NetworkX
   def self.edge_dfs(graph, start, orientation=nil)
     case orientation
     when :reverse
-      graph = graph.reverse if graph.class.name == 'NetworkX::DiGraph' || graph.class.name == 'NetworkX::MultiDiGraph'
+      graph = graph.reverse if graph.instance_of?(::NetworkX::DiGraph) || graph.instance_of?(::NetworkX::MultiDiGraph)
     when :ignore
-      graph = graph.to_undirected if graph.class.name == 'NetworkX::DiGraph'
-      graph = graph.to_multigraph if graph.class.name == 'NetworkX::MultiDiGraph'
+      graph = graph.to_undirected if graph.instance_of?(::NetworkX::DiGraph)
+      graph = graph.to_multigraph if graph.instance_of?(::NetworkX::MultiDiGraph)
     end
 
     visited_edges = []

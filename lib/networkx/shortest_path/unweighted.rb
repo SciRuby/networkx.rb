@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module NetworkX
   # TODO: Reduce method length
 
   # Helper function for single source shortest path length
   def self.help_single_shortest_path_length(adj, firstlevel, cutoff)
-    iterator = Enumerator.new do |e|
+    Enumerator.new do |e|
       seen = {}
       level = 0
       nextlevel = firstlevel
@@ -22,7 +24,6 @@ module NetworkX
       end
       seen.clear
     end
-    iterator
   end
 
   # Computes shortest path values to all nodes from a given node

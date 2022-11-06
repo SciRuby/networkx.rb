@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NetworkX
   # TODO: Reduce method complexity and method length
 
@@ -47,7 +49,7 @@ module NetworkX
         end
       end
     rescue NoMethodError
-      return cliques
+      cliques
     end
   end
 
