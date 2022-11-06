@@ -318,7 +318,7 @@ module NetworkX
     return 0 if source == target
 
     weight = get_weight(graph)
-    length = help_bellman_ford(graph, [source], weight, nil, nil, nil, nil, target=target)
+    length = help_bellman_ford(graph, [source], weight, nil, nil, nil, nil, target)
     raise ArgumentError, 'Node not reachable!' unless length.key?(target)
 
     length[target]
@@ -419,7 +419,7 @@ module NetworkX
       dist[n], pred[n] = 0, []
     end
     weight = get_weight(graph)
-    dist_bellman = help_bellman_ford(graph, sources, weight, pred, nil, dist=dist)
+    dist_bellman = help_bellman_ford(graph, sources, weight, pred, nil, dist)
     new_weight = ->(u, v, d) { weight.call(u, v, d) + dist_bellman[u] - dist_bellman[v] }
     dist_path = dist_path_lambda(graph, new_weight)
     set_path_lengths_johnson(graph, dist_path, new_weight)

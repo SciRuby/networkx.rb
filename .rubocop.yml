@@ -47,7 +47,7 @@ Style/DoubleNegation:
   Enabled: false
 
 Style/EmptyCaseCondition:
-  Enabled: false
+  Enabled: true
 
 Style/EmptyElse:
   EnforcedStyle: empty
@@ -58,11 +58,14 @@ Style/EmptyMethod:
 Style/FormatString:
   EnforcedStyle: percent
 
+Style/OptionalBooleanParameter:
+  Enabled: false
+
 Style/ParallelAssignment:
   Enabled: false
 
 Style/SingleLineBlockParams:
-  Enabled: false
+  Enabled: true
 
 Style/PerlBackrefs:
   Enabled: false
