@@ -41,8 +41,6 @@ module NetworkX
       @pred[node_2][node_1] = all_edge_attrs
     end
 
-    # TODO: Reduce method complexity
-
     # Removes edge from the graph
     #
     # @example
@@ -187,8 +185,6 @@ module NetworkX
       number_of_edges
     end
 
-    # TODO: Reduce method length and method complexity
-
     # Returns subgraph consisting of given array of nodes
     #
     # @example
@@ -213,8 +209,6 @@ module NetworkX
                              "received #{nodes.class.name} instead."
       end
     end
-
-    # TODO: Reduce method length and method complexity
 
     # Returns subgraph conisting of given edges
     #

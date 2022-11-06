@@ -1,6 +1,4 @@
 module NetworkX
-  # TODO: Reduce method complexity and method length
-
   # Helper function to augment the flow in a residual graph
   def self.augment(residual, inf, path)
     flow = inf
@@ -20,8 +18,6 @@ module NetworkX
     end
     flow
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Helper function for the bidirectional bfs
   def self.bidirectional_bfs(residual, source, target)
@@ -59,8 +55,6 @@ module NetworkX
     end
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Core helper function for the EdmondsKarp algorithm
   def self.edmondskarp_core(residual, source, target, cutoff)
     inf = residual.graph[:inf]
@@ -85,8 +79,6 @@ module NetworkX
     end
     flow_val
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Helper function for the edmondskarp function
   def self.edmondskarp_impl(graph, source, target, residual, cutoff)

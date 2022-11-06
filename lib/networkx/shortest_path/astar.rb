@@ -1,6 +1,4 @@
 module NetworkX
-  # TODO: Reduce method complexity and method length
-
   # Returns path using astar algorithm between source and target
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph

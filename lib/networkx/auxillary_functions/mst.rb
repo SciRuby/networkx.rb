@@ -11,8 +11,6 @@ module NetworkX
     edges
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Returns the minimum spanning tree of a graph
   #
   # @param graph [Graph, DiGraph] a graph

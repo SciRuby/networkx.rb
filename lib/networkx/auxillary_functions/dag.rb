@@ -25,8 +25,6 @@ module NetworkX
     anc - [source]
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Returns the nodes arranged in the topologically sorted fashion
   #
   # @param graph [DiGraph] a graph

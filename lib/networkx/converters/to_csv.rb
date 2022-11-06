@@ -1,6 +1,4 @@
 module NetworkX
-  # TODO: Reduce method length and method complexity
-
   # Saves the graph in a csv file
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph

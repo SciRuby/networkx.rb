@@ -1,5 +1,3 @@
-# TODO: Reduce module length
-
 module NetworkX
   # Returns a label for unique node
   def self.generate_unique_node
@@ -24,8 +22,6 @@ module NetworkX
     false
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Detects the unboundedness in the residual graph
   def self._detect_unboundedness(residual)
     g = NetworkX::DiGraph.new
@@ -41,8 +37,6 @@ module NetworkX
     end
     raise ArgumentError, 'Negative cost cycle of infinite capacity found!' if negative_edge_cycle(g)
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Returns the residual graph of the given graph
   def self._build_residual_network(graph)
@@ -88,8 +82,6 @@ module NetworkX
     residual
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Returns the flowdict of the graph
   def self._build_flow_dict(graph, residual)
     flow_dict = {}
@@ -130,8 +122,6 @@ module NetworkX
     @itr += 1
     @itr
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Computes max flow using capacity scaling algorithm
   #

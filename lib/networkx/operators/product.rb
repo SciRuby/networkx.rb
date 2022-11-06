@@ -1,8 +1,4 @@
-# TODO: Reduce module length
-
 module NetworkX
-  # TODO: Reduce method length
-
   # Returns the edges of the graph in an array
   def self.edges_in_array(graph)
     edge_array = []
@@ -167,8 +163,6 @@ module NetworkX
     g.add_edges(undirected_edges_cross_edges(g_1, g_2)) unless g.directed?
     g
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Returns the specified power of the graph
   #

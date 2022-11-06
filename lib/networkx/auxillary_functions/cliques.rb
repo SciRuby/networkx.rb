@@ -1,6 +1,4 @@
 module NetworkX
-  # TODO: Reduce method complexity and method length
-
   # Returns all cliques in the graph
   #
   # @param graph [Graph, MultiGraph] a graph

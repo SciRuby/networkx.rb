@@ -1,6 +1,4 @@
 module NetworkX
-  # TODO: Reduce method length and method complexity
-
   # Computes pagerank values for the graph
   #
   # @param graph [Graph] a graph

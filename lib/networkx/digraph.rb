@@ -173,8 +173,6 @@ module NetworkX
       new_graph
     end
 
-    # TODO: Reduce method complexity and method length
-
     # Returns subgraph consisting of given array of nodes
     #
     # @example
@@ -199,8 +197,6 @@ module NetworkX
                              "received #{nodes.class.name} instead."
       end
     end
-
-    # TODO: Reduce method complexity and method length
 
     # Returns subgraph consisting of given edges
     #

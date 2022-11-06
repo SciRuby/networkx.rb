@@ -1,12 +1,8 @@
-# TODO: Reduce module length
-
 module NetworkX
   # Helper function to return an arbitrary element from an iterable object
   def self.arbitrary_element(iterable)
     iterable.each { |u| return u }
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Helper function to apply the preflow push algorithm
   def self.preflowpush_impl(graph, source, target, residual, globalrelabel_freq, value_only)
@@ -129,8 +125,6 @@ module NetworkX
     r_adj[u_node].map { |v, attr| attr[:flow] < (attr[:capacity] + 1) ? _nodes[v][:height] : Float::INFINITY }.min
   end
 
-  # TODO: Reduce method complexity and method length
-
   # Helper function for discharging a node
   def self.discharge(u_node, is_phase_1, residual_nodes, residual_adj, height, levels, grt, source, target)
     height_val = residual_nodes[u_node][:height]
@@ -164,8 +158,6 @@ module NetworkX
     next_height
   end
 
-  # TODO: Reduce method complexity
-
   # Helper function for applying gap heuristic
   def self.gap_heuristic(height, levels, residual_nodes)
     ((height + 1)..(max_height)).each do |idx|
@@ -178,8 +170,6 @@ module NetworkX
       level.inactive.clear
     end
   end
-
-  # TODO: Reduce method complexity and method length
 
   # Helper function for global relabel heuristic
   def self.global_relabel(from_sink, source, target, residual_nodes, num, levels, residual_pred)
@@ -217,8 +207,6 @@ module NetworkX
     residual_nodes[node_1][:excess] -= flow
     residual_nodes[node_2][:excess] += flow
   end
-
-  # TODO: Reduce method length
 
   # Helper function for reverse bfs
   def self.reverse_bfs(src, residual_pred)
