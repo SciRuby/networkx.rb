@@ -94,6 +94,9 @@ Style/EmptyMethod:
 Style/FormatString:
   EnforcedStyle: percent
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/MultilineBlockChain:
   Enabled: false
 

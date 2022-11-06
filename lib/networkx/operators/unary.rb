@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Performs the complement operation on the graph
   #

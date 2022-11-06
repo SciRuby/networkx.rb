@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Performs the union of many graphs
   #

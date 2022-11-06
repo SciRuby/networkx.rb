@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Describes the class for making Undirected Graphs
   #

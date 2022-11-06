@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # TODO: Reduce method length and method complexity
 

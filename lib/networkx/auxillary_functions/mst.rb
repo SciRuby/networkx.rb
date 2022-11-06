@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Helper function for the minimum spanning tree
   #

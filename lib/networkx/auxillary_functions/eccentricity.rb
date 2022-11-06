@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Returns the eccentricity of a particular node or all nodes
   #

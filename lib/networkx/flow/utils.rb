@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module NetworkX
   # Helper class for preflow push algorithm
   class CurrentEdge
