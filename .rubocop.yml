@@ -81,6 +81,9 @@ Naming/VariableNumber:
 Style/AndOr:
   EnforcedStyle: conditionals
 
+Style/CombinableLoops:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
