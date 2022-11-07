@@ -1,10 +1,14 @@
 # Refer to: C00 https://github.com/universato/ac-library-rb/blob/main/lib/dsu.rb
 # Refer to: https://networkx.org/documentation/stable/_modules/networkx/utils/union_find.html#UnionFind.union
 module NetworkX
+  # Union Find Tree
+  #
+  # @attr_reader parents [Hash{ Object => Object }] Return parent of each element
+  # @attr_reader weights [Hash{ Object => Integer }] Return weight of each element
   class UnionFind
     attr_accessor :parents, :weights
 
-    # UnionFind
+    # Constructor for initializing Union Find Tree
     #
     # @param nodes [?Array[Object]] nodes
     #
