@@ -15,6 +15,10 @@ AllCops:
 Layout/ExtraSpacing:
   AllowForAlignment: true
 
+Layout/HashAlignment:
+  Exclude:
+      - spec/**/*
+
 Layout/LineLength:
   Max: 120
 
@@ -28,7 +32,8 @@ Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 Layout/SpaceAroundOperators:
-  Enabled: true
+  Exclude:
+    - spec/**/*
 
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
@@ -124,7 +129,10 @@ RSpec/MessageSpies:
   EnforcedStyle: receive
 
 RSpec/ExampleLength:
-  Max: 15
+  Max: 25
+
+RSpec/FilePath:
+  Enabled: false
 
 RSpec/MultipleExpectations:
   Max: 10
