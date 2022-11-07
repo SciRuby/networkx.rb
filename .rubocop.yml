@@ -3,12 +3,16 @@ AllCops:
   TargetRubyVersion: 2.7
   Include:
     - 'lib/**/*'
+    - 'Rakefile'
   Exclude:
     - 'vendor/**/*'
     - 'benchmarks/*'
     - 'profile/*'
   DisplayCopNames: true
-  SuggestExtensions: false
+
+require:
+  - rubocop-rspec
+  - rubocop-rake
 
 ### Layouts ------------------------------------------------------------
 
@@ -124,9 +128,6 @@ Style/SingleLineBlockParams:
   Enabled: true
 
 ### RSpec --------------------------------------------------------------
-
-require:
-  - rubocop-rspec
 
 RSpec/MessageSpies:
   EnforcedStyle: receive
