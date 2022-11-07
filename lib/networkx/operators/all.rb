@@ -1,7 +1,7 @@
 module NetworkX
   # Performs the union of many graphs
   #
-  # @param [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
+  # @param graphs [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] union of all the graphs
   def self.union_all(graphs)
@@ -17,7 +17,7 @@ module NetworkX
 
   # Performs the disjoint union of many graphs
   #
-  # @param [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
+  # @param graphs [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] disjoint union of all the graphs
   def self.disjoint_union_all(graphs)
@@ -33,7 +33,7 @@ module NetworkX
 
   # Performs the intersection of many graphs
   #
-  # @param [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
+  # @param graphs [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] intersection of all the graphs
   def self.intersection_all(graphs)
@@ -49,7 +49,7 @@ module NetworkX
 
   # Performs the composition of many graphs
   #
-  # @param [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
+  # @param graphs [Array<Graph>, Array<DiGraph>, Array<MultiGraph>, Array<MultiDiGraph>] Array of graphs
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] composition of all the graphs
   def self.compose_all(graphs)

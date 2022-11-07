@@ -142,7 +142,7 @@ module NetworkX
   # @param source [Object] source node
   # @param target [Object] target node
   # @param residual [DiGraph, nil] residual graph
-  # @param value_only [Boolean] if true, compute only the maximum flow value
+  # @param _value_only [Boolean] if true, compute only the maximum flow value
   # @param two_phase [Boolean] if true, two phase variant is used
   # @param cutoff [Numeric] cutoff value for the algorithm
   #

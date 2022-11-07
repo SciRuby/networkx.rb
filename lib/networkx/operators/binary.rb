@@ -41,8 +41,8 @@ module NetworkX
 
   # Performs the intersection of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the intersection of the two graphs
   def self.intersection(g_1, g_2)
@@ -84,8 +84,8 @@ module NetworkX
 
   # Performs the difference of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the difference of the two graphs
   def self.difference(g_1, g_2)
@@ -113,8 +113,8 @@ module NetworkX
 
   # Performs the symmetric difference of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the symmetric difference of the two graphs
   def self.symmetric_difference(g_1, g_2)
@@ -154,8 +154,8 @@ module NetworkX
 
   # Performs the composition of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the composition of the two graphs
   def self.compose(g_1, g_2)
@@ -179,8 +179,8 @@ module NetworkX
 
   # Performs the union of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the union of the two graphs
   def self.union(g_1, g_2)
@@ -215,8 +215,8 @@ module NetworkX
 
   # Performs the disjoint union of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the disjoint union of the two graphs
   def self.disjoint_union(g_1, g_2)

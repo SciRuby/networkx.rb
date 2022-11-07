@@ -108,8 +108,8 @@ module NetworkX
 
   # Returns the tensor product of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the tensor product of the two graphs
   def self.tensor_product(g_1, g_2)
@@ -122,8 +122,8 @@ module NetworkX
 
   # Returns the cartesian product of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the cartesian product of the two graphs
   def self.cartesian_product(g_1, g_2)
@@ -136,8 +136,8 @@ module NetworkX
 
   # Returns the lexicographic product of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the lexicographic product of the two graphs
   def self.lexicographic_product(g_1, g_2)
@@ -150,8 +150,8 @@ module NetworkX
 
   # Returns the strong product of two graphs
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the strong product of the two graphs
   def self.strong_product(g_1, g_2)
@@ -166,8 +166,8 @@ module NetworkX
 
   # Returns the specified power of the graph
   #
-  # @param [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param [Numeric] the power to which to raise the graph to
+  # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param pow [Numeric] the power to which to raise the graph to
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the power of the graph
   def self.power(graph, pow)
