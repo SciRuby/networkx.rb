@@ -1,25 +1,97 @@
+# Refer to: C00 https://github.com/universato/ac-library-rb/blob/main/lib/dsu.rb
+# Refer to: https://networkx.org/documentation/stable/_modules/networkx/utils/union_find.html#UnionFind.union
 module NetworkX
   class UnionFind
-    def initialize(nodes)
-      @unions = {}
-      nodes.each_with_index do |node, index|
-        @unions[node] = index
+    attr_accessor :parents, :weights
+
+    # UnionFind
+    #
+    # @param nodes [?Array[Object]] nodes
+    #
+    # @return [UnionFind] Union Find Tree
+    def initialize(nodes=nil)
+      @weights = {}
+      @parents = {}
+      nodes&.each do |node|
+        @weights[node] = 1
+        @parents[node] = node
       end
     end
 
+    # Return the root of node
+    #
+    # @param node [Object] node
+    #
+    # @return [Object] root of node, leader of node
+    def [](node)
+      if @parents.has_key?(node)
+        @parents[node] == node ? node : (@parents[node] = self[@parents[node]])
+      else
+        @weights[node] = 1
+        @parents[node] = node
+      end
+    end
+
+    # Return the root of node
+    #
+    # @param node [Object] node
+    #
+    # @return [Object] root of node, leader of node
+    def root(node)
+      @parents.has_key?(node) or raise ArgumentError.new, "#{node} is not a node"
+
+      @parents[node] == node ? node : (@parents[node] = root(@parents[node]))
+    end
+
+    def each(&block)
+      @parents.each_key(&block)
+    end
+
+    def to_sets
+      (0...@parents.size).group_by { |node| root(node) }.values
+    end
+    alias groups to_sets
+
+    # Is each root of two nodes the same?
+    #
+    # @param node_1 [Object] node
+    # @param node_2 [Object] node
+    #
+    # @return [bool] Is each root of node_1 and nodes_2 the same?
     def connected?(node_1, node_2)
-      @unions[node_1] == @unions[node_2]
+      root(node_1) == root(node_2)
     end
+    alias same? connected?
 
-    def union(node_1, node_2)
-      return if connected?(node_1, node_2)
+    # Unite nodes.
+    #
+    # @param nodes [Array[Object]] nodes
+    #
+    # @return [Object | nil] root of united nodes
+    def union(*nodes)
+      return merge(*nodes) if nodes.size == 2
 
-      node1_id = @unions[node_1]
-      node2_id = @unions[node_2]
+      roots = nodes.map { |node| self[node] }.uniq
+      return if roots.size == 1
 
-      @unions.each do |node, id|
-        @unions[node] = node1_id if id == node2_id
+      roots.sort_by! { |root| @weights[root] }
+      root = roots[-1]
+      roots[0...-1].each do |r|
+        @weights[root] += @weights[r]
+        @parents[r] = root
       end
+      root
+    end
+    alias unite union
+
+    def merge(node_1, node_2)
+      x = self[node_1]
+      y = self[node_2]
+      return if x == y
+
+      x, y = y, x if @weights[x] < @weights[y]
+      @weights[x] += @weights[y]
+      @parents[y] = x
     end
   end
 end

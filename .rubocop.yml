@@ -100,6 +100,9 @@ Style/FrozenStringLiteralComment:
 Style/MultilineBlockChain:
   Enabled: false
 
+Style/PreferredHashMethods:
+  Enabled: false
+
 Style/OptionalBooleanParameter:
   Enabled: false
 
@@ -119,6 +122,12 @@ require:
 
 RSpec/MessageSpies:
   EnforcedStyle: receive
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Max: 10
 
 RSpec/NestedGroups:
   Max: 5
