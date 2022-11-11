@@ -186,4 +186,25 @@ RSpec.describe NetworkX::Graph do
     expect(fw[3][1]).to be 2
     expect(fw[3][2]).to be 1
   end
+
+  it 'test bfs_edge' do
+    n = 10
+    edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..7)
+    g.add_edges_from(edges)
+    expect(g.bfs_edges(1)).to eq(edges)
+  end
+
+  it 'test dfs_nodes' do
+    edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
+    # ext_edges = [[1, 2], [2, 4], [2, 5], [1, 2], [3, 6], [3, 7]]
+    dfs_nodes = [1, 2, 4, 5, 3, 6, 7]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..7)
+    g.add_edges_from(edges)
+    expect(g.dfs_nodes(1)).to eq(dfs_nodes)
+  end
 end

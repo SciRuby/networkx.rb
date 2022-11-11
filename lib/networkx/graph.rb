@@ -388,6 +388,65 @@ module NetworkX
       end
     end
 
+    # [EXPERIMENTAL]
+    def out_edges(node)
+      @adj[node].map do |v, _|
+        [node, v]
+      end
+    end
+
+    # [EXPERIMENTAL]
+    def degree
+      @adj.transform_values(&:size)
+    end
+
+    # [EXPERIMENTAL]
+    def bfs_edges(node)
+      each_bfs_edge(node).to_a
+    end
+
+    # it may be only for tree
+    # [EXPERIMENTAL]
+    def each_bfs_edge(node)
+      return enum_for(:each_bfs_edge, node) unless block_given?
+
+      que = [node]
+      used = Array.new(number_of_nodes, false)
+      while que[0]
+        node = que.shift
+        used[node] = true
+        @adj[node].each do |v, _data|
+          next if used[v]
+
+          yield(node, v)
+          que << v unless used[v]
+        end
+      end
+    end
+
+    # [EXPERIMENTAL]
+    def dfs_nodes(node)
+      each_dfs_node(node).to_a
+    end
+
+    # [EXPERIMENTAL]
+    def each_dfs_node(node)
+      return enum_for(:each_dfs_node, node) unless block_given?
+
+      st = [node]
+      used = Array.new(number_of_nodes, false)
+      while st[-1]
+        node = st.pop
+        yield(node)
+        used[node] = true
+        @adj[node].reverse_each do |v, _data|
+          next if used[v]
+
+          st << v unless used[v]
+        end
+      end
+    end
+
     def multigraph?
       ['NetworkX::MultiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
     end
