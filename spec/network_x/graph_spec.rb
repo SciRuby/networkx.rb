@@ -113,6 +113,15 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  # [EXPERIMENTAL]
+  it 'test `add_edges_from`' do
+    g = NetworkX::Graph.new
+    g.add_nodes_from(0...10)
+    g.add_edges_from([[0, 1], [1, 2], [3, 2], [5, 3], [6, 9], [7, 1]])
+    expect(g.number_of_nodes).to be 10
+    expect(g.number_of_edges).to be 6
+  end
+
   # test experimental methods: `add_nodes_from`
   it 'test add_nodes_from(String)' do
     g = NetworkX::Graph.new

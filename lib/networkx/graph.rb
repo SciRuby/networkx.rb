@@ -57,6 +57,10 @@ module NetworkX
       end
     end
 
+    def add_edges_from(rng)
+      rng.each { |node| add_edge(*node) }
+    end
+
     # Adds a node and its attributes to the graph
     #
     # @example Add a node with attribute 'type'
