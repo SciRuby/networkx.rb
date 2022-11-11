@@ -125,7 +125,7 @@ RSpec.describe NetworkX::Graph do
   # test experimental methods: `add_nodes_from`
   it 'test add_nodes_from(String)' do
     g = NetworkX::Graph.new
-    g.add_nodes_from("Hello")
+    g.add_nodes_from('Hello')
     expect(g.number_of_nodes).to be 4
     expect(g.node?('l')).to be true
     expect(g.node?('h')).to be false
