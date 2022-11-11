@@ -447,6 +447,31 @@ module NetworkX
       end
     end
 
+    def dfs_edges(node)
+      each_dfs_edge(node).to_a
+    end
+
+    def each_dfs_edge(node)
+      return enum_for(:each_dfs_edge, node) unless block_given?
+
+      st = [node]
+      used = Array.new(number_of_nodes, false)
+      parents = Array.new(number_of_nodes)
+      while st[-1]
+        node = st.pop
+
+        yield(parents[node], node) if parents[node]
+
+        used[node] = true
+        @adj[node].reverse_each do |v, _data|
+          next if used[v]
+
+          parents[v] = node
+          st << v unless used[v]
+        end
+      end
+    end
+
     def multigraph?
       ['NetworkX::MultiGraph', 'NetworkX::MultiDiGraph'].include?(self.class.name)
     end
