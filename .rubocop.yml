@@ -132,6 +132,9 @@ Style/SingleLineBlockParams:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
+RSpec/DescribedClass:
+  Enabled: false
+
 RSpec/ExampleLength:
   Max: 25
 

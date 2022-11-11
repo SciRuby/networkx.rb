@@ -89,6 +89,18 @@ module NetworkX
       end
     end
 
+    # [TODO][EXPERIMENTAL]
+    #
+    # @param nodes_for_adding [Array | Range | String] nodes
+    def add_nodes_from(nodes_for_adding)
+      case nodes_for_adding
+      when String
+        nodes_for_adding.each_char { |node| add_node(node) }
+      else
+        nodes_for_adding.each { |node| add_node(node) }
+      end
+    end
+
     # Removes node from the graph
     #
     # @example
@@ -179,6 +191,44 @@ module NetworkX
 
       (edges.transpose << weights).transpose.each do |node_1, node_2, weight|
         add_weighted_edge(node_1, node_2, weight)
+      end
+    end
+
+    # [TODO][EXPERIMENTAL]
+    #
+    # @param edges [[Object, Object, Integer|Float]] the weight of edge
+    # @param weight [Symbol] weight name key. default key is `:weight``
+    def add_weighted_edges_from(edges, weight: :weight)
+      edges.each do |s, t, w|
+        add_edge(s, t, **{weight => w})
+      end
+    end
+
+    # [TODO][EXPERIMENTAL]
+    #
+    # @param data [bool] true if you want data of each edge
+    def edges(data: false)
+      each_edge(data: data).to_a
+    end
+
+    # [TODO][EXPERIMENTAL]
+    #
+    # @param data [bool] true if you want data of each edge
+    def each_edge(data: false)
+      return enum_for(:each_edge, data: data) unless block_given?
+
+      h = {}
+      @adj.each do |v, ws|
+        ws.each do |w, info|
+          next if v > w
+
+          h[[v, w, info]] = true
+        end
+      end
+      if data
+        h.each { |(v, w, info), _true| yield(v, w, info) }
+      else
+        h.each { |(v, w, _info), _true| yield(v, w) }
       end
     end
 
