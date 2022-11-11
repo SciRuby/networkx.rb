@@ -11,10 +11,10 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
 
 # Developing the gem
 
-1. Clone this repository and install all the required gem dependencies.
+1. Fork this repository and clone it and install all the required gem dependencies.
 
     ```sh
-    git clone https://github.com/athityakumar/networkx.rb.git
+    git clone https://github.com/`your_github_user_id`/networkx.rb.git
     cd networkx.rb
     gem install bundler
     bundle install
@@ -22,13 +22,9 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
 
 2. Checkout to a different git branch (say, `adds-new-feature`).
 
-3. Add any gem dependencies required, appropriately to the gemspec file or Gemfile.
+3. Add code (, test, and YARD documentation).
 
-4. Add code and YARD documentation.
-
-5. Add tests to `spec/networkx/filename_spec.rb`. Add any files required for testing in the `spec/fixtures/` directory.
-
-6. Run the rspec test-suite.
+4. Run the rspec test-suite.
     ```sh
     # Runs test suite for all files
     bundle exec rspec
@@ -37,7 +33,7 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
     bundle exec rspec spec/networkx/filename_spec.rb
     ```
 
-7. Run the rubocop for static code quality comments.
+5. Run the rubocop for static code quality comments.
 
     ```sh
     # Runs rubocop test for all files
@@ -47,4 +43,18 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
     bundle exec rubocop lib/networkx/filename.rb
     ```
 
-8. Send a Pull Request back to this repository. :tada:
+6. Send a Pull Request back to this repository. :tada:
+
+# Note: YARD Document
+
+You can add YARD documentation
+
+1. Create Document for `doc` directory with `yard` command
+2. Create server via `yard server` command
+3. open Browser with `open http://0.0.0.0:8808` e.t.c.
+
+```
+$ yard
+$ yard server
+$ open http://0.0.0.0:8808   
+```
