@@ -12,10 +12,6 @@ require 'saharspec/its/call'
 
 require 'networkx'
 
-require_relative 'support/shared_contexts'
-require_relative 'support/shared_examples'
-require_relative 'support/custom_matchers'
-
 RSpec::Expectations.configuration.warn_about_potential_false_positives = false
 
 RSpec.configure do |config|
