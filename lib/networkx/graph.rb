@@ -413,7 +413,7 @@ module NetworkX
       return enum_for(:each_bfs_edge, node) unless block_given?
 
       que = [node]
-      used = Array.new(number_of_nodes, false)
+      used = {}
       while que[0]
         node = que.shift
         used[node] = true
@@ -476,9 +476,9 @@ module NetworkX
 
     def info
       info = ''
-      info << "Type: #{graph.class}\n"
-      info << "Number of nodes: #{graph.number_of_nodes}\n"
-      info << "Number of edges: #{graph.number_of_edges}\n"
+      info << "Type: #{self.class}\n"
+      info << "Number of nodes: #{number_of_nodes}\n"
+      info << "Number of edges: #{number_of_edges}\n"
       info
     end
 
