@@ -147,7 +147,7 @@ module NetworkX
     #
     # @param node [Object] the node whose in degree is to be calculated
     def in_degree(node)
-      @pred[node].values.map(:length).inject(:+)
+      @pred[node].values.map(&:length).sum
     end
 
     # Returns out-degree of a given node
@@ -157,7 +157,7 @@ module NetworkX
     #
     # @param node [Object] the node whose out degree is to be calculated
     def out_degree(node)
-      @adj[node].values.map(:length).inject(:+)
+      @adj[node].values.map(&:length).sum
     end
 
     # Returns number of edges

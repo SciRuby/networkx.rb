@@ -88,6 +88,34 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect(empty_graph.number_of_edges).to be 0
   end
 
+  it 'test indegree & out_degree of MultiDiGraph with no edge' do
+    graph = NetworkX::MultiDiGraph.new
+    graph.add_node(0)
+    graph.add_node(1)
+
+    expect(graph.in_degree(0)).to be 0
+    expect(graph.in_degree(1)).to be 0
+    expect(graph.out_degree(0)).to be 0
+    expect(graph.out_degree(1)).to be 0
+  end
+
+  it 'test indegree & out_degree of simple MultiDiGraph' do
+    graph = NetworkX::MultiDiGraph.new
+    graph.add_edges([[0, 1], [1, 2], [2, 3], [3, 4]])
+
+    expect(graph.in_degree(0)).to be 0
+    expect(graph.in_degree(1)).to be 1
+    expect(graph.in_degree(2)).to be 1
+    expect(graph.in_degree(3)).to be 1
+    expect(graph.in_degree(4)).to be 1
+
+    expect(graph.out_degree(0)).to be 1
+    expect(graph.out_degree(1)).to be 1
+    expect(graph.out_degree(2)).to be 1
+    expect(graph.out_degree(3)).to be 1
+    expect(graph.out_degree(4)).to be 0
+  end
+
   context 'when size is called' do
     subject { graph.size(true) }
 
