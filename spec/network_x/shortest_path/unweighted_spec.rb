@@ -34,7 +34,7 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.single_source_shortest_path(graph, 'A') }
 
     it do
-      is_expected.to eq('A'=>['A'], 'B'=>%w[A B], 'C'=>%w[A C], 'D'=>%w[A C D])
+      is_expected.to eq('A' => ['A'], 'B' => %w[A B], 'C' => %w[A C], 'D' => %w[A C D])
     end
   end
 
@@ -42,11 +42,11 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.all_pairs_shortest_path(graph) }
 
     it do
-      is_expected.to eq([['A', {'A'=>['A'], 'B'=>%w[A B], 'C'=>%w[A C], 'D'=>%w[A C D]}],
-                         ['B', {'B'=>['B'], 'A'=>%w[B A], 'C'=>%w[B A C], 'D'=>%w[B A C D]}],
-                         ['C', {'C'=>['C'], 'A'=>%w[C A], 'D'=>%w[C D], 'B'=>%w[C A B]}],
-                         ['D', {'D'=>['D'], 'C'=>%w[D C], 'A'=>%w[D C A], 'B'=>%w[D C A B]}],
-                         ['E', {'E'=>['E']}]])
+      is_expected.to eq([['A', {'A' => ['A'], 'B' => %w[A B], 'C' => %w[A C], 'D' => %w[A C D]}],
+                         ['B', {'B' => ['B'], 'A' => %w[B A], 'C' => %w[B A C], 'D' => %w[B A C D]}],
+                         ['C', {'C' => ['C'], 'A' => %w[C A], 'D' => %w[C D], 'B' => %w[C A B]}],
+                         ['D', {'D' => ['D'], 'C' => %w[D C], 'A' => %w[D C A], 'B' => %w[D C A B]}],
+                         ['E', {'E' => ['E']}]])
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.predecessor(graph, 'A', true) }
 
     it do
-      is_expected.to eq('A'=>[], 'B'=>['A'], 'C'=>['A'], 'D'=>['C'])
+      is_expected.to eq('A' => [], 'B' => ['A'], 'C' => ['A'], 'D' => ['C'])
     end
   end
 end

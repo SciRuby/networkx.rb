@@ -12,9 +12,9 @@ RSpec.describe NetworkX::DiGraph do
     subject { NetworkX.preflowpush(graph, 1, 4) }
 
     its('adj') do
-      is_expected.to eq(1=>{2=>{capacity: 1, flow: 1}},
-                        2=>{1=>{capacity: 0, flow: -1}, 4=>{capacity: 3, flow: 1}},
-                        4=>{2=>{capacity: 0, flow: -1}})
+      is_expected.to eq(1 => {2 => {capacity: 1, flow: 1}},
+                        2 => {1 => {capacity: 0, flow: -1}, 4 => {capacity: 3, flow: 1}},
+                        4 => {2 => {capacity: 0, flow: -1}})
     end
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe NetworkX::Graph do
   context 'when hits is called' do
     subject { NetworkX.hits(graph, 1 => 0.333, 2 => 0.333, 4 => 0.333) }
 
-    it { is_expected.to eq([{1=>1.0, 2=>1.0, 4=>1.0}, {1=>0.5, 2=>1.0, 4=>0.5}]) }
+    it { is_expected.to eq([{1 => 1.0, 2 => 1.0, 4 => 1.0}, {1 => 0.5, 2 => 1.0, 4 => 0.5}]) }
   end
 
   context 'when authority_matrix is called' do

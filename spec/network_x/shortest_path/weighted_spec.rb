@@ -22,7 +22,7 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.multisource_dijkstra_path_length(graph, %w[B A]) }
 
     it do
-      is_expected.to eq('B'=>0, 'A'=>0, 'C'=>2, 'D'=>5)
+      is_expected.to eq('B' => 0, 'A' => 0, 'C' => 2, 'D' => 5)
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.multisource_dijkstra_path(graph, %w[B A]) }
 
     it do
-      is_expected.to eq('B'=>['B'], 'A'=>['A'], 'C'=>%w[A C], 'D'=>%w[A C D])
+      is_expected.to eq('B' => ['B'], 'A' => ['A'], 'C' => %w[A C], 'D' => %w[A C D])
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.multisource_dijkstra_path(graph, %w[B A]) }
 
     it do
-      is_expected.to eq('B'=>['B'], 'A'=>['A'], 'C'=>%w[A C], 'D'=>%w[A C D])
+      is_expected.to eq('B' => ['B'], 'A' => ['A'], 'C' => %w[A C], 'D' => %w[A C D])
     end
   end
 
@@ -46,7 +46,8 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.dijkstra_predecessor_distance(graph, 'A') }
 
     it do
-      is_expected.to eq([{'A'=>[], 'B'=>['A'], 'C'=>['A'], 'D'=>['C']}, {'A'=>0, 'C'=>2, 'B'=>5, 'D'=>5}])
+      is_expected.to eq([{'A' => [], 'B' => ['A'], 'C' => ['A'], 'D' => ['C']},
+                         {'A' => 0, 'C' => 2, 'B' => 5, 'D' => 5}])
     end
   end
 
@@ -55,30 +56,30 @@ RSpec.describe NetworkX::Graph do
 
     it do
       is_expected.to eq([['A',
-                          [{'A'=>0, 'C'=>2, 'B'=>5, 'D'=>5},
-                           {'A'=>['A'],
-                            'B'=>%w[A B],
-                            'C'=>%w[A C],
-                            'D'=>%w[A C D]}]],
+                          [{'A' => 0, 'C' => 2, 'B' => 5, 'D' => 5},
+                           {'A' => ['A'],
+                            'B' => %w[A B],
+                            'C' => %w[A C],
+                            'D' => %w[A C D]}]],
                          ['B',
-                          [{'B'=>0, 'A'=>5, 'C'=>7, 'D'=>10},
-                           {'B'=>['B'],
-                            'A'=>%w[B A],
-                            'C'=>%w[B A C],
-                            'D'=>%w[B A C D]}]],
+                          [{'B' => 0, 'A' => 5, 'C' => 7, 'D' => 10},
+                           {'B' => ['B'],
+                            'A' => %w[B A],
+                            'C' => %w[B A C],
+                            'D' => %w[B A C D]}]],
                          ['C',
-                          [{'C'=>0, 'A'=>2, 'D'=>3, 'B'=>7},
-                           {'C'=>['C'],
-                            'A'=>%w[C A],
-                            'D'=>%w[C D],
-                            'B'=>%w[C A B]}]],
+                          [{'C' => 0, 'A' => 2, 'D' => 3, 'B' => 7},
+                           {'C' => ['C'],
+                            'A' => %w[C A],
+                            'D' => %w[C D],
+                            'B' => %w[C A B]}]],
                          ['D',
-                          [{'D'=>0, 'C'=>3, 'A'=>5, 'B'=>10},
-                           {'D'=>['D'],
-                            'C'=>%w[D C],
-                            'A'=>%w[D C A],
-                            'B'=>%w[D C A B]}]],
-                         ['E', [{'E'=>0}, {'E'=>['E']}]]])
+                          [{'D' => 0, 'C' => 3, 'A' => 5, 'B' => 10},
+                           {'D' => ['D'],
+                            'C' => %w[D C],
+                            'A' => %w[D C A],
+                            'B' => %w[D C A B]}]],
+                         ['E', [{'E' => 0}, {'E' => ['E']}]]])
     end
   end
 
@@ -86,7 +87,8 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.dijkstra_predecessor_distance(graph, 'A') }
 
     it do
-      is_expected.to eq([{'A'=>[], 'B'=>['A'], 'C'=>['A'], 'D'=>['C']}, {'A'=>0, 'C'=>2, 'B'=>5, 'D'=>5}])
+      is_expected.to eq([{'A' => [], 'B' => ['A'], 'C' => ['A'], 'D' => ['C']},
+                         {'A' => 0, 'C' => 2, 'B' => 5, 'D' => 5}])
     end
   end
 
@@ -94,7 +96,8 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.bellmanford_predecesor_distance(graph, 'A') }
 
     it do
-      is_expected.to eq([{'A'=>[], 'B'=>['A'], 'C'=>['A'], 'D'=>['C']}, {'A'=>0, 'C'=>2, 'B'=>5, 'D'=>5}])
+      is_expected.to eq([{'A' => [], 'B' => ['A'], 'C' => ['A'], 'D' => ['C']},
+                         {'A' => 0, 'C' => 2, 'B' => 5, 'D' => 5}])
     end
   end
 
@@ -102,7 +105,8 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.singlesource_bellmanford(graph, 'A') }
 
     it do
-      is_expected.to eq([{'A'=>0, 'B'=>5, 'C'=>2, 'D'=>5}, {'A'=>['A'], 'B'=>%w[B A], 'C'=>%w[C A], 'D'=>%w[D C A]}])
+      is_expected.to eq([{'A' => 0, 'B' => 5, 'C' => 2, 'D' => 5},
+                         {'A' => ['A'], 'B' => %w[B A], 'C' => %w[C A], 'D' => %w[D C A]}])
     end
   end
 
@@ -126,11 +130,11 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.johnson(graph) }
 
     it do
-      is_expected.to eq([['A', {'A'=>['A'], 'B'=>%w[A B], 'C'=>%w[A C], 'D'=>%w[A C D]}],
-                         ['B', {'B'=>['B'], 'A'=>%w[B A], 'C'=>%w[B A C], 'D'=>%w[B A C D]}],
-                         ['C', {'C'=>['C'], 'A'=>%w[C A], 'D'=>%w[C D], 'B'=>%w[C A B]}],
-                         ['D', {'D'=>['D'], 'C'=>%w[D C], 'A'=>%w[D C A], 'B'=>%w[D C A B]}],
-                         ['E', {'E'=>['E']}]])
+      is_expected.to eq([['A', {'A' => ['A'], 'B' => %w[A B], 'C' => %w[A C], 'D' => %w[A C D]}],
+                         ['B', {'B' => ['B'], 'A' => %w[B A], 'C' => %w[B A C], 'D' => %w[B A C D]}],
+                         ['C', {'C' => ['C'], 'A' => %w[C A], 'D' => %w[C D], 'B' => %w[C A B]}],
+                         ['D', {'D' => ['D'], 'C' => %w[D C], 'A' => %w[D C A], 'B' => %w[D C A B]}],
+                         ['E', {'E' => ['E']}]])
     end
   end
 end

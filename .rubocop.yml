@@ -21,10 +21,6 @@ Lint/AmbiguousOperatorPrecedence:
 Layout/ExtraSpacing:
   AllowForAlignment: true
 
-Layout/HashAlignment:
-  Exclude:
-      - spec/**/*
-
 Layout/LineLength:
   Max: 120
 
@@ -36,10 +32,6 @@ Layout/SpaceAfterComma:
 
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
-
-Layout/SpaceAroundOperators:
-  Exclude:
-    - spec/**/*
 
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space

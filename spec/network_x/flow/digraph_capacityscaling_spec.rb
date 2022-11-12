@@ -11,6 +11,6 @@ RSpec.describe NetworkX::DiGraph do
   context 'when capacity_scaling is called' do
     subject { NetworkX.capacity_scaling(graph) }
 
-    it { is_expected.to eq([0, {1=>{2=>0}, 2=>{4=>0}, 4=>{}}]) }
+    it { is_expected.to eq([0, {1 => {2 => 0}, 2 => {4 => 0}, 4 => {}}]) }
   end
 end

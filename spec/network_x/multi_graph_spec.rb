@@ -39,7 +39,7 @@ RSpec.describe NetworkX::MultiGraph do
       graph.remove_nodes(%w[Chennai Mumbai])
     end
 
-    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore'=> {}) }
+    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
     its('adj') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
   end
 
@@ -118,7 +118,7 @@ RSpec.describe NetworkX::MultiGraph do
 
     expect(h.number_of_nodes).to eq 3
     expect(h.number_of_edges).to eq 3
-    expect(h.edges(data: true)).to eq [[0, 1, {0=>{}}], [1, 2, {0=>{}, 1=>{}}]]
+    expect(h.edges(data: true)).to eq [[0, 1, {0 => {}}], [1, 2, {0 => {}, 1 => {}}]]
   end
 
   context 'when edges_subgraph is called' do

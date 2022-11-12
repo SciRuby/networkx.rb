@@ -39,7 +39,7 @@ RSpec.describe NetworkX::Graph do
       graph.remove_nodes(%w[Chennai Mumbai])
     end
 
-    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore'=> {}) }
+    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
     its('adj') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
   end
 
@@ -195,7 +195,7 @@ RSpec.describe NetworkX::Graph do
   # https://atcoder.jp/contests/abc051/tasks/abc051_d
   it 'ABC051 D: example 2' do
     n, _m = 3, 2
-    edges= [[1, 2, 1], [2, 3, 1]]
+    edges = [[1, 2, 1], [2, 3, 1]]
 
     g = NetworkX::Graph.new
     g.add_nodes_from(1..n)

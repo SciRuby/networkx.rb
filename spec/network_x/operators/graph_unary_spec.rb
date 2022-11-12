@@ -13,10 +13,10 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.complement(graph_1) }
 
     its('adj') do
-      is_expected.to eq(1=>{5=>{}, 6=>{}},
-                        2=>{5=>{}, 6=>{}},
-                        5=>{1=>{}, 2=>{}},
-                        6=>{1=>{}, 2=>{}})
+      is_expected.to eq(1 => {5 => {}, 6 => {}},
+                        2 => {5 => {}, 6 => {}},
+                        5 => {1 => {}, 2 => {}},
+                        6 => {1 => {}, 2 => {}})
     end
   end
 end

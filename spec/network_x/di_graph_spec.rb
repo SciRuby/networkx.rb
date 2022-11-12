@@ -46,7 +46,7 @@ RSpec.describe NetworkX::DiGraph do
       graph.remove_nodes(%w[Chennai Mumbai])
     end
 
-    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore'=> {}) }
+    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
     its('adj') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
   end
 

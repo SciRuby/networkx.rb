@@ -13,10 +13,10 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.union(graph_1, graph_2) }
 
     its('adj') do
-      is_expected.to eq(1=>{2=>{}},
-                        2=>{1=>{}},
-                        5=>{6=>{}},
-                        6=>{5=>{}})
+      is_expected.to eq(1 => {2 => {}},
+                        2 => {1 => {}},
+                        5 => {6 => {}},
+                        6 => {5 => {}})
     end
   end
 
@@ -24,10 +24,10 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.disjoint_union(graph_1, graph_2) }
 
     its('adj') do
-      is_expected.to eq('10'=>{'21'=>{}},
-                        '21'=>{'10'=>{}},
-                        '50'=>{'61'=>{}},
-                        '61'=>{'50'=>{}})
+      is_expected.to eq('10' => {'21' => {}},
+                        '21' => {'10' => {}},
+                        '50' => {'61' => {}},
+                        '61' => {'50' => {}})
     end
   end
 
@@ -35,10 +35,10 @@ RSpec.describe NetworkX::Graph do
     subject { NetworkX.compose(graph_1, graph_2) }
 
     its('adj') do
-      is_expected.to eq(1=>{2=>{}},
-                        2=>{1=>{}},
-                        5=>{6=>{}},
-                        6=>{5=>{}})
+      is_expected.to eq(1 => {2 => {}},
+                        2 => {1 => {}},
+                        5 => {6 => {}},
+                        6 => {5 => {}})
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe NetworkX::Graph do
       graph_2.add_node(2)
     end
 
-    its('adj') { is_expected.to eq(1=>{2=>{}}, 2=>{1=>{}}) }
+    its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
 
   context 'when difference is called' do
@@ -63,12 +63,12 @@ RSpec.describe NetworkX::Graph do
       graph_2.add_node(2)
     end
 
-    its('adj') { is_expected.to eq(1=>{2=>{}}, 2=>{1=>{}}) }
+    its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
 
   context 'when intersection is called' do
     subject { NetworkX.intersection(graph_1, graph_1) }
 
-    its('adj') { is_expected.to eq(1=>{2=>{}}, 2=>{1=>{}}) }
+    its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
 end

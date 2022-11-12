@@ -13,6 +13,6 @@ RSpec.describe NetworkX::Graph do
   context 'when mst is called' do
     subject { NetworkX.minimum_spanning_tree(graph) }
 
-    its('adj') { is_expected.to eq(1=>{2=>{}, 4=>{}}, 2=>{1=>{}, 5=>{}}, 4=>{1=>{}}, 5=>{2=>{}}) }
+    its('adj') { is_expected.to eq(1 => {2 => {}, 4 => {}}, 2 => {1 => {}, 5 => {}}, 4 => {1 => {}}, 5 => {2 => {}}) }
   end
 end
