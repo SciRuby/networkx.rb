@@ -473,7 +473,7 @@ module NetworkX
     end
 
     def info
-      info = ""
+      info = ''
       info << "Type: #{graph.class}\n"
       info << "Number of nodes: #{graph.number_of_nodes}\n"
       info << "Number of edges: #{graph.number_of_edges}\n"
