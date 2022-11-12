@@ -6,7 +6,7 @@ module NetworkX
   # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
   # @attr_reader graph [Hash{ Object => Object }] Stores the attributes of the graph
   class Graph
-    attr_reader :adj, :nodes, :graph
+    attr_reader :adj, :graph
 
     # Constructor for initializing graph
     #
@@ -205,6 +205,16 @@ module NetworkX
     def add_weighted_edges_from(edges, weight: :weight)
       edges.each do |s, t, w|
         add_edge(s, t, **{weight => w})
+      end
+    end
+
+    # [TODO] Current default of `data` is true.
+    # [Alert] Change the default in the futher. Please specify the `data`.
+    def nodes(data: true)
+      if data
+        @nodes
+      else
+        @nodes.keys
       end
     end
 
