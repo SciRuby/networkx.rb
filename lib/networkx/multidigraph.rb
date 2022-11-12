@@ -165,7 +165,7 @@ module NetworkX
     # @example
     #   graph.number_of_edges
     def number_of_edges
-      @adj.values.flat_map(&:values).map(&:length).inject(:+)
+      @adj.values.flat_map(&:values).map(&:length).sum
     end
 
     # Returns the size of the graph

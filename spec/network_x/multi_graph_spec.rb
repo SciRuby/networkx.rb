@@ -80,6 +80,11 @@ RSpec.describe NetworkX::MultiGraph do
     end
   end
 
+  it 'test number_of_edges of empty graph returns 0' do
+    empty_graph = NetworkX::MultiGraph.new
+    expect(empty_graph.number_of_edges).to be 0
+  end
+
   context 'when size is called' do
     subject { graph.size(true) }
 

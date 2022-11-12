@@ -76,6 +76,11 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'test number_of_edges of empty graph returns 0' do
+    empty_graph = NetworkX::Graph.new
+    expect(empty_graph.number_of_edges).to be 0
+  end
+
   it 'when size is called' do
     graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
     expect(graph.size(true)).to eq 15
