@@ -3,7 +3,10 @@ AllCops:
   TargetRubyVersion: 3.0
   Include:
     - 'lib/**/*'
+    - 'spec/**/*_spec.rb'
+    - 'Gemfile'
     - 'Rakefile'
+    - '*.gemspace'
   DisplayCopNames: true
 
 require:
