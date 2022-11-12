@@ -104,6 +104,18 @@ RSpec.describe NetworkX::MultiGraph do
     end
   end
 
+  it 'test `subgrapsh` method' do
+    g = NetworkX::MultiGraph.new
+    g.add_nodes_from(0...4)
+    g.add_edges([[0, 1], [1, 2], [1, 2], [1, 3]])
+
+    h = g.subgraph([0, 1, 2])
+
+    expect(h.number_of_nodes).to eq 3
+    expect(h.number_of_edges).to eq 3
+    expect(h.edges(data: true)).to eq [[0, 1, {0=>{}}], [1, 2, {0=>{}, 1=>{}}]]
+  end
+
   context 'when edges_subgraph is called' do
     subject { graph.edge_subgraph([%w[Nagpur Mumbai], %w[Nagpur Chennai]]) }
 
