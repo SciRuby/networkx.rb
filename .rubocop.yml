@@ -112,9 +112,6 @@ Style/FrozenStringLiteralComment:
 Style/MultilineBlockChain:
   Enabled: false
 
-Style/PreferredHashMethods:
-  Enabled: false
-
 Style/OptionalBooleanParameter:
   Enabled: false
 
@@ -123,6 +120,9 @@ Style/ParallelAssignment:
 
 Style/PerlBackrefs:
   Enabled: false
+
+Style/PreferredHashMethods:
+  EnforcedStyle: verbose
 
 Style/SingleLineBlockParams:
   Enabled: true
