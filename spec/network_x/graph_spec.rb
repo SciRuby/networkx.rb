@@ -117,6 +117,28 @@ RSpec.describe NetworkX::Graph do
     expect(h.edges).to eq [[0, 1], [1, 2]]
   end
 
+  it 'test errors' do
+    g = NetworkX::Graph.new
+    expect { g.add_edges('abc') }.to raise_error(ArgumentError)
+    expect { g.add_nodes('xyz') }.to raise_error(ArgumentError)
+    expect { g.remove_nodes('wwww') }.to raise_error(ArgumentError)
+    expect { g.remove_edges('css') }.to raise_error(ArgumentError)
+    expect { g.get_edge_data('yes', 'no') }.to raise_error(KeyError, 'No such edge exists!')
+    expect { g.subgraph('xxx') }.to raise_error(ArgumentError)
+  end
+
+  it 'test get_node_data' do
+    g = NetworkX::Graph.new
+    g.add_node('Tokyo', country: 'Japan')
+    expect(g.get_node_data('Tokyo')).to eq({country: 'Japan'})
+  end
+
+  it 'test get_edge_data' do
+    g = NetworkX::Graph.new
+    g.add_edge('New York', 'Tokyo', time_diff: 14)
+    expect(g.get_edge_data('New York', 'Tokyo')).to eq({:time_diff=>14})
+  end
+
   # [EXPERIMENTAL]
   it 'test `add_edges_from`' do
     g = NetworkX::Graph.new
