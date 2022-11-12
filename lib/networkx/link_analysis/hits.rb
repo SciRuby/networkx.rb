@@ -11,7 +11,7 @@ module NetworkX
     return [{}, {}] if graph.nodes.empty?
 
     h = nstart
-    sum = h.values.inject(:+)
+    sum = h.values.sum
     h.each_key { |k| h[k] /= (sum * 1.0) }
     i = 0
     a = {}
@@ -29,7 +29,7 @@ module NetworkX
       h.each_key { |k| h[k] /= smax }
       smax = a.values.max
       a.each_key { |k| a[k] /= smax }
-      break if h.keys.map { |k| (h[k] - hlast[k]).abs }.inject(:+) < tol
+      break if h.keys.map { |k| (h[k] - hlast[k]).abs }.sum < tol
       raise ArgumentError, 'Power Iteration failed to converge!' if i > max_iter
 
       i += 1

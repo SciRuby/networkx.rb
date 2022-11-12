@@ -33,7 +33,7 @@ module NetworkX
     end
     (0..(dim - 1)).each do |i|
       p[i] = []
-      (0..(dim - 1)).each { |j| p[i][j] = matrix[i][j] / (matrix[i].inject(:+) * 1.0) }
+      (0..(dim - 1)).each { |j| p[i][j] = matrix[i][j] / (matrix[i].sum * 1.0) }
     end
 
     max_iter.times do |_|
