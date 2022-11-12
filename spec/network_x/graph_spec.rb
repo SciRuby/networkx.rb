@@ -141,7 +141,7 @@ RSpec.describe NetworkX::Graph do
   it 'test get_edge_data' do
     g = NetworkX::Graph.new
     g.add_edge('New York', 'Tokyo', time_diff: 14)
-    expect(g.get_edge_data('New York', 'Tokyo')).to eq({:time_diff=>14})
+    expect(g.get_edge_data('New York', 'Tokyo')).to eq({time_diff: 14})
   end
 
   # [EXPERIMENTAL]
