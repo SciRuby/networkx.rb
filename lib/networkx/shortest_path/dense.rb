@@ -20,7 +20,7 @@ module NetworkX
     as_hash = {}
     (0..(nodelen - 1)).each do |i|
       (0..(nodelen - 1)).each do |j|
-        as_hash[index[i]] = {} unless as_hash.key?(index[i])
+        as_hash[index[i]] = {} unless as_hash.has_key?(index[i])
         as_hash[index[i]][index[j]] = a[i, j]
       end
     end

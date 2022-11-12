@@ -91,7 +91,7 @@ module NetworkX
     end
 
     inf_chk = 3 * edge_list.inject(0) do |result, arr|
-      arr[2].key?(:capacity) && arr[2][:capacity] != inf ? (result + arr[2][:capacity]) : result
+      arr[2].has_key?(:capacity) && arr[2][:capacity] != inf ? (result + arr[2][:capacity]) : result
     end
     inf = inf_chk.zero? ? 1 : inf_chk
 

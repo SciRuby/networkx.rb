@@ -41,7 +41,7 @@ module NetworkX
 
     until zero_indegree.empty?
       node = zero_indegree.shift
-      raise ArgumentError, 'Graph changed during iteration!' unless graph.nodes.key?(node)
+      raise ArgumentError, 'Graph changed during iteration!' unless graph.nodes.has_key?(node)
 
       graph.adj[node].each_key do |child|
         indegree_map[child] -= 1

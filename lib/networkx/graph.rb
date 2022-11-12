@@ -69,7 +69,7 @@ module NetworkX
     # @param node [Object] the node object
     # @param node_attrs [Hash{ Object => Object }] the hash of the attributes of the node
     def add_node(node, **node_attrs)
-      if @nodes.key?(node)
+      if @nodes.has_key?(node)
         @nodes[node].merge!(node_attrs)
       else
         @adj[node] = {}
@@ -112,7 +112,7 @@ module NetworkX
     #
     # @param node [Object] the node to be removed
     def remove_node(node)
-      raise KeyError, "Error in deleting node #{node} from Graph." unless @nodes.key?(node)
+      raise KeyError, "Error in deleting node #{node} from Graph." unless @nodes.has_key?(node)
 
       @adj[node].each_key { |k| @adj[k].delete(node) }
       @adj.delete(node)
@@ -143,9 +143,9 @@ module NetworkX
     # @param node_1 [Object] the first node of the edge
     # @param node_2 [Object] the second node of the edge
     def remove_edge(node_1, node_2)
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].key?(node_2)
+      raise KeyError, "#{node_1} is not a valid node." unless @nodes.has_key?(node_1)
+      raise KeyError, "#{node_2} is not a valid node" unless @nodes.has_key?(node_2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].has_key?(node_2)
 
       @adj[node_1].delete(node_2)
       @adj[node_2].delete(node_1) if node_1 != node_2
@@ -253,7 +253,7 @@ module NetworkX
     #
     # @param node [Object] the node to be checked
     def node?(node)
-      @nodes.key?(node)
+      @nodes.has_key?(node)
     end
 
     # Checks if the the edge consisting of two nodes is present in the graph
@@ -264,7 +264,7 @@ module NetworkX
     # @param node_1 [Object] the first node of the edge to be checked
     # @param node_2 [Object] the second node of the edge to be checked
     def edge?(node_1, node_2)
-      node?(node_1) && @adj[node_1].key?(node_2)
+      node?(node_1) && @adj[node_1].has_key?(node_2)
     end
 
     # Gets the node data
@@ -331,7 +331,7 @@ module NetworkX
       if is_weighted
         graph_size = 0
         @adj.each do |_, hash_val|
-          hash_val.each { |_, v| graph_size += v[:weight] if v.key?(:weight) }
+          hash_val.each { |_, v| graph_size += v[:weight] if v.has_key?(:weight) }
         end
         return graph_size / 2
       end
@@ -349,11 +349,11 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::Graph.new(**@graph)
         nodes.each do |u, _|
-          raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.key?(u)
+          raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.has_key?(u)
 
           sub_graph.add_node(u, **@nodes[u])
           @adj[u].each do |v, edge_val|
-            sub_graph.add_edge(u, v, **edge_val) if @adj[u].key?(v) && nodes.include?(v)
+            sub_graph.add_edge(u, v, **edge_val) if @adj[u].has_key?(v) && nodes.include?(v)
           end
           return sub_graph
         end
@@ -374,8 +374,8 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::Graph.new(**@graph)
         edges.each do |u, v|
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u) \
-                                                                                    && @adj[u].key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.has_key?(u) \
+                                                                                    && @adj[u].has_key?(v)
 
           sub_graph.add_node(u, **@nodes[u])
           sub_graph.add_node(v, **@nodes[v])

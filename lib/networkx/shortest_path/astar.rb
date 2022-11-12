@@ -33,15 +33,15 @@ module NetworkX
         return path
       end
 
-      next if explored.key?(curnode)
+      next if explored.has_key?(curnode)
 
       explored[curnode] = parent
 
       graph.adj[curnode].each do |u, attrs|
-        next if explored.key?(u)
+        next if explored.has_key?(u)
 
         ncost = dist + (attrs[:weight] || 1)
-        if enqueued.key?(u)
+        if enqueued.has_key?(u)
           qcost, = enqueued[u]
           next if qcost <= ncost
         else

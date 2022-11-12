@@ -6,8 +6,8 @@ module NetworkX
 
   # Helper function to apply the preflow push algorithm
   def self.preflowpush_impl(graph, source, target, residual, globalrelabel_freq, value_only)
-    raise ArgumentError, 'Source not in graph!' unless graph.nodes.key?(source)
-    raise ArgumentError, 'Target not in graph!' unless graph.nodes.key?(target)
+    raise ArgumentError, 'Source not in graph!' unless graph.nodes.has_key?(source)
+    raise ArgumentError, 'Target not in graph!' unless graph.nodes.has_key?(target)
     raise ArgumentError, 'Source and Target are same!' if source == target
 
     globalrelabel_freq = 0 if globalrelabel_freq.nil?
@@ -27,7 +27,7 @@ module NetworkX
 
     heights = reverse_bfs(target, residual_pred)
 
-    unless heights.key?(source)
+    unless heights.has_key?(source)
       r_network.graph[:flow_value] = 0
       return r_network
     end
@@ -39,7 +39,7 @@ module NetworkX
     grt = GlobalRelabelThreshold.new(n, r_network.size, globalrelabel_freq)
 
     residual_nodes.each do |u, u_attrs|
-      u_attrs[:height] = heights.key?(u) ? heights[u] : (n + 1)
+      u_attrs[:height] = heights.has_key?(u) ? heights[u] : (n + 1)
       u_attrs[:curr_edge] = CurrentEdge.new(residual_adj[u])
     end
 
@@ -178,7 +178,7 @@ module NetworkX
     heights.delete(target) unless from_sink
     max_height = heights.values.max
     if from_sink
-      residual_nodes.each { |u, attr| heights[u] = num + 1 if !heights.key?(u) && attr[:height] < num }
+      residual_nodes.each { |u, attr| heights[u] = num + 1 if !heights.has_key?(u) && attr[:height] < num }
     else
       heights.each_key { |u| heights[u] += num }
       max_height += num
@@ -217,7 +217,7 @@ module NetworkX
       u, height = q.shift
       height += 1
       residual_pred[u].each do |v, attr|
-        if !heights.key?(v) && attr[:flow] < attr[:capacity]
+        if !heights.has_key?(v) && attr[:flow] < attr[:capacity]
           heights[v] = height
           q << [v, height]
         end

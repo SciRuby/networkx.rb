@@ -185,7 +185,7 @@ module NetworkX
         this_level.each do |v, _attrs|
           next if v == n
 
-          unless seen.key?(v)
+          unless seen.has_key?(v)
             seen[v] = level
             next_level.merge!(graph.adj[v])
           end

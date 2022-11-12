@@ -17,7 +17,7 @@ module NetworkX
         z = stack.shift
         zused = used[z]
         graph.adj[z].each_key do |u|
-          if !used.key?(u)
+          if !used.has_key?(u)
             pred[u] = z
             stack << u
             used[u] = [z]

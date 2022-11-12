@@ -22,7 +22,7 @@ module NetworkX
 
     until fringe.empty?
       d, _, v = fringe.pop
-      next if dist.key?(v)
+      next if dist.has_key?(v)
 
       dist[v] = d
       break if v == target
@@ -34,9 +34,9 @@ module NetworkX
         vu_dist = dist[v] + cost
         next if !cutoff.nil? && vu_dist > cutoff
 
-        if dist.key?(u)
+        if dist.has_key?(u)
           raise ValueError, 'Contradictory weights found!' if vu_dist < dist[u]
-        elsif !seen.key?(u) || vu_dist < seen[u]
+        elsif !seen.has_key?(u) || vu_dist < seen[u]
           seen[u] = vu_dist
           fringe << [vu_dist, count.call(i), u]
           paths[u] = paths[v] + [u] unless paths.nil?
@@ -71,7 +71,7 @@ module NetworkX
     sources.each { |source| paths[source] = [source] }
     dist = help_multisource_dijkstra(graph, sources, weight, nil, paths, cutoff, target)
     return [dist, paths] if target.nil?
-    raise KeyError, "No path to #{target}!" unless dist.key?(target)
+    raise KeyError, "No path to #{target}!" unless dist.has_key?(target)
 
     [dist[target], paths[target]]
   end
@@ -148,7 +148,7 @@ module NetworkX
 
     weight = get_weight(graph)
     length = help_dijkstra(graph, source, weight, nil, nil, nil, target)
-    raise KeyError, 'Node not reachable!' unless length.key?(target)
+    raise KeyError, 'Node not reachable!' unless length.has_key?(target)
 
     length[target]
   end
@@ -246,7 +246,7 @@ module NetworkX
           end
           dist[v] = dist_v
           pred[v] = [u]
-        elsif dist.key?(v) && dist_v == dist[v]
+        elsif dist.has_key?(v) && dist_v == dist[v]
           pred[v] << u
         end
       end
@@ -294,7 +294,7 @@ module NetworkX
     paths = {source => [source]}
     dist = help_bellman_ford(graph, [source], weight, nil, paths, nil, cutoff, target)
     return [dist, paths] if target.nil?
-    raise ArgumentError, 'Node not reachable!' unless dist.key?(target)
+    raise ArgumentError, 'Node not reachable!' unless dist.has_key?(target)
 
     [dist[target], paths[target]]
   end
@@ -311,7 +311,7 @@ module NetworkX
 
     weight = get_weight(graph)
     length = help_bellman_ford(graph, [source], weight, nil, nil, nil, nil, target)
-    raise ArgumentError, 'Node not reachable!' unless length.key?(target)
+    raise ArgumentError, 'Node not reachable!' unless length.has_key?(target)
 
     length[target]
   end

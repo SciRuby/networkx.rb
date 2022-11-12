@@ -67,7 +67,7 @@ module NetworkX
     end
 
     temp_inf = [residual.nodes.map { |_u, attrs| attrs[:excess].abs }.inject(0, :+), edge_list.map do |_, _, _, e|
-      (e.key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0)
+      (e.has_key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0)
     end.inject(0, :+) * 2].max
     inf = temp_inf.zero? ? 1 : temp_inf
 
@@ -197,7 +197,7 @@ module NetworkX
           end
           p_u = r_nodes[u][:potential]
           r_adj[u].each do |v, uv_edges|
-            next if d.key?(v)
+            next if d.has_key?(v)
 
             wmin = inf
             uv_edges.each_value do |e|

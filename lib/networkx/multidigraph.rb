@@ -16,7 +16,7 @@ module NetworkX
       return 0 if @adj[node_1][node_2].nil?
 
       key = @adj[node_1][node_2].length
-      key += 1 while @adj[node_1][node_2].key?(key)
+      key += 1 while @adj[node_1][node_2].has_key?(key)
       key
     end
 
@@ -53,10 +53,10 @@ module NetworkX
         super(node_1, node_2)
         return
       end
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1][node_2].key?(key)
+      raise KeyError, "#{node_1} is not a valid node." unless @nodes.has_key?(node_1)
+      raise KeyError, "#{node_2} is not a valid node" unless @nodes.has_key?(node_2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].has_key?(node_2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1][node_2].has_key?(key)
 
       @adj[node_1][node_2].delete(key)
       @pred[node_2][node_1].delete(key)
@@ -72,7 +72,7 @@ module NetworkX
     # @param key [Integer] the key of the given edge
     def edge?(node_1, node_2, key=nil)
       super(node_1, node_2) if key.nil?
-      node?(node_1) && @adj[node_1].key?(node_2) && @adj[node_1][node_2].key?(key)
+      node?(node_1) && @adj[node_1].has_key?(node_2) && @adj[node_1][node_2].has_key?(key)
     end
 
     # Returns the undirected version of the graph
@@ -178,7 +178,7 @@ module NetworkX
       if is_weighted
         graph_size = 0
         @adj.each do |_, hash_val|
-          hash_val.each { |_, v| v.each { |_, attrs| graph_size += attrs[:weight] if attrs.key?(:weight) } }
+          hash_val.each { |_, v| v.each { |_, attrs| graph_size += attrs[:weight] if attrs.has_key?(:weight) } }
         end
         return graph_size
       end
@@ -196,11 +196,11 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::MultiDiGraph.new(**@graph)
         nodes.each do |u, _|
-          raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.key?(u)
+          raise KeyError, "#{u} does not exist in the current graph!" unless @nodes.has_key?(u)
 
           sub_graph.add_node(u, **@nodes[u])
           @adj[u].each do |v, edge_val|
-            edge_val.each { |_, keyval| sub_graph.add_edge(u, v, **keyval) if @adj[u].key?(v) && nodes.include?(v) }
+            edge_val.each { |_, keyval| sub_graph.add_edge(u, v, **keyval) if @adj[u].has_key?(v) && nodes.include?(v) }
           end
           return sub_graph
         end
@@ -221,8 +221,8 @@ module NetworkX
       when Array, Set
         sub_graph = NetworkX::MultiDiGraph.new(**@graph)
         edges.each do |u, v|
-          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.key?(u) \
-                                                                                    && @adj[u].key?(v)
+          raise KeyError, "Edge between #{u} and #{v} does not exist in the graph!" unless @nodes.has_key?(u) \
+                                                                                    && @adj[u].has_key?(v)
 
           sub_graph.add_node(u, **@nodes[u])
           sub_graph.add_node(v, **@nodes[v])

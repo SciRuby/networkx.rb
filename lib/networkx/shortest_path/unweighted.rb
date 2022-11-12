@@ -10,7 +10,7 @@ module NetworkX
         thislevel = nextlevel
         nextlevel = {}
         thislevel.each do |u, _attrs|
-          next if seen.key?(u)
+          next if seen.has_key?(u)
 
           seen[u] = level
           nextlevel.merge!(adj[u])
@@ -58,7 +58,7 @@ module NetworkX
       nextlevel = {}
       thislevel.each_key do |u|
         adj[u].each_key do |v|
-          unless paths.key?(v)
+          unless paths.has_key?(v)
             paths[v] = paths[u] + [v]
             nextlevel[v] = 1
           end
@@ -120,7 +120,7 @@ module NetworkX
       nextlevel = []
       thislevel.each do |u|
         graph.adj[u].each_key do |v|
-          if !seen.key?(v)
+          if !seen.has_key?(v)
             pred[v] = [u]
             seen[v] = level
             nextlevel << v

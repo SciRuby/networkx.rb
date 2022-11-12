@@ -125,7 +125,7 @@ Style/PerlBackrefs:
   Enabled: false
 
 Style/PreferredHashMethods:
-  EnforcedStyle: verbose
+  Enabled: false
 
 Style/SingleLineBlockParams:
   Enabled: true

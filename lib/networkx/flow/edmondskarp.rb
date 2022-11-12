@@ -31,7 +31,7 @@ module NetworkX
             next unless !pred.include?(v) && (uv_attrs[:flow] < uv_attrs[:capacity])
 
             pred[v] = u
-            return [v, pred, succ] if succ.key?(v)
+            return [v, pred, succ] if succ.has_key?(v)
 
             q << v
           end
@@ -40,10 +40,10 @@ module NetworkX
       else
         q_t.each do |u|
           residual.pred[u].each do |v, uv_attrs|
-            next unless !succ.key?(v) && uv_attrs[:flow] < uv_attrs[:capacity]
+            next unless !succ.has_key?(v) && uv_attrs[:flow] < uv_attrs[:capacity]
 
             succ[v] = u
-            return [v, pred, succ] if pred.key?(v)
+            return [v, pred, succ] if pred.has_key?(v)
 
             q << v
           end
@@ -82,8 +82,8 @@ module NetworkX
 
   # Helper function for the edmondskarp function
   def self.edmondskarp_impl(graph, source, target, residual, cutoff)
-    raise ArgumentError, 'Source not in graph!' unless graph.nodes.key?(source)
-    raise ArgumentError, 'Target not in graph!' unless graph.nodes.key?(target)
+    raise ArgumentError, 'Source not in graph!' unless graph.nodes.has_key?(source)
+    raise ArgumentError, 'Target not in graph!' unless graph.nodes.has_key?(target)
     raise ArgumentError, 'Source and target are same node!' if source == target
 
     res_graph = residual.nil? ? build_residual_network(graph) : residual.clone
