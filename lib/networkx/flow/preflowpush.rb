@@ -1,7 +1,13 @@
 module NetworkX
   # Helper function to return an arbitrary element from an iterable object
   def self.arbitrary_element(iterable)
-    iterable.each { |u| return u }
+    if iterable.is_a?(Hash)
+      iterable.first[0]
+    elsif iterable.respond_to?(:first)
+      iterable.first
+    elsif iterable.respond_to?(:[])
+      iterable[0]
+    end
   end
 
   # Helper function to apply the preflow push algorithm
