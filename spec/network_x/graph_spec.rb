@@ -207,4 +207,34 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from(edges)
     expect(g.dfs_nodes(1)).to eq(dfs_nodes)
   end
+
+  it 'test dfs_edges' do
+    edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
+    dfs_edges = [[1, 2], [2, 4], [2, 5], [1, 3], [3, 6], [3, 7]]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..7)
+    g.add_edges_from(edges)
+    expect(g.dfs_edges(1)).to eq(dfs_edges)
+  end
+
+  it 'test dfs_edges to line graph (ABC133 E sample1)' do
+    n, _k = 4, 3
+    edges = [[1, 2], [2, 3], [3, 4]]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..n)
+    g.add_edges_from(edges)
+    expect(g.dfs_edges(1)).to eq([[1, 2], [2, 3], [3, 4]])
+  end
+
+  it 'test dfs_edges to line graph (ABC133 E sample2)' do
+    n, _k = 5, 4
+    edges = [[1, 2], [1, 3], [1, 4], [4, 5]]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..n)
+    g.add_edges_from(edges)
+    expect(g.dfs_edges(1)).to eq([[1, 2], [1, 3], [1, 4], [4, 5]])
+  end
 end
