@@ -255,6 +255,7 @@ module NetworkX
     def node?(node)
       @nodes.has_key?(node)
     end
+    alias has_node? node?
 
     # Checks if the the edge consisting of two nodes is present in the graph
     #
@@ -266,6 +267,7 @@ module NetworkX
     def edge?(node_1, node_2)
       node?(node_1) && @adj[node_1].has_key?(node_2)
     end
+    alias has_edge? edge?
 
     # Gets the node data
     #

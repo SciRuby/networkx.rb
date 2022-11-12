@@ -98,6 +98,7 @@ module NetworkX
       super(node_1, node_2) if key.nil?
       node?(node_1) && @adj[node_1].has_key?(node_2) && @adj[node_1][node_2].has_key?(key)
     end
+    alias has_edge? edge?
 
     # Returns the undirected version of the graph
     #
