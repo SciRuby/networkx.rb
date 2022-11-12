@@ -428,6 +428,7 @@ module NetworkX
 
         @adj[node].each do |v, _data|
           next if used[v]
+
           used[v] = true
 
           yield(node, v)
