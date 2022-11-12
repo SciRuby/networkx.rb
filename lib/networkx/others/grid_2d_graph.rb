@@ -14,8 +14,8 @@ module NetworkX
 
     m.is_a?(Integer) or raise(ArgumentError, "[NetworkX] argument m: Integer, not #{m.class}")
     n.is_a?(Integer) or raise(ArgumentError, "[NetworkX] argument n: Integer, not #{n.class}")
-    create_using.is_a?(Class) or raise(ArgumentError,
-                                       "[NetworkX] argument create_using: `Graph` class or children, not #{create_using.class}")
+    create_using.is_a?(Class) \
+      or raise(ArgumentError, "[NetworkX] argument create_using: `Graph` class or children, not #{create_using.class}")
 
     g = create_using.new
 
