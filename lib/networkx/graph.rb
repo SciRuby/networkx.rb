@@ -407,21 +407,21 @@ module NetworkX
       each_bfs_edge(node).to_a
     end
 
-    # it may be only for tree
     # [EXPERIMENTAL]
     def each_bfs_edge(node)
       return enum_for(:each_bfs_edge, node) unless block_given?
 
       que = [node]
-      used = {}
+      used = {node => true}
       while que[0]
         node = que.shift
-        used[node] = true
+
         @adj[node].each do |v, _data|
           next if used[v]
+          used[v] = true
 
           yield(node, v)
-          que << v unless used[v]
+          que << v
         end
       end
     end
