@@ -76,16 +76,9 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
-  context 'when size is called' do
-    subject { graph.size(true) }
-
-    before do
-      graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
-    end
-
-    it do
-      expect(subject).to eq 15
-    end
+  it 'when size is called' do
+    graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
+    expect(graph.size(true)).to eq 15
   end
 
   context 'when subgraph is called' do
@@ -199,7 +192,6 @@ RSpec.describe NetworkX::Graph do
   end
 
   it 'test bfs_edge' do
-    n = 10
     edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
 
     g = NetworkX::Graph.new
@@ -230,7 +222,6 @@ RSpec.describe NetworkX::Graph do
     end
     expect(ans).to be 22
   end
-
 
   it 'test bfs_edge (ABC051 D - Maze Master sample_01)' do
     # # https://atcoder.jp/contests/abc151/submissions/36398103

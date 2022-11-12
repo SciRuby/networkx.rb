@@ -1,13 +1,9 @@
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
   Include:
     - 'lib/**/*'
     - 'Rakefile'
-  Exclude:
-    - 'vendor/**/*'
-    - 'benchmarks/*'
-    - 'profile/*'
   DisplayCopNames: true
 
 require:
@@ -15,6 +11,9 @@ require:
   - rubocop-rake
 
 ### Layouts ------------------------------------------------------------
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
 
 Layout/ExtraSpacing:
   AllowForAlignment: true
@@ -130,6 +129,9 @@ Style/PreferredHashMethods:
 Style/SingleLineBlockParams:
   Enabled: true
 
+Style/SymbolArray:
+  Enabled: false # general array literal is easy to read. no problem.
+
 ### RSpec --------------------------------------------------------------
 
 RSpec/MessageSpies:
@@ -144,8 +146,17 @@ RSpec/ExampleLength:
 RSpec/FilePath:
   Enabled: false
 
+RSpec/ImplicitSubject:
+  Enabled: false # too many offenses
+
 RSpec/MultipleExpectations:
-  Max: 10
+  Max: 15
 
 RSpec/NestedGroups:
   Max: 5
+
+RSpec/RepeatedExampleGroupBody:
+  Enabled: false
+
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: false # too many offenses

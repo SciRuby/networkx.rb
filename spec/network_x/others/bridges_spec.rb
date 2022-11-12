@@ -30,7 +30,7 @@ RSpec.describe NetworkX do
 
   it 'test brudges to answer ABC075_C sample#2' do
     n, _m = 3, 3
-    edges = [[1, 2],[1, 3],[2, 3]]
+    edges = [[1, 2], [1, 3], [2, 3]]
     graph = NetworkX::Graph.new
     graph.add_nodes_from(1..n)
     graph.add_edges(edges)
@@ -40,7 +40,7 @@ RSpec.describe NetworkX do
 
   it 'test brudges to answer ABC075_C sample#3' do
     n, _m = 6, 5
-    edges = [[1, 2],[2, 3],[3, 4],[4, 5],[5, 6]]
+    edges = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
     graph = NetworkX::Graph.new
     graph.add_nodes_from(1..n)
     graph.add_edges(edges)
