@@ -367,8 +367,8 @@ module NetworkX
           @adj[u].each do |v, edge_val|
             sub_graph.add_edge(u, v, **edge_val) if @adj[u].has_key?(v) && nodes.include?(v)
           end
-          return sub_graph
         end
+        sub_graph
       else
         raise ArgumentError, 'Expected Argument to be Array or Set of nodes, ' \
                              "received #{nodes.class.name} instead."

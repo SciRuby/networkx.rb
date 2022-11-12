@@ -113,6 +113,17 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'test `subgraph` method' do
+    g = NetworkX::Graph.new
+    g.add_nodes_from(0...4)
+    g.add_edges([[0, 1], [1, 2], [1, 3]])
+
+    h = g.subgraph([0, 1, 2])
+
+    expect(h.nodes(data: false)).to eq [0, 1, 2]
+    expect(h.edges).to eq [[0, 1], [1, 2]]
+  end
+
   # [EXPERIMENTAL]
   it 'test `add_edges_from`' do
     g = NetworkX::Graph.new
