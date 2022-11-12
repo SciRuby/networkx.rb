@@ -52,7 +52,7 @@ module NetworkX
     end
 
     def to_sets
-      (0...@parents.size).group_by { |node| root(node) }.values
+      each.group_by { |node| root(node) }.values
     end
     alias groups to_sets
 

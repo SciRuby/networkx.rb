@@ -51,6 +51,17 @@ RSpec.describe NetworkX::Graph do
     expect(groups[0]).to eq [0, 1, 2, 3]
   end
 
+  it 'test groups (symbol case)' do
+    uf = NetworkX::UnionFind.new([:a, :b, :c, :d, :e, :f])
+    expect(uf.groups.size).to eq 6
+
+    uf.unite(:a, :b)
+    expect(uf.groups.size).to eq 5
+
+    uf.unite(:b, :d, :e)
+    expect(uf.groups.size).to eq 3
+  end
+
   it 'test multiple unite' do
     uf = NetworkX::UnionFind.new((6..15))
     expect(uf[11] == uf[9]).to be false
