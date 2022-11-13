@@ -98,4 +98,17 @@ module NetworkX
     end
     raise ArgumentError, 'No cycle found!' if cycle.empty?
   end
+
+  # Returns whether the given undirected cycle has cycle.
+  #
+  # @param undirected_graph [Graph] an undirected graph
+  #
+  # @return [book] true if the given graph has cycle. otherwise, false.
+  def self.cycle?(undirected_graph)
+    uf = NetworkX::UnionFind.new
+    undirected_graph.edges.each do |x, y|
+      uf[x] == uf[y] ? (return [x, y]) : uf.unite(x, y)
+    end
+    false
+  end
 end
