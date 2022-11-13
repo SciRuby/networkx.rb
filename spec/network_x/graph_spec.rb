@@ -166,6 +166,15 @@ RSpec.describe NetworkX::Graph do
     expect(g.node?('x')).to be false
   end
 
+  it 'test degree' do
+    graph = NetworkX::Graph.new
+    graph.add_edges([[0, 1], [1, 2], [2, 3]])
+    expect(graph.degree[0]).to be 1
+    expect(graph.degree[1]).to be 2
+    expect(graph.degree[2]).to be 2
+    expect(graph.degree[3]).to be 1
+  end
+
   # test experimental methods: `add_nodes_from`, `add_weighted_edges_from`, `each_edge`, `edges`
   # https://atcoder.jp/contests/abc051/tasks/abc051_d
   it 'ABC051 D: example 1' do
