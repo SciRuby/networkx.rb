@@ -161,7 +161,7 @@ RSpec.describe NetworkX::DiGraph do
     end
   end
 
-  it 'test `subgrapsh` method' do
+  it 'test `subgraph` method' do
     g = NetworkX::DiGraph.new
     g.add_nodes_from(0...4)
     g.add_edges([[0, 1], [1, 2], [1, 3]])

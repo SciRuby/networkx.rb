@@ -149,7 +149,7 @@ RSpec.describe NetworkX::MultiGraph do
     end
   end
 
-  it 'test `subgrapsh` method' do
+  it 'test `subgraph` method' do
     g = NetworkX::MultiGraph.new
     g.add_nodes_from(0...4)
     g.add_edges([[0, 1], [1, 2], [1, 2], [1, 3]])
