@@ -401,13 +401,6 @@ module NetworkX
     end
 
     # [EXPERIMENTAL]
-    def out_edges(node)
-      @adj[node].map do |v, _|
-        [node, v]
-      end
-    end
-
-    # [EXPERIMENTAL]
     def degree(nodes = nil)
       if nodes.nil?
         @adj.transform_values(&:size)
