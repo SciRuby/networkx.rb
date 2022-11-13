@@ -143,6 +143,12 @@ RSpec.describe NetworkX::MultiGraph do
     expect(h.edges(data: true)).to eq [[0, 1, {0 => {}}], [1, 2, {0 => {}, 1 => {}}]]
   end
 
+  it 'tests error from subgraph and edge_subgraph' do
+    g = NetworkX::MultiGraph.new
+    expect { g.subgraph(nil) }.to raise_error(ArgumentError)
+    expect { g.edge_subgraph(nil) }.to raise_error(ArgumentError)
+  end
+
   context 'when edges_subgraph is called' do
     subject { graph.edge_subgraph([%w[Nagpur Mumbai], %w[Nagpur Chennai]]) }
 
