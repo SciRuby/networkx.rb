@@ -27,6 +27,17 @@ RSpec.describe NetworkX::Graph do
     it { is_expected.to eq([[1, 2], [2, 4], [4, 1]]) }
   end
 
+  it 'when find_cycle occures ArgumentError' do
+    empty_graph = NetworkX::Graph.empty_graph(3)
+    expect{NetworkX.find_cycle(empty_graph, 0)}.to raise_error(ArgumentError)
+
+    null_graph = NetworkX::Graph.null_graph
+    expect{NetworkX.find_cycle(null_graph, 0)}.to raise_error(ArgumentError)
+
+    tree = NetworkX::Graph.balanced_tree(3, 2)
+    expect{NetworkX.find_cycle(tree, 0)}.to raise_error(ArgumentError)
+  end
+
   it 'cycle? only for Undirected Graph' do
     undirected_graph = NetworkX::Graph.new
     expect(NetworkX.cycle?(undirected_graph)).to be false
