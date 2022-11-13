@@ -127,6 +127,16 @@ RSpec.describe NetworkX::MultiGraph do
     end
   end
 
+  it 'test size' do
+    graph = NetworkX::MultiGraph.new
+    expect(graph.size).to be 0
+    expect(graph.size(true)).to be 0
+
+    graph.add_edge(:s, :t, weight: 10)
+    expect(graph.size).to be 1
+    expect(graph.size(true)).to be 10
+  end
+
   context 'when subgraph is called' do
     subject { graph.subgraph(%w[Nagpur Mumbai]) }
 

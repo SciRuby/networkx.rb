@@ -83,6 +83,7 @@ RSpec.describe NetworkX::Graph do
 
   it 'when size is called' do
     graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
+    expect(graph.size).to be 3
     expect(graph.size(true)).to eq 15
   end
 
