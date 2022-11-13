@@ -62,6 +62,17 @@ RSpec.describe NetworkX::DiGraph do
     end
   end
 
+  it 'tests DiGraph#clear' do
+    graph = NetworkX::DiGraph.new(name: 'test')
+    graph.add_edge(:x, :y, key: 'first')
+    graph.add_edge(:x, :y, key: 'second')
+    graph.clear
+    expect(graph.number_of_edges).to be 0
+    expect(graph.number_of_nodes).to be 0
+    expect(graph.graph).to eq({})
+    expect(graph.adj).to eq({})
+  end
+
   context 'when weighted edge/s is/are added' do
     before do
       graph.add_weighted_edge('Nagpur', 'Mumbai', 15)
