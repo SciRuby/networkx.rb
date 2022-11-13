@@ -20,6 +20,22 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'unite DiGraph' do
+    graph1 = NetworkX::DiGraph.new
+    graph2 = NetworkX::DiGraph.new
+    graph1.add_edge(1, 2)
+    graph1.add_edge(2, 3)
+    graph2.add_edge(5, 6)
+
+    graph3 = NetworkX.union(graph1, graph2)
+    expect(graph3.class).to be NetworkX::DiGraph
+    expect(graph3.number_of_nodes).to be 5
+    expect(graph3.number_of_edges).to be 3
+    expect(graph3.has_node?(2)).to be true
+    expect(graph3.has_node?(5)).to be true
+    expect(graph3.has_edge?(5, 6)).to be true
+  end
+
   context 'when disjoint_union is called' do
     subject { NetworkX.disjoint_union(graph1, graph2) }
 

@@ -191,10 +191,10 @@ module NetworkX
       new_graph = NetworkX::MultiGraph.new
     when NetworkX::MultiDiGraph
       new_graph = NetworkX::MultiDiGraph.new
-    when NetworkX::Graph
-      new_graph = NetworkX::Graph.new
     when NetworkX::DiGraph
       new_graph = NetworkX::DiGraph.new
+    when NetworkX::Graph
+      new_graph = NetworkX::Graph.new
     end
 
     new_graph.graph.merge!(g1.graph)
