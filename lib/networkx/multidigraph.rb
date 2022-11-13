@@ -54,10 +54,12 @@ module NetworkX
       raise KeyError, "#{node1} is not a valid node." unless @nodes.has_key?(node1)
       raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
       raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node1][node2].has_key?(key)
+      if @adj[node1][node2].none? { |_index, data| data[:key] == key }
+        raise KeyError, 'The given edge is not a valid one'
+      end
 
-      @adj[node1][node2].delete(key)
-      @pred[node2][node1].delete(key)
+      @adj[node1][node2].delete_if { |_indx, data| data[:key] == key }
+      @pred[node2][node1].delete_if { |_indx, data| data[:key] == key }
     end
 
     # Checks if the the edge consisting of two nodes is present in the graph
