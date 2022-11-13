@@ -312,4 +312,14 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from(edges)
     expect(g.dfs_edges(1)).to eq([[1, 2], [1, 3], [1, 4], [4, 5]])
   end
+
+  it 'test info method' do
+    output = <<~'OUTPUT'
+      Type: NetworkX::Graph
+      Number of nodes: 0
+      Number of edges: 0
+    OUTPUT
+    graph = NetworkX::Graph.new
+    expect(graph.info).to eq(output)
+  end
 end
