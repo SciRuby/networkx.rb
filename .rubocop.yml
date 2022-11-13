@@ -18,6 +18,9 @@ require:
 Lint/AmbiguousOperatorPrecedence:
   Enabled: false
 
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
