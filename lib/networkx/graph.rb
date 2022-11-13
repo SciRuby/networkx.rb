@@ -16,8 +16,6 @@ module NetworkX
     def initialize(**graph_attrs)
       @nodes = {}
       @adj = {}
-      @graph = {}
-
       @graph = graph_attrs
     end
 
