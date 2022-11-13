@@ -126,7 +126,7 @@ RSpec.describe NetworkX::Graph do
   it 'test errors' do
     g = NetworkX::Graph.new
     expect { g.add_edges('abc') }.to raise_error(ArgumentError)
-    expect { g.add_nodes('xyz') }.to raise_error(ArgumentError)
+    expect { g.add_nodes(nil) }.to raise_error(ArgumentError)
     expect { g.remove_nodes('wwww') }.to raise_error(ArgumentError)
     expect { g.remove_edges('css') }.to raise_error(ArgumentError)
     expect { g.get_edge_data('yes', 'no') }.to raise_error(KeyError, 'No such edge exists!')
@@ -153,6 +153,12 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [1, 2], [3, 2], [5, 3], [6, 9], [7, 1]])
     expect(g.number_of_nodes).to be 10
     expect(g.number_of_edges).to be 6
+  end
+
+  it 'test add_nodes(Range)' do
+    g = NetworkX::Graph.new
+    g.add_nodes(0...10)
+    expect(g.number_of_nodes).to be 10
   end
 
   # test experimental methods: `add_nodes_from`

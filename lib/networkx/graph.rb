@@ -84,8 +84,10 @@ module NetworkX
       case nodes
       when Set, Array
         nodes.each { |node, node_attrs| add_node(node, **(node_attrs || {})) }
+      when Range
+        nodes.each { |node| add_node(node) }
       else
-        raise ArgumentError, 'Expected argument to be an Array or Set of nodes, ' \
+        raise ArgumentError, 'Expected argument to be an Array/Set/Range of nodes, ' \
                              "received #{nodes.class.name} instead."
       end
     end
