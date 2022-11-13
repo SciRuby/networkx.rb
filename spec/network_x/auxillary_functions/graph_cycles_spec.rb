@@ -26,4 +26,18 @@ RSpec.describe NetworkX::Graph do
 
     it { is_expected.to eq([[1, 2], [2, 4], [4, 1]]) }
   end
+
+  it 'cycle? only for Undirected Graph' do
+    undirected_graph = NetworkX::Graph.new
+    expect(NetworkX.cycle?(undirected_graph)).to be false
+
+    undirected_graph.add_edge(0, 1)
+    expect(NetworkX.cycle?(undirected_graph)).to be false
+
+    undirected_graph.add_edge(1, 2)
+    expect(NetworkX.cycle?(undirected_graph)).to be false
+
+    undirected_graph.add_edge(2, 0)
+    expect(NetworkX.cycle?(undirected_graph)).to be_truthy
+  end
 end
