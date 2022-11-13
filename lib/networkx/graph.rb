@@ -3,7 +3,6 @@ module NetworkX
   #
   # @attr_reader adj [Hash{ Object => Hash{ Object => Hash{ Object => Object } } }]
   #                  Stores the edges and their attributes in an adjencency list form
-  # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
   # @attr_reader graph [Hash{ Object => Object }] Stores the attributes of the graph
   class Graph
     attr_reader :adj, :graph
@@ -210,6 +209,11 @@ module NetworkX
 
     # [TODO] Current default of `data` is true.
     # [Alert] Change the default in the futher. Please specify the `data`.
+    #
+    # @param data [bool] true if you want data of each edge
+    #
+    # @return [Hash | Array] if data is true, it returns hash including data.
+    #                        otherwise, simple nodes array.
     def nodes(data: true)
       if data
         @nodes
@@ -221,6 +225,8 @@ module NetworkX
     # [TODO][EXPERIMENTAL]
     #
     # @param data [bool] true if you want data of each edge
+    #
+    # @return [Array[[Object, Object]]] edges array
     def edges(data: false)
       each_edge(data: data).to_a
     end
