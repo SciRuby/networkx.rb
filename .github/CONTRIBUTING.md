@@ -47,7 +47,7 @@ Please proceed with a Pull Request only after you're assigned. It'd be sad if yo
 
 # Note: YARD Document
 
-You can add YARD documentation
+You can create YARD documentation
 
 1. Create Document for `doc` directory with `yard` command
 2. Create server via `yard server` command

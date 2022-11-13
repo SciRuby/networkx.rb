@@ -6,6 +6,7 @@ This project intends to provide a working alternative to the Ruby community, by 
 ## List of contents
 
 - [Installing](#installing)
+- [Document](#document)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -25,17 +26,9 @@ g = NetworkX::Graph.new
 g.add_edge('start', 'stop')
 ``` 
 
-And, You can add YARD documentation
+## Document
 
-1. Create Document for `doc` directory with `yard` command
-2. Create server via `yard server` command
-3. open Browser with `open http://0.0.0.0:8808` e.t.c.
-
-```
-$ yard
-$ yard server
-$ open http://0.0.0.0:8808   
-```
+You can read [Document](https://sciruby-jp.github.io/networkx.rb/) for this library.
 
 ## Roadmap
 
