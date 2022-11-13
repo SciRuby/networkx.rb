@@ -131,6 +131,7 @@ RSpec.describe NetworkX::Graph do
     expect { g.remove_edges('css') }.to raise_error(ArgumentError)
     expect { g.get_edge_data('yes', 'no') }.to raise_error(KeyError, 'No such edge exists!')
     expect { g.subgraph('xxx') }.to raise_error(ArgumentError)
+    expect { g.edge_subgraph('xxx') }.to raise_error(ArgumentError)
   end
 
   it 'test get_node_data' do
