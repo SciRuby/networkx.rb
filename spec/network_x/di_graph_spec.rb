@@ -146,6 +146,12 @@ RSpec.describe NetworkX::DiGraph do
     end
   end
 
+  it 'tests error of subgraph & edge_subgraph' do
+    g = NetworkX::DiGraph.new
+    expect { g.subgraph(nil) }.to raise_error(ArgumentError)
+    expect { g.edge_subgraph(nil) }.to raise_error(ArgumentError)
+  end
+
   context 'when reverse is called' do
     subject { graph.reverse }
 
