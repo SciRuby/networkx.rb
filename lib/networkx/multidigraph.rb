@@ -73,7 +73,9 @@ module NetworkX
     def edge?(node1, node2, key = nil)
       return super(node1, node2) if key.nil?
 
-      node?(node1) && @adj[node1].has_key?(node2) && @adj[node1][node2].has_key?(key)
+      return false unless node?(node1) && @adj[node1].has_key?(node2)
+
+      @adj[node1][node2].any? { |_index, data| data[:key] == key }
     end
     alias has_edge? edge?
 
