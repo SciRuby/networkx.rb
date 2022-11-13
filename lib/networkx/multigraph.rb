@@ -55,12 +55,12 @@ module NetworkX
       raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
       raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
 
-      if  @adj[node1][node2].none?{|_index, data| data[:key] == key }
+      if @adj[node1][node2].none? { |_index, data| data[:key] == key }
         raise KeyError, 'The given edge is not a valid one'
       end
 
-      @adj[node1][node2].delete_if{|_indx, data| data[:key] == key }
-      @adj[node2][node1].delete_if{|_indx, data| data[:key] == key }
+      @adj[node1][node2].delete_if { |_indx, data| data[:key] == key }
+      @adj[node2][node1].delete_if { |_indx, data| data[:key] == key }
     end
 
     # Returns the size of the graph
@@ -99,6 +99,7 @@ module NetworkX
     # @param key [Integer] the key of the given edge
     def edge?(node1, node2, key = nil)
       return super(node1, node2) if key.nil?
+
       node?(node1) && @adj[node1].has_key?(node2) && @adj[node1][node2].has_key?(key)
     end
     alias has_edge? edge?

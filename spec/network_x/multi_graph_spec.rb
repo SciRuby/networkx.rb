@@ -66,7 +66,7 @@ RSpec.describe NetworkX::MultiGraph do
     expect(graph.number_of_nodes).to be 2
     expect(graph.number_of_edges).to be 1
 
-    expect{graph.remove_edge(:a, :b, 'third')}.to raise_error(KeyError)
+    expect { graph.remove_edge(:a, :b, 'third') }.to raise_error(KeyError)
   end
 
   context 'when weighted edge/s is/are added' do
