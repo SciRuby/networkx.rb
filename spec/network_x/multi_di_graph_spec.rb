@@ -116,6 +116,15 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect(graph.out_degree(4)).to be 0
   end
 
+  it 'tests edge?' do
+    graph = NetworkX::MultiDiGraph.new
+    expect(graph.has_edge?(:x, :y)).to be_falsy
+
+    graph.add_edge(:x, :y)
+    expect(graph.has_edge?(:x, :y)).to be_truthy
+  end
+
+
   context 'when size is called' do
     subject { graph.size(true) }
 
