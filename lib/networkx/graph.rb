@@ -408,8 +408,14 @@ module NetworkX
     end
 
     # [EXPERIMENTAL]
-    def degree
-      @adj.transform_values(&:size)
+    def degree(nodes = nil)
+      if nodes.nil?
+        @adj.transform_values(&:size)
+      else
+        res = {}
+        nodes.each { |node| res[node] = @adj[node].size }
+        res
+      end
     end
 
     # [EXPERIMENTAL]

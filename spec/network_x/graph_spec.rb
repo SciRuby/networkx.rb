@@ -173,6 +173,8 @@ RSpec.describe NetworkX::Graph do
     expect(graph.degree[1]).to be 2
     expect(graph.degree[2]).to be 2
     expect(graph.degree[3]).to be 1
+
+    expect(graph.degree([1, 3, 2])).to eq({1 => 2, 3 => 1, 2 => 2})
   end
 
   # test experimental methods: `add_nodes_from`, `add_weighted_edges_from`, `each_edge`, `edges`
