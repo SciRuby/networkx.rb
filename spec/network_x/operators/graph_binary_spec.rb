@@ -90,6 +90,24 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'compose multiple graphs' do
+    graph1 = NetworkX::MultiDiGraph.new(name: 'first')
+    graph2 = NetworkX::MultiDiGraph.new(name: 'second')
+    graph1.add_nodes_from(0...5)
+    graph2.add_nodes_from(2...6)
+
+    graph1.add_edge(0, 1)
+    graph1.add_edge(1, 2)
+    graph2.add_edge(0, 1)
+    graph2.add_edge(4, 5)
+    graph2.add_edge(4, 5)
+
+    graph3 = NetworkX.compose(graph1, graph2)
+    expect(graph3.class).to be NetworkX::MultiDiGraph
+    expect(graph3.number_of_nodes).to be 6
+    expect(graph3.number_of_edges).to be 5
+  end
+
   context 'when symmetric_difference is called' do
     subject { NetworkX.symmetric_difference(graph1, graph2) }
 
