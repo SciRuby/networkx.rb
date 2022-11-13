@@ -30,16 +30,16 @@ module NetworkX
     # @example Add an edge with no attribute
     #   graph.add_edge("Bangalore", "Chennai")
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
     # @param edge_attrs [Hash{ Object => Object }] the hash of the edge attributes
-    def add_edge(node_1, node_2, **edge_attrs)
-      add_node(node_1)
-      add_node(node_2)
+    def add_edge(node1, node2, **edge_attrs)
+      add_node(node1)
+      add_node(node2)
 
-      edge_attrs = (@adj[node_1][node_2] || {}).merge(edge_attrs)
-      @adj[node_1][node_2] = edge_attrs
-      @adj[node_2][node_1] = edge_attrs
+      edge_attrs = (@adj[node1][node2] || {}).merge(edge_attrs)
+      @adj[node1][node2] = edge_attrs
+      @adj[node2][node1] = edge_attrs
     end
 
     # Adds multiple edges from an array
@@ -50,7 +50,7 @@ module NetworkX
     def add_edges(edges)
       case edges
       when Array
-        edges.each { |node_1, node_2, attrs| add_edge(node_1, node_2, **(attrs || {})) }
+        edges.each { |node1, node2, attrs| add_edge(node1, node2, **(attrs || {})) }
       else
         raise ArgumentError, 'Expected argument to be an Array of edges, ' \
                              "received #{edges.class.name} instead."
@@ -140,15 +140,15 @@ module NetworkX
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
-    def remove_edge(node_1, node_2)
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.has_key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.has_key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].has_key?(node_2)
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
+    def remove_edge(node1, node2)
+      raise KeyError, "#{node1} is not a valid node." unless @nodes.has_key?(node1)
+      raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
 
-      @adj[node_1].delete(node_2)
-      @adj[node_2].delete(node_1) if node_1 != node_2
+      @adj[node1].delete(node2)
+      @adj[node2].delete(node1) if node1 != node2
     end
 
     # Removes multiple edges from the graph
@@ -160,7 +160,7 @@ module NetworkX
     def remove_edges(edges)
       case edges
       when Array, Set
-        edges.each { |node_1, node_2| remove_edge(node_1, node_2) }
+        edges.each { |node1, node2| remove_edge(node1, node2) }
       else
         raise ArgumentError, 'Expected Arguement to be Array or Set of edges, ' \
                              "received #{edges.class.name} instead."
@@ -172,11 +172,11 @@ module NetworkX
     # @example
     #   graph.add_weighted_edge('Noida', 'Bangalore', 1000)
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
     # @param weight [Integer] the weight value
-    def add_weighted_edge(node_1, node_2, weight)
-      add_edge(node_1, node_2, weight: weight)
+    def add_weighted_edge(node1, node2, weight)
+      add_edge(node1, node2, weight: weight)
     end
 
     # Adds multiple weighted edges
@@ -193,8 +193,8 @@ module NetworkX
       raise ArgumentError, 'edges and weight must be given in an Array.' \
                            unless edges.is_a?(Array) && weights.is_a?(Array)
 
-      (edges.transpose << weights).transpose.each do |node_1, node_2, weight|
-        add_weighted_edge(node_1, node_2, weight)
+      (edges.transpose << weights).transpose.each do |node1, node2, weight|
+        add_weighted_edge(node1, node2, weight)
       end
     end
 
@@ -259,7 +259,7 @@ module NetworkX
     # Checks if a node is present in the graph
     #
     # @example
-    #   graph.node?(node_1)
+    #   graph.node?(node1)
     #
     # @param node [Object] the node to be checked
     def node?(node)
@@ -270,12 +270,12 @@ module NetworkX
     # Checks if the the edge consisting of two nodes is present in the graph
     #
     # @example
-    #   graph.edge?(node_1, node_2)
+    #   graph.edge?(node1, node2)
     #
-    # @param node_1 [Object] the first node of the edge to be checked
-    # @param node_2 [Object] the second node of the edge to be checked
-    def edge?(node_1, node_2)
-      node?(node_1) && @adj[node_1].has_key?(node_2)
+    # @param node1 [Object] the first node of the edge to be checked
+    # @param node2 [Object] the second node of the edge to be checked
+    def edge?(node1, node2)
+      node?(node1) && @adj[node1].has_key?(node2)
     end
     alias has_edge? edge?
 
@@ -294,14 +294,14 @@ module NetworkX
     # Gets the edge data
     #
     # @example
-    #   graph.get_edge_data(node_1, node_2)
+    #   graph.get_edge_data(node1, node2)
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
-    def get_edge_data(node_1, node_2)
-      raise KeyError, 'No such edge exists!' unless node?(node_1) && node?(node_2)
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
+    def get_edge_data(node1, node2)
+      raise KeyError, 'No such edge exists!' unless node?(node1) && node?(node2)
 
-      @adj[node_1][node_2]
+      @adj[node1][node2]
     end
 
     # Retus a hash of neighbours of a node

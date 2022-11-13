@@ -49,9 +49,6 @@ Metrics:
 Naming/MethodParameterName:
   Enabled: false
 
-Naming/VariableNumber:
-  EnforcedStyle: snake_case
-
 ### Styles -------------------------------------------------------------
 
 Style/AndOr:

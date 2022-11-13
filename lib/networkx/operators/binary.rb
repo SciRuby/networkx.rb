@@ -41,39 +41,39 @@ module NetworkX
 
   # Performs the intersection of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the intersection of the two graphs
-  def self.intersection(g_1, g_2)
-    result = Marshal.load(Marshal.dump(g_1))
+  def self.intersection(g1, g2)
+    result = Marshal.load(Marshal.dump(g1))
     result.clear
 
-    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g_1.multigraph? == g_2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g_1.nodes.keys - g_2.nodes.keys).empty?
+    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
+    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g_1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
 
-    if g_1.number_of_edges <= g_2.number_of_edges
-      g_1.adj.each do |u, u_edges|
+    if g1.number_of_edges <= g2.number_of_edges
+      g1.adj.each do |u, u_edges|
         u_edges.each do |v, uv_attrs|
-          if g_1.multigraph?
+          if g1.multigraph?
             uv_attrs.each do |k, attrs|
-              result.add_edge(u, v, **attrs) if g_2.edge?(u, v, k)
+              result.add_edge(u, v, **attrs) if g2.edge?(u, v, k)
             end
-          elsif g_2.edge?(u, v)
+          elsif g2.edge?(u, v)
             result.add_edge(u, v, **uv_attrs)
           end
         end
       end
     else
-      g_2.adj.each do |u, u_edges|
+      g2.adj.each do |u, u_edges|
         u_edges.each do |v, uv_attrs|
-          if g_2.multigraph?
+          if g2.multigraph?
             uv_attrs.each do |k, attrs|
-              result.add_edge(u, v, **attrs) if g_1.edge?(u, v, k)
+              result.add_edge(u, v, **attrs) if g1.edge?(u, v, k)
             end
-          elsif g_1.edge?(u, v)
+          elsif g1.edge?(u, v)
             result.add_edge(u, v, uv_attrs)
           end
         end
@@ -84,27 +84,27 @@ module NetworkX
 
   # Performs the difference of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the difference of the two graphs
-  def self.difference(g_1, g_2)
-    result = Marshal.load(Marshal.dump(g_1))
+  def self.difference(g1, g2)
+    result = Marshal.load(Marshal.dump(g1))
     result.clear
 
-    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g_1.multigraph? == g_2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g_1.nodes.keys - g_2.nodes.keys).empty?
+    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
+    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g_1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
 
-    g_1.adj.each do |u, u_edges|
+    g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
-        if g_1.multigraph?
+        if g1.multigraph?
           uv_attrs.each do |k, attrs|
-            result.add_edge(u, v, **attrs) unless g_2.edge?(u, v, k)
+            result.add_edge(u, v, **attrs) unless g2.edge?(u, v, k)
           end
         else
-          result.add_edge(u, v, **uv_attrs) unless g_2.edge?(u, v)
+          result.add_edge(u, v, **uv_attrs) unless g2.edge?(u, v)
         end
       end
     end
@@ -113,39 +113,39 @@ module NetworkX
 
   # Performs the symmetric difference of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the symmetric difference of the two graphs
-  def self.symmetric_difference(g_1, g_2)
-    result = Marshal.load(Marshal.dump(g_1))
+  def self.symmetric_difference(g1, g2)
+    result = Marshal.load(Marshal.dump(g1))
     result.clear
 
-    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g_1.multigraph? == g_2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g_1.nodes.keys - g_2.nodes.keys).empty?
+    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
+    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g_1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
 
-    g_1.adj.each do |u, u_edges|
+    g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
-        if g_1.multigraph?
+        if g1.multigraph?
           uv_attrs.each do |k, attrs|
-            result.add_edge(u, v, **attrs) unless g_2.edge?(u, v, k)
+            result.add_edge(u, v, **attrs) unless g2.edge?(u, v, k)
           end
         else
-          result.add_edge(u, v, **uv_attrs) unless g_2.edge?(u, v)
+          result.add_edge(u, v, **uv_attrs) unless g2.edge?(u, v)
         end
       end
     end
 
-    g_2.adj.each do |u, u_edges|
+    g2.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
-        if g_2.multigraph?
+        if g2.multigraph?
           uv_attrs.each do |k, attrs|
-            result.add_edge(u, v, **attrs) unless g_1.edge?(u, v, k)
+            result.add_edge(u, v, **attrs) unless g1.edge?(u, v, k)
           end
         else
-          result.add_edge(u, v, **uv_attrs) unless g_1.edge?(u, v)
+          result.add_edge(u, v, **uv_attrs) unless g1.edge?(u, v)
         end
       end
     end
@@ -154,39 +154,39 @@ module NetworkX
 
   # Performs the composition of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the composition of the two graphs
-  def self.compose(g_1, g_2)
-    result = Marshal.load(Marshal.dump(g_1))
+  def self.compose(g1, g2)
+    result = Marshal.load(Marshal.dump(g1))
     result.clear
 
-    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g_1.multigraph? == g_2.multigraph?
+    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
 
-    result.add_nodes(g_1.nodes.map { |u, attrs| [u, attrs] })
-    result.add_nodes(g_2.nodes.map { |u, attrs| [u, attrs] })
+    result.add_nodes(g1.nodes.map { |u, attrs| [u, attrs] })
+    result.add_nodes(g2.nodes.map { |u, attrs| [u, attrs] })
 
-    if g_1.multigraph?
-      g_1.adj.each { |u, e| e.each { |v, uv_edges| uv_edges.each_value { |attrs| result.add_edge(u, v, **attrs) } } }
-      g_2.adj.each { |u, e| e.each { |v, uv_edges| uv_edges.each_value { |attrs| result.add_edge(u, v, **attrs) } } }
+    if g1.multigraph?
+      g1.adj.each { |u, e| e.each { |v, uv_edges| uv_edges.each_value { |attrs| result.add_edge(u, v, **attrs) } } }
+      g2.adj.each { |u, e| e.each { |v, uv_edges| uv_edges.each_value { |attrs| result.add_edge(u, v, **attrs) } } }
     else
-      g_1.adj.each { |u, u_edges| u_edges.each { |v, attrs| result.add_edge(u, v, **attrs) } }
-      g_2.adj.each { |u, u_edges| u_edges.each { |v, attrs| result.add_edge(u, v, **attrs) } }
+      g1.adj.each { |u, u_edges| u_edges.each { |v, attrs| result.add_edge(u, v, **attrs) } }
+      g2.adj.each { |u, u_edges| u_edges.each { |v, attrs| result.add_edge(u, v, **attrs) } }
     end
     result
   end
 
   # Performs the union of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the union of the two graphs
-  def self.union(g_1, g_2)
-    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g_1.multigraph? == g_2.multigraph?
+  def self.union(g1, g2)
+    raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
 
-    case g_1
+    case g1
     when NetworkX::MultiGraph
       new_graph = NetworkX::MultiGraph.new
     when NetworkX::MultiDiGraph
@@ -197,17 +197,17 @@ module NetworkX
       new_graph = NetworkX::DiGraph.new
     end
 
-    new_graph.graph.merge!(g_1.graph)
-    new_graph.graph.merge!(g_2.graph)
+    new_graph.graph.merge!(g1.graph)
+    new_graph.graph.merge!(g2.graph)
 
-    raise ArgumentError, 'Graphs must be disjoint!' unless (g_1.nodes.keys & g_2.nodes.keys).empty?
+    raise ArgumentError, 'Graphs must be disjoint!' unless (g1.nodes.keys & g2.nodes.keys).empty?
 
-    g1_edges = get_edges(g_1)
-    g2_edges = get_edges(g_2)
+    g1_edges = get_edges(g1)
+    g2_edges = get_edges(g2)
 
-    new_graph.add_nodes(g_1.nodes.keys)
+    new_graph.add_nodes(g1.nodes.keys)
     new_graph.add_edges(g1_edges)
-    new_graph.add_nodes(g_2.nodes.keys)
+    new_graph.add_nodes(g2.nodes.keys)
     new_graph.add_edges(g2_edges)
 
     new_graph
@@ -215,16 +215,16 @@ module NetworkX
 
   # Performs the disjoint union of two graphs
   #
-  # @param g_1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
-  # @param g_2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
+  # @param g1 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.1
+  # @param g2 [Graph, DiGraph, MultiGraph, MultiDiGraph] graph no.2
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the disjoint union of the two graphs
-  def self.disjoint_union(g_1, g_2)
-    new_g_1 = convert_to_distinct_labels(g_1)
-    new_g_2 = convert_to_distinct_labels(g_2)
-    result = union(new_g_1, new_g_2)
-    result.graph.merge!(g_1.graph)
-    result.graph.merge!(g_2.graph)
+  def self.disjoint_union(g1, g2)
+    new_g1 = convert_to_distinct_labels(g1)
+    new_g2 = convert_to_distinct_labels(g2)
+    result = union(new_g1, new_g2)
+    result.graph.merge!(g1.graph)
+    result.graph.merge!(g2.graph)
     result
   end
 end

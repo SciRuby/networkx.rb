@@ -23,13 +23,13 @@ module NetworkX
     m.times { |i| n.times { |j| a << [i, j] } }
     g.add_nodes_from(a)
 
-    e_1 = []
-    (m - 1).times { |i| n.times { |j| e_1 << [[i, j], [i + 1, j]] } }
-    g.add_edges_from(e_1)
+    e1 = []
+    (m - 1).times { |i| n.times { |j| e1 << [[i, j], [i + 1, j]] } }
+    g.add_edges_from(e1)
 
-    e_2 = []
-    m.times { |i| (n - 1).times { |j| e_2 << [[i, j], [i, j + 1]] } }
-    g.add_edges_from(e_2)
+    e2 = []
+    m.times { |i| (n - 1).times { |j| e2 << [[i, j], [i, j + 1]] } }
+    g.add_edges_from(e2)
 
     g.add_edges_from(g.edges.map { |i, j| [j, i] }) if g.directed?
 

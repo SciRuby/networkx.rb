@@ -34,9 +34,9 @@ module NetworkX
 
   # Helper class for preflow push algorithm
   class GlobalRelabelThreshold
-    def initialize(num_1, num_2, freq)
+    def initialize(num1, num2, freq)
       freq = freq.nil? ? Float::INFINITY : freq
-      @threshold = (num_1 + num_2) / freq
+      @threshold = (num1 + num2) / freq
       @work = 0
     end
 

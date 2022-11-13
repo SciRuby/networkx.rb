@@ -1,16 +1,16 @@
 RSpec.describe NetworkX::Graph do
   subject { graph }
 
-  let(:graph_1) { described_class.new(type: 'undirected') }
-  let(:graph_2) { described_class.new(type: 'undirected') }
+  let(:graph1) { described_class.new(type: 'undirected') }
+  let(:graph2) { described_class.new(type: 'undirected') }
 
   before do
-    graph_1.add_edge(1, 2)
-    graph_2.add_edge(5, 6)
+    graph1.add_edge(1, 2)
+    graph2.add_edge(5, 6)
   end
 
   context 'when tensor_product is called' do
-    subject { NetworkX.tensor_product(graph_1, graph_2) }
+    subject { NetworkX.tensor_product(graph1, graph2) }
 
     its('adj') do
       is_expected.to eq([1, 5] => {[2, 6] => {}},
@@ -21,7 +21,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when lexicographic_product is called' do
-    subject { NetworkX.lexicographic_product(graph_1, graph_2) }
+    subject { NetworkX.lexicographic_product(graph1, graph2) }
 
     its('adj') do
       is_expected.to eq([1, 5] => {[2, 5] => {}, [2, 6] => {}, [1, 6] => {}},
@@ -32,7 +32,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when cartesian_product is called' do
-    subject { NetworkX.cartesian_product(graph_1, graph_2) }
+    subject { NetworkX.cartesian_product(graph1, graph2) }
 
     its('adj') do
       is_expected.to eq([1, 5] => {[2, 5] => {}, [1, 6] => {}},
@@ -43,7 +43,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when strong_product is called' do
-    subject { NetworkX.strong_product(graph_1, graph_2) }
+    subject { NetworkX.strong_product(graph1, graph2) }
 
     its('adj') do
       is_expected.to eq([1, 5] => {[1, 6] => {}, [2, 5] => {}, [2, 6] => {}},
@@ -54,7 +54,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when power is called' do
-    subject { NetworkX.power(graph_1, 2) }
+    subject { NetworkX.power(graph1, 2) }
 
     its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end

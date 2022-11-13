@@ -30,16 +30,16 @@ module NetworkX
     # @example Add an edge with no attribute
     #   graph.add_edge("Bangalore", "Chennai")
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
     # @param edge_attrs [Hash{ Object => Object }] the hash of the edge attributes
-    def add_edge(node_1, node_2, **edge_attrs)
-      add_node(node_1)
-      add_node(node_2)
+    def add_edge(node1, node2, **edge_attrs)
+      add_node(node1)
+      add_node(node2)
 
-      edge_attrs = (@adj[node_1][node_2] || {}).merge(edge_attrs)
-      @adj[node_1][node_2] = edge_attrs
-      @pred[node_2][node_1] = edge_attrs
+      edge_attrs = (@adj[node1][node2] || {}).merge(edge_attrs)
+      @adj[node1][node2] = edge_attrs
+      @pred[node2][node1] = edge_attrs
     end
 
     # Adds a node and its attributes to the graph
@@ -80,15 +80,15 @@ module NetworkX
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
-    def remove_edge(node_1, node_2)
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.has_key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.has_key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].has_key?(node_2)
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
+    def remove_edge(node1, node2)
+      raise KeyError, "#{node1} is not a valid node." unless @nodes.has_key?(node1)
+      raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
 
-      @adj[node_1].delete(node_2)
-      @pred[node_2].delete(node_1)
+      @adj[node1].delete(node2)
+      @pred[node2].delete(node1)
     end
 
     # Clears the graph

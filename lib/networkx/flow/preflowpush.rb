@@ -132,7 +132,7 @@ module NetworkX
   end
 
   # Helper function for discharging a node
-  def self.discharge(u_node, is_phase_1, residual_nodes, residual_adj, height, levels, grt, source, target)
+  def self.discharge(u_node, is_phase1, residual_nodes, residual_adj, height, levels, grt, source, target)
     height_val = residual_nodes[u_node][:height]
     curr_edge = residual_nodes[u_node][:curr_edge]
     next_height = height_val
@@ -153,7 +153,7 @@ module NetworkX
         curr_edge.move_to_next
       rescue StopIteration
         height_val = relabel(u_node, grt, residual_adj, residual_nodes, source, target, levels)
-        if is_phase_1 && height_val >= n - 1
+        if is_phase1 && height_val >= n - 1
           levels[height].active.add(u_node)
           break
         end
@@ -207,11 +207,11 @@ module NetworkX
   end
 
   # Helper function for augmenting flow
-  def self.push(node_1, node_2, flow, residual_nodes, residual_adj)
-    residual_adj[node_1][node_2][:flow] += flow
-    residual_adj[node_2][node_1][:flow] -= flow
-    residual_nodes[node_1][:excess] -= flow
-    residual_nodes[node_2][:excess] += flow
+  def self.push(node1, node2, flow, residual_nodes, residual_adj)
+    residual_adj[node1][node2][:flow] += flow
+    residual_adj[node2][node1][:flow] -= flow
+    residual_nodes[node1][:excess] -= flow
+    residual_nodes[node2][:excess] += flow
   end
 
   # Helper function for reverse bfs

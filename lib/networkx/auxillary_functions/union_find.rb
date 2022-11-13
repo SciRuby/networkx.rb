@@ -58,12 +58,12 @@ module NetworkX
 
     # Is each root of two nodes the same?
     #
-    # @param node_1 [Object] node
-    # @param node_2 [Object] node
+    # @param node1 [Object] node
+    # @param node2 [Object] node
     #
-    # @return [bool] Is each root of node_1 and nodes_2 the same?
-    def connected?(node_1, node_2)
-      root(node_1) == root(node_2)
+    # @return [bool] Is each root of node1 and nodes_2 the same?
+    def connected?(node1, node2)
+      root(node1) == root(node2)
     end
     alias same? connected?
 
@@ -88,9 +88,9 @@ module NetworkX
     end
     alias unite union
 
-    def merge(node_1, node_2)
-      x = self[node_1]
-      y = self[node_2]
+    def merge(node1, node2)
+      x = self[node1]
+      y = self[node2]
       return if x == y
 
       x, y = y, x if @weights[x] < @weights[y]

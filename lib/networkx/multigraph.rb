@@ -8,13 +8,13 @@ module NetworkX
   class MultiGraph < Graph
     # Returns a new key
     #
-    # @param node_1 [Object] the first node of a given edge
-    # @param node_2 [Object] the second node of a given edge
-    def new_edge_key(node_1, node_2)
-      return 0 if @adj[node_1][node_2].nil?
+    # @param node1 [Object] the first node of a given edge
+    # @param node2 [Object] the second node of a given edge
+    def new_edge_key(node1, node2)
+      return 0 if @adj[node1][node2].nil?
 
-      key = @adj[node_1][node_2].length
-      key += 1 while @adj[node_1][node_2].has_key?(key)
+      key = @adj[node1][node2].length
+      key += 1 while @adj[node1][node2].has_key?(key)
       key
     end
 
@@ -26,17 +26,17 @@ module NetworkX
     # @example Add an edge with no attribute
     #   graph.add_edge("Bangalore", "Chennai")
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
     # @param edge_attrs [Hash{ Object => Object }] the hash of the edge attributes
-    def add_edge(node_1, node_2, **edge_attrs)
-      add_node(node_1)
-      add_node(node_2)
-      key = new_edge_key(node_1, node_2)
-      all_edge_attrs = @adj[node_1][node_2] || {}
+    def add_edge(node1, node2, **edge_attrs)
+      add_node(node1)
+      add_node(node2)
+      key = new_edge_key(node1, node2)
+      all_edge_attrs = @adj[node1][node2] || {}
       all_edge_attrs[key] = edge_attrs
-      @adj[node_1][node_2] = all_edge_attrs
-      @adj[node_2][node_1] = all_edge_attrs
+      @adj[node1][node2] = all_edge_attrs
+      @adj[node2][node1] = all_edge_attrs
     end
 
     # Removes edge from the graph
@@ -44,20 +44,20 @@ module NetworkX
     # @example
     #   graph.remove_edge('Noida', 'Bangalore')
     #
-    # @param node_1 [Object] the first node of the edge
-    # @param node_2 [Object] the second node of the edge
-    def remove_edge(node_1, node_2, key=nil)
+    # @param node1 [Object] the first node of the edge
+    # @param node2 [Object] the second node of the edge
+    def remove_edge(node1, node2, key=nil)
       if key.nil?
-        super(node_1, node_2)
+        super(node1, node2)
         return
       end
-      raise KeyError, "#{node_1} is not a valid node." unless @nodes.has_key?(node_1)
-      raise KeyError, "#{node_2} is not a valid node" unless @nodes.has_key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1].has_key?(node_2)
-      raise KeyError, 'The given edge is not a valid one.' unless @adj[node_1][node_2].has_key?(key)
+      raise KeyError, "#{node1} is not a valid node." unless @nodes.has_key?(node1)
+      raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
+      raise KeyError, 'The given edge is not a valid one.' unless @adj[node1][node2].has_key?(key)
 
-      @adj[node_1][node_2].delete(key)
-      @adj[node_2][node_1].delete(key)
+      @adj[node1][node2].delete(key)
+      @adj[node2][node1].delete(key)
     end
 
     # Returns the size of the graph
@@ -89,14 +89,14 @@ module NetworkX
     # Checks if the the edge consisting of two nodes is present in the graph
     #
     # @example
-    #   graph.edge?(node_1, node_2)
+    #   graph.edge?(node1, node2)
     #
-    # @param node_1 [Object] the first node of the edge to be checked
-    # @param node_2 [Object] the second node of the edge to be checked
+    # @param node1 [Object] the first node of the edge to be checked
+    # @param node2 [Object] the second node of the edge to be checked
     # @param key [Integer] the key of the given edge
-    def edge?(node_1, node_2, key=nil)
-      super(node_1, node_2) if key.nil?
-      node?(node_1) && @adj[node_1].has_key?(node_2) && @adj[node_1][node_2].has_key?(key)
+    def edge?(node1, node2, key=nil)
+      super(node1, node2) if key.nil?
+      node?(node1) && @adj[node1].has_key?(node2) && @adj[node1][node2].has_key?(key)
     end
     alias has_edge? edge?
 
@@ -107,11 +107,11 @@ module NetworkX
     def to_undirected
       graph = NetworkX::Graph.new(**@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, **node_attr) }
-      @adj.each do |node_1, node_1_edges|
-        node_1_edges.each do |node_2, node_1_node_2|
+      @adj.each do |node1, node1_edges|
+        node1_edges.each do |node2, node1_node2|
           edge_attrs = {}
-          node_1_node_2.each { |_key, attrs| edge_attrs.merge!(attrs) }
-          graph.add_edge(node_1, node_2, **edge_attrs)
+          node1_node2.each { |_key, attrs| edge_attrs.merge!(attrs) }
+          graph.add_edge(node1, node2, **edge_attrs)
         end
       end
       graph
