@@ -18,23 +18,11 @@ require:
 Lint/AmbiguousOperatorPrecedence:
   Enabled: false
 
-Layout/ExtraSpacing:
-  AllowForAlignment: true
-
 Layout/LineLength:
   Max: 120
 
-Layout/ParameterAlignment:
-  EnforcedStyle: with_fixed_indentation
-
-Layout/SpaceAfterComma:
-  Enabled: true
-
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
-
-Layout/SpaceInsideBlockBraces:
-  EnforcedStyle: space
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
@@ -51,50 +39,23 @@ Naming/MethodParameterName:
 
 ### Styles -------------------------------------------------------------
 
-Style/AndOr:
-  EnforcedStyle: conditionals
-
 Style/CombinableLoops:
   Enabled: false
 
 Style/Documentation:
   Enabled: false
 
-Style/DoubleNegation:
-  Enabled: false
-
-Style/EmptyCaseCondition:
-  Enabled: true
-
-Style/EmptyElse:
-  EnforcedStyle: empty
-
-Style/EmptyMethod:
-  EnforcedStyle: compact
-
-Style/FormatString:
-  EnforcedStyle: percent
-
 Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/MultilineBlockChain:
   Enabled: false
 
 Style/OptionalBooleanParameter:
   Enabled: false
 
 Style/ParallelAssignment:
-  Enabled: false
-
-Style/PerlBackrefs:
-  Enabled: false
+  Enabled: false # one line style is compact.
 
 Style/PreferredHashMethods:
   Enabled: false
-
-Style/SingleLineBlockParams:
-  Enabled: true
 
 Style/SymbolArray:
   Enabled: false # general array literal is easy to read. no problem.
@@ -111,7 +72,7 @@ RSpec/ExampleLength:
   Max: 25
 
 RSpec/FilePath:
-  Enabled: false
+  Enabled: false # too many offense
 
 RSpec/ImplicitSubject:
   Enabled: false # too many offenses
