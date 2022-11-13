@@ -40,7 +40,7 @@ module NetworkX
   def self.directed_edges_cross_edges(g1, g2)
     result = []
     edges_in_array(g1).each do |u, v, c|
-      edges_in_array(g2) do |x, y, d|
+      edges_in_array(g2).each do |x, y, d|
         result << [[u, x], [v, y], hash_product(c, d)]
       end
     end
