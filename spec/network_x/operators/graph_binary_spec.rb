@@ -36,6 +36,38 @@ RSpec.describe NetworkX::Graph do
     expect(graph3.has_edge?(5, 6)).to be true
   end
 
+  it 'unite Graph' do
+    graph1 = NetworkX::Graph.new
+    graph2 = NetworkX::Graph.new
+    graph1.add_edge(:a, :b)
+    graph1.add_edge(:b, :c)
+    graph2.add_edge(:e, :f)
+
+    graph3 = NetworkX.union(graph1, graph2)
+    expect(graph3.class).to be NetworkX::Graph
+    expect(graph3.number_of_nodes).to be 5
+    expect(graph3.number_of_edges).to be 3
+    expect(graph3.has_node?(:b)).to be true
+    expect(graph3.has_node?(:e)).to be true
+    expect(graph3.has_edge?(:e, :f)).to be true
+  end
+
+  it 'unite MultiDiGraph' do
+    graph1 = NetworkX::MultiDiGraph.new
+    graph2 = NetworkX::MultiDiGraph.new
+    graph1.add_edge(1, 2)
+    graph1.add_edge(2, 3)
+    graph2.add_edge(5, 6)
+
+    graph3 = NetworkX.union(graph1, graph2)
+    expect(graph3.class).to be NetworkX::MultiDiGraph
+    expect(graph3.number_of_nodes).to be 5
+    expect(graph3.number_of_edges).to be 3
+    expect(graph3.has_node?(2)).to be true
+    expect(graph3.has_node?(5)).to be true
+    expect(graph3.has_edge?(5, 6)).to be true
+  end
+
   context 'when disjoint_union is called' do
     subject { NetworkX.disjoint_union(graph1, graph2) }
 
