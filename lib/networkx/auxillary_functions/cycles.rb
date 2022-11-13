@@ -5,7 +5,7 @@ module NetworkX
   # @param root [Object, Nil] root for the graph cycles
   #
   # @return [Array<Array<Object>>] Arrays of nodes in the cycles
-  def self.cycle_basis(graph, root=nil)
+  def self.cycle_basis(graph, root = nil)
     gnodes = graph.nodes.keys
     cycles = []
     until gnodes.empty?

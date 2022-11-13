@@ -3,7 +3,7 @@ module NetworkX
   #
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param filename [String] filename of the graph
-  def self.graph_to_csv(graph, filename='graph.csv')
+  def self.graph_to_csv(graph, filename = 'graph.csv')
     CSV.open(filename, 'wb') do |csv|
       csv << [graph.class.name]
       csv << ['graph_values']

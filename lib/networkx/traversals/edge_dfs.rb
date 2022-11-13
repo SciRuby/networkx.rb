@@ -48,7 +48,7 @@ module NetworkX
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param start [Object] node to start dfs from
   # @param orientation [:ignore, :reverse', nil] the orientation of edges of graph
-  def self.edge_dfs(graph, start, orientation=nil)
+  def self.edge_dfs(graph, start, orientation = nil)
     case orientation
     when :reverse
       graph = graph.reverse if graph.instance_of?(::NetworkX::DiGraph) || graph.instance_of?(::NetworkX::MultiDiGraph)

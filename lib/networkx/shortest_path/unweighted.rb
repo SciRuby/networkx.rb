@@ -29,7 +29,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the shortest path algorithm
   #
   # @return [Array<Object, Numeric>] path lengths for all nodes
-  def self.single_source_shortest_path_length(graph, source, cutoff=nil)
+  def self.single_source_shortest_path_length(graph, source, cutoff = nil)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
 
     cutoff = Float::INFINITY if cutoff.nil?
@@ -43,7 +43,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the shortest path algorithm
   #
   # @return [Array<Object, Array<Object, Numeric>>] path lengths for all nodes from all nodes
-  def self.all_pairs_shortest_path_length(graph, cutoff=nil)
+  def self.all_pairs_shortest_path_length(graph, cutoff = nil)
     shortest_paths = []
     graph.nodes.each_key { |n| shortest_paths << [n, single_source_shortest_path_length(graph, n, cutoff)] }
     shortest_paths
@@ -76,7 +76,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the shortest path algorithm
   #
   # @return [Array<Object, Array<Object, Array<Object>>>] path lengths for all nodes from all nodes
-  def self.single_source_shortest_path(graph, source, cutoff=nil)
+  def self.single_source_shortest_path(graph, source, cutoff = nil)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
 
     cutoff = Float::INFINITY if cutoff.nil?
@@ -91,7 +91,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the shortest path algorithm
   #
   # @return [Array<Object, Hash {Object => Array<Object> }>] paths for all nodes from all nodes
-  def self.all_pairs_shortest_path(graph, cutoff=nil)
+  def self.all_pairs_shortest_path(graph, cutoff = nil)
     shortest_paths = []
     graph.nodes.each_key { |n| shortest_paths << [n, single_source_shortest_path(graph, n, cutoff)] }
     shortest_paths
@@ -107,7 +107,7 @@ module NetworkX
   # @return [Array<Hash{ Object => Array<Object> }, Hash{ Object => Numeric }>,
   #         Hash{ Object => Array<Object> }]
   #         predecessors of a given node and/or seen dict
-  def self.predecessor(graph, source, cutoff=nil, return_seen=false)
+  def self.predecessor(graph, source, cutoff = nil, return_seen = false)
     raise ArgumentError, 'Source not found in the Graph!' unless graph.node?(source)
 
     level = 0

@@ -8,7 +8,7 @@ module NetworkX
   #
   # @return [Array<Object>] an array of nodes forming a path between source
   #                         and target
-  def self.astar_path(graph, source, target, heuristic=nil)
+  def self.astar_path(graph, source, target, heuristic = nil)
     warn 'A* is not implemented for MultiGraph and MultiDiGraph' if graph.is_a?(MultiGraph) || graph.is_a?(MultiDiGraph)
 
     raise ArgumentError, 'Either source or target is not in graph' unless graph.node?(source) && graph.node?(target)
@@ -62,7 +62,7 @@ module NetworkX
   # @param heuristic [] a lambda to compute heuristic b/w two nodes
   #
   # @return [Numeric] the length of the path
-  def self.astar_path_length(graph, source, target, heuristic=nil)
+  def self.astar_path_length(graph, source, target, heuristic = nil)
     raise ArgumentError, 'Either source or target is not in graph' unless graph.node?(source) && graph.node?(target)
 
     path = astar_path(graph, source, target, heuristic)

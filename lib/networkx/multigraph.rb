@@ -46,7 +46,7 @@ module NetworkX
     #
     # @param node1 [Object] the first node of the edge
     # @param node2 [Object] the second node of the edge
-    def remove_edge(node1, node2, key=nil)
+    def remove_edge(node1, node2, key = nil)
       if key.nil?
         super(node1, node2)
         return
@@ -67,7 +67,7 @@ module NetworkX
     #
     # @param is_weighted [Bool] if true, method returns sum of weights of all edges
     #                           else returns number of edges
-    def size(is_weighted=false)
+    def size(is_weighted = false)
       if is_weighted
         graph_size = 0
         @adj.each do |_, hash_val|
@@ -94,7 +94,7 @@ module NetworkX
     # @param node1 [Object] the first node of the edge to be checked
     # @param node2 [Object] the second node of the edge to be checked
     # @param key [Integer] the key of the given edge
-    def edge?(node1, node2, key=nil)
+    def edge?(node1, node2, key = nil)
       super(node1, node2) if key.nil?
       node?(node1) && @adj[node1].has_key?(node2) && @adj[node1][node2].has_key?(key)
     end

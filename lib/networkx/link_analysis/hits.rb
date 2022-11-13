@@ -7,7 +7,7 @@ module NetworkX
   # @param nstart [Array<Numeric>] starting hub values for the nodes
   #
   # @return [Array<Numeric, Numeric>] hits and authority scores
-  def self.hits(graph, max_iter=100, tol=1e-8, nstart)
+  def self.hits(graph, max_iter = 100, tol = 1e-8, nstart)
     return [{}, {}] if graph.nodes.empty?
 
     h = nstart

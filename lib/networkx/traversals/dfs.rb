@@ -7,7 +7,7 @@ module NetworkX
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param source [Object] node to start dfs from
   # @param depth_limit [Integer, nil] the depth limit of dfs
-  def self.dfs_edges(graph, source, depth_limit=nil)
+  def self.dfs_edges(graph, source, depth_limit = nil)
     raise KeyError, "There exists no node names #{source} in the given graph." unless graph.node?(source)
 
     depth_limit = graph.nodes.length if depth_limit.nil?
@@ -36,7 +36,7 @@ module NetworkX
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param source [Object] node to start dfs from
   # @param depth_limit [Integer, nil] the depth limit of dfs
-  def self.dfs_tree(graph, source, depth_limit=nil)
+  def self.dfs_tree(graph, source, depth_limit = nil)
     t = NetworkX::DiGraph.new
     t.add_node(source)
     t.add_edges_from(dfs_edges(graph, source, depth_limit))
@@ -51,7 +51,7 @@ module NetworkX
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param source [Object] node to start dfs from
   # @param depth_limit [Integer, nil] the depth limit of dfs
-  def self.dfs_successors(graph, source, depth_limit=nil)
+  def self.dfs_successors(graph, source, depth_limit = nil)
     dfs_edges = dfs_edges(graph, source, depth_limit)
     successors = {}
     dfs_edges.each do |u, v|
@@ -69,7 +69,7 @@ module NetworkX
   # @param graph [Graph, DiGraph, MultiGraph, MultiDiGraph] a graph
   # @param source [Object] node to start dfs from
   # @param depth_limit [Integer, nil] the depth limit of dfs
-  def self.dfs_predecessors(graph, source, depth_limit=nil)
+  def self.dfs_predecessors(graph, source, depth_limit = nil)
     dfs_edges = dfs_edges(graph, source, depth_limit)
     predecessors = {}
     dfs_edges.each { |u, v| predecessors[v] = u }

@@ -9,7 +9,7 @@ module NetworkX
   end
 
   # Helper function for multisource dijkstra
-  def self.help_multisource_dijkstra(graph, sources, weight, pred=nil, paths=nil, cutoff=nil, target=nil)
+  def self.help_multisource_dijkstra(graph, sources, weight, pred = nil, paths = nil, cutoff = nil, target = nil)
     count = ->(i) { i + 1 }
     i = -1
     dist = {}
@@ -50,7 +50,7 @@ module NetworkX
   end
 
   # Helper function for single source dijkstra
-  def self.help_dijkstra(graph, source, weight, pred=nil, paths=nil, cutoff=nil, target=nil)
+  def self.help_dijkstra(graph, source, weight, pred = nil, paths = nil, cutoff = nil, target = nil)
     help_multisource_dijkstra(graph, [source], weight, pred, paths, cutoff, target)
   end
 
@@ -62,7 +62,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Numeric, Array<Object>] path lengths for all nodes
-  def self.multisource_dijkstra(graph, sources, target=nil, cutoff=nil)
+  def self.multisource_dijkstra(graph, sources, target = nil, cutoff = nil)
     raise ValueError, 'Sources cannot be empty' if sources.empty?
     return [0, [target]] if sources.include?(target)
 
@@ -83,7 +83,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Hash{ Object => Numeric }] path lengths for any nodes from given nodes
-  def self.multisource_dijkstra_path_length(graph, sources, cutoff=nil)
+  def self.multisource_dijkstra_path_length(graph, sources, cutoff = nil)
     raise ValueError, 'Sources cannot be empty' if sources.empty?
 
     weight = get_weight(graph)
@@ -97,7 +97,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Hash{ Object => Array<Object> }] paths for any nodes from given nodes
-  def self.multisource_dijkstra_path(graph, sources, cutoff=nil)
+  def self.multisource_dijkstra_path(graph, sources, cutoff = nil)
     _, path = multisource_dijkstra(graph, sources, nil, cutoff)
     path
   end
@@ -110,7 +110,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Hash{ Object => Array<Object> }, Array<Object>] paths for all nodes/target node from given node
-  def self.singlesource_dijkstra(graph, source, target=nil, cutoff=nil)
+  def self.singlesource_dijkstra(graph, source, target = nil, cutoff = nil)
     multisource_dijkstra(graph, [source], target, cutoff)
   end
 
@@ -121,7 +121,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Hash{ Object => Numeric }] path lengths for all nodes from given node
-  def self.singlesource_dijkstra_path_length(graph, source, cutoff=nil)
+  def self.singlesource_dijkstra_path_length(graph, source, cutoff = nil)
     multisource_dijkstra_path_length(graph, [source], cutoff)
   end
 
@@ -132,7 +132,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Hash{ Object => Array<Object> }] paths for all nodes from given node
-  def self.singlesource_dijkstra_path(graph, source, cutoff=nil)
+  def self.singlesource_dijkstra_path(graph, source, cutoff = nil)
     multisource_dijkstra_path(graph, [source], cutoff)
   end
 
@@ -173,7 +173,7 @@ module NetworkX
   #
   # @return [<Array<Hash{ Object => Array<Object> }, Hash{ Object => Numeric }>]
   #         predcessor hash and distance hash
-  def self.dijkstra_predecessor_distance(graph, source, cutoff=nil)
+  def self.dijkstra_predecessor_distance(graph, source, cutoff = nil)
     weight = get_weight(graph)
     pred = {source => []}
     [pred, help_dijkstra(graph, source, weight, pred, nil, cutoff)]
@@ -186,7 +186,7 @@ module NetworkX
   #
   # @return [Array<Object, Array<Hash{ Object => Numeric }, Hash{ Object => Array<Object> }>>]
   #          paths and path lengths between all nodes
-  def self.all_pairs_dijkstra(graph, cutoff=nil)
+  def self.all_pairs_dijkstra(graph, cutoff = nil)
     path = []
     graph.nodes.each_key { |n| path << [n, singlesource_dijkstra(graph, n, nil, cutoff)] }
     path
@@ -198,7 +198,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Array<Object, Hash{ Object => Numeric }>] path lengths between all nodes
-  def self.all_pairs_dijkstra_path_length(graph, cutoff=nil)
+  def self.all_pairs_dijkstra_path_length(graph, cutoff = nil)
     path_lengths = []
     graph.nodes.each_key { |n| path_lengths << [n, singlesource_dijkstra_path_length(graph, n, cutoff)] }
     path_lengths
@@ -210,14 +210,14 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Array<Object, Hash{ Object => Array<Object> }>] path lengths between all nodes
-  def self.all_pairs_dijkstra_path(graph, cutoff=nil)
+  def self.all_pairs_dijkstra_path(graph, cutoff = nil)
     paths = []
     graph.nodes.each_key { |n| paths << singlesource_dijkstra_path(graph, n, cutoff) }
     paths
   end
 
   # Helper function for bellman ford
-  def self.help_bellman_ford(graph, sources, weight, pred=nil, paths=nil, dist=nil, cutoff=nil, target=nil)
+  def self.help_bellman_ford(graph, sources, weight, pred = nil, paths = nil, dist = nil, cutoff = nil, target = nil)
     pred = sources.product([[]]).to_h if pred.nil?
     dist = sources.product([0]).to_h if dist.nil?
 
@@ -274,7 +274,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for the dijkstra algorithm
   #
   # @return [Array<Hash{ Object => Array<Object> }, Hash{ Object => Numeric }>] predecessors and distances
-  def self.bellmanford_predecesor_distance(graph, source, target=nil, cutoff=nil)
+  def self.bellmanford_predecesor_distance(graph, source, target = nil, cutoff = nil)
     raise ArgumentError, 'Node not found!' unless graph.node?(source)
 
     weight = get_weight(graph)
@@ -287,7 +287,7 @@ module NetworkX
     [pred, dist]
   end
 
-  def self.singlesource_bellmanford(graph, source, target=nil, cutoff=nil)
+  def self.singlesource_bellmanford(graph, source, target = nil, cutoff = nil)
     return [0, [source]] if source == target
 
     weight = get_weight(graph)
@@ -335,7 +335,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for Bellman Ford algorithm
   #
   # @return [Hash{ Object => Array<Object> }] path from source to all nodes
-  def self.singlesource_bellmanford_path(graph, source, cutoff=nil)
+  def self.singlesource_bellmanford_path(graph, source, cutoff = nil)
     _, path = singlesource_bellmanford(graph, source, cutoff)
     path
   end
@@ -347,7 +347,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for Bellman Ford algorithm
   #
   # @return [Hash{ Object => Numeric }] path lengths from source to all nodes
-  def self.singlesource_bellmanford_path_length(graph, source, cutoff=nil)
+  def self.singlesource_bellmanford_path_length(graph, source, cutoff = nil)
     weight = get_weight(graph)
     help_bellman_ford(graph, [source], weight, nil, nil, nil, cutoff)
   end
@@ -358,7 +358,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for Bellman Ford algorithm
   #
   # @return [Array<Object, Hash{ Object => Numeric }>] path lengths from source to all nodes
-  def self.allpairs_bellmanford_path_length(graph, cutoff=nil)
+  def self.allpairs_bellmanford_path_length(graph, cutoff = nil)
     path_lengths = []
     graph.nodes.each_key { |n| path_lengths << [n, singlesource_bellmanford_path_length(graph, n, cutoff)] }
     path_lengths
@@ -370,7 +370,7 @@ module NetworkX
   # @param cutoff [Numeric, nil] cutoff for Bellman Ford algorithm
   #
   # @return [Array<Object, Hash{ Object => Array<Object> }>] path lengths from source to all nodes
-  def self.allpairs_bellmanford_path(graph, cutoff=nil)
+  def self.allpairs_bellmanford_path(graph, cutoff = nil)
     paths = []
     graph.nodes.each_key { |n| paths << [n, singlesource_bellmanford_path(graph, n, cutoff)] }
     paths

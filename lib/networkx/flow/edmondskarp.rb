@@ -107,7 +107,7 @@ module NetworkX
   # @param cutoff [Numeric] cutoff for the algorithm
   #
   # @return [DiGraph] a residual graph containing the flow values
-  def self.edmondskarp(graph, source, target, residual=nil, cutoff=nil)
+  def self.edmondskarp(graph, source, target, residual = nil, cutoff = nil)
     edmondskarp_impl(graph, source, target, residual, cutoff)
   end
 end

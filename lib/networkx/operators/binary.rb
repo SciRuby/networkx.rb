@@ -12,7 +12,7 @@ module NetworkX
 
   # Transforms the labels of the nodes of the graphs
   # so that they are disjoint.
-  def self.convert_to_distinct_labels(graph, starting_int=-1)
+  def self.convert_to_distinct_labels(graph, starting_int = -1)
     new_graph = Marshal.load(Marshal.dump(graph))
     new_graph.clear
 

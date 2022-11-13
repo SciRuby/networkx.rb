@@ -13,7 +13,7 @@ module NetworkX
     # @param nodes [?Array[Object]] nodes
     #
     # @return [UnionFind] Union Find Tree
-    def initialize(nodes=nil)
+    def initialize(nodes = nil)
       @weights = {}
       @parents = {}
       nodes&.each do |node|

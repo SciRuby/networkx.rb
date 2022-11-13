@@ -147,7 +147,9 @@ module NetworkX
   # @param cutoff [Numeric] cutoff value for the algorithm
   #
   # @return [DiGraph] a residual graph containing the flow values
-  def self.shortest_augmenting_path(graph, source, target, residual=nil, _value_only=false, two_phase=false, cutoff=nil)
+  def self.shortest_augmenting_path(graph, source, target, residual = nil, \
+                                    _value_only = false, two_phase = false, cutoff = nil)
+
     shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
   end
 end

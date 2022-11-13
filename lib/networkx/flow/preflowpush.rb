@@ -243,7 +243,7 @@ module NetworkX
   #                             maximum preflow
   #
   # @return [DiGraph] a residual graph containing the flow values
-  def self.preflowpush(graph, source, target, residual=nil, globalrelabel_freq=1, value_only=false)
+  def self.preflowpush(graph, source, target, residual = nil, globalrelabel_freq = 1, value_only = false)
     preflowpush_impl(graph, source, target, residual, globalrelabel_freq, value_only)
   end
 end

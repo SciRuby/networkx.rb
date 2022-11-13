@@ -339,7 +339,7 @@ module NetworkX
     #
     # @param is_weighted [Bool] if true, method returns sum of weights of all edges
     #                           else returns number of edges
-    def size(is_weighted=false)
+    def size(is_weighted = false)
       if is_weighted
         graph_size = 0
         @adj.each do |_, hash_val|

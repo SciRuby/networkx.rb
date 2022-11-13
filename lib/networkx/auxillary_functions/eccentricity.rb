@@ -5,7 +5,7 @@ module NetworkX
   # @param node [Object] node to find the eccentricity of
   #
   # @return [Array<Numeric>, Numeric] eccentricity/eccentricites of all nodes
-  def self.eccentricity(graph, node=nil)
+  def self.eccentricity(graph, node = nil)
     e = {}
     graph.nodes.each do |u, _|
       length = single_source_shortest_path_length(graph, u)

@@ -18,12 +18,6 @@ require:
 Lint/AmbiguousOperatorPrecedence:
   Enabled: false
 
-Layout/LineLength:
-  Max: 120
-
-Layout/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
-
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
