@@ -98,7 +98,7 @@ module NetworkX
     # @param node2 [Object] the second node of the edge to be checked
     # @param key [Integer] the key of the given edge
     def edge?(node1, node2, key = nil)
-      super(node1, node2) if key.nil?
+      return super(node1, node2) if key.nil?
       node?(node1) && @adj[node1].has_key?(node2) && @adj[node1][node2].has_key?(key)
     end
     alias has_edge? edge?

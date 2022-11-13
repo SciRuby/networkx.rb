@@ -99,6 +99,14 @@ RSpec.describe NetworkX::MultiGraph do
     expect(empty_graph.number_of_edges).to be 0
   end
 
+  it 'tests edge?' do
+    graph = NetworkX::MultiGraph.new
+    expect(graph.has_edge?(:x, :y)).to be_falsy
+
+    graph.add_edge(:x, :y)
+    expect(graph.has_edge?(:x, :y)).to be_truthy
+  end
+
   context 'when size is called' do
     subject { graph.size(true) }
 
