@@ -10,6 +10,7 @@ module NetworkX
   def self.dfs_edges(graph, source, depth_limit = nil)
     raise KeyError, "There exists no node names #{source} in the given graph." unless graph.node?(source)
 
+    depth_limit += 1 if depth_limit
     depth_limit = graph.nodes.length if depth_limit.nil?
     dfs_edges = []
     visited = [source]

@@ -18,6 +18,27 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'dfs_edges with limit' do
+    graph = NetworkX::Graph.new
+    graph.add_edges([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [4, 5]])
+    edges = NetworkX.dfs_edges(graph, 0, 2)
+    expect(edges).to eq([[0, 1], [1, 2]])
+  end
+
+  it 'dfs_tree' do
+    graph = NetworkX::Graph.new
+    graph.add_edges([[0, 1], [1, 2], [1, 3], [2, 3], [1, 4], [4, 5], [5, 2], [5, 3], [4, 2]])
+    tree = NetworkX.dfs_tree(graph, 0)
+    expect(tree.edges.sort).to eq([[0, 1], [1, 2], [1, 3], [1, 4], [4, 5]])
+  end
+
+  it 'dfs_tree with limit' do
+    graph = NetworkX::Graph.new
+    graph.add_edges([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [4, 5]])
+    tree = NetworkX.dfs_tree(graph, 0, 2)
+    expect(tree.edges.sort).to eq([[0, 1], [1, 2]])
+  end
+
   context 'when dfs_successors is called' do
     subject { NetworkX.dfs_successors(graph, 'A') }
 
