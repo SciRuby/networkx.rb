@@ -41,32 +41,7 @@ Layout/SpaceInsideHashLiteralBraces:
 
 ### Metrics ------------------------------------------------------------
 
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/BlockLength:
-  Enabled: false
-
-Metrics/BlockNesting:
-  Enabled: false
-
-Metrics/ClassLength:
-  Max: 300
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/ModuleLength:
-  Max: 225
-
-Metrics/ParameterLists:
-  Enabled: false
-  Max: 10
-
-Metrics/PerceivedComplexity:
+Metrics:
   Enabled: false
 
 ### Naming -------------------------------------------------------------
