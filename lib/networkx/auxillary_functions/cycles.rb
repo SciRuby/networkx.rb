@@ -73,7 +73,7 @@ module NetworkX
               break
             else
               popped_head = popped_edge[1]
-              active_nodes.delete!(popped_head)
+              active_nodes.delete(popped_head)
             end
 
             unless edges.empty?
