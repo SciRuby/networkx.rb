@@ -124,7 +124,6 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect(graph.has_edge?(:x, :y)).to be_truthy
   end
 
-
   context 'when size is called' do
     subject { graph.size(true) }
 

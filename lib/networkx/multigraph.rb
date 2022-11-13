@@ -47,10 +47,8 @@ module NetworkX
     # @param node1 [Object] the first node of the edge
     # @param node2 [Object] the second node of the edge
     def remove_edge(node1, node2, key = nil)
-      if key.nil?
-        super(node1, node2)
-        return
-      end
+      return super(node1, node2) if key.nil?
+
       raise KeyError, "#{node1} is not a valid node." unless @nodes.has_key?(node1)
       raise KeyError, "#{node2} is not a valid node" unless @nodes.has_key?(node2)
       raise KeyError, 'The given edge is not a valid one.' unless @adj[node1].has_key?(node2)
