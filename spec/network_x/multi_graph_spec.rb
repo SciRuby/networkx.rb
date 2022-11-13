@@ -55,6 +55,20 @@ RSpec.describe NetworkX::MultiGraph do
     end
   end
 
+  it 'tests `remove_edge` with key' do
+    graph = NetworkX::MultiGraph.new
+    graph.add_edge(:a, :b, key: 'first')
+    graph.add_edge(:a, :b, key: 'second')
+    expect(graph.number_of_nodes).to be 2
+    expect(graph.number_of_edges).to be 2
+
+    graph.remove_edge(:a, :b, 'first')
+    expect(graph.number_of_nodes).to be 2
+    expect(graph.number_of_edges).to be 1
+
+    expect{graph.remove_edge(:a, :b, 'third')}.to raise_error(KeyError)
+  end
+
   context 'when weighted edge/s is/are added' do
     before do
       graph.remove_nodes(%w[Chennai Bangalore])
