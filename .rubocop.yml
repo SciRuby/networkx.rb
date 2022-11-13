@@ -34,7 +34,7 @@ Naming/MethodParameterName:
 ### Styles -------------------------------------------------------------
 
 Style/CombinableLoops:
-  Enabled: false
+  Enabled: false # there is case that it can't combined loop.
 
 Style/Documentation:
   Enabled: false
@@ -43,7 +43,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/OptionalBooleanParameter:
-  Enabled: false
+  Enabled: false # it is necessary to change distructively.
 
 Style/ParallelAssignment:
   Enabled: false # one line style is compact.
