@@ -64,7 +64,8 @@ module NetworkX
       (matrix.row(i) / total.to_f).to_a
     end
 
-    unless curr = personalization
+    curr = personalization
+    unless curr
       curr = Array.new(n)
       graph.nodes(data: false).each{|node| curr[index_from_node[node]] = 1.0 / n }
     end

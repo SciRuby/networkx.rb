@@ -17,7 +17,7 @@ RSpec.describe NetworkX::Graph do
   it 'error of pagerank' do
     graph = NetworkX::Graph.new
     graph.add_edges([[1, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 5], [5, 1]])
-    init =  (1..5).to_h{|i| [i, 0.20] }
+    init = (1..5).to_h{|i| [i, 0.20] }
     expect{NetworkX.pagerank(graph, init, 0.85, 1e-4, 5)}.to raise_error(ArgumentError)
     expect{NetworkX.pagerank(graph, nil, 0.85, 1e-16)}.to raise_error(ArgumentError)
   end

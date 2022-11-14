@@ -17,7 +17,7 @@ RSpec.describe NetworkX do
 
     expect(NetworkX.to_number_if_possible('11.0')).to be 11.0
     expect(NetworkX.to_number_if_possible('1e2')).to be 100.0
-    expect(NetworkX.to_number_if_possible('-25e-2')).to be -0.25
+    expect(NetworkX.to_number_if_possible('-25e-2')).to be(-0.25)
 
     expect(NetworkX.to_number_if_possible('e')).to eq 'e'
     expect(NetworkX.to_number_if_possible('E')).to eq 'E'

@@ -40,9 +40,10 @@ module NetworkX
   end
 
   def self.to_number_if_possible(str)
-    if str =~ /^[+-]?[0-9]+$/
+    case str
+    when /^[+-]?[0-9]+$/
       str.to_i
-    elsif str =~ /^([+-]?\d*\.\d*)|(\d*[eE][+-]?\d+)$/
+    when /^([+-]?\d*\.\d*)|(\d*[eE][+-]?\d+)$/
       str.to_f
     else
       str
