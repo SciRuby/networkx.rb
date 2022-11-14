@@ -52,6 +52,22 @@ RSpec.describe NetworkX::Graph do
     expect(graph3.has_edge?(:e, :f)).to be true
   end
 
+  it 'unite MultiGraph' do
+    graph1 = NetworkX::MultiGraph.new
+    graph2 = NetworkX::MultiGraph.new
+    graph1.add_edge(1, 2)
+    graph1.add_edge(2, 3)
+    graph2.add_edge(5, 6)
+
+    graph3 = NetworkX.union(graph1, graph2)
+    expect(graph3.class).to be NetworkX::MultiGraph
+    expect(graph3.number_of_nodes).to be 5
+    expect(graph3.number_of_edges).to be 3
+    expect(graph3.has_node?(2)).to be true
+    expect(graph3.has_node?(5)).to be true
+    expect(graph3.has_edge?(5, 6)).to be true
+  end
+
   it 'unite MultiDiGraph' do
     graph1 = NetworkX::MultiDiGraph.new
     graph2 = NetworkX::MultiDiGraph.new

@@ -2,9 +2,20 @@ module NetworkX
   # Returns the edges of the graph in an array
   def self.get_edges(graph)
     edges = []
-    graph.adj.each do |u, u_attrs|
-      u_attrs.each do |v, uv_attrs|
-        edges << [u, v, uv_attrs]
+    if graph.is_a?(MultiGraph)
+      graph.adj.each do |u, v_keys|
+        v_keys.each do |v, key_attrs|
+          next if u > v
+          key_attrs.each do |key, attributes|
+            edges << [u, v, attributes]
+          end
+        end
+      end
+    else
+      graph.adj.each do |u, u_attrs|
+        u_attrs.each do |v, uv_attrs|
+          edges << [u, v, uv_attrs]
+        end
       end
     end
     edges
