@@ -21,6 +21,9 @@ Lint/AmbiguousOperatorPrecedence:
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
 
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
@@ -45,6 +48,9 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/NumericPredicate:
+  Enabled: false # it is easier to read `size > 0` than `size.positive?`
+
 Style/OptionalBooleanParameter:
   Enabled: false # it is necessary to change distructively.
 
@@ -56,6 +62,9 @@ Style/PreferredHashMethods:
 
 Style/SymbolArray:
   Enabled: false # general array literal is easy to read. no problem.
+
+Style/ZeroLengthPredicate:
+  Enabled: false # it is so easy to read `a.size > 0` as `!a.empty?`
 
 ### RSpec --------------------------------------------------------------
 
