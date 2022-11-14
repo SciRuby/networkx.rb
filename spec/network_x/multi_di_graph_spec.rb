@@ -208,6 +208,13 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect { g.edge_subgraph(nil) }.to raise_error(ArgumentError)
   end
 
+  it 'nodes' do
+    graph = NetworkX::MultiDiGraph.new
+    graph.add_edges([[:x, :y], [:y, :z]])
+    expect(graph.nodes(data: false)).to eq([:x, :y, :z])
+    expect(graph.nodes(data: true)).to eq({x: {}, y: {}, z: {}})
+  end
+
   context 'when reverse is called' do
     subject { graph.reverse }
 

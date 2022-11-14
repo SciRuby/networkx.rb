@@ -45,7 +45,7 @@ RSpec.describe NetworkX::DiGraph do
     graph.add_edges([[1, 2], [5, 6]])
     graph.add_node(10, name: 'ten')
     expect(graph.nodes(data: false).sort).to eq([1, 2, 5, 6, 10])
-    expect(graph.nodes(data: true).sort).to eq([[1, {}], [2, {}], [5, {}], [6, {}], [10, {name: 'ten'}]])
+    expect(graph.nodes(data: true)).to eq({1 => {}, 2 => {}, 5 => {}, 6 => {}, 10 => {name: 'ten'}})
   end
 
   context 'when node/s is/are removed' do
