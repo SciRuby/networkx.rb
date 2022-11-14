@@ -49,4 +49,40 @@ module NetworkX
     end
     raise ArgumentError, 'PageRank failed to converge!'
   end
+
+  def self.pagerank2(graph, alpha: 0.85, personalization: nil, eps: 1e-6, max_iter: 100)
+    n = graph.number_of_nodes
+
+    matrix, index_to_node = NetworkX.to_matrix(graph, 0)
+
+    # index_to_node = {0=>0, 1=>1, 2=>2, 3=>3}
+
+    index_from_node = index_to_node.invert
+
+    probabilities = Array.new(n) do |i|
+      total = matrix.row(i).sum
+      (matrix.row(i) / total.to_f).to_a
+    end
+
+    unless curr = personalization
+      curr = Array.new(n)
+      graph.nodes(data: false).each{|node| curr[index_from_node[node]] = 1.0 / n }
+    end
+
+    max_iter.times do
+      prev = curr.clone
+
+      n.times do |i|
+        ip = 0.0
+        n.times do |j|
+          ip += probabilities[j][i] * prev[j]
+        end
+        curr[i] = (alpha * ip) + ((1.0 - alpha) / n * 1.0)
+      end
+
+      err = (0...n).map{|i| (prev[i] - curr[i]).abs }.sum
+      return (0...n).map{|i| [index_to_node[i], curr[i]] }.sort.to_h if err < eps
+    end
+    (0...n).map{|i| [index_to_node[i], curr[i]] }.sort.to_h
+  end
 end
