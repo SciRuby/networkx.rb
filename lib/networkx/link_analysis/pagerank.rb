@@ -11,7 +11,7 @@ module NetworkX
   def self.pagerank(graph, init = nil, alpha = 0.85, eps = 1e-4, max_iter = 100)
     dim = graph.nodes.length
     if init.nil?
-      init = dim.times.to_h { |i| [i, 1.0 / dim] }
+      init = graph.nodes(data: false).to_h{ |i| [i, 1.0 / dim] }
     else
       s = init.values.sum.to_f
       init = init.transform_values { |v| v / s }
