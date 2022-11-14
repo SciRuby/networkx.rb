@@ -122,6 +122,13 @@ RSpec.describe NetworkX::MultiGraph do
     expect(graph.has_edge?(:x, :y, 'first')).to be_truthy
   end
 
+  it 'each_edges' do
+    graph = NetworkX::MultiGraph.new
+    graph.add_edge(1, 2, key:'first')
+    graph.add_edge(1, 2, key:'second')
+    expect(graph.each_edge.to_a).to eq [[1, 2, 0], [1, 2, 1]]
+  end
+
   context 'when size is called' do
     subject { graph.size(true) }
 
@@ -165,7 +172,7 @@ RSpec.describe NetworkX::MultiGraph do
 
     expect(h.number_of_nodes).to eq 3
     expect(h.number_of_edges).to eq 3
-    expect(h.edges(data: true)).to eq [[0, 1, {0 => {}}], [1, 2, {0 => {}, 1 => {}}]]
+    expect(h.edges(data: true)).to eq [[0, 1, 0, {}], [1, 2, 0, {}], [1, 2, 1, {}]]
   end
 
   it 'tests error from subgraph and edge_subgraph' do
