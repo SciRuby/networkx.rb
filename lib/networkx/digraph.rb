@@ -8,7 +8,7 @@ module NetworkX
   # @attr_reader nodes [Hash{ Object => Hash{ Object => Object } }] Stores the nodes and their attributes
   # @attr_reader graph [Hash{ Object => Object }] Stores the attributes of the graph
   class DiGraph < Graph
-    attr_reader :adj, :nodes, :graph, :pred
+    attr_reader :adj, :graph, :pred
 
     # Constructor for initializing graph
     #
@@ -53,6 +53,10 @@ module NetworkX
       super(node, **node_attrs)
 
       @pred[node] = {} unless @pred.has_key?(node)
+    end
+
+    def nodes(data: true)
+      data ? @nodes : @nodes.keys
     end
 
     # Removes node from the graph
