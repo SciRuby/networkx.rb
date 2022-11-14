@@ -110,6 +110,7 @@ module NetworkX
       @adj.each do |v, ws|
         ws.each do |w, key_and_info|
           next if v > w
+
           key_and_info.each do |key, info|
             data ? yield(v, w, key, info) : yield(v, w, key)
           end

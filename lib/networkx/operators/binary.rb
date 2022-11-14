@@ -6,7 +6,8 @@ module NetworkX
       graph.adj.each do |u, v_keys|
         v_keys.each do |v, key_attrs|
           next if u > v
-          key_attrs.each do |key, attributes|
+
+          key_attrs.each do |_key, attributes|
             edges << [u, v, attributes]
           end
         end

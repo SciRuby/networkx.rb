@@ -124,8 +124,8 @@ RSpec.describe NetworkX::MultiGraph do
 
   it 'each_edges' do
     graph = NetworkX::MultiGraph.new
-    graph.add_edge(1, 2, key:'first')
-    graph.add_edge(1, 2, key:'second')
+    graph.add_edge(1, 2, key: 'first')
+    graph.add_edge(1, 2, key: 'second')
     expect(graph.each_edge.to_a).to eq [[1, 2, 0], [1, 2, 1]]
   end
 
