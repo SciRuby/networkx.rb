@@ -25,4 +25,14 @@ RSpec.describe NetworkX::DiGraph do
 
     expect(NetworkX.edge_dfs(graph, :A)).to eq([[:A, :B, 0], [:B, :A, 0], [:B, :D, 0]])
   end
+
+  it 'edges_dfes to digraph with option' do
+    graph = NetworkX::DiGraph.new
+    graph.add_edge(:A, :B)
+    graph.add_edges([%i[B C], %i[C D]])
+
+    expect(NetworkX.edge_dfs(graph, :A, :reverse)).to eq([])
+    expect(NetworkX.edge_dfs(graph, :D, :ignore)).to eq([%i[D C], %i[C B], %i[B A]])
+    expect(NetworkX.edge_dfs(graph, :D, :reverse)).to eq([%i[D C], %i[C B], %i[B A]])
+  end
 end
