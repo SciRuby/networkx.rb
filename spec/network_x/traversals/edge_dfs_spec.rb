@@ -17,4 +17,12 @@ RSpec.describe NetworkX::DiGraph do
       is_expected.to eq([%w[A B], %w[B A], %w[B D]])
     end
   end
+
+  it 'multigraph' do
+    graph = NetworkX::MultiDiGraph.new
+    graph.add_edge(:A, :B)
+    graph.add_edges([%i[B A], %i[B D]])
+
+    expect(NetworkX.edge_dfs(graph, :A)).to eq([[:A, :B, 0], [:B, :A, 0], [:B, :D, 0]])
+  end
 end
