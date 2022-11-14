@@ -9,7 +9,7 @@ module NetworkX
           line.strip.split(delimiter) if line.strip.size > 0
         end
 
-        edges.each{|edge| edge.map!{|node| to_number_if_possible(node) } }
+        edges.each{|edge| edge.map!{|node| NetworkX.to_number_if_possible(node) } }
 
         graph = new
         graph.add_edges(edges)
@@ -25,9 +25,9 @@ module NetworkX
 
         edges.map! do |x, y, weight|
           [
-            to_number_if_possible(x),
-            to_number_if_possible(y),
-            {weight: to_number_if_possible(weight)}
+            NetworkX.to_number_if_possible(x),
+            NetworkX.to_number_if_possible(y),
+            {weight: NetworkX.to_number_if_possible(weight)}
           ]
         end
 
@@ -36,18 +36,16 @@ module NetworkX
         graph
       end
       alias read_weighted_edges read_weighted_edgelist
+    end
+  end
 
-      private
-
-      def to_number_if_possible(str)
-        if str =~ /^[+-]?[0-9]+$/
-          str.to_i
-        elsif node =~ /^[+-]?[0-9e.]+$/
-          str.to_f
-        else
-          str
-        end
-      end
+  def self.to_number_if_possible(str)
+    if str =~ /^[+-]?[0-9]+$/
+      str.to_i
+    elsif str =~ /^([+-]?\d*\.\d*)|(\d*[eE][+-]?\d+)$/
+      str.to_f
+    else
+      str
     end
   end
 end
