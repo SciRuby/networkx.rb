@@ -225,4 +225,28 @@ RSpec.describe NetworkX::MultiDiGraph do
                         'Mumbai' => {'Nagpur' => {0 => {}}}, 'Kolkata' => {})
     end
   end
+
+  it 'to_undirected' do
+    multi_directed_graph = NetworkX::MultiDiGraph.new(name: 'MultiDi')
+    multi_directed_graph.add_edges([[:a, :b], [:c, :d]])
+
+    undirected_graph = multi_directed_graph.to_undirected
+    expect(undirected_graph.class).to eq NetworkX::Graph
+    expect(undirected_graph.graph[:name]).to eq 'MultiDi'
+    expect(undirected_graph.number_of_edges).to be 2
+    expect(undirected_graph.number_of_nodes).to be 4
+  end
+
+  it 'to_directed' do
+    multi_directed_graph = NetworkX::MultiDiGraph.new(name: 'MultiDi')
+    multi_directed_graph.add_edges([[:a, :b], [:a, :b]])
+    expect(multi_directed_graph.number_of_edges).to be 2
+    expect(multi_directed_graph.number_of_nodes).to be 2
+
+    undirected_graph = multi_directed_graph.to_directed
+    expect(undirected_graph.class).to eq NetworkX::DiGraph
+    expect(undirected_graph.graph[:name]).to eq 'MultiDi'
+    expect(undirected_graph.number_of_edges).to be 1
+    expect(undirected_graph.number_of_nodes).to be 2
+  end
 end
