@@ -40,6 +40,13 @@ RSpec.describe NetworkX::Graph do
     expect(graph.nodes(data: true)).to eq({x: {}, y: {}, z: {}})
   end
 
+  it 'each_node' do
+    graph = NetworkX::Graph.new
+    graph.add_edges([[:x, :y], [:y, :z]])
+    expect(graph.each_node.to_a).to eq([:x, :y, :z])
+    expect(graph.each_node(data: true).to_a).to eq([[:x, {}], [:y, {}], [:z, {}]])
+  end
+
   context 'when node/s is/are removed' do
     before do
       graph.remove_node('Nagpur')

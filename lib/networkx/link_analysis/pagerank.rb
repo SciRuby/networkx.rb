@@ -67,7 +67,7 @@ module NetworkX
     curr = personalization
     unless curr
       curr = Array.new(n)
-      graph.nodes(data: false).each{|node| curr[index_from_node[node]] = 1.0 / n }
+      graph.each_node{|node| curr[index_from_node[node]] = 1.0 / n }
     end
 
     max_iter.times do

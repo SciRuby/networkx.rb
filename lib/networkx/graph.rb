@@ -222,6 +222,12 @@ module NetworkX
       end
     end
 
+    def each_node(data: false, &block)
+      return enum_for(:each_node, data: data) unless block_given?
+
+      data ? @nodes.each(&block) : @nodes.each_key(&block)
+    end
+
     # [TODO][EXPERIMENTAL]
     #
     # @param data [bool] true if you want data of each edge
