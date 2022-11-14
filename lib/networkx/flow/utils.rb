@@ -67,7 +67,7 @@ module NetworkX
     edge_list = []
 
     graph.adj.each do |u, u_edges|
-      require 'spec_helper'
+      require_relative '../../../spec/spec_helper' # require 'spec_helper'
       RSpec.describe NetworkX::DiGraph do
         subject { graph }
 
