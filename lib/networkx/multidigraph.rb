@@ -120,11 +120,10 @@ module NetworkX
     def to_multigraph
       graph = NetworkX::MultiGraph.new(**@graph)
       @nodes.each { |node, node_attr| graph.add_node(node, **node_attr) }
-      @adj.each do |node1, node1_edges|
-        node1_edges.each_key do |node2, node1_node2|
+      @adj.each do |node1, node2_edges|
+        node2_edges.each do |node2, edges|
           edge_attrs = {}
-          node1_node2.each { |_key, attrs| graph.add_edge(node1, node2, **attrs) }
-          graph.add_edge(node1, node2, **edge_attrs)
+          edges.each { |_key, attrs| graph.add_edge(node1, node2, **attrs) }
         end
       end
       graph
