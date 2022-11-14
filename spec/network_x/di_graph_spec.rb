@@ -208,4 +208,15 @@ RSpec.describe NetworkX::DiGraph do
                         'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
     end
   end
+
+  it 'to_undirected' do
+    directed_graph = NetworkX::DiGraph.new(name: 'Di')
+    directed_graph.add_edges([[:a, :b], [:c, :d]])
+
+    undirected_graph = directed_graph.to_undirected
+    expect(undirected_graph.class).to eq NetworkX::Graph
+    expect(undirected_graph.graph[:name]).to eq 'Di'
+    expect(undirected_graph.number_of_edges).to be 2
+    expect(undirected_graph.number_of_nodes).to be 4
+  end
 end
