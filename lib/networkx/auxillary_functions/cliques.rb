@@ -57,8 +57,6 @@ module NetworkX
   # @return [Numeric] Number of cliques containing the given node
   def self.number_of_cliques(graph, node)
     cliques = find_cliques(graph)
-    num_cliq_arr = []
-    cliques.each { |c| num_cliq_arr << 1 if c.include?(node) }
-    num_cliq_arr.length
+    cliques.count { |c| c.include?(node) }
   end
 end
