@@ -122,7 +122,6 @@ module NetworkX
       @nodes.each { |node, node_attr| graph.add_node(node, **node_attr) }
       @adj.each do |node1, node2_edges|
         node2_edges.each do |node2, edges|
-          edge_attrs = {}
           edges.each { |_key, attrs| graph.add_edge(node1, node2, **attrs) }
         end
       end

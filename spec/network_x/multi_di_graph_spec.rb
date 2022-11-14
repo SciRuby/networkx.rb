@@ -250,7 +250,6 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect(undirected_graph.number_of_nodes).to be 2
   end
 
-
   it 'to_multidirected' do
     multi_directed_graph = NetworkX::MultiDiGraph.new(name: 'MultiDi')
     multi_directed_graph.add_edges([[:a, :b], [:a, :b]])
