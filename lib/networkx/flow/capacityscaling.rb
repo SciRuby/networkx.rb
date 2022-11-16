@@ -116,13 +116,6 @@ module NetworkX
     flow_dict
   end
 
-  # Counter for the algorithm
-  @itr = 0
-  def self.count
-    @itr += 1
-    @itr
-  end
-
   # Computes max flow using capacity scaling algorithm
   #
   # @param graph [DiGraph, MultiDiGraph] a graph
