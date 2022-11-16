@@ -10,6 +10,46 @@ RSpec.describe NetworkX::Graph do
     graph.add_node('E')
   end
 
+  it 'simple single source dijkstra' do
+    n, _m = 2, 2
+    weighted_edges = [[1, 2, 2], [2, 1, 1]]
+
+    g = NetworkX::DiGraph.new
+    g.add_nodes_from(1..n)
+    g.add_weighted_edges_from(weighted_edges)
+
+    expect(NetworkX.singlesource_dijkstra_path_length(g, 1)).to eq({1 => 0, 2 => 2})
+    expect(NetworkX.dijkstra_path(g, 1, 2)).to eq([1, 2])
+    expect(NetworkX.singlesource_dijkstra_path(g, 1)).to eq({1=>[1], 2=>[1, 2]})
+  end
+
+  it 'single source dijkstra' do
+    # https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja
+    n, _m, r = 4, 5, 0
+    weighted_edges = [[0, 1, 1], [0, 2, 4], [1, 2, 2], [2, 3, 1], [1, 3, 5]]
+
+    g = NetworkX::DiGraph.new
+    g.add_nodes_from(0...n)
+    g.add_weighted_edges_from(weighted_edges)
+
+    expect(NetworkX.dijkstra_path_length(g, r, 3)).to be 4
+    expect(NetworkX.singlesource_dijkstra_path(g, r)).to eq({0=>[0], 1=>[0, 1], 2=>[0, 1, 2], 3=>[0, 1, 2, 3]})
+  end
+
+  it 'all pair dijkstra' do
+    n, _m = 4, 5
+    weighted_edges = [[0, 1, 5], [0, 2, -1], [1, 3, 3], [2, 3, 1], [3, 2, 4]]
+
+    g = NetworkX::DiGraph.new
+    g.add_nodes_from(0...n)
+    g.add_weighted_edges_from(weighted_edges)
+
+    expect(NetworkX.all_pairs_dijkstra_path_length(g)).to eq [[0, {0 => 0, 1 => 5, 2 => -1, 3 => 0}],
+                                                              [1, {1 => 0, 2 => 7, 3 => 3}],
+                                                              [2, {2 => 0, 3 => 1}],
+                                                              [3, {2 => 4, 3 => 0}]]
+  end
+
   context 'when multisource_dijkstra is called' do
     subject { NetworkX.multisource_dijkstra(graph, %w[B A], 'D') }
 
