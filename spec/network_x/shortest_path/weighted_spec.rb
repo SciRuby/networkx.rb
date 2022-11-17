@@ -48,6 +48,12 @@ RSpec.describe NetworkX::Graph do
                                                               [1, {1 => 0, 2 => 7, 3 => 3}],
                                                               [2, {2 => 0, 3 => 1}],
                                                               [3, {2 => 4, 3 => 0}]]
+    expect(NetworkX.all_pairs_dijkstra_path(g)).to eq [
+      {0 => [0], 1 => [0, 1], 2 => [0, 2], 3 => [0, 2, 3]},
+      {1 => [1], 3 => [1, 3], 2 => [1, 3, 2]},
+      {2 => [2], 3 => [2, 3]},
+      {3 => [3], 2 => [3, 2]}
+    ]
   end
 
   context 'when multisource_dijkstra is called' do
