@@ -466,7 +466,7 @@ module NetworkX
         @adj[node].reverse_each do |v, _data|
           next if used[v]
 
-          st << v unless used[v]
+          st << v
         end
       end
     end
