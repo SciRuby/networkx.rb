@@ -66,28 +66,15 @@ module NetworkX
 
     g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
 
-    if g1.number_of_edges <= g2.number_of_edges
-      g1.adj.each do |u, u_edges|
-        u_edges.each do |v, uv_attrs|
-          if g1.multigraph?
-            uv_attrs.each do |k, attrs|
-              result.add_edge(u, v, **attrs) if g2.edge?(u, v, k)
-            end
-          elsif g2.edge?(u, v)
-            result.add_edge(u, v, **uv_attrs)
+    g1, g2 = g1, g2 if g1.number_of_edges > g2.number_of_edges
+    g1.adj.each do |u, u_edges|
+      u_edges.each do |v, uv_attrs|
+        if g1.multigraph?
+          uv_attrs.each do |k, attrs|
+            result.add_edge(u, v, **attrs) if g2.edge?(u, v, k)
           end
-        end
-      end
-    else
-      g2.adj.each do |u, u_edges|
-        u_edges.each do |v, uv_attrs|
-          if g2.multigraph?
-            uv_attrs.each do |k, attrs|
-              result.add_edge(u, v, **attrs) if g1.edge?(u, v, k)
-            end
-          elsif g1.edge?(u, v)
-            result.add_edge(u, v, uv_attrs)
-          end
+        elsif g2.edge?(u, v)
+          result.add_edge(u, v, **uv_attrs)
         end
       end
     end
