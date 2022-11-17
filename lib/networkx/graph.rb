@@ -471,6 +471,19 @@ module NetworkX
       end
     end
 
+    def dfs_postorder_nodes(node, used = {node => true})
+      res = []
+      @adj[node].each do |v, _data|
+        next if used[v]
+
+        used[node] = true
+        res.concat dfs_postorder_nodes(v, used)
+      end
+
+      res << node
+      res
+    end
+
     def dfs_edges(node)
       each_dfs_edge(node).to_a
     end

@@ -309,6 +309,7 @@ RSpec.describe NetworkX::Graph do
     tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
 
     expect(tree.dfs_preorder_nodes('a')).to eq %w[a b c h i d e f j g k]
+    expect(tree.dfs_postorder_nodes('a')).to eq %w[h i c d b j f k g e a]
   end
 
   it 'test dfs_edges' do
