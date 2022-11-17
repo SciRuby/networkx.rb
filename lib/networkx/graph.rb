@@ -458,14 +458,14 @@ module NetworkX
       return enum_for(:each_dfs_preorder_node, node) unless block_given?
 
       st = [node]
-      used = {}
+      used = {node => true}
       while st[-1]
         node = st.pop
         yield(node)
-        used[node] = true
         @adj[node].reverse_each do |v, _data|
           next if used[v]
 
+          used[v] = node
           st << v
         end
       end
