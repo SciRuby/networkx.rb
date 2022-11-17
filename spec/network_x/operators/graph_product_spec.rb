@@ -58,4 +58,19 @@ RSpec.describe NetworkX::Graph do
 
     its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
+
+  it 'edges_in_array' do
+    graph = NetworkX::MultiDiGraph.new
+    expect(NetworkX.edges_in_array(graph)).to eq []
+
+
+    graph.add_nodes_from([:a, :b])
+    expect(NetworkX.edges_in_array(graph)).to eq []
+
+    graph.add_edge(:a, :b)
+    expect(NetworkX.edges_in_array(graph)).to eq [[:a, :b, {}]]
+
+    graph.add_edge(:a, :b)
+    expect(NetworkX.edges_in_array(graph)).to eq [[:a, :b, {}], [:a, :b, {}]]
+  end
 end
