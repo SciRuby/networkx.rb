@@ -303,6 +303,14 @@ RSpec.describe NetworkX::Graph do
     expect(g.dfs_nodes(1)).to eq(dfs_nodes)
   end
 
+  it 'test' do
+    tree = NetworkX::Graph.new
+    tree.add_nodes('a'..'o')
+    tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
+
+    expect(tree.dfs_nodes('a')).to eq %w[a b c h i d e f j g k]
+  end
+
   it 'test dfs_edges' do
     edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
     dfs_edges = [[1, 2], [2, 4], [2, 5], [1, 3], [3, 6], [3, 7]]

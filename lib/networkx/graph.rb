@@ -458,7 +458,7 @@ module NetworkX
       return enum_for(:each_dfs_node, node) unless block_given?
 
       st = [node]
-      used = Array.new(number_of_nodes, false)
+      used = {}
       while st[-1]
         node = st.pop
         yield(node)
