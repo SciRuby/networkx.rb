@@ -66,7 +66,7 @@ module NetworkX
 
     g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
 
-    g1, g2 = g1, g2 if g1.number_of_edges > g2.number_of_edges
+    g1, g2 = g2, g1 if g1.number_of_edges > g2.number_of_edges
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
         if g1.multigraph?
