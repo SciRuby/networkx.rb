@@ -479,8 +479,8 @@ module NetworkX
       return enum_for(:each_dfs_edge, node) unless block_given?
 
       st = [node]
-      used = Array.new(number_of_nodes, false)
-      parents = Array.new(number_of_nodes)
+      used = {}
+      parents = {}
       while st[-1]
         node = st.pop
 

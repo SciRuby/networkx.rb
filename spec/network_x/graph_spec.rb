@@ -321,6 +321,15 @@ RSpec.describe NetworkX::Graph do
     expect(g.dfs_edges(1)).to eq(dfs_edges)
   end
 
+  it 'tes dfs_edges for object other than integert' do
+    tree = NetworkX::Graph.new
+    tree.add_nodes('a'..'o')
+    tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
+
+    expect(tree.dfs_edges('a')).to eq [%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e],
+                                       %w[e f], %w[f j], %w[e g], %w[g k]]
+  end
+
   it 'test dfs_edges to line graph (ABC133 E sample1)' do
     n, _k = 4, 3
     edges = [[1, 2], [2, 3], [3, 4]]
