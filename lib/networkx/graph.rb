@@ -449,13 +449,13 @@ module NetworkX
     end
 
     # [EXPERIMENTAL]
-    def dfs_nodes(node)
-      each_dfs_node(node).to_a
+    def dfs_preorder_nodes(node)
+      each_dfs_preorder_node(node).to_a
     end
 
     # [EXPERIMENTAL]
-    def each_dfs_node(node)
-      return enum_for(:each_dfs_node, node) unless block_given?
+    def each_dfs_preorder_node(node)
+      return enum_for(:each_dfs_preorder_node, node) unless block_given?
 
       st = [node]
       used = {}

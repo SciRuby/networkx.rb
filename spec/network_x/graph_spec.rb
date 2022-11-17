@@ -292,15 +292,15 @@ RSpec.describe NetworkX::Graph do
     expect(g.bfs_edges(1)).to eq([[1, 0]])
   end
 
-  it 'test dfs_nodes' do
+  it 'test dfs_preorder_nodes' do
     edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
     # ext_edges = [[1, 2], [2, 4], [2, 5], [1, 2], [3, 6], [3, 7]]
-    dfs_nodes = [1, 2, 4, 5, 3, 6, 7]
+    dfs_preorder_nodes = [1, 2, 4, 5, 3, 6, 7]
 
     g = NetworkX::Graph.new
     g.add_nodes_from(1..7)
     g.add_edges_from(edges)
-    expect(g.dfs_nodes(1)).to eq(dfs_nodes)
+    expect(g.dfs_preorder_nodes(1)).to eq(dfs_preorder_nodes)
   end
 
   it 'test' do
@@ -308,7 +308,7 @@ RSpec.describe NetworkX::Graph do
     tree.add_nodes('a'..'o')
     tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
 
-    expect(tree.dfs_nodes('a')).to eq %w[a b c h i d e f j g k]
+    expect(tree.dfs_preorder_nodes('a')).to eq %w[a b c h i d e f j g k]
   end
 
   it 'test dfs_edges' do
