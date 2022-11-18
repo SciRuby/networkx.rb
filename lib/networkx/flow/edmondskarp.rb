@@ -37,6 +37,8 @@ module NetworkX
           end
         end
         return [nil, nil, nil] if q.empty?
+
+        q_s = q
       else
         q_t.each do |u|
           residual.pred[u].each do |v, uv_attrs|
@@ -94,7 +96,7 @@ module NetworkX
       end
     end
     cutoff = Float::INFINITY if cutoff.nil?
-    res_graph.graph[:flow_val] = edmondskarp_core(res_graph, source, target, cutoff)
+    res_graph.graph[:flow_value] = edmondskarp_core(res_graph, source, target, cutoff)
     res_graph
   end
 
