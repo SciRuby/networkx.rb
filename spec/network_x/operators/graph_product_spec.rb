@@ -63,7 +63,6 @@ RSpec.describe NetworkX::Graph do
     graph = NetworkX::MultiDiGraph.new
     expect(NetworkX.edges_in_array(graph)).to eq []
 
-
     graph.add_nodes_from([:a, :b])
     expect(NetworkX.edges_in_array(graph)).to eq []
 
