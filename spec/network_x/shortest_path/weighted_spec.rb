@@ -138,6 +138,40 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'dijksttra for simple MultiGraph' do
+    graph = NetworkX::MultiGraph.new
+    graph.add_edges_from([[:a, :b], [:a, :b], [:b, :a], [:a, :c], [:c, :d], [:a, :d], [:c, :e]])
+    expect(NetworkX.dijkstra_path_length(graph, :a, :a)).to be 0
+    expect(NetworkX.dijkstra_path_length(graph, :a, :b)).to be 1
+    expect(NetworkX.dijkstra_path_length(graph, :a, :c)).to be 1
+    expect(NetworkX.dijkstra_path_length(graph, :a, :d)).to be 1
+    expect(NetworkX.dijkstra_path_length(graph, :a, :e)).to be 2
+  end
+
+  it 'dijksttra for MultiGraph' do
+    graph = NetworkX::MultiGraph.new
+    graph.add_weighted_edges_from([[:a, :b, 20], [:a, :b, 5], [:a, :b, 10]])
+    expect(graph.edges).to eq [[:a, :b, 0], [:a, :b, 1], [:a, :b, 2]]
+    expect(NetworkX.dijkstra_path_length(graph, :a, :a)).to be 0
+    # expect(NetworkX.dijkstra_path_length(graph, :a, :b)).to be 5 # [TODO]
+  end
+
+  it 'allpairs_bellmanford_path for MultiGraph' do
+    graph = NetworkX::MultiGraph.new
+    graph.add_edges_from([[:a, :b], [:a, :b], [:b, :c], [:a, :c]])
+
+    expect(NetworkX.allpairs_bellmanford_path_length(graph)).to eq  [
+      [:a, {:a=>0, :b=>1, :c=>1}],
+      [:b, {:a=>1, :b=>0, :c=>1}],
+      [:c, {:a=>1, :b=>1, :c=>0}]
+    ]
+    expect(NetworkX.allpairs_bellmanford_path(graph)).to eq  [
+      [:a, {:a=>[:a], :b=>[:b, :a], :c=>[:c, :a]}],
+      [:b, {:a=>[:a, :b], :b=>[:b], :c=>[:c, :b]}],
+      [:c, {:a=>[:a, :c], :b=>[:b, :c], :c=>[:c]}]
+    ]
+  end
+
   context 'when bellmanford_predecesor_distance is called' do
     subject { NetworkX.bellmanford_predecesor_distance(graph, 'A') }
 
