@@ -252,7 +252,7 @@ module NetworkX
       end
     end
     unless paths.nil?
-      dsts = target.nil? ? pred : [target]
+      dsts = pred
       dsts.each_key do |dst|
         path, cur = [dst], dst
         until pred[cur][0].nil?

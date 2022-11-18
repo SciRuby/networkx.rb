@@ -172,6 +172,13 @@ RSpec.describe NetworkX::Graph do
     ]
   end
 
+  it 'raise ArgumentError in singlesource_bellmanford' do
+    graph = NetworkX::DiGraph.new
+    graph.add_node(:a)
+    graph.add_node(:x)
+    expect{ NetworkX.singlesource_bellmanford(graph, :a, :x) }.to raise_error(ArgumentError)
+  end
+
   context 'when bellmanford_predecesor_distance is called' do
     subject { NetworkX.bellmanford_predecesor_distance(graph, 'A') }
 
