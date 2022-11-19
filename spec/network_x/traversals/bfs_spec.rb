@@ -34,6 +34,14 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
+  it 'bfs_nodes' do
+    tree = NetworkX::Graph.new
+    tree.add_nodes('a'..'o')
+    tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
+
+    expect(tree.bfs_nodes('a')).to eq %w[a b e c d f g h i j k]
+  end
+
   it 'test bfs_edge' do
     edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
 

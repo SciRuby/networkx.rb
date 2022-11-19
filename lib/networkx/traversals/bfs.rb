@@ -57,6 +57,27 @@ module NetworkX
   end
 
   class Graph
+    def bfs_nodes(root)
+      each_bfs_node(root).to_a
+    end
+
+    def each_bfs_node(root)
+      return enum_for(:each_bfs_node, root) unless block_given?
+
+      queue = [root]
+      dist = {root => 0}
+      while (v = queue.shift)
+        yield v
+        d = dist[v]
+        @adj[v].each do |u, _data|
+          next if dist[u]
+
+          dist[u] = d + 1
+          queue << u
+        end
+      end
+    end
+
     # [EXPERIMENTAL]
     #
     # @param [Object] node which is root, start ,source
