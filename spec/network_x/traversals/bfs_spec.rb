@@ -34,7 +34,6 @@ RSpec.describe NetworkX::Graph do
     end
   end
 
-
   it 'test bfs_edge' do
     edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
 

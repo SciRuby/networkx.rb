@@ -160,15 +160,15 @@ RSpec.describe NetworkX::Graph do
     graph = NetworkX::MultiGraph.new
     graph.add_edges_from([[:a, :b], [:a, :b], [:b, :c], [:a, :c]])
 
-    expect(NetworkX.allpairs_bellmanford_path_length(graph)).to eq  [
-      [:a, {:a=>0, :b=>1, :c=>1}],
-      [:b, {:a=>1, :b=>0, :c=>1}],
-      [:c, {:a=>1, :b=>1, :c=>0}]
+    expect(NetworkX.allpairs_bellmanford_path_length(graph)).to eq [
+      [:a, {a: 0, b: 1, c: 1}],
+      [:b, {a: 1, b: 0, c: 1}],
+      [:c, {a: 1, b: 1, c: 0}]
     ]
-    expect(NetworkX.allpairs_bellmanford_path(graph)).to eq  [
-      [:a, {:a=>[:a], :b=>[:b, :a], :c=>[:c, :a]}],
-      [:b, {:a=>[:a, :b], :b=>[:b], :c=>[:c, :b]}],
-      [:c, {:a=>[:a, :c], :b=>[:b, :c], :c=>[:c]}]
+    expect(NetworkX.allpairs_bellmanford_path(graph)).to eq [
+      [:a, {a: [:a], b: [:b, :a], c: [:c, :a]}],
+      [:b, {a: [:a, :b], b: [:b], c: [:c, :b]}],
+      [:c, {a: [:a, :c], b: [:b, :c], c: [:c]}]
     ]
   end
 
@@ -181,7 +181,7 @@ RSpec.describe NetworkX::Graph do
 
   it 'bellmanford_path' do
     graph = NetworkX::DiGraph.new
-    graph.add_edges_from([[:a, :b],[:b,:c], [:c, :d], [:d, :x], [:c, :x]])
+    graph.add_edges_from([[:a, :b], [:b, :c], [:c, :d], [:d, :x], [:c, :x]])
     graph.add_node(:x)
 
     expect(NetworkX.bellmanford_path(graph, :a, :x)).to eq [:x, :c, :b, :a]
