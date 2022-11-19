@@ -25,8 +25,7 @@ module NetworkX
   # Transforms the labels of the nodes of the graphs
   # so that they are disjoint.
   def self.convert_to_distinct_labels(graph, starting_int = -1)
-    new_graph = Marshal.load(Marshal.dump(graph))
-    new_graph.clear
+    new_graph = graph.class.new
 
     idx_dict = graph.nodes.keys.to_h do |v|
       starting_int += 1
@@ -58,8 +57,7 @@ module NetworkX
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the intersection of the two graphs
   def self.intersection(g1, g2)
-    result = Marshal.load(Marshal.dump(g1))
-    result.clear
+    result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
     raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
@@ -88,8 +86,7 @@ module NetworkX
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the difference of the two graphs
   def self.difference(g1, g2)
-    result = Marshal.load(Marshal.dump(g1))
-    result.clear
+    result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
     raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
@@ -117,8 +114,7 @@ module NetworkX
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the symmetric difference of the two graphs
   def self.symmetric_difference(g1, g2)
-    result = Marshal.load(Marshal.dump(g1))
-    result.clear
+    result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
     raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
@@ -158,8 +154,7 @@ module NetworkX
   #
   # @return [Graph, DiGraph, MultiGraph, MultiDiGraph] the composition of the two graphs
   def self.compose(g1, g2)
-    result = Marshal.load(Marshal.dump(g1))
-    result.clear
+    result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
 
@@ -185,17 +180,7 @@ module NetworkX
   def self.union(g1, g2)
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
 
-    case g1
-    when NetworkX::MultiGraph
-      new_graph = NetworkX::MultiGraph.new
-    when NetworkX::MultiDiGraph
-      new_graph = NetworkX::MultiDiGraph.new
-    when NetworkX::DiGraph
-      new_graph = NetworkX::DiGraph.new
-    when NetworkX::Graph
-      new_graph = NetworkX::Graph.new
-    end
-
+    new_graph = g1.class.new
     new_graph.graph.merge!(g1.graph)
     new_graph.graph.merge!(g2.graph)
 
