@@ -136,6 +136,86 @@ RSpec.describe NetworkX::Graph do
     its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
 
+  it 'intersection for Graph' do
+    g = NetworkX::Graph.new
+    h = NetworkX::Graph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.intersection(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 2
+    expect(new_graph.adj).to eq({
+                                  0 => {1 => {}},
+                                  1 => {0 => {}, 2 => {}},
+                                  2 => {1 => {}},
+                                  3 => {}
+                                })
+  end
+
+  it 'intersection for MultiDiGraph' do
+    g = NetworkX::MultiDiGraph.new
+    h = NetworkX::MultiDiGraph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.intersection(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 2
+    expect(new_graph.adj).to eq({
+                                  0 => {1 => {0 => {}}},
+                                  1 => {2 => {0 => {}}},
+                                  2 => {},
+                                  3 => {}
+                                })
+  end
+
+  it 'difference for Graph' do
+    g = NetworkX::Graph.new
+    h = NetworkX::Graph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.difference(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 2
+    expect(new_graph.adj).to eq({
+                                  0 => {2 => {}},
+                                  1 => {3 => {}},
+                                  2 => {0 => {}},
+                                  3 => {1 => {}}
+                                })
+  end
+
+  it 'difference for DiGraph' do
+    g = NetworkX::DiGraph.new
+    h = NetworkX::DiGraph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.difference(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 2
+    expect(new_graph.adj).to eq({
+                                  0 => {2 => {}},
+                                  1 => {3 => {}},
+                                  2 => {},
+                                  3 => {}
+                                })
+  end
+
+  it 'difference for MultiDiGraph' do
+    g = NetworkX::MultiDiGraph.new
+    h = NetworkX::MultiDiGraph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.difference(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 2
+    expect(new_graph.adj).to eq({0 => {2 => {0 => {}}}, 1 => {3 => {0 => {}}}, 2 => {}, 3 => {}})
+  end
+
   it 'symmetric_difference for Graph' do
     g = NetworkX::Graph.new
     h = NetworkX::Graph.new
@@ -163,6 +243,24 @@ RSpec.describe NetworkX::Graph do
     expect(new_graph.number_of_edges).to be 3
     expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.adj).to eq({0 => {2 => {}, 3 => {}}, 1 => {3 => {}}, 2 => {}, 3 => {}})
+  end
+
+  it 'symmetric_difference for MultiDiGraph' do
+    g = NetworkX::MultiDiGraph.new
+    h = NetworkX::MultiDiGraph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+
+    new_graph = NetworkX.symmetric_difference(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 3
+    expect(new_graph.adj).to eq({
+                                  0 => {2 => {0 => {}}, 3 => {0 => {}}},
+                                  1 => {3 => {0 => {}}},
+                                  2 => {},
+                                  3 => {}
+                                })
   end
 
   context 'when difference is called' do

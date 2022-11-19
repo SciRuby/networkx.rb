@@ -109,9 +109,11 @@ RSpec.describe NetworkX::MultiGraph do
   it 'tests edge?' do
     graph = NetworkX::MultiGraph.new
     expect(graph.has_edge?(:x, :y)).to be_falsy
+    expect(graph.has_edge?(:y, :x)).to be_falsy
 
     graph.add_edge(:x, :y)
     expect(graph.has_edge?(:x, :y)).to be_truthy
+    expect(graph.has_edge?(:y, :x)).to be_truthy
   end
 
   it 'tests edge? with key' do
@@ -120,6 +122,8 @@ RSpec.describe NetworkX::MultiGraph do
 
     graph.add_edge(:x, :y, key: 'first')
     expect(graph.has_edge?(:x, :y, 'first')).to be_truthy
+    expect(graph.has_edge?(:y, :x, 'first')).to be_truthy
+    expect(graph.has_edge?(:y, :x, 'second')).to be_falsy
   end
 
   it 'each_edges' do

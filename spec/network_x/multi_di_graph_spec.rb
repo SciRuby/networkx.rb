@@ -135,6 +135,7 @@ RSpec.describe NetworkX::MultiDiGraph do
 
     graph.add_edge(:x, :y)
     expect(graph.has_edge?(:x, :y)).to be_truthy
+    expect(graph.has_edge?(:y, :x)).to be_falsy
   end
 
   it 'tests edge? with key' do
@@ -143,6 +144,7 @@ RSpec.describe NetworkX::MultiDiGraph do
 
     graph.add_edge(:x, :y, key: 'first')
     expect(graph.has_edge?(:x, :y, 'first')).to be_truthy
+    expect(graph.has_edge?(:x, :y, 'second')).to be_falsy
   end
 
   context 'when size is called' do
