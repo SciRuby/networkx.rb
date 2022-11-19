@@ -136,6 +136,35 @@ RSpec.describe NetworkX::Graph do
     its('adj') { is_expected.to eq(1 => {2 => {}}, 2 => {1 => {}}) }
   end
 
+  it 'symmetric_difference for Graph' do
+    g = NetworkX::Graph.new
+    h = NetworkX::Graph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.symmetric_difference(g, h)
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 3
+    expect(new_graph.adj).to eq({
+                                  0 => {2 => {}, 3 => {}},
+                                  1 => {3 => {}},
+                                  2 => {0 => {}},
+                                  3 => {1 => {}, 0 => {}}
+                                })
+  end
+
+  it 'symmetric_difference for DiGraph' do
+    g = NetworkX::DiGraph.new
+    h = NetworkX::DiGraph.new
+    g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
+    h.add_edges_from([[0, 1], [1, 2], [0, 3]])
+    new_graph = NetworkX.symmetric_difference(g, h)
+    expect(new_graph.number_of_nodes).to be 4
+    expect(new_graph.number_of_edges).to be 3
+    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.adj).to eq({0 => {2 => {}, 3 => {}}, 1 => {3 => {}}, 2 => {}, 3 => {}})
+  end
+
   context 'when difference is called' do
     subject { NetworkX.difference(graph1, graph2) }
 
