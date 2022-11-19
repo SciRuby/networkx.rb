@@ -47,6 +47,14 @@ RSpec.describe NetworkX::Graph do
     expect(graph.each_node(data: true).to_a).to eq([[:x, {}], [:y, {}], [:z, {}]])
   end
 
+  it 'add_path' do
+    graph = NetworkX::Graph.new
+    graph.add_path(%i[a b c])
+    expect(graph.number_of_nodes).to be 3
+    expect(graph.number_of_edges).to be 2
+    expect(graph.edges).to eq [[:a, :b] , [:b, :c]]
+  end
+
   context 'when node/s is/are removed' do
     before do
       graph.remove_node('Nagpur')

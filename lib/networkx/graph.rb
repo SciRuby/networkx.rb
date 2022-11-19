@@ -104,6 +104,10 @@ module NetworkX
       end
     end
 
+    def add_path(paths)
+      paths.each_cons(2){|x, y| add_edge(x, y) }
+    end
+
     # Removes node from the graph
     #
     # @example
