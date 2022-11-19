@@ -25,4 +25,12 @@ RSpec.describe NetworkX::Graph do
       is_expected.to eq(3)
     end
   end
+
+  it 'not reachable' do
+    graph = NetworkX::Graph.new
+    graph.add_node(:a)
+    graph.add_node(:b)
+
+    expect{ NetworkX.astar_path(graph, :a, :b) }.to raise_error(ArgumentError)
+  end
 end
