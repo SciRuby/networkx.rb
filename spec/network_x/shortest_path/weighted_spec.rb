@@ -179,6 +179,15 @@ RSpec.describe NetworkX::Graph do
     expect{ NetworkX.singlesource_bellmanford(graph, :a, :x) }.to raise_error(ArgumentError)
   end
 
+  it 'bellmanford_path' do
+    graph = NetworkX::DiGraph.new
+    graph.add_edges_from([[:a, :b],[:b,:c], [:c, :d], [:d, :x], [:c, :x]])
+    graph.add_node(:x)
+
+    expect(NetworkX.bellmanford_path(graph, :a, :x)).to eq [:x, :c, :b, :a]
+    # [TODO] [:a, :b, :c, :x] ?
+  end
+
   context 'when bellmanford_predecesor_distance is called' do
     subject { NetworkX.bellmanford_predecesor_distance(graph, 'A') }
 
