@@ -68,6 +68,8 @@ module NetworkX
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
         if g1.multigraph?
+          next if u > v && g1.instance_of?(MultiGraph)
+
           uv_attrs.each do |k, attrs|
             result.add_edge(u, v, **attrs) if g2.edge?(u, v, k)
           end
@@ -96,6 +98,8 @@ module NetworkX
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
         if g1.multigraph?
+          next if u > v && g1.instance_of?(MultiGraph)
+
           uv_attrs.each do |k, attrs|
             result.add_edge(u, v, **attrs) unless g2.edge?(u, v, k)
           end
@@ -124,6 +128,8 @@ module NetworkX
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
         if g1.multigraph?
+          next if u > v && g1.instance_of?(MultiGraph)
+
           uv_attrs.each do |k, attrs|
             result.add_edge(u, v, **attrs) unless g2.edge?(u, v, k)
           end
@@ -135,6 +141,8 @@ module NetworkX
 
     g2.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
+        next if u > v && g1.instance_of?(MultiGraph)
+
         if g2.multigraph?
           uv_attrs.each do |k, attrs|
             result.add_edge(u, v, **attrs) unless g1.edge?(u, v, k)
