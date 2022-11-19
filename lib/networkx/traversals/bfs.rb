@@ -55,4 +55,35 @@ module NetworkX
     bfs_edges.each { |u, v| predecessors[v] = u }
     predecessors
   end
+
+  class Graph
+    # [EXPERIMENTAL]
+    #
+    # @param [Object] node which is root, start ,source
+    def bfs_edges(node)
+      each_bfs_edge(node).to_a
+    end
+
+    # [EXPERIMENTAL]
+    #
+    # @param [Object] node which is root, start ,source
+    def each_bfs_edge(node)
+      return enum_for(:each_bfs_edge, node) unless block_given?
+
+      que = [node]
+      used = {node => true}
+      while que[0]
+        node = que.shift
+
+        @adj[node].each do |v, _data|
+          next if used[v]
+
+          used[v] = true
+
+          yield(node, v)
+          que << v
+        end
+      end
+    end
+  end
 end

@@ -84,4 +84,31 @@ module NetworkX
     end
     e.take(graph.number_of_edges)
   end
+
+  class Graph
+    def dfs_edges(node)
+      each_dfs_edge(node).to_a
+    end
+
+    def each_dfs_edge(node)
+      return enum_for(:each_dfs_edge, node) unless block_given?
+
+      st = [node]
+      used = {}
+      parents = {}
+      while st[-1]
+        node = st.pop
+
+        yield(parents[node], node) if parents[node]
+
+        used[node] = true
+        @adj[node].reverse_each do |v, _data|
+          next if used[v]
+
+          parents[v] = node
+          st << v unless used[v]
+        end
+      end
+    end
+  end
 end

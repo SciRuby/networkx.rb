@@ -33,4 +33,37 @@ RSpec.describe NetworkX::Graph do
       is_expected.to eq('B' => 'A', 'C' => 'A', 'D' => 'C')
     end
   end
+
+
+  it 'test bfs_edge' do
+    edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..7)
+    g.add_edges_from(edges)
+    expect(g.bfs_edges(1)).to eq(edges)
+  end
+
+  it 'test bfs_edge (ABC051 D - Maze Master many paths)' do
+    # https://atcoder.jp/contests/abc151/submissions/36396660
+    def bfs(sy, sx, graph)
+      dist = {}
+      dist[[sy, sx]] = 0
+      graph.each_bfs_edge([sy, sx]) do |from, to|
+        dist[to] = dist[from] + 1
+      end
+      dist.values.max
+    end
+
+    h, w = 12, 12
+    grid_graph = NetworkX.grid_2d_graph(h, w)
+    ans = 0
+    h.times do |y|
+      w.times do |x|
+        tmp = bfs(y, x, grid_graph)
+        ans = tmp if ans < tmp
+      end
+    end
+    expect(ans).to be 22
+  end
 end

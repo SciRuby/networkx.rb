@@ -76,4 +76,51 @@ module NetworkX
     dfs_edges.each { |u, v| predecessors[v] = u }
     predecessors
   end
+
+  class Graph
+    # [EXPERIMENTAL]
+    #
+    # @param node [Object] node which is root, start ,source
+    #
+    # @return [Array[Object]] nodes
+    def dfs_preorder_nodes(node)
+      each_dfs_preorder_node(node).to_a
+    end
+
+    # [EXPERIMENTAL]
+    #
+    # @param node [Object] node which is root, start ,source
+    def each_dfs_preorder_node(node)
+      return enum_for(:each_dfs_preorder_node, node) unless block_given?
+
+      st = [node]
+      used = {node => true}
+      while st[-1]
+        node = st.pop
+        yield(node)
+        @adj[node].reverse_each do |v, _data|
+          next if used[v]
+
+          used[v] = node
+          st << v
+        end
+      end
+    end
+
+    # [EXPERIMENTAL]
+    #
+    # @param node [Object] node which is root, start ,source
+    def dfs_postorder_nodes(node, used = {node => true})
+      res = []
+      @adj[node].each do |v, _data|
+        next if used[v]
+
+        used[node] = true
+        res.concat dfs_postorder_nodes(v, used)
+      end
+
+      res << node
+      res
+    end
+  end
 end

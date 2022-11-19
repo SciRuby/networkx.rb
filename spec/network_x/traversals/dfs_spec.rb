@@ -54,4 +54,24 @@ RSpec.describe NetworkX::Graph do
       is_expected.to eq('B' => 'A', 'C' => 'A', 'D' => 'B')
     end
   end
+
+  it 'test dfs_preorder_nodes' do
+    edges = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7]]
+    # ext_edges = [[1, 2], [2, 4], [2, 5], [1, 2], [3, 6], [3, 7]]
+    dfs_preorder_nodes = [1, 2, 4, 5, 3, 6, 7]
+
+    g = NetworkX::Graph.new
+    g.add_nodes_from(1..7)
+    g.add_edges_from(edges)
+    expect(g.dfs_preorder_nodes(1)).to eq(dfs_preorder_nodes)
+  end
+
+  it 'test' do
+    tree = NetworkX::Graph.new
+    tree.add_nodes('a'..'o')
+    tree.add_edges([%w[a b], %w[b c], %w[c h], %w[c i], %w[b d], %w[a e], %w[e f], %w[f j], %w[e g], %w[g k]])
+
+    expect(tree.dfs_preorder_nodes('a')).to eq %w[a b c h i d e f j g k]
+    expect(tree.dfs_postorder_nodes('a')).to eq %w[h i c d b j f k g e a]
+  end
 end
