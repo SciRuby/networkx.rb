@@ -124,5 +124,12 @@ module NetworkX
       res << node
       res
     end
+
+    # @param node [Object] node which is root, start, source
+    def each_dfs_postorder_node(node)
+      return enum_for(:each_dfs_postorder_node, node) unless block_given?
+
+      dfs_postorder_nodes(node).each{|node| yield node }
+    end
   end
 end

@@ -82,6 +82,7 @@ RSpec.describe NetworkX::Graph do
 
     expect(tree.dfs_preorder_nodes('a')).to eq %w[a b c h i d e f j g k]
     expect(tree.dfs_postorder_nodes('a')).to eq %w[h i c d b j f k g e a]
+    expect(tree.each_dfs_postorder_node('a').to_a).to eq %w[h i c d b j f k g e a]
   end
 
   it 'test dfs nodes for DiGraph' do
@@ -91,5 +92,6 @@ RSpec.describe NetworkX::Graph do
 
     expect(tree.dfs_preorder_nodes('a')).to eq %w[a b c h i d e f j g k]
     expect(tree.dfs_postorder_nodes('a')).to eq %w[h i c d b j f k g e a]
+    expect(tree.each_dfs_postorder_node('a').to_a).to eq %w[h i c d b j f k g e a]
   end
 end
