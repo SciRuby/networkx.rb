@@ -209,4 +209,14 @@ RSpec.describe NetworkX::MultiGraph do
                         'Mumbai' => {'Nagpur' => {}}, 'Kolkata' => {})
     end
   end
+
+  it 'directed?' do
+    directed_graph = NetworkX::MultiGraph.new
+    expect(directed_graph.directed?).to be false
+  end
+
+  it 'multigraph?' do
+    directed_graph = NetworkX::MultiGraph.new
+    expect(directed_graph.multigraph?).to be true
+  end
 end

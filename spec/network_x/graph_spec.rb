@@ -268,4 +268,14 @@ RSpec.describe NetworkX::Graph do
     graph = NetworkX::Graph.new
     expect(graph.info).to eq(output)
   end
+
+  it 'directed?' do
+    directed_graph = NetworkX::Graph.new
+    expect(directed_graph.directed?).to be false
+  end
+
+  it 'multigraph?' do
+    directed_graph = NetworkX::Graph.new
+    expect(directed_graph.multigraph?).to be false
+  end
 end

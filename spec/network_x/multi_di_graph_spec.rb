@@ -264,4 +264,14 @@ RSpec.describe NetworkX::MultiDiGraph do
     expect(multi_graph.number_of_edges).to be 2
     expect(multi_graph.number_of_nodes).to be 2
   end
+
+  it 'directed?' do
+    directed_graph = NetworkX::MultiDiGraph.new
+    expect(directed_graph.directed?).to be true
+  end
+
+  it 'multigraph?' do
+    directed_graph = NetworkX::MultiDiGraph.new
+    expect(directed_graph.multigraph?).to be true
+  end
 end

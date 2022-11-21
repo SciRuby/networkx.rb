@@ -226,5 +226,9 @@ module NetworkX
                              "received #{edges.class.name} instead."
       end
     end
+
+    def directed?
+      true
+    end
   end
 end

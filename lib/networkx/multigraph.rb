@@ -191,5 +191,9 @@ module NetworkX
                              "received #{edges.class.name} instead."
       end
     end
+
+    def multigraph?
+      true
+    end
   end
 end
