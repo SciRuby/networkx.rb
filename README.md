@@ -14,7 +14,7 @@ This project intends to provide a working alternative to the Ruby community, by 
 ## Installing
 
 - Clone the repository or fork
-  - Clone this repository with `git clone https://github.com/sciruby-jp/networkx.rb.git`
+  - Clone this repository with `git clone https://github.com/SciRuby/networkx.rb.git`
   - or You can fork and do clone it.
 - Navigate to networkx with `cd networkx.rb`
 - Install dependencies with `gem install bundler && bundle install`
@@ -28,7 +28,7 @@ g.add_edge('start', 'stop')
 
 ## Document
 
-You can read [Document](https://sciruby-jp.github.io/networkx.rb/) for this library.
+You can read [Document](https://SciRuby.github.io/networkx.rb/) for this library.
 
 ## Roadmap
 
