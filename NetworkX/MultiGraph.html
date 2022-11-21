@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: NetworkX::MultiGraph
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "NetworkX::MultiGraph";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../NetworkX.html" title="NetworkX (module)">NetworkX</a></span></span>
+     &raquo; 
+    <span class="title">MultiGraph</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: NetworkX::MultiGraph
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Graph.html" title="NetworkX::Graph (class)">Graph</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Graph.html" title="NetworkX::Graph (class)">Graph</a></span></li>
+          
+            <li class="next">NetworkX::MultiGraph</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/networkx/multigraph.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Describes the class for making MultiGraphs</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adj-instance_method" title="#adj (instance method)">#<strong>adj</strong>  &#x21d2; Hash{ Object =&gt; Hash{ Object =&gt; Hash{ Integer =&gt; Hash{ Object =&gt; Object } } } } </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stores the edges and their attributes in an adjencency list form.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#graph-instance_method" title="#graph (instance method)">#<strong>graph</strong>  &#x21d2; Hash{ Object =&gt; Object } </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stores the attributes of the gra.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nodes-instance_method" title="#nodes (instance method)">#<strong>nodes</strong>  &#x21d2; Hash{ Object =&gt; Hash{ Object =&gt; Object } } </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Stores the nodes and their attributes.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_edge-instance_method" title="#add_edge (instance method)">#<strong>add_edge</strong>(node1, node2, **edge_attrs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the respective edge.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_edge-instance_method" title="#each_edge (instance method)">#<strong>each_edge</strong>(data: false)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edge%3F-instance_method" title="#edge? (instance method)">#<strong>edge?</strong>(node1, node2, key = nil)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if the the edge consisting of two nodes is present in the graph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edge_subgraph-instance_method" title="#edge_subgraph (instance method)">#<strong>edge_subgraph</strong>(edges)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns subgraph conisting of given edges.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_edge%3F-instance_method" title="#has_edge? (instance method)">#<strong>has_edge?</strong>(node1, node2, key = nil)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_edge_key-instance_method" title="#new_edge_key (instance method)">#<strong>new_edge_key</strong>(node1, node2)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a new key.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_edges-instance_method" title="#number_of_edges (instance method)">#<strong>number_of_edges</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns number of edges.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_edge-instance_method" title="#remove_edge (instance method)">#<strong>remove_edge</strong>(node1, node2, key = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes edge from the graph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size-instance_method" title="#size (instance method)">#<strong>size</strong>(is_weighted = false)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the size of the graph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subgraph-instance_method" title="#subgraph (instance method)">#<strong>subgraph</strong>(nodes)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns subgraph consisting of given array of nodes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_undirected-instance_method" title="#to_undirected (instance method)">#<strong>to_undirected</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the undirected version of the graph.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Graph.html" title="NetworkX::Graph (class)">Graph</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Graph.html#add_edges-instance_method" title="NetworkX::Graph#add_edges (method)">#add_edges</a></span>, <span class='object_link'><a href="Graph.html#add_edges_from-instance_method" title="NetworkX::Graph#add_edges_from (method)">#add_edges_from</a></span>, <span class='object_link'><a href="Graph.html#add_node-instance_method" title="NetworkX::Graph#add_node (method)">#add_node</a></span>, <span class='object_link'><a href="Graph.html#add_nodes-instance_method" title="NetworkX::Graph#add_nodes (method)">#add_nodes</a></span>, <span class='object_link'><a href="Graph.html#add_nodes_from-instance_method" title="NetworkX::Graph#add_nodes_from (method)">#add_nodes_from</a></span>, <span class='object_link'><a href="Graph.html#add_path-instance_method" title="NetworkX::Graph#add_path (method)">#add_path</a></span>, <span class='object_link'><a href="Graph.html#add_weighted_edge-instance_method" title="NetworkX::Graph#add_weighted_edge (method)">#add_weighted_edge</a></span>, <span class='object_link'><a href="Graph.html#add_weighted_edges-instance_method" title="NetworkX::Graph#add_weighted_edges (method)">#add_weighted_edges</a></span>, <span class='object_link'><a href="Graph.html#add_weighted_edges_from-instance_method" title="NetworkX::Graph#add_weighted_edges_from (method)">#add_weighted_edges_from</a></span>, <span class='object_link'><a href="Graph.html#balanced_tree-class_method" title="NetworkX::Graph.balanced_tree (method)">balanced_tree</a></span>, <span class='object_link'><a href="Graph.html#barbell_graph-class_method" title="NetworkX::Graph.barbell_graph (method)">barbell_graph</a></span>, <span class='object_link'><a href="Graph.html#bfs_edges-instance_method" title="NetworkX::Graph#bfs_edges (method)">#bfs_edges</a></span>, <span class='object_link'><a href="Graph.html#bfs_nodes-instance_method" title="NetworkX::Graph#bfs_nodes (method)">#bfs_nodes</a></span>, <span class='object_link'><a href="Graph.html#bull_graph-class_method" title="NetworkX::Graph.bull_graph (method)">bull_graph</a></span>, <span class='object_link'><a href="Graph.html#circular_ladder_graph-class_method" title="NetworkX::Graph.circular_ladder_graph (method)">circular_ladder_graph</a></span>, <span class='object_link'><a href="Graph.html#clear-instance_method" title="NetworkX::Graph#clear (method)">#clear</a></span>, <span class='object_link'><a href="Graph.html#complete_edges-class_method" title="NetworkX::Graph.complete_edges (method)">complete_edges</a></span>, <span class='object_link'><a href="Graph.html#complete_graph-class_method" title="NetworkX::Graph.complete_graph (method)">complete_graph</a></span>, <span class='object_link'><a href="Graph.html#cubical_graph-class_method" title="NetworkX::Graph.cubical_graph (method)">cubical_graph</a></span>, <span class='object_link'><a href="Graph.html#cycle_graph-class_method" title="NetworkX::Graph.cycle_graph (method)">cycle_graph</a></span>, <span class='object_link'><a href="Graph.html#degree-instance_method" title="NetworkX::Graph#degree (method)">#degree</a></span>, <span class='object_link'><a href="Graph.html#dfs_edges-instance_method" title="NetworkX::Graph#dfs_edges (method)">#dfs_edges</a></span>, <span class='object_link'><a href="Graph.html#dfs_postorder_nodes-instance_method" title="NetworkX::Graph#dfs_postorder_nodes (method)">#dfs_postorder_nodes</a></span>, <span class='object_link'><a href="Graph.html#dfs_preorder_nodes-instance_method" title="NetworkX::Graph#dfs_preorder_nodes (method)">#dfs_preorder_nodes</a></span>, <span class='object_link'><a href="Graph.html#diamond_graph-class_method" title="NetworkX::Graph.diamond_graph (method)">diamond_graph</a></span>, <span class='object_link'><a href="Graph.html#directed%3F-instance_method" title="NetworkX::Graph#directed? (method)">#directed?</a></span>, <span class='object_link'><a href="Graph.html#dodecahedral_graph-class_method" title="NetworkX::Graph.dodecahedral_graph (method)">dodecahedral_graph</a></span>, <span class='object_link'><a href="Graph.html#each_bfs_edge-instance_method" title="NetworkX::Graph#each_bfs_edge (method)">#each_bfs_edge</a></span>, <span class='object_link'><a href="Graph.html#each_bfs_node-instance_method" title="NetworkX::Graph#each_bfs_node (method)">#each_bfs_node</a></span>, <span class='object_link'><a href="Graph.html#each_dfs_edge-instance_method" title="NetworkX::Graph#each_dfs_edge (method)">#each_dfs_edge</a></span>, <span class='object_link'><a href="Graph.html#each_dfs_preorder_node-instance_method" title="NetworkX::Graph#each_dfs_preorder_node (method)">#each_dfs_preorder_node</a></span>, <span class='object_link'><a href="Graph.html#each_node-instance_method" title="NetworkX::Graph#each_node (method)">#each_node</a></span>, <span class='object_link'><a href="Graph.html#edges-instance_method" title="NetworkX::Graph#edges (method)">#edges</a></span>, <span class='object_link'><a href="Graph.html#empty_graph-class_method" title="NetworkX::Graph.empty_graph (method)">empty_graph</a></span>, <span class='object_link'><a href="Graph.html#get_edge_data-instance_method" title="NetworkX::Graph#get_edge_data (method)">#get_edge_data</a></span>, <span class='object_link'><a href="Graph.html#get_node_data-instance_method" title="NetworkX::Graph#get_node_data (method)">#get_node_data</a></span>, <span class='object_link'><a href="Graph.html#heawood_graph-class_method" title="NetworkX::Graph.heawood_graph (method)">heawood_graph</a></span>, <span class='object_link'><a href="Graph.html#house_graph-class_method" title="NetworkX::Graph.house_graph (method)">house_graph</a></span>, <span class='object_link'><a href="Graph.html#house_x_graph-class_method" title="NetworkX::Graph.house_x_graph (method)">house_x_graph</a></span>, <span class='object_link'><a href="Graph.html#info-instance_method" title="NetworkX::Graph#info (method)">#info</a></span>, <span class='object_link'><a href="Graph.html#initialize-instance_method" title="NetworkX::Graph#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Graph.html#ladder_graph-class_method" title="NetworkX::Graph.ladder_graph (method)">ladder_graph</a></span>, <span class='object_link'><a href="Graph.html#lollipop_graph-class_method" title="NetworkX::Graph.lollipop_graph (method)">lollipop_graph</a></span>, <span class='object_link'><a href="Graph.html#moebius_kantor_graph-class_method" title="NetworkX::Graph.moebius_kantor_graph (method)">moebius_kantor_graph</a></span>, <span class='object_link'><a href="Graph.html#multigraph%3F-instance_method" title="NetworkX::Graph#multigraph? (method)">#multigraph?</a></span>, <span class='object_link'><a href="Graph.html#neighbours-instance_method" title="NetworkX::Graph#neighbours (method)">#neighbours</a></span>, <span class='object_link'><a href="Graph.html#node%3F-instance_method" title="NetworkX::Graph#node? (method)">#node?</a></span>, <span class='object_link'><a href="Graph.html#null_graph-class_method" title="NetworkX::Graph.null_graph (method)">null_graph</a></span>, <span class='object_link'><a href="Graph.html#number_of_nodes-instance_method" title="NetworkX::Graph#number_of_nodes (method)">#number_of_nodes</a></span>, <span class='object_link'><a href="Graph.html#octahedral_graph-class_method" title="NetworkX::Graph.octahedral_graph (method)">octahedral_graph</a></span>, <span class='object_link'><a href="Graph.html#path_graph-class_method" title="NetworkX::Graph.path_graph (method)">path_graph</a></span>, <span class='object_link'><a href="Graph.html#put_graph_x2-instance_method" title="NetworkX::Graph#put_graph_x2 (method)">#put_graph_x2</a></span>, <span class='object_link'><a href="Graph.html#read_edgelist-class_method" title="NetworkX::Graph.read_edgelist (method)">read_edgelist</a></span>, <span class='object_link'><a href="Graph.html#read_weighted_edgelist-class_method" title="NetworkX::Graph.read_weighted_edgelist (method)">read_weighted_edgelist</a></span>, <span class='object_link'><a href="Graph.html#remove_edges-instance_method" title="NetworkX::Graph#remove_edges (method)">#remove_edges</a></span>, <span class='object_link'><a href="Graph.html#remove_node-instance_method" title="NetworkX::Graph#remove_node (method)">#remove_node</a></span>, <span class='object_link'><a href="Graph.html#remove_nodes-instance_method" title="NetworkX::Graph#remove_nodes (method)">#remove_nodes</a></span>, <span class='object_link'><a href="Graph.html#star_graph-class_method" title="NetworkX::Graph.star_graph (method)">star_graph</a></span>, <span class='object_link'><a href="Graph.html#tetrahedral_graph-class_method" title="NetworkX::Graph.tetrahedral_graph (method)">tetrahedral_graph</a></span>, <span class='object_link'><a href="Graph.html#trivial_graph-class_method" title="NetworkX::Graph.trivial_graph (method)">trivial_graph</a></span>, <span class='object_link'><a href="Graph.html#wheel_graph-class_method" title="NetworkX::Graph.wheel_graph (method)">wheel_graph</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Graph.html#initialize-instance_method" title="NetworkX::Graph#initialize (method)">NetworkX::Graph</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="adj-instance_method">
+  
+    #<strong>adj</strong>  &#x21d2; <tt>Hash{ Object =&gt; Hash{ Object =&gt; Hash{ Integer =&gt; Hash{ Object =&gt; Object } } } }</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stores the edges and their attributes in an adjencency list form</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{ Object =&gt; Hash{ Object =&gt; Hash{ Integer =&gt; Hash{ Object =&gt; Object } } } }</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current value of adj</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_adj'>adj</span>
+  <span class='ivar'>@adj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="graph-instance_method">
+  
+    #<strong>graph</strong>  &#x21d2; <tt>Hash{ Object =&gt; Object }</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stores the attributes of the gra</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{ Object =&gt; Object }</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current value of graph</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_graph'>graph</span>
+  <span class='ivar'>@graph</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="nodes-instance_method">
+  
+    #<strong>nodes</strong>  &#x21d2; <tt>Hash{ Object =&gt; Hash{ Object =&gt; Object } }</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Stores the nodes and their attributes</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{ Object =&gt; Hash{ Object =&gt; Object } }</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current value of nodes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nodes'>nodes</span>
+  <span class='ivar'>@nodes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_edge-instance_method">
+  
+    #<strong>add_edge</strong>(node1, node2, **edge_attrs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the respective edge</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Add an edge with attribute name</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Edge1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Add an edge with no attribute</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Bangalore</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Chennai</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node1</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the first node of the edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node2</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the second node of the edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>edge_attrs</span>
+      
+      
+        <span class='type'>(<tt>Hash{ Object =&gt; Object }</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the hash of the edge attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_edge_attrs'>edge_attrs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_new_edge_key'>new_edge_key</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_all_edge_attrs'>all_edge_attrs</span> <span class='op'>=</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_all_edge_attrs'>all_edge_attrs</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_edge_attrs'>edge_attrs</span>
+  <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_all_edge_attrs'>all_edge_attrs</span>
+  <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_all_edge_attrs'>all_edge_attrs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="each_edge-instance_method">
+  
+    #<strong>each_edge</strong>(data: false)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_each_edge'>each_edge</span><span class='lparen'>(</span><span class='label'>data:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:each_edge</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='ivar'>@adj</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='id identifier rubyid_ws'>ws</span><span class='op'>|</span>
+    <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_key_and_info'>key_and_info</span><span class='op'>|</span>
+      <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_w'>w</span>
+
+      <span class='id identifier rubyid_key_and_info'>key_and_info</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span><span class='op'>|</span>
+        <span class='id identifier rubyid_data'>data</span> <span class='op'>?</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edge?-instance_method">
+  
+    #<strong>edge?</strong>(node1, node2, key = nil)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if the the edge consisting of two nodes is present in the graph</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_edge?'>edge?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node1</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the first node of the edge to be checked</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node2</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the second node of the edge to be checked</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the key of the given edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edge?'>edge?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_node?'>node?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edge_subgraph-instance_method">
+  
+    #<strong>edge_subgraph</strong>(edges)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns subgraph conisting of given edges</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_edge_subgraph'>edge_subgraph</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='qwords_beg'>%w[</span><span class='tstring_content'>Nagpur</span><span class='words_sep'> </span><span class='tstring_content'>Wardha</span><span class='tstring_end'>]</span></span><span class='comma'>,</span> <span class='qwords_beg'>%w[</span><span class='tstring_content'>Nagpur</span><span class='words_sep'> </span><span class='tstring_content'>Mumbai</span><span class='tstring_end'>]</span></span><span class='rbracket'>]</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>edges</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="Array (class)">Array</a></span>&lt;Object, Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the edges to be included in the subraph</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edge_subgraph'>edge_subgraph</span><span class='lparen'>(</span><span class='id identifier rubyid_edges'>edges</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_edges'>edges</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Array.html" title="Array (class)">Array</a></span></span><span class='comma'>,</span> <span class='const'>Set</span>
+    <span class='id identifier rubyid_sub_graph'>sub_graph</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../NetworkX.html" title="NetworkX (module)">NetworkX</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="NetworkX::MultiGraph (class)">MultiGraph</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Graph.html#initialize-instance_method" title="NetworkX::Graph#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='ivar'>@graph</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_edges'>edges</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Edge between </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_u'>u</span><span class='embexpr_end'>}</span><span class='tstring_content'> and </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_v'>v</span><span class='embexpr_end'>}</span><span class='tstring_content'> does not exist in the graph!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@nodes</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='rparen'>)</span> \
+                                                                                <span class='op'>&amp;&amp;</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>
+
+      <span class='id identifier rubyid_sub_graph'>sub_graph</span><span class='period'>.</span><span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='op'>**</span><span class='ivar'>@nodes</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_sub_graph'>sub_graph</span><span class='period'>.</span><span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='op'>**</span><span class='ivar'>@nodes</span><span class='lbracket'>[</span><span class='id identifier rubyid_v'>v</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_v'>v</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_keyval'>keyval</span><span class='op'>|</span> <span class='id identifier rubyid_sub_graph'>sub_graph</span><span class='period'>.</span><span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_keyval'>keyval</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_sub_graph'>sub_graph</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected Argument to be Array or Set of edges, </span><span class='tstring_end'>&#39;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>received </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_edges'>edges</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> instead.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_edge?-instance_method">
+  
+    #<strong>has_edge?</strong>(node1, node2, key = nil)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_edge?'>has_edge?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_node?'>node?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__index'>_index</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='op'>|</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_key'>key</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_edge_key-instance_method">
+  
+    #<strong>new_edge_key</strong>(node1, node2)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new key</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node1</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the first node of a given edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node2</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the second node of a given edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_edge_key'>new_edge_key</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='int'>0</span> <span class='kw'>if</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='kw'>while</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_key'>key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="number_of_edges-instance_method">
+  
+    #<strong>number_of_edges</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns number of edges</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_number_of_edges'>number_of_edges</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_number_of_edges'>number_of_edges</span>
+  <span class='ivar'>@adj</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_flat_map'>flat_map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:values</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:length</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span> <span class='op'>/</span> <span class='int'>2</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_edge-instance_method">
+  
+    #<strong>remove_edge</strong>(node1, node2, key = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes edge from the graph</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_remove_edge'>remove_edge</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Noida</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Bangalore</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node1</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the first node of the edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node2</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the second node of the edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>KeyError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_edge'>remove_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node1'>node1</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not a valid node.</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@nodes</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node2'>node2</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not a valid node</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@nodes</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>The given edge is not a valid one.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_node2'>node2</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__index'>_index</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='op'>|</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_key'>key</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>The given edge is not a valid one</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__indx'>_indx</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='op'>|</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_key'>key</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_node2'>node2</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_node1'>node1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__indx'>_indx</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='op'>|</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_key'>key</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size-instance_method">
+  
+    #<strong>size</strong>(is_weighted = false)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the size of the graph</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_weighted</span>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if true, method returns sum of weights of all edges else returns number of edges</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span><span class='lparen'>(</span><span class='id identifier rubyid_is_weighted'>is_weighted</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_is_weighted'>is_weighted</span>
+    <span class='id identifier rubyid_graph_size'>graph_size</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='ivar'>@adj</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_hash_val'>hash_val</span><span class='op'>|</span>
+      <span class='id identifier rubyid_hash_val'>hash_val</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='op'>|</span> <span class='id identifier rubyid_graph_size'>graph_size</span> <span class='op'>+=</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='lbracket'>[</span><span class='symbol'>:weight</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:weight</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_graph_size'>graph_size</span> <span class='op'>/</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_number_of_edges'>number_of_edges</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="subgraph-instance_method">
+  
+    #<strong>subgraph</strong>(nodes)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns subgraph consisting of given array of nodes</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_subgraph'>subgraph</span><span class='lparen'>(</span><span class='qwords_beg'>%w[</span><span class='tstring_content'>Mumbai</span><span class='words_sep'> </span><span class='tstring_content'>Nagpur</span><span class='tstring_end'>]</span></span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>nodes</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="Array (class)">Array</a></span>&lt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the nodes to be included in the subgraph</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_subgraph'>subgraph</span><span class='lparen'>(</span><span class='id identifier rubyid_nodes'>nodes</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_nodes'>nodes</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Array.html" title="Array (class)">Array</a></span></span><span class='comma'>,</span> <span class='const'>Set</span>
+    <span class='id identifier rubyid_sub_graph'>sub_graph</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../NetworkX.html" title="NetworkX (module)">NetworkX</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="NetworkX::MultiGraph (class)">MultiGraph</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Graph.html#initialize-instance_method" title="NetworkX::Graph#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='ivar'>@graph</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='id identifier rubyid__'>_</span><span class='op'>|</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='const'>KeyError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_u'>u</span><span class='embexpr_end'>}</span><span class='tstring_content'> does not exist in the current graph!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@nodes</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='rparen'>)</span>
+
+      <span class='id identifier rubyid_sub_graph'>sub_graph</span><span class='period'>.</span><span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='op'>**</span><span class='ivar'>@nodes</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='id identifier rubyid_edge_val'>edge_val</span><span class='op'>|</span>
+        <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_u'>u</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_v'>v</span>
+
+        <span class='id identifier rubyid_edge_val'>edge_val</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_keyval'>keyval</span><span class='op'>|</span> <span class='id identifier rubyid_sub_graph'>sub_graph</span><span class='period'>.</span><span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_u'>u</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_keyval'>keyval</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@adj</span><span class='lbracket'>[</span><span class='id identifier rubyid_u'>u</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_sub_graph'>sub_graph</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected Argument to be Array or Set of nodes, </span><span class='tstring_end'>&#39;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>received </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> instead.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_undirected-instance_method">
+  
+    #<strong>to_undirected</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the undirected version of the graph</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_to_undirected'>to_undirected</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/networkx/multigraph.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_undirected'>to_undirected</span>
+  <span class='id identifier rubyid_graph'>graph</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../NetworkX.html" title="NetworkX (module)">NetworkX</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Graph.html" title="NetworkX::Graph (class)">Graph</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Graph.html#initialize-instance_method" title="NetworkX::Graph#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='ivar'>@graph</span><span class='rparen'>)</span>
+  <span class='ivar'>@nodes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_node_attr'>node_attr</span><span class='op'>|</span> <span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_add_node'>add_node</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_node_attr'>node_attr</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@adj</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node1_edges'>node1_edges</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node1_edges'>node1_edges</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='id identifier rubyid_node1_node2'>node1_node2</span><span class='op'>|</span>
+      <span class='id identifier rubyid_edge_attrs'>edge_attrs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+      <span class='id identifier rubyid_node1_node2'>node1_node2</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__key'>_key</span><span class='comma'>,</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='op'>|</span> <span class='id identifier rubyid_edge_attrs'>edge_attrs</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_attrs'>attrs</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_graph'>graph</span><span class='period'>.</span><span class='id identifier rubyid_add_edge'>add_edge</span><span class='lparen'>(</span><span class='id identifier rubyid_node1'>node1</span><span class='comma'>,</span> <span class='id identifier rubyid_node2'>node2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_edge_attrs'>edge_attrs</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_graph'>graph</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Nov 21 11:28:25 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>
