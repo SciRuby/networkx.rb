@@ -80,7 +80,7 @@ module NetworkX
   class Graph
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start ,source
+    # @param node [Object] node which is root, start, source
     #
     # @return [Array[Object]] nodes
     def dfs_preorder_nodes(node)
@@ -89,7 +89,7 @@ module NetworkX
 
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start ,source
+    # @param node [Object] node which is root, start, source
     def each_dfs_preorder_node(node)
       return enum_for(:each_dfs_preorder_node, node) unless block_given?
 
@@ -109,7 +109,9 @@ module NetworkX
 
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start ,source
+    # @param node [Object] node which is root, start, source
+    #
+    # @return [Array[Object]] array of dfs postorder nodes
     def dfs_postorder_nodes(node, used = {node => true})
       res = []
       @adj[node].each do |v, _data|
