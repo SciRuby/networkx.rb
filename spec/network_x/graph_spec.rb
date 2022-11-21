@@ -52,7 +52,7 @@ RSpec.describe NetworkX::Graph do
     graph.add_path(%i[a b c])
     expect(graph.number_of_nodes).to be 3
     expect(graph.number_of_edges).to be 2
-    expect(graph.edges).to eq [[:a, :b] , [:b, :c]]
+    expect(graph.edges).to eq [[:a, :b], [:b, :c]]
   end
 
   context 'when node/s is/are removed' do
