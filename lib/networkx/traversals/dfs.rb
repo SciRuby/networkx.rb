@@ -80,21 +80,21 @@ module NetworkX
   class Graph
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start, source
+    # @param root [Object] node which is root, start, source
     #
     # @return [Array[Object]] nodes
-    def dfs_preorder_nodes(node)
-      each_dfs_preorder_node(node).to_a
+    def dfs_preorder_nodes(root)
+      each_dfs_preorder_node(root).to_a
     end
 
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start, source
-    def each_dfs_preorder_node(node)
-      return enum_for(:each_dfs_preorder_node, node) unless block_given?
+    # @param root [Object] node which is root, start, source
+    def each_dfs_preorder_node(root)
+      return enum_for(:each_dfs_preorder_node, root) unless block_given?
 
-      st = [node]
-      used = {node => true}
+      st = [root]
+      used = {root => true}
       while st[-1]
         node = st.pop
         yield(node)
@@ -109,27 +109,27 @@ module NetworkX
 
     # [EXPERIMENTAL]
     #
-    # @param node [Object] node which is root, start, source
+    # @param root [Object] node which is root, start, source
     #
     # @return [Array[Object]] array of dfs postorder nodes
-    def dfs_postorder_nodes(node, used = {node => true})
+    def dfs_postorder_nodes(root, used = {root => true})
       res = []
-      @adj[node].each do |v, _data|
+      @adj[root].each do |v, _data|
         next if used[v]
 
-        used[node] = true
+        used[v] = true
         res.concat dfs_postorder_nodes(v, used)
       end
 
-      res << node
+      res << root
       res
     end
 
-    # @param node [Object] node which is root, start, source
-    def each_dfs_postorder_node(node, &block)
-      return enum_for(:each_dfs_postorder_node, node) unless block_given?
+    # @param root [Object] node which is root, start, source
+    def each_dfs_postorder_node(root, &block)
+      return enum_for(:each_dfs_postorder_node, root) unless block_given?
 
-      dfs_postorder_nodes(node).each(&block)
+      dfs_postorder_nodes(root).each(&block)
     end
   end
 end
