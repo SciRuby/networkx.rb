@@ -75,6 +75,18 @@ RSpec.describe NetworkX::Graph do
     expect(g.dfs_preorder_nodes(1)).to eq(dfs_preorder_nodes)
   end
 
+  it 'test each dfs nodes for Digraph' do
+    edges = [[2, 1], [2, 8], [8, 3], [3, 5], [5, 4], [5, 7], [7, 6], [8, 9]]
+    dfs_preorder_nodes = [2, 1, 8, 3, 5, 4, 7, 6, 9]
+    dfs_postorder_nodes = [1, 4, 6, 7, 5, 3, 9, 8, 2]
+
+    g = NetworkX::DiGraph.new
+    g.add_nodes_from(1..9)
+    g.add_edges_from(edges)
+    expect(g.each_dfs_preorder_node(2).to_a).to eq(dfs_preorder_nodes)
+    expect(g.each_dfs_postorder_node(2).to_a).to eq(dfs_postorder_nodes)
+  end
+
   it 'test dfs nodes for Graph' do
     tree = NetworkX::Graph.new
     tree.add_nodes('a'..'o')
