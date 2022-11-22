@@ -137,6 +137,7 @@ module NetworkX
                              "received #{nodes.class.name} instead."
       end
     end
+    alias remove_nodes_from remove_nodes
 
     # Removes edge from the graph
     #
@@ -169,6 +170,7 @@ module NetworkX
                              "received #{edges.class.name} instead."
       end
     end
+    alias remove_edges_from remove_edges
 
     # Adds weighted edge
     #
