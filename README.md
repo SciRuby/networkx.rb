@@ -1,5 +1,7 @@
 # NetworkX.rb
 
+[![Gem Version](https://badge.fury.io/rb/networkx.svg)](https://badge.fury.io/rb/networkx)
+
 [NetworkX](https://networkx.github.io/) is a very popular Python library, that handles various use-cases of the Graph Data Structure.  
 This project intends to provide a working alternative to the Ruby community, by closely mimicing as many features as possible. 
 
