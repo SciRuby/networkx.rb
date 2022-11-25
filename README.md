@@ -8,17 +8,30 @@ This project intends to provide a working alternative to the Ruby community, by 
 ## List of contents
 
 - [Installing](#installing)
+- [Usage](#Usage)
 - [Document](#document)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Installing
 
-- Clone the repository or fork
-  - Clone this repository with `git clone https://github.com/SciRuby/networkx.rb.git`
-  - or You can fork and do clone it.
-- Navigate to networkx with `cd networkx.rb`
-- Install dependencies with `gem install bundler && bundle install`
+- install it yourself as:
+```console
+$ gem install networkx
+```
+
+
+- Or use Bundler & Gemfile
+  1. add this line to your application's Gemfile:
+  ```ruby
+  gem 'networkx'
+  ```
+  2. And then execute:
+  ```console
+  $ bundle install
+  ```
+
+## Usage
 
 ```ruby
 require 'networkx'
