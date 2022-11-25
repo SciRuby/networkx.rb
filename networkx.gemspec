@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['athityakumar@gmail.com']
   spec.summary       = 'A Ruby implemenation of the well-known graph library called networkx.'
   spec.description   = NetworkX::DESCRIPTION
-  spec.homepage      = 'https://github.com/athityakumar/networkx.rb'
+  spec.homepage      = 'https://github.com/SciRuby/networkx.rb'
   spec.license       = 'MIT'
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'bin'
