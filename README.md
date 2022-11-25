@@ -9,7 +9,6 @@ This project intends to provide a working alternative to the Ruby community, by 
 
 - [Installing](#installing)
 - [Document](#document)
-- [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -31,22 +30,6 @@ g.add_edge('start', 'stop')
 ## Document
 
 You can read [Document](https://SciRuby.github.io/networkx.rb/) for this library.
-
-## Roadmap
-
-Quite easily, any networkx user would be able to understand the number of details that have been implemented in the Python library. As a humble start towards the release of v0.1.0, the following could be the goals to achieve :
-
-- `Node` : This class should be capable of handling different types of nodes (not just `String` / `Integer`).  
-   A possible complex use-case could be XML nodes.
-
-- `Edge` : This class should be capable of handling different types of edges.  
-  Though a basic undirected Graph doesn't store any metadata in the edges, weighted edges and parametric edges are something that need to be handled.
-
-- `Graph` : The simplest of graphs.  
-  This class handles just connections between different `Node`s via `Edge`s.
-
-- `DirectedGraph` : Inherits from `Graph` class.  
-  Uses directions between `Edge`s.
 
 ## Contributing
 
