@@ -22,20 +22,20 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.7'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rspec-its', '~> 1.0'
-  spec.add_development_dependency 'rubocop', '~> 1.0'
-  spec.add_development_dependency 'rubocop-rake', '~> 0.6'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.0'
-  spec.add_development_dependency 'rubygems-tasks', '~> 0.2'
-  spec.add_development_dependency 'saharspec', '~> 0.0'
-  spec.add_development_dependency 'simplecov', '~> 0.21'
-  spec.add_development_dependency 'yard', '~> 0.9'
+  spec.add_development_dependency 'bundler', '>= 2.0'
+  spec.add_development_dependency 'rake', '>= 13.0'
+  spec.add_development_dependency 'rspec', '>= 3.0'
+  spec.add_development_dependency 'rspec-its', '>= 1.0'
+  spec.add_development_dependency 'rubocop', '>= 1.0'
+  spec.add_development_dependency 'rubocop-rake', '>= 0.6'
+  spec.add_development_dependency 'rubocop-rspec', '>= 2.0'
+  spec.add_development_dependency 'rubygems-tasks', '>= 0.2'
+  spec.add_development_dependency 'saharspec', '>= 0.0'
+  spec.add_development_dependency 'simplecov', '>= 0.21'
+  spec.add_development_dependency 'yard', '>= 0.9'
 
-  spec.add_runtime_dependency 'matrix', '~> 0.4'
-  spec.add_runtime_dependency 'rb_heap', '~> 1.0'
+  spec.add_runtime_dependency 'matrix', '>= 0.4'
+  spec.add_runtime_dependency 'rb_heap', '>= 1.0'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

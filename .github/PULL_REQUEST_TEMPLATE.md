@@ -1,8 +1,3 @@
-Thanks for contributing this Pull Request.   
-Add a brief description of what this Pull Request does.   
-Do tag the relevant issue(s) and PR(s) below.   
-If required, add some screenshot(s) to support your changes.  
-
 **Relevant Issues and PRs**
 - (optional)
 
