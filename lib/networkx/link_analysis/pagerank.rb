@@ -59,7 +59,7 @@ module NetworkX
   # @param eps [Numeric] tolerence to check for convergence
   # @param max_iter [Integer] max iterations for the pagerank algorithm to run
   #
-  # @return [Array<Numeric>] pagerank values of the graph
+  # @return [Hash of Object => Float] pagerank values of the graph
   def self.pagerank2(graph, alpha: 0.85, personalization: nil, eps: 1e-6, max_iter: 100)
     n = graph.number_of_nodes
 
