@@ -27,7 +27,7 @@ module NetworkX
 
           case multigraph_weight
           when 'sum'
-            edge_attr = all_weights.inject(0, :+)
+            edge_attr = all_weights.sum
           when 'max'
             edge_attr = all_weights.max
           when 'min'

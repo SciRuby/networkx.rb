@@ -40,8 +40,8 @@ module NetworkX
 
   # Returns the residual graph of the given graph
   def self._build_residual_network(graph)
-    raise ArgumentError, 'Sum of demands should be 0!' unless \
-                         graph.nodes(data: true).values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
+    raise ArgumentError, 'Sum of demands should be 0!' \
+      unless graph.nodes(data: true).values.map { |attr| attr[:demand] || 0 }.sum.zero?
 
     residual = NetworkX::MultiDiGraph.new(inf: 0)
     residual.add_nodes(graph.nodes(data: true).map { |u, attr| [u, {excess: (attr[:demand] || 0) * -1, potential: 0}] })
@@ -66,11 +66,11 @@ module NetworkX
       end
     end
 
-    temp_inf = [residual.nodes(data: true).map do |_u, attrs|
-                  attrs[:excess].abs
-                end.inject(0, :+), edge_list.map do |_, _, _, e|
-                                     (e.has_key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0)
-                                   end.inject(0, :+) * 2].max
+    temp_inf = [
+      residual.nodes(data: true).map { |_u, attrs| attrs[:excess].abs }.sum,
+      edge_list.map {|_, _, _, e| (e.has_key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0) }.sum * 2
+    ].max
+
     inf = temp_inf.zero? ? 1 : temp_inf
 
     edge_list.each do |u, v, k, e|
