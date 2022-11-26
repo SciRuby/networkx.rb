@@ -1,5 +1,6 @@
 module NetworkX
   # Computes pagerank values for the graph
+  # This is deprecated because it may be slow
   #
   # @param graph [Graph] a graph
   # @param init [Array<Numeric>] initial pagerank values for the nodes
@@ -8,7 +9,7 @@ module NetworkX
   # @param max_iter [Integer] max iterations for the pagerank algorithm to run
   #
   # @return [Array<Numeric>] pagerank values of the graph
-  def self.pagerank(graph, init = nil, alpha = 0.85, eps = 1e-4, max_iter = 100)
+  def self.pagerank1(graph, init = nil, alpha = 0.85, eps = 1e-4, max_iter = 100)
     dim = graph.nodes.length
     if init.nil?
       init = graph.nodes(data: false).to_h{ |i| [i, 1.0 / dim] }
@@ -50,12 +51,19 @@ module NetworkX
     raise ArgumentError, 'PageRank failed to converge!'
   end
 
+  # Computes pagerank values for the graph
+  # New pagerank method.
+  #
+  # @param graph [Graph] a graph
+  # @param alpha [Numeric] the alpha value to compute the pagerank
+  # @param eps [Numeric] tolerence to check for convergence
+  # @param max_iter [Integer] max iterations for the pagerank algorithm to run
+  #
+  # @return [Array<Numeric>] pagerank values of the graph
   def self.pagerank2(graph, alpha: 0.85, personalization: nil, eps: 1e-6, max_iter: 100)
     n = graph.number_of_nodes
 
     matrix, index_to_node = NetworkX.to_matrix(graph, 0)
-
-    # index_to_node = {0=>0, 1=>1, 2=>2, 3=>3}
 
     index_from_node = index_to_node.invert
 
@@ -85,5 +93,9 @@ module NetworkX
       return (0...n).map{|i| [index_to_node[i], curr[i]] }.sort.to_h if err < eps
     end
     (0...n).map{|i| [index_to_node[i], curr[i]] }.sort.to_h
+  end
+
+  class << self
+    alias pagerank pagerank1
   end
 end
