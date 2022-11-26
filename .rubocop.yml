@@ -1,12 +1,12 @@
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 2.7
   Include:
     - 'lib/**/*'
     - 'spec/**/*_spec.rb'
     - 'Gemfile'
     - 'Rakefile'
-    - '*.gemspace'
+    - '*.gemspec'
   DisplayCopNames: true
 
 require:
