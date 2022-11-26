@@ -9,7 +9,7 @@ RSpec.describe NetworkX::Graph do
   end
 
   context 'when pagerank is called' do
-    subject { NetworkX.pagerank(graph, 1 => 0.333, 2 => 0.333, 4 => 0.333) }
+    subject { NetworkX.pagerank(graph, init: {1 => 0.333, 2 => 0.333, 4 => 0.333}) }
 
     it { is_expected.to eq([0.2567467074324632, 0.4865065851350735, 0.2567467074324632]) }
   end
@@ -18,8 +18,8 @@ RSpec.describe NetworkX::Graph do
     graph = NetworkX::Graph.new
     graph.add_edges([[1, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 5], [5, 1]])
     init = (1..5).to_h{|i| [i, 0.20] }
-    expect{NetworkX.pagerank(graph, init, 0.85, 1e-4, 5)}.to raise_error(ArgumentError)
-    expect{NetworkX.pagerank(graph, nil, 0.85, 1e-16)}.to raise_error(ArgumentError)
+    expect{NetworkX.pagerank(graph, init: init, max_iter: 5)}.to raise_error(ArgumentError)
+    expect{NetworkX.pagerank(graph, eps: 1e-16)}.to raise_error(ArgumentError)
   end
 
   it 'Digraph#pagerank2' do
