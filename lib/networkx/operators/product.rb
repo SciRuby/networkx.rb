@@ -28,8 +28,8 @@ module NetworkX
   # Returns the node product of nodes of two graphs
   def self.node_product(g1, g2)
     n_product = []
-    g1.nodes.each do |k1, attrs1|
-      g2.nodes.each do |k2, attrs2|
+    g1.nodes(data: true).each do |k1, attrs1|
+      g2.nodes(data: true).each do |k2, attrs2|
         n_product << [[k1, k2], hash_product(attrs1, attrs2)]
       end
     end
@@ -62,7 +62,7 @@ module NetworkX
   def self.edges_cross_nodes(g1, g2)
     result = []
     edges_in_array(g1).each do |u, v, d|
-      g2.nodes.each_key do |x|
+      g2.nodes(data: true).each_key do |x|
         result << [[u, x], [v, x], d]
       end
     end
@@ -72,7 +72,7 @@ module NetworkX
   # Returns the product of directed nodes with edges
   def self.nodes_cross_edges(g1, g2)
     result = []
-    g1.nodes.each_key do |x|
+    g1.nodes(data: true).each_key do |x|
       edges_in_array(g2).each do |u, v, d|
         result << [[x, u], [x, v], d]
       end
@@ -84,8 +84,8 @@ module NetworkX
   def self.edges_cross_nodes_and_nodes(g1, g2)
     result = []
     edges_in_array(g1).each do |u, v, d|
-      g2.nodes.each_key do |x|
-        g2.nodes.each_key do |y|
+      g2.nodes(data: true).each_key do |x|
+        g2.nodes(data: true).each_key do |y|
           result << [[u, x], [v, y], d]
         end
       end
@@ -174,8 +174,8 @@ module NetworkX
     raise ArgumentError, 'Power must be a positive quantity!' if pow <= 0
 
     result = NetworkX::Graph.new
-    result.add_nodes(graph.nodes.map { |n, attrs| [n, attrs] })
-    graph.nodes.each do |n, _attrs|
+    result.add_nodes(graph.nodes(data: true).map { |n, attrs| [n, attrs] })
+    graph.nodes(data: true).each do |n, _attrs|
       seen = {}
       level = 1
       next_level = graph.adj[n]

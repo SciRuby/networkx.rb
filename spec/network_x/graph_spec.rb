@@ -16,11 +16,7 @@ RSpec.describe NetworkX::Graph do
 
   context 'when a new node/s has/have been created' do
     its('nodes') do
-      is_expected.to eq('Kolkata' => {},
-                        'Nagpur' => {},
-                        'Mumbai' => {},
-                        'Chennai' => {},
-                        'Bangalore' => {})
+      is_expected.to eq(%w[Nagpur Mumbai Chennai Bangalore Kolkata])
     end
   end
 
@@ -61,7 +57,7 @@ RSpec.describe NetworkX::Graph do
       graph.remove_nodes(%w[Chennai Mumbai])
     end
 
-    its('nodes') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
+    its('nodes') { is_expected.to eq(%w[Bangalore Kolkata]) }
     its('adj') { is_expected.to eq('Kolkata' => {}, 'Bangalore' => {}) }
   end
 
@@ -113,7 +109,7 @@ RSpec.describe NetworkX::Graph do
     subject { graph.subgraph(%w[Nagpur Mumbai]) }
 
     its('nodes') do
-      is_expected.to eq('Nagpur' => {}, 'Mumbai' => {})
+      is_expected.to eq(%w[Nagpur Mumbai])
     end
 
     its('adj') do
@@ -125,7 +121,7 @@ RSpec.describe NetworkX::Graph do
     subject { graph.edge_subgraph([%w[Nagpur Mumbai], %w[Nagpur Chennai]]) }
 
     its('nodes') do
-      is_expected.to eq('Nagpur' => {}, 'Mumbai' => {}, 'Chennai' => {})
+      is_expected.to eq(%w[Nagpur Mumbai Chennai])
     end
 
     its('adj') do

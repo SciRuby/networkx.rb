@@ -34,7 +34,7 @@ module NetworkX
 
     cutoff = Float::INFINITY if cutoff.nil?
     nextlevel = {source => 1}
-    help_single_shortest_path_length(graph.adj, nextlevel, cutoff).take(graph.nodes.length)
+    help_single_shortest_path_length(graph.adj, nextlevel, cutoff).take(graph.nodes(data: true).length)
   end
 
   # Computes shortest path values to all nodes from all nodes
@@ -45,7 +45,7 @@ module NetworkX
   # @return [Array<Object, Array<Object, Numeric>>] path lengths for all nodes from all nodes
   def self.all_pairs_shortest_path_length(graph, cutoff = nil)
     shortest_paths = []
-    graph.nodes.each_key { |n| shortest_paths << [n, single_source_shortest_path_length(graph, n, cutoff)] }
+    graph.nodes(data: true).each_key { |n| shortest_paths << [n, single_source_shortest_path_length(graph, n, cutoff)] }
     shortest_paths
   end
 
@@ -93,7 +93,7 @@ module NetworkX
   # @return [Array<Object, Hash {Object => Array<Object> }>] paths for all nodes from all nodes
   def self.all_pairs_shortest_path(graph, cutoff = nil)
     shortest_paths = []
-    graph.nodes.each_key { |n| shortest_paths << [n, single_source_shortest_path(graph, n, cutoff)] }
+    graph.nodes(data: true).each_key { |n| shortest_paths << [n, single_source_shortest_path(graph, n, cutoff)] }
     shortest_paths
   end
 

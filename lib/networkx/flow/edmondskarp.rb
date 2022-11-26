@@ -84,8 +84,8 @@ module NetworkX
 
   # Helper function for the edmondskarp function
   def self.edmondskarp_impl(graph, source, target, residual, cutoff)
-    raise ArgumentError, 'Source not in graph!' unless graph.nodes.has_key?(source)
-    raise ArgumentError, 'Target not in graph!' unless graph.nodes.has_key?(target)
+    raise ArgumentError, 'Source not in graph!' unless graph.nodes(data: true).has_key?(source)
+    raise ArgumentError, 'Target not in graph!' unless graph.nodes(data: true).has_key?(target)
     raise ArgumentError, 'Source and target are same node!' if source == target
 
     res_graph = residual.nil? ? build_residual_network(graph) : residual.clone

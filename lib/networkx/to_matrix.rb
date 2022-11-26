@@ -2,14 +2,14 @@ module NetworkX
   def self.to_matrix(graph, val, multigraph_weight = 'sum')
     is_undirected = !graph.directed?
     is_multigraph = graph.multigraph?
-    nodelen = graph.nodes.length
+    nodelen = graph.nodes(data: true).length
 
     m = Matrix.build(nodelen) { val }
     index = {}
     inv_index = {}
     ind = 0
 
-    graph.nodes.each do |u, _|
+    graph.nodes(data: true).each do |u, _|
       index[u] = ind
       inv_index[ind] = u
       ind += 1

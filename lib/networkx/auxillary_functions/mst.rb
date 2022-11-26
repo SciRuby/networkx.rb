@@ -20,8 +20,8 @@ module NetworkX
     mst = Marshal.load(Marshal.dump(graph))
     mst.clear
     edges = get_edges_weights(graph).sort_by { |a| a[1] }
-    union_find = UnionFind.new(graph.nodes.keys)
-    while edges.any? && mst.nodes.length <= graph.nodes.length
+    union_find = UnionFind.new(graph.nodes(data: true).keys)
+    while edges.any? && mst.nodes(data: true).length <= graph.nodes(data: true).length
       edge = edges.shift
       unless union_find.connected?(edge[0][0], edge[0][1])
         union_find.union(edge[0][0], edge[0][1])

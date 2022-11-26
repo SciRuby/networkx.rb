@@ -11,7 +11,7 @@ module NetworkX
   # @return [Boolean] whether there exists a negative cycle in graph
   def self.negative_edge_cycle(graph)
     newnode = generate_unique_node
-    graph.add_edges(graph.nodes.keys.map { |n| [newnode, n] })
+    graph.add_edges(graph.nodes(data: true).keys.map { |n| [newnode, n] })
     begin
       bellmanford_predecesor_distance(graph, newnode)
     rescue ArgumentError
@@ -25,10 +25,10 @@ module NetworkX
   # Detects the unboundedness in the residual graph
   def self._detect_unboundedness(residual)
     g = NetworkX::DiGraph.new
-    g.add_nodes(residual.nodes.keys.zip(residual.nodes.values))
+    g.add_nodes(residual.nodes(data: true).keys.zip(residual.nodes(data: true).values))
     inf = residual.graph[:inf]
 
-    residual.nodes.each do |u, _attr|
+    residual.nodes(data: true).each do |u, _attr|
       residual.adj[u].each do |v, uv_attrs|
         w = inf
         uv_attrs.each { |_key, edge_attrs| w = [w, edge_attrs[:weight]].min if edge_attrs[:capacity] == inf }
@@ -41,10 +41,10 @@ module NetworkX
   # Returns the residual graph of the given graph
   def self._build_residual_network(graph)
     raise ArgumentError, 'Sum of demands should be 0!' unless \
-                         graph.nodes.values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
+                         graph.nodes(data: true).values.map { |attr| attr[:demand] || 0 }.inject(0, :+).zero?
 
     residual = NetworkX::MultiDiGraph.new(inf: 0)
-    residual.add_nodes(graph.nodes.map { |u, attr| [u, {excess: (attr[:demand] || 0) * -1, potential: 0}] })
+    residual.add_nodes(graph.nodes(data: true).map { |u, attr| [u, {excess: (attr[:demand] || 0) * -1, potential: 0}] })
     inf = Float::INFINITY
     edge_list = []
 
@@ -66,9 +66,11 @@ module NetworkX
       end
     end
 
-    temp_inf = [residual.nodes.map { |_u, attrs| attrs[:excess].abs }.inject(0, :+), edge_list.map do |_, _, _, e|
-      (e.has_key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0)
-    end.inject(0, :+) * 2].max
+    temp_inf = [residual.nodes(data: true).map do |_u, attrs|
+                  attrs[:excess].abs
+                end.inject(0, :+), edge_list.map do |_, _, _, e|
+                                     (e.has_key?(:capacity) && e[:capacity] != inf ? e[:capacity] : 0)
+                                   end.inject(0, :+) * 2].max
     inf = temp_inf.zero? ? 1 : temp_inf
 
     edge_list.each do |u, v, k, e|
@@ -88,7 +90,7 @@ module NetworkX
     inf = Float::INFINITY
 
     if graph.multigraph?
-      graph.nodes.each_key do |u|
+      graph.nodes(data: true).each_key do |u|
         flow_dict[u] = {}
         graph.adj[u].each do |v, uv_edges|
           flow_dict[u][v] = uv_edges.transform_values do |e|
@@ -102,7 +104,7 @@ module NetworkX
         end
       end
     else
-      graph.nodes.each_key do |u|
+      graph.nodes(data: true).each_key do |u|
         flow_dict[u] = graph.adj[u].to_h do |v, e|
           [v, u != v || (e[:capacity] || inf) <= 0 || (e[:weight] || 0) >= 0 ? 0 : e[:capacity]]
         end
@@ -163,7 +165,7 @@ module NetworkX
       s_set = Set.new
       t_set = Set.new
 
-      residual.nodes.each do |u, _attrs|
+      residual.nodes(data: true).each do |u, _attrs|
         excess = r_nodes[u][:excess]
         if excess >= delta
           s_set.add(u)
@@ -236,7 +238,7 @@ module NetworkX
 
     r_nodes.each_value { |attrs| raise ArgumentError, 'No flow satisfying all demands!' if attrs[:excess] != 0 }
 
-    residual.nodes.each_key do |node|
+    residual.nodes(data: true).each_key do |node|
       residual.adj[node].each_value do |uv_edges|
         uv_edges.each_value do |k_attrs|
           flow = k_attrs[:flow]

@@ -6,7 +6,7 @@ module NetworkX
   #
   # @return [Array<Array<Object>>] Arrays of nodes in the cycles
   def self.cycle_basis(graph, root = nil)
-    gnodes = graph.nodes.keys
+    gnodes = graph.nodes(data: true).keys
     cycles = []
     until gnodes.empty?
       root = gnodes.shift if root.nil?

@@ -10,7 +10,7 @@ module NetworkX
       csv << graph.graph.keys
       csv << graph.graph.values
       csv << ['graph_nodes']
-      graph.nodes.each do |u, attrs|
+      graph.nodes(data: true).each do |u, attrs|
         node_attrs = [u]
         attrs.each do |k, v|
           node_attrs << k

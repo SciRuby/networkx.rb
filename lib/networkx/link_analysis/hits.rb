@@ -8,7 +8,7 @@ module NetworkX
   #
   # @return [Array<Numeric, Numeric>] hits and authority scores
   def self.hits(graph, max_iter = 100, tol = 1e-8, nstart)
-    return [{}, {}] if graph.nodes.empty?
+    return [{}, {}] if graph.nodes(data: true).empty?
 
     h = nstart
     sum = h.values.sum

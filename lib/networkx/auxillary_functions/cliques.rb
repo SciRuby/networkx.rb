@@ -5,15 +5,15 @@ module NetworkX
   #
   # @return [Array<Array<Object>>] Arrays of nodes in the cliques
   def self.find_cliques(graph)
-    return nil if graph.nodes.empty?
+    return nil if graph.nodes(data: true).empty?
 
     q = [nil]
     adj = {}
-    graph.nodes.each_key { |u| adj[u] = [] }
+    graph.nodes(data: true).each_key { |u| adj[u] = [] }
     graph.adj.each { |u, u_edges| u_edges.each_key { |v| adj[u] << v if u != v } }
 
-    subg = graph.nodes.keys
-    cand = graph.nodes.keys
+    subg = graph.nodes(data: true).keys
+    cand = graph.nodes(data: true).keys
     u = subg.max { |n1, n2| (cand & adj[n1]).length <=> (cand & adj[n2]).length }
     ext_u = cand - adj[u]
     stack = []

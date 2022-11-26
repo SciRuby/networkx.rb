@@ -7,7 +7,7 @@ module NetworkX
   #                                                     b/w all pairs of nodes
   def self.floyd_warshall(graph)
     a, index = to_matrix(graph, Float::INFINITY, 'min')
-    nodelen = graph.nodes.length
+    nodelen = graph.nodes(data: true).length
     (0..(nodelen - 1)).each { |i| a[i, i] = 0 }
     (0..(nodelen - 1)).each do |k|
       (0..(nodelen - 1)).each do |i|

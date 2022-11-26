@@ -62,7 +62,7 @@ module NetworkX
     raise NotImplementedError, 'MultiGraph and MultiDiGraph not supported!' if graph.multigraph?
 
     r_network = NetworkX::DiGraph.new(inf: 0, flow_value: 0)
-    r_network.add_nodes(graph.nodes.keys)
+    r_network.add_nodes(graph.nodes(data: true).keys)
     inf = Float::INFINITY
     edge_list = []
 

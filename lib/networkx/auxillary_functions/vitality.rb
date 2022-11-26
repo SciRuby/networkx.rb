@@ -7,7 +7,7 @@ module NetworkX
   # @return [Numeric] closeness vitality of the given node
   def self.closeness_vitality(graph, node)
     before = wiener_index(graph)
-    after = wiener_index(graph.subgraph(graph.nodes.keys - [node]))
+    after = wiener_index(graph.subgraph(graph.nodes(data: true).keys - [node]))
     before - after
   end
 end

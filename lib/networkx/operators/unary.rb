@@ -8,9 +8,9 @@ module NetworkX
     result = Marshal.load(Marshal.dump(graph))
     result.clear
 
-    result.add_nodes(graph.nodes.map { |u, attrs| [u, attrs] })
+    result.add_nodes(graph.nodes(data: true).map { |u, attrs| [u, attrs] })
     graph.adj.each do |u, u_edges|
-      graph.nodes.each { |v, attrs| result.add_edge(u, v, **attrs) if !u_edges.has_key?(v) && u != v }
+      graph.nodes(data: true).each { |v, attrs| result.add_edge(u, v, **attrs) if !u_edges.has_key?(v) && u != v }
     end
     result
   end

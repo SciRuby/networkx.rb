@@ -27,12 +27,12 @@ module NetworkX
   def self.convert_to_distinct_labels(graph, starting_int = -1)
     new_graph = graph.class.new
 
-    idx_dict = graph.nodes.keys.to_h do |v|
+    idx_dict = graph.nodes(data: true).keys.to_h do |v|
       starting_int += 1
       [v, starting_int]
     end
 
-    graph.nodes.each do |u, attrs|
+    graph.nodes(data: true).each do |u, attrs|
       new_graph.add_node(u.to_s + idx_dict[u].to_s, **attrs)
     end
 
@@ -60,9 +60,12 @@ module NetworkX
     result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    unless (g1.nodes(data: true).keys - g2.nodes(data: true).keys).empty?
+      raise ArgumentError, 'Node sets must be equal!'
+    end
+
+    g1.nodes(data: true).each { |u, attrs| result.add_node(u, **attrs) }
 
     g1, g2 = g2, g1 if g1.number_of_edges > g2.number_of_edges
     g1.adj.each do |u, u_edges|
@@ -91,9 +94,12 @@ module NetworkX
     result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    unless (g1.nodes(data: true).keys - g2.nodes(data: true).keys).empty?
+      raise ArgumentError, 'Node sets must be equal!'
+    end
+
+    g1.nodes(data: true).each { |u, attrs| result.add_node(u, **attrs) }
 
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
@@ -121,9 +127,12 @@ module NetworkX
     result = g1.class.new
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
-    raise ArgumentError, 'Node sets must be equal!' unless (g1.nodes.keys - g2.nodes.keys).empty?
 
-    g1.nodes.each { |u, attrs| result.add_node(u, **attrs) }
+    unless (g1.nodes(data: true).keys - g2.nodes(data: true).keys).empty?
+      raise ArgumentError, 'Node sets must be equal!'
+    end
+
+    g1.nodes(data: true).each { |u, attrs| result.add_node(u, **attrs) }
 
     g1.adj.each do |u, u_edges|
       u_edges.each do |v, uv_attrs|
@@ -166,8 +175,8 @@ module NetworkX
 
     raise ArgumentError, 'Arguments must be both Graphs or MultiGraphs!' unless g1.multigraph? == g2.multigraph?
 
-    result.add_nodes(g1.nodes.map { |u, attrs| [u, attrs] })
-    result.add_nodes(g2.nodes.map { |u, attrs| [u, attrs] })
+    result.add_nodes(g1.nodes(data: true).map { |u, attrs| [u, attrs] })
+    result.add_nodes(g2.nodes(data: true).map { |u, attrs| [u, attrs] })
 
     if g1.multigraph?
       g1.adj.each { |u, e| e.each { |v, uv_edges| uv_edges.each_value { |attrs| result.add_edge(u, v, **attrs) } } }
@@ -192,14 +201,16 @@ module NetworkX
     new_graph.graph.merge!(g1.graph)
     new_graph.graph.merge!(g2.graph)
 
-    raise ArgumentError, 'Graphs must be disjoint!' unless (g1.nodes.keys & g2.nodes.keys).empty?
+    unless (g1.nodes(data: true).keys & g2.nodes(data: true).keys).empty?
+      raise ArgumentError, 'Graphs must be disjoint!'
+    end
 
     g1_edges = get_edges(g1)
     g2_edges = get_edges(g2)
 
-    new_graph.add_nodes(g1.nodes.keys)
+    new_graph.add_nodes(g1.nodes(data: true).keys)
     new_graph.add_edges(g1_edges)
-    new_graph.add_nodes(g2.nodes.keys)
+    new_graph.add_nodes(g2.nodes(data: true).keys)
     new_graph.add_edges(g2_edges)
 
     new_graph

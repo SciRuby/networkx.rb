@@ -188,7 +188,7 @@ module NetworkX
   #          paths and path lengths between all nodes
   def self.all_pairs_dijkstra(graph, cutoff = nil)
     path = []
-    graph.nodes.each_key { |n| path << [n, singlesource_dijkstra(graph, n, nil, cutoff)] }
+    graph.nodes(data: true).each_key { |n| path << [n, singlesource_dijkstra(graph, n, nil, cutoff)] }
     path
   end
 
@@ -200,7 +200,7 @@ module NetworkX
   # @return [Array<Object, Hash{ Object => Numeric }>] path lengths between all nodes
   def self.all_pairs_dijkstra_path_length(graph, cutoff = nil)
     path_lengths = []
-    graph.nodes.each_key { |n| path_lengths << [n, singlesource_dijkstra_path_length(graph, n, cutoff)] }
+    graph.nodes(data: true).each_key { |n| path_lengths << [n, singlesource_dijkstra_path_length(graph, n, cutoff)] }
     path_lengths
   end
 
@@ -212,7 +212,7 @@ module NetworkX
   # @return [Array<Object, Hash{ Object => Array<Object> }>] path lengths between all nodes
   def self.all_pairs_dijkstra_path(graph, cutoff = nil)
     paths = []
-    graph.nodes.each_key { |n| paths << singlesource_dijkstra_path(graph, n, cutoff) }
+    graph.nodes(data: true).each_key { |n| paths << singlesource_dijkstra_path(graph, n, cutoff) }
     paths
   end
 
@@ -221,7 +221,7 @@ module NetworkX
     pred = sources.product([[]]).to_h if pred.nil?
     dist = sources.product([0]).to_h if dist.nil?
 
-    inf, n, count, q, in_q = Float::INFINITY, graph.nodes.length, {}, sources.clone, Set.new(sources)
+    inf, n, count, q, in_q = Float::INFINITY, graph.nodes(data: true).length, {}, sources.clone, Set.new(sources)
     until q.empty?
       u = q.shift
       in_q.delete(u)
@@ -281,7 +281,7 @@ module NetworkX
     # TODO: Detection of selfloop edges
     dist = {source => 0}
     pred = {source => []}
-    return [pred, dist] if graph.nodes.length == 1
+    return [pred, dist] if graph.nodes(data: true).length == 1
 
     dist = help_bellman_ford(graph, [source], weight, pred, nil, dist, cutoff, target)
     [pred, dist]
@@ -360,7 +360,7 @@ module NetworkX
   # @return [Array<Object, Hash{ Object => Numeric }>] path lengths from source to all nodes
   def self.allpairs_bellmanford_path_length(graph, cutoff = nil)
     path_lengths = []
-    graph.nodes.each_key { |n| path_lengths << [n, singlesource_bellmanford_path_length(graph, n, cutoff)] }
+    graph.nodes(data: true).each_key { |n| path_lengths << [n, singlesource_bellmanford_path_length(graph, n, cutoff)] }
     path_lengths
   end
 
@@ -372,13 +372,13 @@ module NetworkX
   # @return [Array<Object, Hash{ Object => Array<Object> }>] path lengths from source to all nodes
   def self.allpairs_bellmanford_path(graph, cutoff = nil)
     paths = []
-    graph.nodes.each_key { |n| paths << [n, singlesource_bellmanford_path(graph, n, cutoff)] }
+    graph.nodes(data: true).each_key { |n| paths << [n, singlesource_bellmanford_path(graph, n, cutoff)] }
     paths
   end
 
   # Helper function to get sources
   def self.get_sources(graph)
-    graph.nodes.collect { |k, _v| k }
+    graph.nodes(data: true).collect { |k, _v| k }
   end
 
   # Helper function to get distances
@@ -393,7 +393,7 @@ module NetworkX
   # Helper function to set path lengths for Johnson algorithm
   def self.set_path_lengths_johnson(graph, dist_path, new_weight)
     path_lengths = []
-    graph.nodes.each_key { |n| path_lengths << [n, dist_path.call(graph, n, new_weight)] }
+    graph.nodes(data: true).each_key { |n| path_lengths << [n, dist_path.call(graph, n, new_weight)] }
     path_lengths
   end
 
@@ -405,7 +405,7 @@ module NetworkX
   def self.johnson(graph)
     dist, pred = {}, {}
     sources = get_sources(graph)
-    graph.nodes.each_key do |n|
+    graph.nodes(data: true).each_key do |n|
       dist[n], pred[n] = 0, []
     end
     weight = get_weight(graph)

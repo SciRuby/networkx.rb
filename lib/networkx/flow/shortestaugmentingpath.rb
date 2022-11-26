@@ -1,8 +1,8 @@
 module NetworkX
   # Helper function for running the shortest augmenting path algorithm
   def self.shortest_augmenting_path_impl(graph, source, target, residual, two_phase, cutoff)
-    raise ArgumentError, 'Source is not in the graph!' unless graph.nodes.has_key?(source)
-    raise ArgumentError, 'Target is not in the graph!' unless graph.nodes.has_key?(target)
+    raise ArgumentError, 'Source is not in the graph!' unless graph.nodes(data: true).has_key?(source)
+    raise ArgumentError, 'Target is not in the graph!' unless graph.nodes(data: true).has_key?(target)
     raise ArgumentError, 'Source and Target are the same!' if source == target
 
     residual = residual.nil? ? build_residual_network(graph) : residual
@@ -35,7 +35,7 @@ module NetworkX
       return residual
     end
 
-    n = graph.nodes.length
+    n = graph.nodes(data: true).length
     m = residual.size / 2
 
     r_nodes.each do |node, attrs|

@@ -34,14 +34,14 @@ module NetworkX
     raise ArgumentError, 'Topological Sort not defined on undirected graphs!' unless graph.directed?
 
     nodes = []
-    indegree_map = graph.nodes.each_key.map do |u|
+    indegree_map = graph.nodes(data: true).each_key.map do |u|
       [u, graph.in_degree(u)] if graph.in_degree(u).positive?
     end.compact.to_h
-    zero_indegree = graph.nodes.each_key.select { |u| graph.in_degree(u).zero? }
+    zero_indegree = graph.nodes(data: true).each_key.select { |u| graph.in_degree(u).zero? }
 
     until zero_indegree.empty?
       node = zero_indegree.shift
-      raise ArgumentError, 'Graph changed during iteration!' unless graph.nodes.has_key?(node)
+      raise ArgumentError, 'Graph changed during iteration!' unless graph.nodes(data: true).has_key?(node)
 
       graph.adj[node].each_key do |child|
         indegree_map[child] -= 1

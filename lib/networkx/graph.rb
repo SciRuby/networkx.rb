@@ -213,14 +213,13 @@ module NetworkX
       end
     end
 
-    # [TODO] Current default of `data` is true.
-    # [Alert] Change the default in the futher. Please specify the `data`.
+    # Return nodes of graph
     #
     # @param data [bool] true if you want data of each edge
     #
     # @return [Hash | Array] if data is true, it returns hash including data.
     #                        otherwise, simple nodes array.
-    def nodes(data: true)
+    def nodes(data: false)
       if data
         @nodes
       else

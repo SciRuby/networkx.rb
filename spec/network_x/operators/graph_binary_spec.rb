@@ -142,7 +142,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.intersection(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -159,7 +159,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.intersection(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -176,7 +176,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.intersection(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -193,7 +193,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -210,7 +210,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -228,7 +228,7 @@ RSpec.describe NetworkX::Graph do
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
 
     new_graph = NetworkX.difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({
@@ -245,7 +245,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 2
     expect(new_graph.adj).to eq({0 => {2 => {0 => {}}}, 1 => {3 => {0 => {}}}, 2 => {}, 3 => {}})
@@ -257,7 +257,7 @@ RSpec.describe NetworkX::Graph do
     g.add_edges_from([[0, 1], [0, 2], [1, 2], [1, 3]])
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
     new_graph = NetworkX.symmetric_difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 3
     expect(new_graph.adj).to eq({
@@ -276,7 +276,7 @@ RSpec.describe NetworkX::Graph do
     new_graph = NetworkX.symmetric_difference(g, h)
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 3
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.adj).to eq({0 => {2 => {}, 3 => {}}, 1 => {3 => {}}, 2 => {}, 3 => {}})
   end
 
@@ -287,7 +287,7 @@ RSpec.describe NetworkX::Graph do
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
 
     new_graph = NetworkX.symmetric_difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 3
     expect(new_graph.adj).to eq({
@@ -305,7 +305,7 @@ RSpec.describe NetworkX::Graph do
     h.add_edges_from([[0, 1], [1, 2], [0, 3]])
 
     new_graph = NetworkX.symmetric_difference(g, h)
-    expect(new_graph.nodes).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
+    expect(new_graph.nodes(data: true)).to eq({0 => {}, 1 => {}, 2 => {}, 3 => {}})
     expect(new_graph.number_of_nodes).to be 4
     expect(new_graph.number_of_edges).to be 3
     expect(new_graph.adj).to eq({

@@ -7,10 +7,10 @@ module NetworkX
   # @return [Array<Numeric>, Numeric] eccentricity/eccentricites of all nodes
   def self.eccentricity(graph, node = nil)
     e = {}
-    graph.nodes.each do |u, _|
+    graph.nodes(data: true).each do |u, _|
       length = single_source_shortest_path_length(graph, u)
       l = length.length
-      raise ArgumentError, 'Found infinite path length!' unless l == graph.nodes.length
+      raise ArgumentError, 'Found infinite path length!' unless l == graph.nodes(data: true).length
 
       e[u] = length.max_by { |a| a[1] }[1]
     end

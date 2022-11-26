@@ -12,8 +12,8 @@ module NetworkX
 
   # Helper function to apply the preflow push algorithm
   def self.preflowpush_impl(graph, source, target, residual, globalrelabel_freq, value_only)
-    raise ArgumentError, 'Source not in graph!' unless graph.nodes.has_key?(source)
-    raise ArgumentError, 'Target not in graph!' unless graph.nodes.has_key?(target)
+    raise ArgumentError, 'Source not in graph!' unless graph.nodes(data: true).has_key?(source)
+    raise ArgumentError, 'Target not in graph!' unless graph.nodes(data: true).has_key?(target)
     raise ArgumentError, 'Source and Target are same!' if source == target
 
     globalrelabel_freq = 0 if globalrelabel_freq.nil?
@@ -38,7 +38,7 @@ module NetworkX
       return r_network
     end
 
-    n = r_network.nodes.length
+    n = r_network.nodes(data: true).length
     max_height = heights.map { |u, h| u == source ? -1 : h }.max
     heights[source] = n
 
