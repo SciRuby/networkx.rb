@@ -47,7 +47,7 @@ You can read [Document](https://SciRuby.github.io/networkx.rb/) for this library
 ## Contributing
 
 Your contributions are always welcome!  
-Please have a look at the [contribution guidelines](CONTRIBUTING.md) first. :tada:
+Please have a look at the [contribution guidelines](.github/CONTRIBUTING.md) first. :tada:
 
 ## License
 
